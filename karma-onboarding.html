@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Karma Onboarding">
+<meta name="theme-color" content="#E94E1B">
+<title>Karma Food · Onboarding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+:root{
+  --neon:#D4FF3F;--orange:#E94E1B;--ink:#1A1A18;--cream:#F5F1E8;
+  --card:#fff;--border:#E6E1D5;--muted:#8A857A;--sub:#5C574E;
+  --orange-soft:#FDEDE7;--neon-soft:#F3FFCC;
+}
+html,body{height:100%;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;max-width:480px;margin:0 auto;position:relative;overflow-x:hidden;}
+.head{font-family:'Boldonse',sans-serif;font-weight:400;letter-spacing:.3px;}
+
+/* ---------- PREBOARDING / WELCOME ---------- */
+#welcome{position:fixed;inset:0;max-width:480px;margin:0 auto;background:var(--orange);z-index:100;display:flex;flex-direction:column;overflow:hidden;}
+.wl-slide{position:absolute;inset:0;display:flex;flex-direction:column;padding:32px 26px 120px;opacity:0;transform:translateX(40px);transition:opacity .35s,transform .35s;pointer-events:none;overflow-y:auto;}
+.wl-slide.on{opacity:1;transform:none;pointer-events:auto;}
+.wl-kicker{color:var(--neon);font-size:13px;letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:auto;padding-top:20px;}
+.wl-big{color:#fff;font-size:34px;line-height:1.15;margin:0 0 18px;}
+.wl-txt{color:#FFE9DF;font-size:16px;line-height:1.6;margin-bottom:14px;}
+.wl-emoji{font-size:52px;margin-bottom:18px;}
+.wl-dots{position:absolute;bottom:92px;left:0;right:0;display:flex;justify-content:center;gap:7px;}
+.wl-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35);transition:.3s;}
+.wl-dot.on{background:var(--neon);width:22px;border-radius:4px;}
+.wl-nav{position:absolute;bottom:26px;left:26px;right:26px;display:flex;gap:12px;}
+.wl-btn{flex:1;padding:16px;border-radius:14px;border:none;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;}
+.wl-btn.primary{background:var(--neon);color:var(--ink);}
+.wl-btn.ghost{background:rgba(255,255,255,.15);color:#fff;flex:0 0 auto;padding:16px 20px;}
+.wl-input{width:100%;padding:15px;border-radius:12px;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:16px;outline:none;margin-bottom:12px;}
+.wl-input::placeholder{color:rgba(255,255,255,.6);}
+.wl-input:focus{border-color:var(--neon);}
+.wl-role{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
+.wl-chip{padding:15px 18px;border-radius:14px;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:16px;font-weight:600;cursor:pointer;text-align:left;display:flex;align-items:center;gap:12px;transition:.15s;}
+.wl-chip.sel{background:var(--neon);color:var(--ink);border-color:var(--neon);}
+.wl-chip .ce{font-size:22px;}
+
+/* ---------- TOPBAR ---------- */
+#topbar{background:var(--orange);color:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;position:sticky;top:0;z-index:20;}
+.tb-l{display:flex;flex-direction:column;}
+.tb-title{font-size:15px;}
+.tb-sub{font-size:11px;color:var(--neon);margin-top:2px;font-weight:600;letter-spacing:.3px;}
+.tb-av{width:38px;height:38px;border-radius:50%;background:var(--neon);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;font-family:'Boldonse',sans-serif;}
+
+/* ---------- CONTENT ---------- */
+#content{flex:1;overflow-y:auto;padding:14px 14px 92px;}
+.view{display:none;}
+.view.show{display:block;animation:fade .25s;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+/* ---------- BOTTOM NAV ---------- */
+#bottomnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid var(--border);display:flex;z-index:30;padding-bottom:env(safe-area-inset-bottom);}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px;border:none;background:transparent;color:var(--muted);font-size:10px;font-weight:600;cursor:pointer;}
+.nav-btn svg{width:23px;height:23px;stroke:currentColor;stroke-width:1.9;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.nav-btn.active{color:var(--orange);}
+
+/* ---------- CARDS / SHARED ---------- */
+.hero{background:var(--ink);border-radius:20px;padding:20px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden;}
+.hero::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;background:var(--orange);border-radius:50%;opacity:.25;}
+.hero-hi{font-size:13px;color:var(--neon);font-weight:700;letter-spacing:.5px;}
+.hero-name{font-size:26px;margin:4px 0 12px;}
+.prog-wrap{background:rgba(255,255,255,.15);border-radius:20px;height:12px;overflow:hidden;}
+.prog-fill{height:100%;background:var(--neon);border-radius:20px;transition:width .5s;}
+.prog-lbl{display:flex;justify-content:space-between;font-size:12px;margin-top:8px;color:#DDD;}
+.sec-lbl{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px;text-transform:uppercase;padding:16px 2px 8px;}
+.card{background:var(--card);border-radius:16px;border:1px solid var(--border);overflow:hidden;margin-bottom:12px;}
+.next-card{background:var(--neon);border-radius:16px;padding:16px 18px;margin-bottom:14px;cursor:pointer;display:flex;align-items:center;gap:14px;}
+.next-card .nc-ic{width:44px;height:44px;background:var(--ink);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.next-card .nc-t{flex:1;}
+.nc-k{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;opacity:.6;}
+.nc-h{font-size:16px;font-weight:700;margin-top:2px;}
+.nc-arrow{font-size:22px;font-weight:800;}
+.tip{background:var(--orange-soft);border-radius:14px;padding:14px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-start;}
+.tip .ti{font-size:24px;}
+.tip .tt{font-size:14px;line-height:1.5;color:var(--sub);}
+.tip .tt b{color:var(--orange);}
+
+/* module cards grid */
+.mod-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.mod{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px;cursor:pointer;position:relative;overflow:hidden;transition:transform .12s;}
+.mod:active{transform:scale(.97);}
+.mod .m-ic{font-size:30px;}
+.mod .m-t{font-size:15px;font-weight:700;margin-top:10px;line-height:1.25;}
+.mod .m-meta{font-size:11px;color:var(--muted);margin-top:6px;font-weight:600;}
+.mod .m-bar{height:6px;background:var(--border);border-radius:6px;margin-top:10px;overflow:hidden;}
+.mod .m-bar i{display:block;height:100%;background:var(--orange);border-radius:6px;}
+.mod.done{border-color:var(--orange);}
+.mod .m-check{position:absolute;top:12px;right:12px;width:24px;height:24px;background:var(--orange);border-radius:50%;color:#fff;display:none;align-items:center;justify-content:center;font-size:14px;font-weight:800;}
+.mod.done .m-check{display:flex;}
+.mod .m-lock{position:absolute;inset:0;background:rgba(245,241,232,.72);display:none;align-items:center;justify-content:center;font-size:24px;}
+.mod.locked .m-lock{display:flex;}
+
+/* pill/tag */
+.pill{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;}
+.pill.global{background:var(--neon-soft);color:#5A7A00;}
+.pill.local{background:var(--orange-soft);color:var(--orange);}
+
+/* editable store fields */
+.field{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;}
+.field:last-child{border-bottom:none;}
+.field .f-ic{font-size:22px;flex-shrink:0;}
+.field .f-body{flex:1;min-width:0;}
+.field .f-k{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px;}
+.field .f-v{font-size:16px;font-weight:600;margin-top:3px;word-break:break-word;}
+.field .f-meta{font-size:11px;color:var(--muted);margin-top:5px;}
+.field .f-edit{background:none;border:none;color:var(--orange);font-size:20px;cursor:pointer;flex-shrink:0;padding:2px 4px;}
+.field input,.field textarea{width:100%;border:2px solid var(--orange);border-radius:10px;padding:9px 11px;font-size:16px;font-family:inherit;margin-top:4px;outline:none;resize:vertical;}
+.f-save{margin-top:8px;background:var(--orange);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-size:14px;font-weight:700;cursor:pointer;}
+.f-cancel{margin-top:8px;margin-left:8px;background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer;}
+
+/* person cards */
+.person{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);}
+.person:last-child{border-bottom:none;}
+.p-av{width:42px;height:42px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex-shrink:0;}
+.p-body{flex:1;}
+.p-n{font-size:15px;font-weight:700;}
+.p-r{font-size:12px;color:var(--muted);}
+
+/* checklist */
+.cl-item{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer;}
+.cl-item:last-child{border-bottom:none;}
+.cl-box{width:24px;height:24px;border-radius:7px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;transition:.15s;}
+.cl-box.on{background:var(--orange);border-color:var(--orange);}
+.cl-txt{font-size:15px;line-height:1.4;padding-top:1px;}
+.cl-txt.on{color:var(--muted);text-decoration:line-through;}
+.phase-h{display:flex;align-items:center;gap:10px;padding:16px 2px 8px;}
+.phase-h .ph-n{width:26px;height:26px;border-radius:8px;background:var(--ink);color:var(--neon);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;}
+.phase-h .ph-t{font-size:15px;font-weight:800;}
+.phase-h .ph-when{font-size:11px;color:var(--muted);margin-left:auto;font-weight:600;}
+
+/* module reader */
+.reader{position:fixed;inset:0;max-width:480px;margin:0 auto;background:var(--cream);z-index:60;display:none;flex-direction:column;}
+.reader.on{display:flex;}
+.rd-top{background:var(--orange);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.rd-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:34px;height:34px;border-radius:10px;font-size:20px;cursor:pointer;}
+.rd-prog{flex:1;height:8px;background:rgba(255,255,255,.25);border-radius:8px;overflow:hidden;}
+.rd-prog i{display:block;height:100%;background:var(--neon);border-radius:8px;transition:width .3s;}
+.rd-body{flex:1;overflow-y:auto;padding:26px 22px 120px;}
+.rd-emoji{font-size:56px;margin-bottom:16px;}
+.rd-h{font-size:28px;line-height:1.15;margin-bottom:16px;}
+.rd-p{font-size:17px;line-height:1.65;color:var(--sub);margin-bottom:16px;}
+.rd-p b{color:var(--ink);}
+.swipe-cards{display:flex;flex-direction:column;gap:12px;margin:6px 0 16px;}
+.value-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px 18px;border-left:5px solid var(--orange);}
+.value-card .vc-e{font-size:26px;}
+.value-card .vc-t{font-size:17px;font-weight:800;margin:6px 0 4px;}
+.value-card .vc-d{font-size:14px;color:var(--sub);line-height:1.5;}
+.rd-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:16px 22px calc(16px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--cream) 24%);display:flex;gap:12px;}
+.rd-btn{flex:1;padding:16px;border-radius:14px;border:none;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;background:var(--orange);color:#fff;}
+.rd-btn.sec{flex:0 0 auto;background:#fff;color:var(--ink);border:2px solid var(--border);padding:16px 20px;}
+.rd-btn:disabled{opacity:.4;}
+
+/* quiz */
+.quiz-opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid var(--border);border-radius:14px;padding:15px 16px;font-size:16px;font-weight:600;cursor:pointer;margin-bottom:10px;font-family:inherit;transition:.15s;}
+.quiz-opt.right{background:var(--neon);border-color:var(--neon);color:var(--ink);}
+.quiz-opt.wrong{background:var(--orange-soft);border-color:var(--orange);color:var(--orange);}
+.quiz-fb{background:#fff;border-radius:14px;padding:16px;font-size:15px;line-height:1.5;color:var(--sub);border-left:5px solid var(--neon);margin-top:6px;}
+
+/* badge celebration */
+.celebrate{position:fixed;inset:0;max-width:480px;margin:0 auto;background:rgba(26,26,24,.94);z-index:80;display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center;}
+.celebrate.on{display:flex;animation:fade .3s;}
+.cel-badge{width:130px;height:130px;border-radius:50%;background:var(--neon);display:flex;align-items:center;justify-content:center;font-size:62px;margin-bottom:24px;animation:pop .5s;}
+@keyframes pop{0%{transform:scale(0) rotate(-20deg);}70%{transform:scale(1.15) rotate(6deg);}100%{transform:scale(1);}}
+.cel-k{color:var(--neon);font-size:13px;letter-spacing:2px;font-weight:800;text-transform:uppercase;}
+.cel-h{color:#fff;font-size:26px;margin:8px 0 10px;}
+.cel-d{color:#CFC9BC;font-size:15px;line-height:1.5;margin-bottom:28px;max-width:300px;}
+.cel-btn{background:var(--neon);color:var(--ink);border:none;border-radius:14px;padding:15px 40px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;}
+
+/* badges grid */
+.badge-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.badge{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px 8px;text-align:center;}
+.badge .b-e{font-size:34px;filter:grayscale(1);opacity:.35;}
+.badge.got .b-e{filter:none;opacity:1;}
+.badge .b-n{font-size:11px;font-weight:700;margin-top:8px;line-height:1.2;}
+.badge.got .b-n{color:var(--ink);}
+.badge:not(.got) .b-n{color:var(--muted);}
+
+/* faq */
+.faq-search{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:14px;font-size:16px;outline:none;margin-bottom:14px;font-family:inherit;background:#fff;}
+.faq-search:focus{border-color:var(--orange);}
+.faq-item{background:#fff;border:1px solid var(--border);border-radius:14px;margin-bottom:10px;overflow:hidden;}
+.faq-q{padding:15px 16px;font-size:15px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.faq-q .fq-x{font-size:20px;color:var(--orange);transition:.2s;flex-shrink:0;}
+.faq-item.open .fq-x{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .25s;}
+.faq-a .fa-in{padding:0 16px 15px;font-size:14px;line-height:1.6;color:var(--sub);}
+
+/* week plan (chef) */
+.wk-tab{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;}
+.wk-pill{flex-shrink:0;padding:9px 16px;border-radius:20px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:var(--sub);}
+.wk-pill.on{background:var(--ink);border-color:var(--ink);color:var(--neon);}
+.wk-day{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px;}
+.wk-day .wd-h{font-size:14px;font-weight:800;color:var(--orange);margin-bottom:8px;}
+.wk-task{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:14px;line-height:1.45;}
+.wk-task .wt-b{color:var(--orange);font-weight:800;flex-shrink:0;}
+
+/* toast */
+#toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;z-index:90;opacity:0;pointer-events:none;transition:.3s;max-width:90%;text-align:center;}
+#toast.show{opacity:1;}
+.empty{text-align:center;color:var(--muted);padding:40px 20px;font-size:14px;}
+</style>
+</head>
+<body>
+
+<!-- ===================== WELCOME / PREBOARDING ===================== -->
+<div id="welcome">
+  <!-- slide 0 -->
+  <div class="wl-slide on" data-s="0">
+    <div class="wl-kicker">Willkommen 🌱</div>
+    <div class="wl-emoji">👋</div>
+    <h1 class="wl-big head">Hey, schön<br>dass du da bist!</h1>
+    <p class="wl-txt">Das hier ist deine Karma-Food-App. Kein trockenes Handbuch — sondern alles, was du brauchst, um dich vom ersten Tag an sicher zu fühlen.</p>
+    <p class="wl-txt">Dauert keine 5 Minuten dich reinzulesen. Los geht's? 👇</p>
+  </div>
+  <!-- slide 1 -->
+  <div class="wl-slide" data-s="1">
+    <div class="wl-kicker">Wer wir sind</div>
+    <div class="wl-emoji">🍛</div>
+    <h1 class="wl-big head">Der Curry<br>Dealer deines<br>Vertrauens.</h1>
+    <p class="wl-txt">Karma Food gibt's seit 2014 — gegründet von Adi & Simone. Plant-based, Indian-inspired, täglich frisch gekocht.</p>
+    <p class="wl-txt">Wir nennen unsere Orte <b style="color:#fff">Lunch-Location</b> — nicht Restaurant. Weil's bei uns um mehr geht als nur einen Teller. Food is community. 🧡</p>
+  </div>
+  <!-- slide 2 -->
+  <div class="wl-slide" data-s="2">
+    <div class="wl-kicker">Wie heißt du?</div>
+    <div class="wl-emoji">✍️</div>
+    <h1 class="wl-big head">Sag uns<br>deinen Namen</h1>
+    <p class="wl-txt">Damit wir dich richtig begrüßen können.</p>
+    <input class="wl-input" id="wl-name" placeholder="Dein Vorname" autocomplete="given-name">
+  </div>
+  <!-- slide 3 -->
+  <div class="wl-slide" data-s="3">
+    <div class="wl-kicker">Dein Bereich</div>
+    <div class="wl-emoji">🎯</div>
+    <h1 class="wl-big head">Wo wirst du<br>arbeiten?</h1>
+    <p class="wl-txt">So zeigen wir dir gleich die passenden Inhalte.</p>
+    <div class="wl-role" id="wl-roles">
+      <button class="wl-chip" data-role="service"><span class="ce">🫶</span> Service & Theke</button>
+      <button class="wl-chip" data-role="barista"><span class="ce">☕</span> Barista</button>
+      <button class="wl-chip" data-role="kueche"><span class="ce">🥘</span> Küche</button>
+      <button class="wl-chip" data-role="schicht"><span class="ce">🧭</span> Schichtverantwortung</button>
+    </div>
+  </div>
+  <!-- slide 4 -->
+  <div class="wl-slide" data-s="4">
+    <div class="wl-kicker">Dein Standort</div>
+    <div class="wl-emoji">📍</div>
+    <h1 class="wl-big head">Welche<br>Location?</h1>
+    <div class="wl-role" id="wl-stores"></div>
+  </div>
+  <!-- slide 5 -->
+  <div class="wl-slide" data-s="5">
+    <div class="wl-kicker">Fertig 🎉</div>
+    <div class="wl-emoji">🚀</div>
+    <h1 class="wl-big head" id="wl-final-h">Los geht's!</h1>
+    <p class="wl-txt" id="wl-final-t">Alles eingerichtet. Deine App wartet auf dich — schau dich in Ruhe um.</p>
+    <div class="tip" style="background:rgba(255,255,255,.12);margin-top:8px;">
+      <span class="ti">💡</span>
+      <span class="tt" style="color:#FFE9DF;">Tipp: Füg die App zum Homescreen hinzu (Teilen → „Zum Home-Bildschirm"), dann hast du sie immer griffbereit.</span>
+    </div>
+  </div>
+
+  <div class="wl-dots" id="wl-dots"></div>
+  <div class="wl-nav">
+    <button class="wl-btn ghost" id="wl-back" style="display:none;">←</button>
+    <button class="wl-btn primary" id="wl-next">Weiter</button>
+  </div>
+</div>
+
+<!-- ===================== MAIN APP ===================== -->
+<div id="topbar" style="display:none;">
+  <div class="tb-l">
+    <div class="tb-title head">Karma Food</div>
+    <div class="tb-sub" id="tb-sub">Onboarding · —</div>
+  </div>
+  <div class="tb-av" id="tb-av">?</div>
+</div>
+
+<div id="content" style="display:none;">
+  <div class="view show" id="v-home"></div>
+  <div class="view" id="v-modules"></div>
+  <div class="view" id="v-store"></div>
+  <div class="view" id="v-check"></div>
+  <div class="view" id="v-help"></div>
+</div>
+
+<nav id="bottomnav" style="display:none;">
+  <button class="nav-btn active" data-v="home" onclick="go('home')">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Start
+  </button>
+  <button class="nav-btn" data-v="modules" onclick="go('modules')">
+    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Lernen
+  </button>
+  <button class="nav-btn" data-v="store" onclick="go('store')">
+    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Store
+  </button>
+  <button class="nav-btn" data-v="check" onclick="go('check')">
+    <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>To-Dos
+  </button>
+  <button class="nav-btn" data-v="help" onclick="go('help')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Hilfe
+  </button>
+</nav>
+
+<!-- module reader -->
+<div class="reader" id="reader">
+  <div class="rd-top">
+    <button class="rd-close" onclick="closeReader()">✕</button>
+    <div class="rd-prog"><i id="rd-prog-fill" style="width:0%"></i></div>
+  </div>
+  <div class="rd-body" id="rd-body"></div>
+  <div class="rd-nav">
+    <button class="rd-btn sec" id="rd-back" onclick="rdBack()">←</button>
+    <button class="rd-btn" id="rd-next" onclick="rdNext()">Weiter</button>
+  </div>
+</div>
+
+<!-- celebration -->
+<div class="celebrate" id="celebrate">
+  <div class="cel-badge" id="cel-e">🏅</div>
+  <div class="cel-k">Badge freigeschaltet</div>
+  <div class="cel-h head" id="cel-h">Stark!</div>
+  <div class="cel-d" id="cel-d"></div>
+  <button class="cel-btn" onclick="closeCelebrate()">Weiter so 🚀</button>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ============ STATE ============ */
+const STORES = [
+  {id:'lb', name:'Liechtensteinstraße', short:'Linke Bahngasse', col:'#00A878'},
+  {id:'boerse', name:'Börse', short:'Börse', col:'#00B4CC'},
+  {id:'1020', name:'Praterstraße', short:'1020', col:'#F0806B'},
+  {id:'3400', name:'Klosterneuburg', short:'Kloburg', col:'#E0521F'},
+  {id:'kitchen', name:'Produktionsküche', short:'Kitchen', col:'#F0A500'},
+];
+const ROLE_LABEL = {service:'Service & Theke', barista:'Barista', kueche:'Küche', schicht:'Schichtverantwortung'};
+
+// Nur unkritische, öffentlich teilbare Fakten. KEINE Passwörter/Codes im öffentlichen Link.
+const DEFAULT_STORE_FACTS = {
+  open:{k:'Öffnungszeiten',ic:'🕒',v:'Mo–Fr, siehe Aushang vor Ort',by:'System',when:'—'},
+  delivery:{k:'Lieferung aus der Küche',ic:'🚚',v:'Küche liefert täglich frisch in die Läden (Bain Marie hält warm)',by:'System',when:'—'},
+  ordering:{k:'Bestelltage Produkte',ic:'📦',v:'Zählen & bestellen: Montag & Donnerstag · Lieferung Di & Fr',by:'System',when:'—'},
+  bins:{k:'Müll & Entsorgung',ic:'♻️',v:'Bitte lokal eintragen (Tage variieren je Standort)',by:'System',when:'—'},
+  marktamt:{k:'Marktamt-Kontrolle',ic:'📋',v:'QR-Code hängt im Betrieb — zeigt: alles digital erfasst. Schädlingsmonitoring: grüne Mappe Stutzig & Hacker',by:'System',when:'—'},
+  dishwasher:{k:'Geschirrspüler',ic:'🧼',v:'Bitte lokal eintragen (Ablauf variiert je Gerät)',by:'System',when:'—'},
+};
+// Sensible Zugangsdaten: bewusst NICHT im öffentlichen Prototyp. Später hinter Store-PIN.
+const LOCKED_FACTS = [
+  {k:'WLAN-Passwort',ic:'📶'},
+  {k:'ready2order Login',ic:'💳'},
+  {k:'Kassenschnitt-Code',ic:'🔢'},
+  {k:'Schlüsselsafe-Code',ic:'🗝️'},
+  {k:'TooGoodToGo Zugang',ic:'🥡'},
+];
+
+let S = load();
+function load(){
+  try{ const raw=localStorage.getItem('kf_onb'); if(raw) return JSON.parse(raw); }catch(e){}
+  return { name:'', role:'', store:'', started:null,
+    modProgress:{}, modDone:{}, badges:{}, checks:{}, storeFacts:{}, wlStep:0 };
+}
+function save(){ try{ localStorage.setItem('kf_onb', JSON.stringify(S)); }catch(e){} }
+
+/* ============ CONTENT: MODULES ============ */
+const MODULES = [
+  { id:'welcome', ic:'🧡', title:'Willkommen bei Karma Food', meta:'Marke · 5 Schritte', scope:'global', roles:'all',
+    badge:{e:'🧡',n:'Marken-Kenner',d:'Du weißt jetzt, wofür Karma Food steht. Welcome to the family!'},
+    steps:[
+      {type:'read', e:'🍛', h:'Der Curry Dealer deines Vertrauens', p:['<b>Hey, we\'re Karma Food.</b> Alles begann 2014 mit einer Vision von Adi & Simone: authentische, pflanzliche indische Küche nach Wien zu bringen.','Wir stehen auf Farbe, Vielfalt und ordentlich Vitamine am Teller. Deshalb kochen wir täglich frisch: <b>Currys, Dal, Salate, Biryani Bowls, Mango Lassi, Masala Chai, Coffee & Cakes.</b>','Schnell, gesund, zum Mitnehmen. Für alle, die wenig Zeit, viel Hunger und null Lust auf Kompromisse haben.']},
+      {type:'read', e:'🌿', h:'Vegan, veggie & regional', p:['Wir kochen <b>ausschließlich vegetarisch und vegan</b>. Veggies sind bei uns keine Beilage, sondern Main Character.','Wichtig zu wissen: Wir sind <b>nicht bio-zertifiziert</b> — und das mit Absicht. Für uns steht <b>regional</b> an erster Stelle. Lieber Produkte aus der Umgebung als Bio, das von weit her kommt.','Bei Gast-Fragen zu Zutaten oder Allergenen gilt immer: kurz nachschauen (Zutatenliste / WhatsApp-Gruppe) statt raten.']},
+      {type:'values', e:'✨', h:'Unsere Good Karma Laws', cards:[
+        {e:'🌿',t:'Vegan & Veggie Fuel',d:'Veggies sind bei uns keine Beilage, sondern Main Character. Authentische, pflanzliche indische Küche — das war von Anfang an die Vision.'},
+        {e:'🤝',t:'Food is Community',d:'Wir kreieren Räume, Events und Momente, in denen sich alle willkommen fühlen. Gutes Essen bringt Menschen zusammen, always.'},
+        {e:'💥',t:'Bold Realness',d:'Real ingredients, real flavor, mit starken Family Roots. Geboren aus der Leidenschaft für ehrliche Küche mit indischen Wurzeln.'},
+      ]},
+      {type:'read', e:'🚀', h:'Von 5m² Küche zu ganz Wien', p:['<b>2014</b> ging der Traum los: Healthy Lunch for everyone. <b>2015</b> wurde aus einer alten Autowaschanlage in der Inkustraße unsere Karma Kitchen — bis heute das Herzstück, wo täglich für alle Locations gekocht wird.','<b>2016</b> Vienna Calling: erste Location am Laurenzerberg. Danach ging\'s Schlag auf Schlag — 1020, 1070, Schottenring, das erste Kochbuch (2020), der Kitchen Collective Eventspace (2022).','Heute: Lunch Locations, Catering, Kochkurse, Webshop, Schrankerl — und ständig neue Pop-ups und Collabs. <b>Started from the bottom, now we\'re here.</b> 🧡']},
+      {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Ein Gast fragt, ob euer Essen bio ist. Was stimmt?',
+        opts:['Ja, alles bio-zertifiziert','Nein — wir setzen bewusst auf regional statt bio','Nur die Currys sind bio'],
+        right:1, fb:'Genau! Wir sind nicht bio-zertifiziert, weil uns regional wichtiger ist als Bio von weit her. Ehrlich & mit Haltung. 🌿'},
+    ]},
+  { id:'products', ic:'🍛', title:'Unsere Produkte', meta:'Marke · 3 Schritte', scope:'global', roles:'all',
+    badge:{e:'🍛',n:'Menü-Profi',d:'Du kennst dich mit unserem Angebot aus. Die Gäste werden's dir danken!'},
+    steps:[
+      {type:'read', e:'🥘', h:'Was wir servieren', p:['Herzstück sind unsere <b>Currys, Bowls und Dals</b> — indisch inspiriert, komplett plant-based.','Dazu wechselnde Specials und Sides. Das Menü ist saisonal und datenbasiert geplant.','Wichtig: Fast alles ist vegan. Wenn ein Gast fragt — im Zweifel nachschauen, nicht raten.']},
+      {type:'read', e:'🛒', h:'Mehr als nur Essen', p:['Im <b>Webshop</b> gibt es Curry-Pasten, Masalas, Saucen, Kashmiri Chili Crisp, Chai-Sirup und Kochbücher.','<b>Catering & Kochkurse</b> bringen Karma zu Events und Menschen nach Hause.','<b>Schrankerl</b> sind unsere smarten RFID-Kühlschränke — Essen to go, rund um die Uhr.']},
+      {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Ein Gast fragt, ob das Curry vegan ist. Du bist dir nicht 100% sicher. Was tust du?',
+        opts:['„Ja klar, alles vegan!" — passt schon','Kurz nachschauen oder Kolleg:in fragen, dann ehrlich antworten','Sagen, dass du's nicht weißt und weggehen'],
+        right:1, fb:'Richtig. Ehrlichkeit + kurz checken ist immer besser als raten. Bei Allergien geht Sicherheit vor. 🙏'},
+    ]},
+  { id:'coffee', ic:'☕', title:'Kaffee-Basics', meta:'Fachwissen · 3 Schritte', scope:'global', roles:['service','barista','schicht'],
+    badge:{e:'☕',n:'Kaffee-Profi',d:'Espresso, Cappuccino & Co — du hast den Dreh raus!'},
+    steps:[
+      {type:'read', e:'☕', h:'Alles beginnt mit Espresso', p:['<b>Jeder Milchkaffee startet als Espresso.</b> Das ist die Basis von allem.','Ein guter Espresso läuft in ca. 25–30 Sekunden durch und hat eine haselnussbraune Crema obendrauf.','Kein Espresso ohne frisch gemahlene Bohnen — der Mahlgrad macht den Unterschied.']},
+      {type:'read', e:'🥛', h:'Espresso vs. Cappuccino', p:['<b>Espresso</b> = pur und konzentriert, nichts dazu.','<b>Cappuccino</b> = Espresso + heiße Milch + Milchschaum, im Verhältnis etwa 1:1:1.','<b>Latte</b> = mehr Milch, weniger Schaum. <b>Flat White</b> = Espresso mit feiner, samtiger Milch.']},
+      {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Was ist der Hauptunterschied zwischen Espresso und Cappuccino?',
+        opts:['Andere Bohnen','Der Cappuccino hat heiße Milch und Milchschaum dazu','Der Espresso ist kälter'],
+        right:1, fb:'Perfekt! Beide starten gleich — die Milch macht den Cappuccino aus. ☕'},
+    ]},
+  { id:'store-basics', ic:'🔑', title:'Store öffnen & schließen', meta:'Prozesse · 3 Schritte', scope:'global', roles:['service','barista','schicht'],
+    badge:{e:'🔑',n:'Alltags-Held',d:'Öffnen, schließen, Kassa — du bringst den Store sicher durch den Tag.'},
+    steps:[
+      {type:'read', e:'🌅', h:'Store öffnen', p:['Licht an, Maschinen hochfahren (Kaffeemaschine braucht Vorlaufzeit!), Kassa starten.','Kurzer Blick: ist alles sauber, ist genug Ware da, stimmt die Auslage?','Erst wenn alles steht, aufsperren. Lieber 5 Minuten früher da sein.']},
+      {type:'read', e:'🌙', h:'Store schließen', p:['Kassa abschließen, Maschinen reinigen, Kühlung checken.','Ware wegräumen, Flächen putzen, Müll raus (siehe „Store"-Tab für die lokalen Zeiten).','Licht aus, absperren, und dran denken: Schlüssel-Info steht im Store-Tab.']},
+      {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Warum solltest du die Kaffeemaschine als Erstes hochfahren?',
+        opts:['Damit sie schön aussieht','Weil sie Vorlaufzeit zum Aufheizen braucht','Muss man nicht'],
+        right:1, fb:'Genau — die Maschine braucht Zeit zum Aufheizen, damit der erste Espresso schon top ist. 🔥'},
+    ]},
+  { id:'roles', ic:'🧭', title:'Wer macht was', meta:'Orientierung · 2 Schritte', scope:'global', roles:'all',
+    badge:{e:'🧭',n:'Team-Versteher',d:'Du weißt, wer wofür da ist. Kein Rätselraten mehr im Alltag!'},
+    steps:[
+      {type:'read', e:'🤝', h:'Selbstorganisiert statt Chef-Prinzip', p:['Bei Karma gibt es <b>keine klassische Restaurantleitung vor Ort</b>. Ihr organisiert euch im Team.','Das heißt: mitdenken, Verantwortung übernehmen, und bei Unsicherheit nachschauen oder fragen.','Diese App ist quasi deine „Leitung to go" — hier steht, was du wissen musst.']},
+      {type:'read', e:'📋', h:'Grobe Zuständigkeiten', p:['<b>Küche</b>: Zubereitung, Warenannahme, Hygiene in der Küche.','<b>Service/Theke</b>: Gäste, Kassa, Kaffee, Sauberkeit im Gastraum.','<b>Schichtverantwortung</b>: behält den Überblick, springt ein, ist erste Anlaufstelle.','<b>Operations (Büro)</b>: alles Übergeordnete — erreichbar über die Prozess-App.']},
+    ]},
+  { id:'chef-week', ic:'📅', title:'Dein Wochenplan', meta:'Nur Küche · Einarbeitung', scope:'global', roles:['kueche'],
+    badge:{e:'📅',n:'Startklar',d:'Du weißt, was in Woche 1 zu tun ist. Willkommen in der Küche!'},
+    isWeekPlan:true },
+];
+
+/* ============ WEEK PLAN (CHEF) ============ */
+const WEEK_PLAN = [
+  {label:'Vor Start', days:[
+    {h:'Zum Einlesen', tasks:['Diese App durchklicken — Marke, Werte, Produkte','Wochenplan Woche 1 überfliegen, damit du weißt was kommt','Fragen sammeln für den ersten Tag']},
+  ]},
+  {label:'Woche 1', days:[
+    {h:'Tag 1 — Ankommen', tasks:['Team & Küche kennenlernen','Warenwirtschaft & Lager anschauen','HACCP / Hygiene-Basics durchgehen']},
+    {h:'Tag 2–3 — Abläufe', tasks:['Produktionsabläufe mitlaufen','Rezepte & Mengen kennenlernen','Bestellsystem in der Prozess-App zeigen lassen']},
+    {h:'Tag 4–5 — Mit anpacken', tasks:['Erste eigene Produktionsschritte','Schrankerl-Produktion (Sonntag-Lieferung) verstehen','Fragen mit Operations klären']},
+  ]},
+  {label:'Woche 2', days:[
+    {h:'Vertiefung', tasks:['Selbstständigere Produktion','Warenannahme eigenständig','Übergabe-Logik (Abnahme vor Transport) kennenlernen']},
+  ]},
+];
+
+/* ============ CHECKLIST (JOURNEY) ============ */
+const CHECKLIST = [
+  {n:1, t:'Ankommen', when:'Tag 1', items:[
+    {id:'c1', t:'App durchgeklickt & Willkommen-Modul geschafft'},
+    {id:'c2', t:'Team & Standort kennengelernt'},
+    {id:'c3', t:'Wichtigste Ansprechpartner gespeichert'},
+  ]},
+  {n:2, t:'Orientierung', when:'Tag 2–3', items:[
+    {id:'c4', t:'Produkte-Modul abgeschlossen'},
+    {id:'c5', t:'„Wer macht was" verstanden'},
+    {id:'c6', t:'Store-Infos im Store-Tab angeschaut'},
+  ]},
+  {n:3, t:'Grundhandwerk', when:'Woche 1–2', items:[
+    {id:'c7', t:'Fachwissen-Modul für meine Rolle geschafft'},
+    {id:'c8', t:'Ersten Arbeitstag mit Kolleg:in gemeistert'},
+    {id:'c9', t:'Erste Fragen im Hilfe-Bereich nachgeschlagen'},
+  ]},
+  {n:4, t:'Alltag sicher', when:'Woche 2–4', items:[
+    {id:'c10', t:'Store öffnen & schließen selbst gemacht'},
+    {id:'c11', t:'Kassen-/Tagesabschluss verstanden'},
+    {id:'c12', t:'Hygiene-Standards sitzen'},
+  ]},
+  {n:5, t:'Eingearbeitet', when:'Tag 30', items:[
+    {id:'c13', t:'Alle Pflichtmodule abgeschlossen'},
+    {id:'c14', t:'Praxis-Check mit Schichtverantwortung'},
+  ]},
+];
+
+/* ============ FAQ ============ */
+const FAQ = [
+  {q:'Ist unser Essen vegan?', a:'Wir kochen ausschließlich vegetarisch und vegan. Bei konkreten Gast-Fragen (v.a. Allergene) immer kurz nachschauen statt raten — die Zutatenliste findest du im extra Tab, und in der WhatsApp-Gruppe „Zutatenliste" kannst du direkt die Küche fragen.'},
+  {q:'Sind wir bio?', a:'Nein, bewusst nicht bio-zertifiziert. Für uns steht regional an erster Stelle — lieber Produkte aus der Umgebung als Bio von weit her.'},
+  {q:'Wo sehe ich die Allergene?', a:'Bei der Zutatenliste im extra Tab. Bei Unsicherheit: WhatsApp-Gruppe „Zutatenliste" oder jemanden vom Team fragen. Nie raten.'},
+  {q:'Wie mache ich einen Cappuccino?', a:'Basis ist immer ein Espresso (1 Shot) plus aufgeschäumte Milch. Mehr Kaffee-Rezepte (Brauner, Flat White, Chai Latte …) findest du im Kaffee-Modul. Alle Hot Drinks gehen mit Bio-Vollmilch oder Haferdrink.'},
+  {q:'Wie groß ist eine normale Portion?', a:'Curry: 2 Schöpfer gestrichen voll + 2 Schöpfer Reis. Bowl: Box voll bis 2 cm unter den Rand. Dal/Stew: 3 kleine Schöpfer. Im Gespräch immer von einer NORMALEN Portion ausgehen, keine kleine anbieten.'},
+  {q:'Was bekomme ich als Mitarbeiter:in gratis?', a:'Während dem Dienst: 1x Essen, 1x Drink, 1x Coffee. Reste vom Vortag (Lunch/Sweets) darfst du gerne mit nach Hause nehmen. Konsumation immer auf „Personalverbrauch" buchen.'},
+  {q:'Welche Rabatte habe ich?', a:'50% auf Konsumation außerhalb vom Dienst, 30% auf Store-Produkte über dein Free Contingent hinaus, 25% auf Karma Products (Gewürze, Pasten, Saucen), 10% auf Merch. Einlösbar per Code (Codeliste in der Wissensdatenbank).'},
+  {q:'Wie funktioniert der Stempelpass?', a:'Ein Stempel pro ganzer Portion Tagesgericht oder pro Heißgetränk. Voll = jede 13. Portion gratis. Nur vollgestempelt einlösbar, halbe Portionen werden nicht gestempelt.'},
+  {q:'Was bei der Marktamt-Kontrolle?', a:'Der QR-Code im Betrieb scannen — dort sind Temperaturkontrollen, Reinigungs- & Hygieneplan digital erfasst. Schädlingsmonitoring liegt in der grünen Mappe von Stutzig & Hacker. Merksatz: Alles ist vorhanden — du musst nur wissen wo.'},
+  {q:'An wen wende ich mich bei einem Problem?', a:'Erste Anlaufstelle ist dein Team vor Ort. Für Übergeordnetes: WhatsApp-Gruppe „Karma Info" oder Operations. Bei Küchen-Fragen zuerst bei der Kitchen anrufen.'},
+  {q:'Was heißt „Lunch-Location"?', a:'So nennen wir unsere Standorte — bewusst nicht „Restaurant", weil es bei uns um mehr geht als nur einen Tisch. Food is community.'},
+  {q:'Wie lade ich die App auf mein Handy?', a:'Im Browser auf „Teilen" tippen und „Zum Home-Bildschirm hinzufügen" wählen. Dann hast du sie wie eine echte App.'},
+  {q:'Woher bekomme ich WLAN & Kassa-Zugänge?', a:'Die bekommst du an deinem ersten Arbeitstag vor Ort — aus Sicherheitsgründen stehen sie nicht im Onboarding-Link.'},
+];
+
+/* ============ WELCOME FLOW ============ */
+let wl = S.wlStep || 0;
+const wlTotal = 6;
+function renderWlDots(){
+  const d=document.getElementById('wl-dots'); d.innerHTML='';
+  for(let i=0;i<wlTotal;i++){ const s=document.createElement('span'); s.className='wl-dot'+(i===wl?' on':''); d.appendChild(s); }
+}
+function showWl(){
+  document.querySelectorAll('.wl-slide').forEach(el=>el.classList.toggle('on', +el.dataset.s===wl));
+  document.getElementById('wl-back').style.display = wl>0 ? 'block':'none';
+  const next=document.getElementById('wl-next');
+  next.textContent = wl===wlTotal-1 ? 'App öffnen 🚀' : (wl===0?'Los geht\'s':'Weiter');
+  // build stores on slide 4
+  if(wl===4) buildWlStores();
+  if(wl===5) buildWlFinal();
+  renderWlDots();
+}
+function buildWlStores(){
+  const c=document.getElementById('wl-stores'); c.innerHTML='';
+  STORES.forEach(s=>{
+    const b=document.createElement('button'); b.className='wl-chip'+(S.store===s.id?' sel':'');
+    b.innerHTML=`<span class="ce" style="width:14px;height:14px;border-radius:50%;background:${s.col};display:inline-block;"></span> ${s.name}`;
+    b.onclick=()=>{ S.store=s.id; save(); buildWlStores(); };
+    c.appendChild(b);
+  });
+}
+function buildWlFinal(){
+  const nm=S.name?(', '+S.name):'';
+  document.getElementById('wl-final-h').textContent = `Los geht's${nm}!`;
+}
+document.getElementById('wl-next').onclick=()=>{
+  if(wl===2){ const v=document.getElementById('wl-name').value.trim(); if(v) S.name=v; }
+  if(wl===3 && !S.role){ toast('Bitte wähl deinen Bereich 🎯'); return; }
+  if(wl===4 && !S.store){ toast('Bitte wähl deinen Standort 📍'); return; }
+  if(wl>=wlTotal-1){ finishWelcome(); return; }
+  wl++; S.wlStep=wl; save(); showWl();
+};
+document.getElementById('wl-back').onclick=()=>{ if(wl>0){ wl--; S.wlStep=wl; save(); showWl(); } };
+document.querySelectorAll('#wl-roles .wl-chip').forEach(b=>{
+  b.onclick=()=>{ S.role=b.dataset.role; save(); document.querySelectorAll('#wl-roles .wl-chip').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); };
+});
+// preselect role visual on load
+function preselectRole(){ if(S.role){ document.querySelectorAll('#wl-roles .wl-chip').forEach(x=>x.classList.toggle('sel', x.dataset.role===S.role)); } }
+
+function finishWelcome(){
+  if(!S.started) S.started = Date.now();
+  save();
+  document.getElementById('welcome').style.display='none';
+  document.getElementById('topbar').style.display='flex';
+  document.getElementById('content').style.display='block';
+  document.getElementById('bottomnav').style.display='flex';
+  bootApp();
+}
+
+/* ============ APP BOOT ============ */
+function storeById(id){ return STORES.find(s=>s.id===id)||STORES[0]; }
+function facts(){
+  const base=JSON.parse(JSON.stringify(DEFAULT_STORE_FACTS));
+  const ov=(S.storeFacts&&S.storeFacts[S.store])||{};
+  Object.keys(ov).forEach(k=>{ if(base[k]) base[k]={...base[k],...ov[k]}; });
+  return base;
+}
+function visibleModules(){
+  return MODULES.filter(m=> m.roles==='all' || (Array.isArray(m.roles)&&m.roles.includes(S.role)) );
+}
+function dayNum(){ if(!S.started) return 1; return Math.max(1, Math.floor((Date.now()-S.started)/86400000)+1); }
+
+function bootApp(){
+  const st=storeById(S.store);
+  document.getElementById('tb-sub').textContent = `${ROLE_LABEL[S.role]||'Team'} · ${st.short}`;
+  document.getElementById('tb-av').textContent = (S.name||'?').slice(0,2).toUpperCase();
+  renderAll();
+  go('home');
+}
+function renderAll(){ renderHome(); renderModules(); renderStore(); renderCheck(); renderHelp(); }
+
+function go(v){
+  document.querySelectorAll('.view').forEach(el=>el.classList.remove('show'));
+  document.getElementById('v-'+v).classList.add('show');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.v===v));
+  document.getElementById('content').scrollTop=0;
+}
+
+/* ============ HOME ============ */
+function renderHome(){
+  const mods=visibleModules();
+  const totalSteps=mods.reduce((a,m)=>a+(m.isWeekPlan?1:(m.steps?m.steps.length:1)),0);
+  const doneSteps=mods.reduce((a,m)=>{
+    if(S.modDone[m.id]) return a+(m.isWeekPlan?1:m.steps.length);
+    return a+(S.modProgress[m.id]||0);
+  },0);
+  const pct=Math.round(doneSteps/Math.max(1,totalSteps)*100);
+  const nextMod = mods.find(m=>!S.modDone[m.id]);
+  const badgeCount=Object.keys(S.badges).length;
+
+  let h=`<div class="hero">
+    <div class="hero-hi">Tag ${dayNum()} deiner Reise · Hi ${S.name||''} 👋</div>
+    <div class="hero-name head">Schön dass<br>du da bist.</div>
+    <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%"></div></div>
+    <div class="prog-lbl"><span>${pct}% geschafft</span><span>🏅 ${badgeCount} Badge${badgeCount===1?'':'s'}</span></div>
+  </div>`;
+
+  if(nextMod){
+    h+=`<div class="next-card" onclick="openModule('${nextMod.id}')">
+      <div class="nc-ic">${nextMod.ic}</div>
+      <div class="nc-t"><div class="nc-k">Als nächstes</div><div class="nc-h">${nextMod.title}</div></div>
+      <div class="nc-arrow">→</div>
+    </div>`;
+  } else {
+    h+=`<div class="next-card" style="background:var(--ink);color:#fff;" onclick="go('modules')">
+      <div class="nc-ic" style="background:var(--neon);">🎉</div>
+      <div class="nc-t"><div class="nc-k" style="color:var(--neon);">Alles geschafft</div><div class="nc-h">Du bist eingearbeitet!</div></div>
+    </div>`;
+  }
+
+  h+=`<div class="tip"><span class="ti">💡</span><span class="tt"><b>Wusstest du?</b> Wir nennen unsere Standorte „Lunch-Location" — nicht Restaurant. Weil's um mehr geht als nur den Teller.</span></div>`;
+
+  h+=`<div class="sec-lbl">Schnellzugriff</div>
+  <div class="mod-grid">
+    <div class="mod" onclick="go('store')"><div class="m-ic">📍</div><div class="m-t">Mein Store</div><div class="m-meta">WLAN, Schlüssel, Infos</div></div>
+    <div class="mod" onclick="go('help')"><div class="m-ic">❓</div><div class="m-t">Ich brauch Hilfe</div><div class="m-meta">FAQ & Nachschlagen</div></div>
+  </div>`;
+
+  document.getElementById('v-home').innerHTML=h;
+}
+
+/* ============ MODULES ============ */
+function renderModules(){
+  const mods=visibleModules();
+  let h=`<div class="sec-lbl">Deine Lernpfade</div><div class="mod-grid">`;
+  mods.forEach(m=>{
+    const total=m.isWeekPlan?1:m.steps.length;
+    const prog=S.modDone[m.id]?total:(S.modProgress[m.id]||0);
+    const pct=Math.round(prog/total*100);
+    const done=S.modDone[m.id];
+    h+=`<div class="mod${done?' done':''}" onclick="openModule('${m.id}')">
+      <div class="m-check">✓</div>
+      <div class="m-ic">${m.ic}</div>
+      <div class="m-t">${m.title}</div>
+      <div class="m-meta">${m.meta}</div>
+      <div class="m-bar"><i style="width:${pct}%"></i></div>
+    </div>`;
+  });
+  h+=`</div>`;
+
+  // badges
+  h+=`<div class="sec-lbl">Deine Badges</div><div class="badge-grid">`;
+  MODULES.filter(m=>m.badge).forEach(m=>{
+    const got=S.badges[m.id];
+    h+=`<div class="badge${got?' got':''}"><div class="b-e">${m.badge.e}</div><div class="b-n">${got?m.badge.n:'???'}</div></div>`;
+  });
+  h+=`</div>`;
+  document.getElementById('v-modules').innerHTML=h;
+}
+
+/* ============ MODULE READER ============ */
+let curMod=null, curStep=0;
+function openModule(id){
+  const m=MODULES.find(x=>x.id===id); if(!m) return;
+  curMod=m; curStep=0;
+  document.getElementById('reader').classList.add('on');
+  renderStep();
+}
+function closeReader(){ document.getElementById('reader').classList.remove('on'); renderAll(); }
+function renderStep(){
+  const m=curMod;
+  if(m.isWeekPlan){ renderWeekPlan(); return; }
+  const step=m.steps[curStep];
+  const body=document.getElementById('rd-body');
+  document.getElementById('rd-prog-fill').style.width=Math.round((curStep)/(m.steps.length)*100)+'%';
+  let h='';
+  if(step.type==='read'){
+    h=`<div class="rd-emoji">${step.e}</div><h1 class="rd-h head">${step.h}</h1>`;
+    step.p.forEach(p=>h+=`<p class="rd-p">${p}</p>`);
+  } else if(step.type==='values'){
+    h=`<div class="rd-emoji">${step.e}</div><h1 class="rd-h head">${step.h}</h1><div class="swipe-cards">`;
+    step.cards.forEach(c=>h+=`<div class="value-card"><div class="vc-e">${c.e}</div><div class="vc-t">${c.t}</div><div class="vc-d">${c.d}</div></div>`);
+    h+=`</div>`;
+  } else if(step.type==='quiz'){
+    h=`<div class="rd-emoji">${step.e}</div><h1 class="rd-h head">${step.h}</h1><p class="rd-p"><b>${step.q}</b></p><div id="quiz-opts">`;
+    step.opts.forEach((o,i)=>h+=`<button class="quiz-opt" onclick="answerQuiz(${i})">${o}</button>`);
+    h+=`</div><div id="quiz-fb"></div>`;
+  }
+  body.innerHTML=h; body.scrollTop=0;
+  document.getElementById('rd-back').style.display = curStep>0?'block':'none';
+  const nx=document.getElementById('rd-next');
+  if(step.type==='quiz'){ nx.disabled=!quizAnswered; nx.textContent = isLast()?'Fertig 🎉':'Weiter'; }
+  else { nx.disabled=false; nx.textContent = isLast()?'Fertig 🎉':'Weiter'; }
+}
+let quizAnswered=false;
+function isLast(){ return curStep===curMod.steps.length-1; }
+function answerQuiz(i){
+  const step=curMod.steps[curStep];
+  const btns=document.querySelectorAll('#quiz-opts .quiz-opt');
+  btns.forEach((b,idx)=>{ b.onclick=null; if(idx===step.right)b.classList.add('right'); else if(idx===i)b.classList.add('wrong'); });
+  document.getElementById('quiz-fb').innerHTML=`<div class="quiz-fb">${i===step.right?'✅ ':'💡 '}${step.fb}</div>`;
+  quizAnswered=true;
+  const nx=document.getElementById('rd-next'); nx.disabled=false;
+}
+function rdNext(){
+  const m=curMod;
+  // save progress
+  const reached=curStep+1;
+  if((S.modProgress[m.id]||0)<reached){ S.modProgress[m.id]=reached; }
+  if(isLast()){ completeModule(m); return; }
+  curStep++; quizAnswered=false; save(); renderStep();
+}
+function rdBack(){ if(curStep>0){ curStep--; quizAnswered = curMod.steps[curStep].type!=='quiz'; save(); renderStep(); } }
+function completeModule(m){
+  const firstTime=!S.modDone[m.id];
+  S.modDone[m.id]=true; S.modProgress[m.id]=m.steps?m.steps.length:1;
+  if(m.badge) S.badges[m.id]=true;
+  save();
+  document.getElementById('reader').classList.remove('on');
+  if(firstTime && m.badge){ showCelebrate(m.badge); }
+  else { renderAll(); }
+}
+
+/* week plan reader */
+let wkTab=0;
+function renderWeekPlan(){
+  const body=document.getElementById('rd-body');
+  document.getElementById('rd-prog-fill').style.width='100%';
+  let h=`<div class="rd-emoji">📅</div><h1 class="rd-h head">Dein Wochenplan</h1><p class="rd-p">Damit du weißt, was auf dich zukommt. Schau ihn dir in Ruhe an — du musst nichts auswendig können.</p>`;
+  h+=`<div class="wk-tab">`;
+  WEEK_PLAN.forEach((w,i)=>h+=`<button class="wk-pill${i===wkTab?' on':''}" onclick="setWkTab(${i})">${w.label}</button>`);
+  h+=`</div>`;
+  WEEK_PLAN[wkTab].days.forEach(d=>{
+    h+=`<div class="wk-day"><div class="wd-h">${d.h}</div>`;
+    d.tasks.forEach(t=>h+=`<div class="wk-task"><span class="wt-b">›</span><span>${t}</span></div>`);
+    h+=`</div>`;
+  });
+  body.innerHTML=h; body.scrollTop=0;
+  document.getElementById('rd-back').style.display='none';
+  const nx=document.getElementById('rd-next'); nx.disabled=false; nx.textContent='Verstanden ✓';
+}
+function setWkTab(i){ wkTab=i; renderWeekPlan(); }
+
+/* ============ CELEBRATION ============ */
+function showCelebrate(b){
+  document.getElementById('cel-e').textContent=b.e;
+  document.getElementById('cel-h').textContent=b.n;
+  document.getElementById('cel-d').textContent=b.d;
+  document.getElementById('celebrate').classList.add('on');
+}
+function closeCelebrate(){ document.getElementById('celebrate').classList.remove('on'); renderAll(); go('modules'); }
+
+/* ============ STORE (EDITABLE) ============ */
+function renderStore(){
+  const st=storeById(S.store);
+  const f=facts();
+  let h=`<div class="hero" style="background:${st.col};">
+    <div class="hero-hi" style="color:#fff;opacity:.9;">📍 Dein Standort</div>
+    <div class="hero-name head" style="font-size:24px;">${st.name}</div>
+    <div style="font-size:13px;color:#fff;opacity:.9;">Diese Infos kann das Team selbst aktuell halten. Was sich ändert (z.B. Müll-Tage), einfach antippen & korrigieren.</div>
+  </div>`;
+
+  h+=`<div style="display:flex;gap:8px;margin-bottom:12px;"><span class="pill local">📍 Lokal · editierbar</span></div>`;
+  h+=`<div class="card">`;
+  Object.keys(f).forEach(key=>{
+    const it=f[key];
+    h+=`<div class="field" id="fld-${key}">
+      <span class="f-ic">${it.ic}</span>
+      <div class="f-body">
+        <div class="f-k">${it.k}</div>
+        <div class="f-v" id="fv-${key}">${escapeHtml(it.v)}</div>
+        <div class="f-meta">zuletzt geändert: ${it.by} · ${it.when}</div>
+      </div>
+      <button class="f-edit" onclick="editField('${key}')">✎</button>
+    </div>`;
+  });
+  h+=`</div>`;
+
+  // locked access data
+  h+=`<div class="sec-lbl">Zugangsdaten</div>
+  <div class="card" style="border-style:dashed;">
+    <div style="padding:14px 16px;background:var(--neon-soft);border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:center;">
+      <span style="font-size:20px;">🔒</span>
+      <span style="font-size:13px;line-height:1.4;color:var(--sub);">WLAN, Kassa & Co. bekommst du an deinem <b>ersten Arbeitstag vor Ort</b> — aus Sicherheitsgründen nicht im Onboarding-Link.</span>
+    </div>`;
+  LOCKED_FACTS.forEach(l=>{
+    h+=`<div class="field"><span class="f-ic" style="opacity:.5;">${l.ic}</span>
+      <div class="f-body"><div class="f-k">${l.k}</div><div class="f-v" style="color:var(--muted);font-weight:500;">🔒 am ersten Tag</div></div></div>`;
+  });
+  h+=`</div>`;
+
+  // team / contacts
+  h+=`<div class="sec-lbl">Team & Ansprechpartner</div><div class="card">
+    <div class="person"><div class="p-av">OP</div><div class="p-body"><div class="p-n">Operations (Büro)</div><div class="p-r">Für alles Übergeordnete · via Prozess-App</div></div></div>
+    <div class="person"><div class="p-av">👥</div><div class="p-body"><div class="p-n">Dein Team vor Ort</div><div class="p-r">Erste Anlaufstelle bei Fragen im Alltag</div></div></div>
+  </div>
+  <div style="font-size:12px;color:var(--muted);padding:4px 4px 10px;">💡 Namen & Kontakte kommen in der vernetzten Version automatisch aus der Prozess-App.</div>`;
+
+  document.getElementById('v-store').innerHTML=h;
+}
+function editField(key){
+  const f=facts()[key];
+  const fld=document.getElementById('fld-'+key);
+  const isLong = f.v.length>28;
+  fld.querySelector('.f-body').innerHTML=`
+    <div class="f-k">${f.k}</div>
+    ${isLong?`<textarea id="edit-${key}" rows="2">${escapeHtml(f.v)}</textarea>`:`<input id="edit-${key}" value="${escapeHtml(f.v)}">`}
+    <div><button class="f-save" onclick="saveField('${key}')">Speichern</button><button class="f-cancel" onclick="renderStore()">Abbrechen</button></div>`;
+  fld.querySelector('.f-edit').style.display='none';
+  setTimeout(()=>document.getElementById('edit-'+key).focus(),50);
+}
+function saveField(key){
+  const val=document.getElementById('edit-'+key).value.trim();
+  if(!val){ toast('Feld darf nicht leer sein'); return; }
+  if(!S.storeFacts) S.storeFacts={};
+  if(!S.storeFacts[S.store]) S.storeFacts[S.store]={};
+  const now=new Date().toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'});
+  S.storeFacts[S.store][key]={v:val, by:(S.name||'Team'), when:now};
+  save();
+  renderStore();
+  toast('Gespeichert ✓ — für alle im Store sichtbar');
+}
+
+/* ============ CHECKLIST ============ */
+function renderCheck(){
+  const allItems=CHECKLIST.flatMap(p=>p.items);
+  const done=allItems.filter(i=>S.checks[i.id]).length;
+  const pct=Math.round(done/allItems.length*100);
+  let h=`<div class="hero">
+    <div class="hero-hi">Deine Einarbeitung</div>
+    <div class="hero-name head" style="font-size:22px;">${done} von ${allItems.length} erledigt</div>
+    <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%"></div></div>
+    <div class="prog-lbl"><span>Von Tag 1 bis „eingearbeitet"</span><span>${pct}%</span></div>
+  </div>`;
+  CHECKLIST.forEach(ph=>{
+    h+=`<div class="phase-h"><span class="ph-n">${ph.n}</span><span class="ph-t">${ph.t}</span><span class="ph-when">${ph.when}</span></div>`;
+    h+=`<div class="card">`;
+    ph.items.forEach(it=>{
+      const on=S.checks[it.id];
+      h+=`<div class="cl-item" onclick="toggleCheck('${it.id}')">
+        <div class="cl-box${on?' on':''}">${on?'✓':''}</div>
+        <div class="cl-txt${on?' on':''}">${it.t}</div>
+      </div>`;
+    });
+    h+=`</div>`;
+  });
+  document.getElementById('v-check').innerHTML=h;
+}
+function toggleCheck(id){ S.checks[id]=!S.checks[id]; save(); renderCheck(); if(S.checks[id]) toast('Abgehakt ✓'); }
+
+/* ============ HELP / FAQ ============ */
+function renderHelp(){
+  let h=`<div class="sec-lbl">Ich brauch Hilfe</div>
+  <input class="faq-search" id="faq-search" placeholder="🔍 Wonach suchst du?" oninput="filterFaq()">
+  <div id="faq-list"></div>`;
+  document.getElementById('v-help').innerHTML=h;
+  renderFaqList('');
+}
+function renderFaqList(q){
+  const list=document.getElementById('faq-list');
+  const ql=q.toLowerCase();
+  const items=FAQ.filter(f=>!ql || f.q.toLowerCase().includes(ql) || f.a.toLowerCase().includes(ql));
+  if(!items.length){ list.innerHTML=`<div class="empty">Nichts gefunden. Frag am besten dein Team oder Operations. 🙏</div>`; return; }
+  list.innerHTML=items.map((f,i)=>`<div class="faq-item" id="faq-${i}">
+    <div class="faq-q" onclick="toggleFaq(${i})">${f.q}<span class="fq-x">+</span></div>
+    <div class="faq-a"><div class="fa-in">${f.a}</div></div>
+  </div>`).join('');
+}
+function filterFaq(){ renderFaqList(document.getElementById('faq-search').value); }
+function toggleFaq(i){
+  const el=document.getElementById('faq-'+i);
+  const a=el.querySelector('.faq-a');
+  const open=el.classList.toggle('open');
+  a.style.maxHeight=open?a.querySelector('.fa-in').scrollHeight+20+'px':'0';
+}
+
+/* ============ UTILS ============ */
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2400); }
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* ============ INIT ============ */
+if(S.started && S.name && S.role && S.store){
+  finishWelcome();
+} else {
+  preselectRole();
+  showWl();
+}
+window.go=go; window.openModule=openModule; window.closeReader=closeReader;
+window.rdNext=rdNext; window.rdBack=rdBack; window.answerQuiz=answerQuiz;
+window.setWkTab=setWkTab; window.closeCelebrate=closeCelebrate;
+window.editField=editField; window.saveField=saveField; window.renderStore=renderStore;
+window.toggleCheck=toggleCheck; window.filterFaq=filterFaq; window.toggleFaq=toggleFaq;
+</script>
+</body>
+</html>
