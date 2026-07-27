@@ -204,6 +204,51 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wk-task{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:14px;line-height:1.45;}
 .wk-task .wt-b{color:var(--orange);font-weight:800;flex-shrink:0;}
 
+/* ---------- FLOW TAB: MAP + ROUTE + TIMELINE ---------- */
+.flow-intro{background:var(--ink);border-radius:20px;padding:20px;color:#fff;margin-bottom:16px;position:relative;overflow:hidden;}
+.flow-intro::after{content:"";position:absolute;right:-24px;bottom:-30px;width:110px;height:110px;background:var(--neon);border-radius:50%;opacity:.18;}
+.flow-intro .fi-k{font-size:12px;color:var(--neon);font-weight:800;letter-spacing:.6px;text-transform:uppercase;}
+.flow-intro .fi-h{font-size:24px;margin:6px 0 8px;}
+.flow-intro .fi-p{font-size:14px;line-height:1.55;color:#DDD8CC;}
+
+.map-wrap{background:#fff;border:1px solid var(--border);border-radius:18px;padding:6px;margin-bottom:14px;overflow:hidden;}
+.map-tabs{display:flex;gap:6px;padding:8px 8px 4px;}
+.map-tab{flex:1;padding:9px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:var(--sub);}
+.map-tab.on{background:var(--ink);border-color:var(--ink);color:var(--neon);}
+.map-svg{width:100%;display:block;border-radius:14px;}
+.map-legend{display:flex;flex-wrap:wrap;gap:8px 14px;padding:10px 12px 6px;}
+.map-legend .ml{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--sub);font-weight:600;}
+.map-legend .ml .dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
+
+.route-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:14px;}
+.route-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.route-head .rh-t{font-size:16px;font-weight:800;}
+.route-play{background:var(--orange);color:#fff;border:none;border-radius:12px;padding:9px 16px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;}
+.route-play:active{transform:scale(.96);}
+.route-steps{margin-top:12px;}
+.route-step{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--border);opacity:.4;transition:opacity .3s;}
+.route-step:first-child{border-top:none;}
+.route-step.active{opacity:1;}
+.route-step .rs-num{width:26px;height:26px;border-radius:50%;background:var(--cream);color:var(--sub);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0;transition:.3s;}
+.route-step.active .rs-num{background:var(--orange);color:#fff;}
+.route-step .rs-t{font-size:14px;font-weight:700;line-height:1.3;}
+.route-step .rs-d{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4;}
+
+.timeline{position:relative;padding-left:8px;margin-bottom:14px;}
+.tl-item{position:relative;padding:0 0 20px 30px;}
+.tl-item::before{content:"";position:absolute;left:6px;top:6px;bottom:-6px;width:2px;background:var(--border);}
+.tl-item:last-child::before{display:none;}
+.tl-dot{position:absolute;left:0;top:2px;width:14px;height:14px;border-radius:50%;background:var(--orange);border:3px solid var(--cream);z-index:1;}
+.tl-time{font-size:12px;font-weight:800;color:var(--orange);letter-spacing:.3px;}
+.tl-h{font-size:15px;font-weight:700;margin:2px 0 3px;}
+.tl-d{font-size:13px;color:var(--sub);line-height:1.45;}
+
+.area-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;}
+.area-card{border-radius:16px;padding:16px;color:#fff;position:relative;overflow:hidden;min-height:110px;display:flex;flex-direction:column;justify-content:space-between;}
+.area-card .ac-e{font-size:28px;}
+.area-card .ac-t{font-size:15px;font-weight:800;margin-top:8px;line-height:1.2;}
+.area-card .ac-d{font-size:11px;opacity:.9;margin-top:3px;line-height:1.35;}
+
 /* toast */
 #toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;z-index:90;opacity:0;pointer-events:none;transition:.3s;max-width:90%;text-align:center;}
 #toast.show{opacity:1;}
@@ -242,13 +287,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="wl-slide" data-s="3">
     <div class="wl-kicker">Dein Bereich</div>
     <div class="wl-emoji">🎯</div>
-    <h1 class="wl-big head">Wo wirst du<br>arbeiten?</h1>
-    <p class="wl-txt">So zeigen wir dir gleich die passenden Inhalte.</p>
+    <h1 class="wl-big head">Wo bist du<br>in der Crew?</h1>
+    <p class="wl-txt">Noch nicht sicher? Kein Stress — wähl einfach, was am ehesten passt. Du siehst trotzdem alles.</p>
     <div class="wl-role" id="wl-roles">
-      <button class="wl-chip" data-role="service"><span class="ce">🫶</span> Service & Theke</button>
-      <button class="wl-chip" data-role="barista"><span class="ce">☕</span> Barista</button>
-      <button class="wl-chip" data-role="kueche"><span class="ce">🥘</span> Küche</button>
-      <button class="wl-chip" data-role="schicht"><span class="ce">🧭</span> Schichtverantwortung</button>
+      <button class="wl-chip" data-role="stores"><span class="ce">🫶</span> Karma Dealer Store</button>
+      <button class="wl-chip" data-role="kitchen"><span class="ce">🥘</span> Produktionsküche</button>
+      <button class="wl-chip" data-role="transporter"><span class="ce">🚐</span> Transporter</button>
+      <button class="wl-chip" data-role="management"><span class="ce">🧭</span> Management</button>
     </div>
   </div>
   <!-- slide 4 -->
@@ -289,6 +334,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="content" style="display:none;">
   <div class="view show" id="v-home"></div>
   <div class="view" id="v-modules"></div>
+  <div class="view" id="v-flow"></div>
   <div class="view" id="v-store"></div>
   <div class="view" id="v-check"></div>
   <div class="view" id="v-help"></div>
@@ -300,6 +346,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </button>
   <button class="nav-btn" data-v="modules" onclick="go('modules')">
     <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Lernen
+  </button>
+  <button class="nav-btn" data-v="flow" onclick="go('flow')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>Karma
   </button>
   <button class="nav-btn" data-v="store" onclick="go('store')">
     <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Store
@@ -339,13 +388,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 /* ============ STATE ============ */
 const STORES = [
-  {id:'lb', name:'Liechtensteinstraße', short:'Linke Bahngasse', col:'#00A878'},
+  {id:'lb', name:'Laurenzerberg', short:'Laurenzerberg', col:'#00A878'},
   {id:'boerse', name:'Börse', short:'Börse', col:'#00B4CC'},
-  {id:'1020', name:'Praterstraße', short:'1020', col:'#F0806B'},
-  {id:'3400', name:'Klosterneuburg', short:'Kloburg', col:'#E0521F'},
+  {id:'1020', name:'Ausstellungsstraße', short:'1020', col:'#F0806B'},
+  {id:'1070', name:'Neustiftgasse', short:'1070', col:'#A855F7'},
+  {id:'3400', name:'Stadtplatz Klosterneuburg', short:'Stadtplatz', col:'#E0521F'},
   {id:'kitchen', name:'Produktionsküche', short:'Kitchen', col:'#F0A500'},
 ];
-const ROLE_LABEL = {service:'Service & Theke', barista:'Barista', kueche:'Küche', schicht:'Schichtverantwortung'};
+const ROLE_LABEL = {stores:'Karma Dealer Store', kitchen:'Produktionsküche', transporter:'Transporter', management:'Management'};
 
 // Nur unkritische, öffentlich teilbare Fakten. KEINE Passwörter/Codes im öffentlichen Link.
 const DEFAULT_STORE_FACTS = {
@@ -399,7 +449,7 @@ const MODULES = [
         opts:['„Ja klar, alles vegan!" — passt schon','Kurz nachschauen oder Kolleg:in fragen, dann ehrlich antworten','Sagen, dass man es nicht weiß und weggehen'],
         right:1, fb:'Richtig. Ehrlichkeit + kurz checken ist immer besser als raten. Bei Allergien geht Sicherheit vor. 🙏'},
     ]},
-  { id:'coffee', ic:'☕', title:'Kaffee-Basics', meta:'Fachwissen · 3 Schritte', scope:'global', roles:['service','barista','schicht'],
+  { id:'coffee', ic:'☕', title:'Kaffee-Basics', meta:'Fachwissen · 3 Schritte', scope:'global', roles:['stores'],
     badge:{e:'☕',n:'Kaffee-Profi',d:'Espresso, Cappuccino & Co — du hast den Dreh raus!'},
     steps:[
       {type:'read', e:'☕', h:'Alles beginnt mit Espresso', p:['<b>Jeder Milchkaffee startet als Espresso.</b> Das ist die Basis von allem.','Ein guter Espresso läuft in ca. 25–30 Sekunden durch und hat eine haselnussbraune Crema obendrauf.','Kein Espresso ohne frisch gemahlene Bohnen — der Mahlgrad macht den Unterschied.']},
@@ -408,7 +458,7 @@ const MODULES = [
         opts:['Andere Bohnen','Der Cappuccino hat heiße Milch und Milchschaum dazu','Der Espresso ist kälter'],
         right:1, fb:'Perfekt! Beide starten gleich — die Milch macht den Cappuccino aus. ☕'},
     ]},
-  { id:'store-basics', ic:'🔑', title:'Store öffnen & schließen', meta:'Prozesse · 3 Schritte', scope:'global', roles:['service','barista','schicht'],
+  { id:'store-basics', ic:'🔑', title:'Store öffnen & schließen', meta:'Prozesse · 3 Schritte', scope:'global', roles:['stores'],
     badge:{e:'🔑',n:'Alltags-Held',d:'Öffnen, schließen, Kassa — du bringst den Store sicher durch den Tag.'},
     steps:[
       {type:'read', e:'🌅', h:'Store öffnen', p:['Licht an, Maschinen hochfahren (Kaffeemaschine braucht Vorlaufzeit!), Kassa starten.','Kurzer Blick: ist alles sauber, ist genug Ware da, stimmt die Auslage?','Erst wenn alles steht, aufsperren. Lieber 5 Minuten früher da sein.']},
@@ -418,12 +468,12 @@ const MODULES = [
         right:1, fb:'Genau — die Maschine braucht Zeit zum Aufheizen, damit der erste Espresso schon top ist. 🔥'},
     ]},
   { id:'roles', ic:'🧭', title:'Wer macht was', meta:'Orientierung · 2 Schritte', scope:'global', roles:'all',
-    badge:{e:'🧭',n:'Team-Versteher',d:'Du weißt, wer wofür da ist. Kein Rätselraten mehr im Alltag!'},
+    badge:{e:'🧭',n:'Crew-Versteher',d:'Du weißt, wie die Karma Crew zusammenspielt. Kein Rätselraten mehr!'},
     steps:[
-      {type:'read', e:'🤝', h:'Selbstorganisiert statt Chef-Prinzip', p:['Bei Karma gibt es <b>keine klassische Restaurantleitung vor Ort</b>. Ihr organisiert euch im Team.','Das heißt: mitdenken, Verantwortung übernehmen, und bei Unsicherheit nachschauen oder fragen.','Diese App ist quasi deine „Leitung to go" — hier steht, was du wissen musst.']},
-      {type:'read', e:'📋', h:'Grobe Zuständigkeiten', p:['<b>Küche</b>: Zubereitung, Warenannahme, Hygiene in der Küche.','<b>Service/Theke</b>: Gäste, Kassa, Kaffee, Sauberkeit im Gastraum.','<b>Schichtverantwortung</b>: behält den Überblick, springt ein, ist erste Anlaufstelle.','<b>Operations (Büro)</b>: alles Übergeordnete — erreichbar über die Prozess-App.']},
+      {type:'read', e:'🤝', h:'Selbstorganisiert statt Chef-Prinzip', p:['Wir sind die <b>Karma Crew</b> — und in den Stores gibt es keine klassische Restaurantleitung vor Ort. Ihr organisiert euch im Team.','Das heißt: mitdenken, Verantwortung übernehmen, und bei Unsicherheit nachschauen oder fragen.','Diese App ist quasi deine „Leitung to go" — hier steht, was du wissen musst.']},
+      {type:'read', e:'🧩', h:'Die vier Bereiche', p:['<b>Produktionsküche (Klosterneuburg)</b>: kocht täglich frisch für alle Locations.','<b>Karma Dealer Stores</b>: die 5 Lunch-Locations — Gäste, Kassa, Kaffee, Portionieren, Sauberkeit.','<b>Transporter</b>: bringt frisches Essen raus und leere Boxen zurück.','<b>Management</b>: hält alles zusammen — erreichbar über WhatsApp „Karma Info".']},
     ]},
-  { id:'chef-week', ic:'📅', title:'Dein Wochenplan', meta:'Nur Küche · Einarbeitung', scope:'global', roles:['kueche'],
+  { id:'chef-week', ic:'📅', title:'Dein Wochenplan', meta:'Nur Küche · Einarbeitung', scope:'global', roles:['kitchen'],
     badge:{e:'📅',n:'Startklar',d:'Du weißt, was in Woche 1 zu tun ist. Willkommen in der Küche!'},
     isWeekPlan:true },
 ];
@@ -557,12 +607,12 @@ function dayNum(){ if(!S.started) return 1; return Math.max(1, Math.floor((Date.
 
 function bootApp(){
   const st=storeById(S.store);
-  document.getElementById('tb-sub').textContent = `${ROLE_LABEL[S.role]||'Team'} · ${st.short}`;
+  document.getElementById('tb-sub').textContent = `${ROLE_LABEL[S.role]||'Karma Crew'} · ${st.short}`;
   document.getElementById('tb-av').textContent = (S.name||'?').slice(0,2).toUpperCase();
   renderAll();
   go('home');
 }
-function renderAll(){ renderHome(); renderModules(); renderStore(); renderCheck(); renderHelp(); }
+function renderAll(){ renderHome(); renderModules(); renderFlow(); renderStore(); renderCheck(); renderHelp(); }
 
 function go(v){
   document.querySelectorAll('.view').forEach(el=>el.classList.remove('show'));
@@ -607,8 +657,10 @@ function renderHome(){
 
   h+=`<div class="sec-lbl">Schnellzugriff</div>
   <div class="mod-grid">
-    <div class="mod" onclick="go('store')"><div class="m-ic">📍</div><div class="m-t">Mein Store</div><div class="m-meta">WLAN, Schlüssel, Infos</div></div>
+    <div class="mod" onclick="go('flow')"><div class="m-ic">🚐</div><div class="m-t">So läuft Karma</div><div class="m-meta">Route, Karte & Ablauf</div></div>
+    <div class="mod" onclick="go('store')"><div class="m-ic">📍</div><div class="m-t">Mein Store</div><div class="m-meta">Infos & Zugänge</div></div>
     <div class="mod" onclick="go('help')"><div class="m-ic">❓</div><div class="m-t">Ich brauch Hilfe</div><div class="m-meta">FAQ & Nachschlagen</div></div>
+    <div class="mod" onclick="go('modules')"><div class="m-ic">📚</div><div class="m-t">Weiterlernen</div><div class="m-meta">Deine Module</div></div>
   </div>`;
 
   document.getElementById('v-home').innerHTML=h;
@@ -643,7 +695,176 @@ function renderModules(){
   document.getElementById('v-modules').innerHTML=h;
 }
 
-/* ============ MODULE READER ============ */
+/* ============ FLOW TAB (So läuft Karma) ============ */
+const AREAS = [
+  {e:'🥘', t:'Produktionsküche', d:'Hier wird täglich frisch gekocht', col:'#F0A500'},
+  {e:'🫶', t:'Karma Dealer Stores', d:'5 Lunch-Locations in Wien & Kloburg', col:'#00A878'},
+  {e:'🚐', t:'Transporter', d:'Bringt frisch raus, holt leer zurück', col:'#E0521F'},
+  {e:'🧭', t:'Management', d:'Hält den Laden zusammen', col:'#00B4CC'},
+];
+// Stops in Reihenfolge der echten Route
+const ROUTE = [
+  {t:'Produktionsküche Klosterneuburg', d:'Inkustraße 1-7 · alles frisch gekocht & eingepackt bis ~9:00', tag:'START', col:'#F0A500'},
+  {t:'Ausstellungsstraße', d:'1020 Wien · erste Anlaufstelle', tag:'1', col:'#F0806B'},
+  {t:'Laurenzerberg', d:'1010 Wien · 1. Bezirk', tag:'2', col:'#00A878'},
+  {t:'Börse / Schottenring', d:'Schottenring 17 · 1010 Wien', tag:'3', col:'#00B4CC'},
+  {t:'Stadtplatz Klosterneuburg', d:'Stadtplatz 34 · zurück in Kloburg', tag:'4', col:'#E0521F'},
+  {t:'Zurück zur Küche', d:'Leere, saubere Boxen kommen wieder mit', tag:'ENDE', col:'#F0A500'},
+];
+const DAYFLOW = [
+  {time:'ab früh', h:'Frisch kochen', d:'In der Produktionsküche Klosterneuburg werden alle Gerichte täglich frisch gekocht.'},
+  {time:'bis 9:00', h:'Einpacken', d:'Küche & Transporter packen alles ein — Currys, Dals, Bowls, Salate & Sweets in die Bain-Marie-Boxen.'},
+  {time:'vormittags', h:'Route fahren', d:'Der Karma-Food-Transporter bringt das frische Essen raus: Ausstellungsstraße → Laurenzerberg → Börse → Stadtplatz.'},
+  {time:'unterwegs', h:'Boxen-Kreislauf', d:'Die leeren, sauberen Boxen vom Vortag nimmt der Transporter wieder mit zurück nach Klosterneuburg.'},
+  {time:'im Store', h:'Warm halten & verkaufen', d:'In den Stores hält die Bain Marie alles warm. Die Karma Crew portioniert & verkauft.'},
+  {time:'bis 14:00', h:'Sweets bestellen', d:'Wichtig: Die Sweets für den nächsten Tag müssen bis 14:00 Uhr bestellt sein.'},
+];
+
+let mapTab='wien';
+function renderFlow(){
+  const el=document.getElementById('v-flow');
+  let h=`<div class="flow-intro">
+    <div class="fi-k">So läuft Karma</div>
+    <div class="fi-h head">Ein Kreislauf,<br>der jeden Tag rollt.</div>
+    <div class="fi-p">Frisch gekocht in Klosterneuburg, ausgeliefert nach Wien, leere Boxen zurück. Hier siehst du, wie alles zusammenspielt — und wo wir überall sind.</div>
+  </div>`;
+
+  // Bereiche
+  h+=`<div class="sec-lbl">Die Karma Crew — vier Bereiche</div><div class="area-grid">`;
+  AREAS.forEach(a=>{
+    h+=`<div class="area-card" style="background:${a.col};"><div><div class="ac-e">${a.e}</div><div class="ac-t">${a.t}</div></div><div class="ac-d">${a.d}</div></div>`;
+  });
+  h+=`</div>`;
+
+  // Map
+  h+=`<div class="sec-lbl">Wo wir überall sind</div>
+  <div class="map-wrap">
+    <div class="map-tabs">
+      <button class="map-tab ${mapTab==='wien'?'on':''}" onclick="switchMap('wien')">🏙️ Wien</button>
+      <button class="map-tab ${mapTab==='klo'?'on':''}" onclick="switchMap('klo')">🌳 Klosterneuburg</button>
+    </div>
+    ${mapTab==='wien'?mapWien():mapKlo()}
+    <div class="map-legend">
+      <span class="ml"><span class="dot" style="background:#F0A500;"></span>Produktionsküche</span>
+      <span class="ml"><span class="dot" style="background:#00A878;"></span>Dealer Store</span>
+    </div>
+  </div>`;
+
+  // Route
+  h+=`<div class="sec-lbl">Die Liefer-Route</div>
+  <div class="route-card">
+    <div class="route-head">
+      <span class="rh-t">🚐 Transporter-Tour</span>
+      <button class="route-play" id="route-play-btn" onclick="playRoute()">▶ Abspielen</button>
+    </div>
+    ${routeMapSvg()}
+    <div class="route-steps" id="route-steps">`;
+  ROUTE.forEach((r,i)=>{
+    h+=`<div class="route-step" id="rstep-${i}"><div class="rs-num" style="">${r.tag}</div><div><div class="rs-t">${r.t}</div><div class="rs-d">${r.d}</div></div></div>`;
+  });
+  h+=`</div></div>`;
+
+  // Tagesablauf
+  h+=`<div class="sec-lbl">Der Tagesablauf</div><div class="timeline">`;
+  DAYFLOW.forEach(d=>{
+    h+=`<div class="tl-item"><div class="tl-dot"></div><div class="tl-time">${d.time}</div><div class="tl-h">${d.h}</div><div class="tl-d">${d.d}</div></div>`;
+  });
+  h+=`</div>`;
+
+  el.innerHTML=h;
+}
+function switchMap(t){ mapTab=t; renderFlow(); }
+
+// gezeichnete CI-Karte Wien (stilisiert, nicht geo-präzise)
+function mapWien(){
+  return `<svg class="map-svg" viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg">
+    <rect width="340" height="240" rx="14" fill="#EDF3EE"/>
+    <!-- Donau -->
+    <path d="M-10 60 C60 90 120 70 175 100 C230 130 280 110 350 140 L350 175 C280 150 235 165 178 135 C120 105 55 125 -10 95 Z" fill="#B8D8E8" opacity="0.7"/>
+    <text x="250" y="128" font-size="9" fill="#5A8199" font-style="italic" transform="rotate(14 250 128)">Donau</text>
+    <!-- stilisierte Blocks -->
+    <g fill="#DDE7DE">
+      <rect x="30" y="150" width="34" height="26" rx="3"/><rect x="72" y="158" width="40" height="30" rx="3"/>
+      <rect x="120" y="150" width="30" height="22" rx="3"/><rect x="40" y="185" width="46" height="26" rx="3"/>
+      <rect x="200" y="40" width="38" height="26" rx="3"/><rect x="246" y="34" width="34" height="30" rx="3"/>
+      <rect x="210" y="74" width="30" height="22" rx="3"/>
+    </g>
+    <!-- Pins -->
+    ${pin(95,168,'#00A878','Laurenzerberg','1010')}
+    ${pin(150,182,'#00B4CC','Börse','1010')}
+    ${pin(232,58,'#F0806B','Ausstellungsstr.','1020')}
+    <text x="12" y="22" font-size="11" font-weight="800" fill="#1A1A18" font-family="sans-serif">WIEN</text>
+  </svg>`;
+}
+function mapKlo(){
+  return `<svg class="map-svg" viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg">
+    <rect width="340" height="240" rx="14" fill="#EDF3EE"/>
+    <!-- Grün / Wald -->
+    <path d="M0 0 H120 C110 40 130 70 90 100 C60 125 40 180 0 200 Z" fill="#CFE6CE" opacity="0.7"/>
+    <circle cx="285" cy="60" r="34" fill="#CFE6CE" opacity="0.6"/>
+    <text x="40" y="60" font-size="9" fill="#5A8560" font-style="italic">Wienerwald</text>
+    <g fill="#DDE7DE">
+      <rect x="150" y="90" width="40" height="28" rx="3"/><rect x="196" y="100" width="34" height="26" rx="3"/>
+      <rect x="160" y="140" width="44" height="26" rx="3"/><rect x="120" y="150" width="32" height="22" rx="3"/>
+    </g>
+    <!-- Pins -->
+    ${pin(178,120,'#E0521F','Stadtplatz 34','Store')}
+    ${pin(240,168,'#F0A500','Produktionsküche','Inkustraße')}
+    <text x="12" y="22" font-size="11" font-weight="800" fill="#1A1A18" font-family="sans-serif">KLOSTERNEUBURG</text>
+  </svg>`;
+}
+function pin(x,y,col,label,sub){
+  return `<g>
+    <path d="M${x} ${y-16} a9 9 0 0 1 9 9 c0 6 -9 15 -9 15 c0 0 -9 -9 -9 -15 a9 9 0 0 1 9 -9 Z" fill="${col}"/>
+    <circle cx="${x}" cy="${y-7}" r="3.5" fill="#fff"/>
+    <rect x="${x-38}" y="${y+10}" width="76" height="26" rx="6" fill="#fff" opacity="0.95"/>
+    <text x="${x}" y="${y+21}" font-size="8.5" font-weight="800" fill="#1A1A18" text-anchor="middle" font-family="sans-serif">${label}</text>
+    <text x="${x}" y="${y+31}" font-size="7" fill="#8A857A" text-anchor="middle" font-family="sans-serif">${sub}</text>
+  </g>`;
+}
+
+// Route-SVG mit animierbarem Transporter
+function routeMapSvg(){
+  // Punkte entlang eines Pfads (schematisch)
+  const pts=[[40,130],[110,50],[175,95],[250,45],[300,120],[40,130]];
+  let path='M'+pts.map(p=>p.join(' ')).join(' L ');
+  let dots='';
+  pts.slice(0,5).forEach((p,i)=>{
+    dots+=`<circle cx="${p[0]}" cy="${p[1]}" r="7" fill="${ROUTE[i].col}"/><text x="${p[0]}" y="${p[1]+3.5}" font-size="8" font-weight="800" fill="#fff" text-anchor="middle" font-family="sans-serif">${ROUTE[i].tag==='START'?'K':ROUTE[i].tag}</text>`;
+  });
+  return `<svg class="map-svg" id="route-svg" viewBox="0 0 340 170" xmlns="http://www.w3.org/2000/svg" style="background:#F7F4EC;">
+    <path id="route-path" d="${path}" fill="none" stroke="#E0521F" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.5"/>
+    ${dots}
+    <g id="route-van" style="opacity:0;"><circle r="12" fill="#1A1A18"/><text y="4.5" font-size="13" text-anchor="middle">🚐</text></g>
+  </svg>`;
+}
+let routeAnim=null;
+function playRoute(){
+  const van=document.getElementById('route-van');
+  const path=document.getElementById('route-path');
+  const btn=document.getElementById('route-play-btn');
+  if(!van||!path) return;
+  if(routeAnim){ cancelAnimationFrame(routeAnim); routeAnim=null; }
+  const len=path.getTotalLength();
+  van.style.opacity='1';
+  btn.textContent='⏸ läuft…';
+  const dur=6000; const start=performance.now();
+  const stepBounds=[0,0.22,0.45,0.68,0.86,1]; // grob wo die stops sitzen
+  function frame(now){
+    let t=(now-start)/dur; if(t>1)t=1;
+    const pt=path.getPointAtLength(t*len);
+    van.setAttribute('transform',`translate(${pt.x} ${pt.y})`);
+    // aktiven step markieren
+    let active=0; for(let i=0;i<stepBounds.length;i++){ if(t>=stepBounds[i]) active=i; }
+    document.querySelectorAll('.route-step').forEach((s,i)=>s.classList.toggle('active', i<=active));
+    if(t<1){ routeAnim=requestAnimationFrame(frame); }
+    else { btn.textContent='▶ Nochmal'; routeAnim=null; setTimeout(()=>{document.querySelectorAll('.route-step').forEach(s=>s.classList.remove('active'));van.style.opacity='0';},1800); }
+  }
+  routeAnim=requestAnimationFrame(frame);
+}
+window.switchMap=switchMap; window.playRoute=playRoute;
+
+
 let curMod=null, curStep=0;
 function openModule(id){
   const m=MODULES.find(x=>x.id===id); if(!m) return;
