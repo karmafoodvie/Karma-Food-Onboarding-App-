@@ -9,20 +9,20 @@
 <meta name="theme-color" content="#E94E1B">
 <title>Karma Food · Onboarding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 :root{
   --neon:#D4FF3F;--orange:#E94E1B;--ink:#1A1A18;--cream:#F5F1E8;
   --card:#fff;--border:#E6E1D5;--muted:#8A857A;--sub:#5C574E;
-  --orange-soft:#FDEDE7;--neon-soft:#F3FFCC;
+  --orange-soft:#FDEDE7;--neon-soft:#F3FFCC;--green:#00A878;--green-soft:#E3F5EE;
+  --purple:#7B61FF;--amber:#F0A500;--amber-soft:#FEF6E0;
 }
 html,body{height:100%;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;max-width:480px;margin:0 auto;position:relative;overflow-x:hidden;}
 .head{font-family:'Boldonse',sans-serif;font-weight:400;letter-spacing:.3px;}
 
-/* ---------- PREBOARDING / WELCOME ---------- */
+/* ---------- WELCOME / PREBOARDING ---------- */
 #welcome{position:fixed;inset:0;max-width:480px;margin:0 auto;background:var(--orange);z-index:100;display:flex;flex-direction:column;overflow:hidden;}
 .wl-slide{position:absolute;inset:0;display:flex;flex-direction:column;padding:32px 26px 120px;opacity:0;transform:translateX(40px);transition:opacity .35s,transform .35s;pointer-events:none;overflow-y:auto;}
 .wl-slide.on{opacity:1;transform:none;pointer-events:auto;}
@@ -44,13 +44,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wl-chip{padding:15px 18px;border-radius:14px;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:16px;font-weight:600;cursor:pointer;text-align:left;display:flex;align-items:center;gap:12px;transition:.15s;}
 .wl-chip.sel{background:var(--neon);color:var(--ink);border-color:var(--neon);}
 .wl-chip .ce{font-size:22px;}
+.area-pick{display:flex;flex-direction:column;gap:14px;margin-top:8px;}
+.area-big{border-radius:20px;padding:22px;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);cursor:pointer;transition:.15s;text-align:left;width:100%;}
+.area-big.sel{background:var(--neon);border-color:var(--neon);}
+.area-big .ab-e{font-size:38px;}
+.area-big .ab-t{font-size:20px;font-weight:800;color:#fff;margin:8px 0 4px;}
+.area-big.sel .ab-t{color:var(--ink);}
+.area-big .ab-d{font-size:13px;color:#FFE9DF;line-height:1.4;}
+.area-big.sel .ab-d{color:#3A3A34;}
 
 /* ---------- TOPBAR ---------- */
 #topbar{background:var(--orange);color:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;position:sticky;top:0;z-index:20;}
 .tb-l{display:flex;flex-direction:column;}
 .tb-title{font-size:15px;}
 .tb-sub{font-size:11px;color:var(--neon);margin-top:2px;font-weight:600;letter-spacing:.3px;}
-.tb-av{width:38px;height:38px;border-radius:50%;background:var(--neon);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;font-family:'Boldonse',sans-serif;}
+.tb-av{width:38px;height:38px;border-radius:50%;background:var(--neon);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;font-family:'Boldonse',sans-serif;cursor:pointer;}
 
 /* ---------- CONTENT ---------- */
 #content{flex:1;overflow-y:auto;padding:14px 14px 92px;}
@@ -64,11 +72,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .nav-btn svg{width:23px;height:23px;stroke:currentColor;stroke-width:1.9;fill:none;stroke-linecap:round;stroke-linejoin:round;}
 .nav-btn.active{color:var(--orange);}
 
-/* ---------- CARDS / SHARED ---------- */
+/* ---------- SHARED ---------- */
 .hero{background:var(--ink);border-radius:20px;padding:20px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden;}
 .hero::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;background:var(--orange);border-radius:50%;opacity:.25;}
 .hero-hi{font-size:13px;color:var(--neon);font-weight:700;letter-spacing:.5px;}
 .hero-name{font-size:26px;margin:4px 0 12px;}
+.hero-p{font-size:14px;line-height:1.55;color:#DDD8CC;}
 .prog-wrap{background:rgba(255,255,255,.15);border-radius:20px;height:12px;overflow:hidden;}
 .prog-fill{height:100%;background:var(--neon);border-radius:20px;transition:width .5s;}
 .prog-lbl{display:flex;justify-content:space-between;font-size:12px;margin-top:8px;color:#DDD;}
@@ -76,16 +85,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .card{background:var(--card);border-radius:16px;border:1px solid var(--border);overflow:hidden;margin-bottom:12px;}
 .next-card{background:var(--neon);border-radius:16px;padding:16px 18px;margin-bottom:14px;cursor:pointer;display:flex;align-items:center;gap:14px;}
 .next-card .nc-ic{width:44px;height:44px;background:var(--ink);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.next-card .nc-t{flex:1;}
 .nc-k{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;opacity:.6;}
 .nc-h{font-size:16px;font-weight:700;margin-top:2px;}
-.nc-arrow{font-size:22px;font-weight:800;}
+.nc-arrow{font-size:22px;font-weight:800;margin-left:auto;}
 .tip{background:var(--orange-soft);border-radius:14px;padding:14px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-start;}
 .tip .ti{font-size:24px;}
 .tip .tt{font-size:14px;line-height:1.5;color:var(--sub);}
 .tip .tt b{color:var(--orange);}
 
-/* module cards grid */
 .mod-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .mod{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px;cursor:pointer;position:relative;overflow:hidden;transition:transform .12s;}
 .mod:active{transform:scale(.97);}
@@ -97,15 +104,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mod.done{border-color:var(--orange);}
 .mod .m-check{position:absolute;top:12px;right:12px;width:24px;height:24px;background:var(--orange);border-radius:50%;color:#fff;display:none;align-items:center;justify-content:center;font-size:14px;font-weight:800;}
 .mod.done .m-check{display:flex;}
-.mod .m-lock{position:absolute;inset:0;background:rgba(245,241,232,.72);display:none;align-items:center;justify-content:center;font-size:24px;}
-.mod.locked .m-lock{display:flex;}
 
-/* pill/tag */
 .pill{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;}
-.pill.global{background:var(--neon-soft);color:#5A7A00;}
 .pill.local{background:var(--orange-soft);color:var(--orange);}
 
-/* editable store fields */
 .field{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;}
 .field:last-child{border-bottom:none;}
 .field .f-ic{font-size:22px;flex-shrink:0;}
@@ -118,15 +120,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .f-save{margin-top:8px;background:var(--orange);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-size:14px;font-weight:700;cursor:pointer;}
 .f-cancel{margin-top:8px;margin-left:8px;background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer;}
 
-/* person cards */
 .person{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);}
 .person:last-child{border-bottom:none;}
 .p-av{width:42px;height:42px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex-shrink:0;}
-.p-body{flex:1;}
 .p-n{font-size:15px;font-weight:700;}
 .p-r{font-size:12px;color:var(--muted);}
 
-/* checklist */
 .cl-item{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer;}
 .cl-item:last-child{border-bottom:none;}
 .cl-box{width:24px;height:24px;border-radius:7px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;transition:.15s;}
@@ -138,7 +137,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .phase-h .ph-t{font-size:15px;font-weight:800;}
 .phase-h .ph-when{font-size:11px;color:var(--muted);margin-left:auto;font-weight:600;}
 
-/* module reader */
 .reader{position:fixed;inset:0;max-width:480px;margin:0 auto;background:var(--cream);z-index:60;display:none;flex-direction:column;}
 .reader.on{display:flex;}
 .rd-top{background:var(--orange);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
@@ -160,13 +158,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .rd-btn.sec{flex:0 0 auto;background:#fff;color:var(--ink);border:2px solid var(--border);padding:16px 20px;}
 .rd-btn:disabled{opacity:.4;}
 
-/* quiz */
 .quiz-opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid var(--border);border-radius:14px;padding:15px 16px;font-size:16px;font-weight:600;cursor:pointer;margin-bottom:10px;font-family:inherit;transition:.15s;}
 .quiz-opt.right{background:var(--neon);border-color:var(--neon);color:var(--ink);}
 .quiz-opt.wrong{background:var(--orange-soft);border-color:var(--orange);color:var(--orange);}
 .quiz-fb{background:#fff;border-radius:14px;padding:16px;font-size:15px;line-height:1.5;color:var(--sub);border-left:5px solid var(--neon);margin-top:6px;}
 
-/* badge celebration */
 .celebrate{position:fixed;inset:0;max-width:480px;margin:0 auto;background:rgba(26,26,24,.94);z-index:80;display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center;}
 .celebrate.on{display:flex;animation:fade .3s;}
 .cel-badge{width:130px;height:130px;border-radius:50%;background:var(--neon);display:flex;align-items:center;justify-content:center;font-size:62px;margin-bottom:24px;animation:pop .5s;}
@@ -176,7 +172,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .cel-d{color:#CFC9BC;font-size:15px;line-height:1.5;margin-bottom:28px;max-width:300px;}
 .cel-btn{background:var(--neon);color:var(--ink);border:none;border-radius:14px;padding:15px 40px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;}
 
-/* badges grid */
 .badge-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
 .badge{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px 8px;text-align:center;}
 .badge .b-e{font-size:34px;filter:grayscale(1);opacity:.35;}
@@ -185,7 +180,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .badge.got .b-n{color:var(--ink);}
 .badge:not(.got) .b-n{color:var(--muted);}
 
-/* faq */
 .faq-search{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:14px;font-size:16px;outline:none;margin-bottom:14px;font-family:inherit;background:#fff;}
 .faq-search:focus{border-color:var(--orange);}
 .faq-item{background:#fff;border:1px solid var(--border);border-radius:14px;margin-bottom:10px;overflow:hidden;}
@@ -195,35 +189,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .faq-a{max-height:0;overflow:hidden;transition:max-height .25s;}
 .faq-a .fa-in{padding:0 16px 15px;font-size:14px;line-height:1.6;color:var(--sub);}
 
-/* week plan (chef) */
-.wk-tab{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;}
-.wk-pill{flex-shrink:0;padding:9px 16px;border-radius:20px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:var(--sub);}
-.wk-pill.on{background:var(--ink);border-color:var(--ink);color:var(--neon);}
-.wk-day{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px;}
-.wk-day .wd-h{font-size:14px;font-weight:800;color:var(--orange);margin-bottom:8px;}
-.wk-task{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:14px;line-height:1.45;}
-.wk-task .wt-b{color:var(--orange);font-weight:800;flex-shrink:0;}
-
-/* ---------- FLOW TAB: MAP + ROUTE + TIMELINE ---------- */
 .flow-intro{background:var(--ink);border-radius:20px;padding:20px;color:#fff;margin-bottom:16px;position:relative;overflow:hidden;}
 .flow-intro::after{content:"";position:absolute;right:-24px;bottom:-30px;width:110px;height:110px;background:var(--neon);border-radius:50%;opacity:.18;}
 .flow-intro .fi-k{font-size:12px;color:var(--neon);font-weight:800;letter-spacing:.6px;text-transform:uppercase;}
 .flow-intro .fi-h{font-size:24px;margin:6px 0 8px;}
 .flow-intro .fi-p{font-size:14px;line-height:1.55;color:#DDD8CC;}
 
-.map-wrap{background:#fff;border:1px solid var(--border);border-radius:18px;padding:6px;margin-bottom:14px;overflow:hidden;}
-.map-tabs{display:flex;gap:6px;padding:8px 8px 4px;}
-.map-tab{flex:1;padding:9px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:var(--sub);}
-.map-tab.on{background:var(--ink);border-color:var(--ink);color:var(--neon);}
-.map-svg{width:100%;display:block;border-radius:14px;}
-.map-legend{display:flex;flex-wrap:wrap;gap:8px 14px;padding:10px 12px 6px;}
-.map-legend .ml{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--sub);font-weight:600;}
-.map-legend .ml .dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
+.stage{background:#fff;border:1px solid var(--border);border-radius:16px;margin-bottom:12px;overflow:hidden;}
+.stage-head{display:flex;align-items:center;gap:13px;padding:15px 16px;cursor:pointer;}
+.stage-num{width:34px;height:34px;border-radius:11px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex-shrink:0;}
+.stage-tl{flex:1;}
+.stage-t{font-size:16px;font-weight:800;}
+.stage-time{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-top:1px;}
+.stage-x{font-size:20px;color:var(--muted);transition:.25s;}
+.stage.open .stage-x{transform:rotate(45deg);}
+.stage-body{max-height:0;overflow:hidden;transition:max-height .3s;}
+.stage.open .stage-body{max-height:600px;}
+.stage-inner{padding:0 16px 15px 63px;}
+.stage-li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;padding:4px 0;color:var(--sub);}
+.stage-li .sb{flex-shrink:0;font-weight:800;color:var(--orange);}
 
+.dish-cat{margin-bottom:6px;}
+.dish-row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:#fff;border:1px solid var(--border);border-radius:14px;margin-bottom:8px;}
+.dish-emoji{width:46px;height:46px;border-radius:12px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;overflow:hidden;}
+.dish-emoji img{width:100%;height:100%;object-fit:cover;}
+.dish-tl{flex:1;}
+.dish-n{font-size:15px;font-weight:700;}
+.dish-d{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.35;}
+.img-todo{font-size:9px;background:var(--amber-soft);color:#8A6200;padding:2px 6px;border-radius:6px;font-weight:700;margin-left:6px;}
+
+.map-svg{width:100%;display:block;border-radius:14px;}
 .route-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:14px;}
 .route-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
 .route-head .rh-t{font-size:16px;font-weight:800;}
-.route-play{background:var(--orange);color:#fff;border:none;border-radius:12px;padding:9px 16px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;}
+.route-play{background:var(--orange);color:#fff;border:none;border-radius:12px;padding:9px 16px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;}
 .route-play:active{transform:scale(.96);}
 .route-steps{margin-top:12px;}
 .route-step{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--border);opacity:.4;transition:opacity .3s;}
@@ -234,71 +233,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .route-step .rs-t{font-size:14px;font-weight:700;line-height:1.3;}
 .route-step .rs-d{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4;}
 
-.timeline{position:relative;padding-left:8px;margin-bottom:14px;}
-.tl-item{position:relative;padding:0 0 20px 30px;}
-.tl-item::before{content:"";position:absolute;left:6px;top:6px;bottom:-6px;width:2px;background:var(--border);}
-.tl-item:last-child::before{display:none;}
-.tl-dot{position:absolute;left:0;top:2px;width:14px;height:14px;border-radius:50%;background:var(--orange);border:3px solid var(--cream);z-index:1;}
-.tl-time{font-size:12px;font-weight:800;color:var(--orange);letter-spacing:.3px;}
-.tl-h{font-size:15px;font-weight:700;margin:2px 0 3px;}
-.tl-d{font-size:13px;color:var(--sub);line-height:1.45;}
-
-.area-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;}
-.area-card{border-radius:16px;padding:16px;color:#fff;position:relative;overflow:hidden;min-height:110px;display:flex;flex-direction:column;justify-content:space-between;}
-.area-card .ac-e{font-size:28px;}
-.area-card .ac-t{font-size:15px;font-weight:800;margin-top:8px;line-height:1.2;}
-.area-card .ac-d{font-size:11px;opacity:.9;margin-top:3px;line-height:1.35;}
-
-/* ---------- KITCHEN TAB ---------- */
-.view-switch{display:flex;gap:6px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:5px;margin-bottom:14px;}
-.view-switch button{flex:1;padding:11px 8px;border-radius:10px;border:none;background:transparent;font-size:13px;font-weight:700;cursor:pointer;color:var(--sub);font-family:inherit;line-height:1.2;}
-.view-switch button.on{background:var(--ink);color:var(--neon);}
-.vs-hint{font-size:12px;color:var(--muted);line-height:1.5;background:var(--cream);border-radius:12px;padding:12px 14px;margin-bottom:14px;display:flex;gap:9px;}
-.vs-hint .vh-i{font-size:16px;flex-shrink:0;}
-
-.krole-split{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
-.krole{border-radius:16px;padding:15px;color:#fff;}
-.krole.chef{background:var(--orange);}
-.krole.sous{background:#00A878;}
-.krole .kr-tag{font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;opacity:.85;}
-.krole .kr-n{font-size:16px;font-weight:800;margin:3px 0 6px;}
-.krole .kr-d{font-size:12px;line-height:1.45;opacity:.95;}
-
-.kweek-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;}
-.kweek-pill{flex-shrink:0;padding:9px 15px;border-radius:20px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:var(--sub);}
-.kweek-pill.on{background:var(--orange);border-color:var(--orange);color:#fff;}
-.kweek-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px;}
-.kweek-motto{background:var(--neon-soft);border-radius:10px;padding:10px 12px;font-size:14px;font-style:italic;color:#5A7A00;font-weight:600;margin-bottom:14px;}
-.kw-block{margin-bottom:14px;}
-.kw-block:last-child{margin-bottom:0;}
-.kw-h{font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:7px;}
-.kw-h.chef{color:var(--orange);}
-.kw-h.sous{color:#00A878;}
-.kw-h.talk{color:#7B61FF;}
-.kw-li{display:flex;gap:9px;align-items:flex-start;font-size:14px;line-height:1.45;padding:3px 0;color:var(--sub);}
-.kw-li .kb{color:var(--ink);font-weight:800;flex-shrink:0;}
-.kw-rule{background:#FEF0EC;border-radius:8px;padding:9px 12px;font-size:13px;font-weight:700;color:var(--orange);margin-top:8px;}
-.kw-success{background:var(--cream);border-radius:10px;padding:11px 13px;margin-top:12px;}
-.kw-success .ks-h{font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
-
-.talk-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px;border-left:4px solid #7B61FF;}
-.talk-card .tc-top{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
-.talk-card .tc-id{background:#7B61FF;color:#fff;font-size:12px;font-weight:800;padding:3px 9px;border-radius:7px;}
-.talk-card .tc-when{font-size:12px;font-weight:700;color:var(--ink);}
-.talk-card .tc-who{font-size:11px;color:var(--muted);margin-bottom:6px;}
-.talk-card .tc-goal{font-size:13px;line-height:1.5;color:var(--sub);}
-
-.warn-card{background:#FFF7F5;border:1px solid #F5C4B8;border-radius:14px;padding:14px 16px;margin-bottom:12px;}
-.warn-card .wc-h{font-size:13px;font-weight:800;color:#C0392B;display:flex;align-items:center;gap:7px;margin-bottom:9px;}
-.warn-li{display:flex;gap:9px;align-items:flex-start;font-size:13px;line-height:1.45;padding:4px 0;color:#7A4A42;}
-.warn-li::before{content:"⚠";flex-shrink:0;}
-
-.philo-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:15px 16px;margin-bottom:10px;border-left:5px solid var(--neon);}
-.philo-card .pc-e{font-size:24px;}
-.philo-card .pc-t{font-size:16px;font-weight:800;margin:5px 0 4px;}
-.philo-card .pc-d{font-size:13px;color:var(--sub);line-height:1.5;}
-
-/* toast */
 #toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;z-index:90;opacity:0;pointer-events:none;transition:.3s;max-width:90%;text-align:center;}
 #toast.show{opacity:1;}
 .empty{text-align:center;color:var(--muted);padding:40px 20px;font-size:14px;}
@@ -308,7 +242,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <!-- ===================== WELCOME / PREBOARDING ===================== -->
 <div id="welcome">
-  <!-- slide 0 -->
   <div class="wl-slide on" data-s="0">
     <div class="wl-kicker">Willkommen 🌱</div>
     <div class="wl-emoji">👋</div>
@@ -316,7 +249,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <p class="wl-txt">Das hier ist deine Karma-Food-App. Kein trockenes Handbuch — sondern alles, was du brauchst, um dich vom ersten Tag an sicher zu fühlen.</p>
     <p class="wl-txt">Dauert keine 5 Minuten dich reinzulesen. Los geht's? 👇</p>
   </div>
-  <!-- slide 1 -->
   <div class="wl-slide" data-s="1">
     <div class="wl-kicker">Wer wir sind</div>
     <div class="wl-emoji">🍛</div>
@@ -324,7 +256,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <p class="wl-txt">Karma Food gibt's seit 2014 — gegründet von Adi & Simone. Plant-based, Indian-inspired, täglich frisch gekocht.</p>
     <p class="wl-txt">Wir nennen unsere Orte <b style="color:#fff">Lunch-Location</b> — nicht Restaurant. Weil's bei uns um mehr geht als nur einen Teller. Food is community. 🧡</p>
   </div>
-  <!-- slide 2 -->
   <div class="wl-slide" data-s="2">
     <div class="wl-kicker">Wie heißt du?</div>
     <div class="wl-emoji">✍️</div>
@@ -332,27 +263,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <p class="wl-txt">Damit wir dich richtig begrüßen können.</p>
     <input class="wl-input" id="wl-name" placeholder="Dein Vorname" autocomplete="given-name">
   </div>
-  <!-- slide 3 -->
   <div class="wl-slide" data-s="3">
     <div class="wl-kicker">Dein Bereich</div>
     <div class="wl-emoji">🎯</div>
-    <h1 class="wl-big head">Wo bist du<br>in der Crew?</h1>
-    <p class="wl-txt">Noch nicht sicher? Kein Stress — wähl einfach, was am ehesten passt. Du siehst trotzdem alles.</p>
-    <div class="wl-role" id="wl-roles">
-      <button class="wl-chip" data-role="stores"><span class="ce">🫶</span> Karma Dealer Store</button>
-      <button class="wl-chip" data-role="kitchen"><span class="ce">🥘</span> Produktionsküche</button>
-      <button class="wl-chip" data-role="transporter"><span class="ce">🚐</span> Transporter</button>
-      <button class="wl-chip" data-role="management"><span class="ce">🧭</span> Management</button>
+    <h1 class="wl-big head">Wo arbeitest<br>du?</h1>
+    <p class="wl-txt">Danach zeigen wir dir genau das, was für deinen Bereich zählt.</p>
+    <div class="area-pick" id="wl-areas">
+      <button class="area-big" data-area="store">
+        <div class="ab-e">🫶</div>
+        <div class="ab-t">Store · Karma Crew</div>
+        <div class="ab-d">Du arbeitest in einer unserer Lunch-Locations — Verkauf, Theke, Gäste.</div>
+      </button>
+      <button class="area-big" data-area="kitchen">
+        <div class="ab-e">🥘</div>
+        <div class="ab-t">Kitchen · Küchen-Team</div>
+        <div class="ab-d">Du arbeitest in der Produktionsküche — kochen, portionieren, verpacken.</div>
+      </button>
     </div>
   </div>
-  <!-- slide 4 -->
   <div class="wl-slide" data-s="4">
     <div class="wl-kicker">Dein Standort</div>
     <div class="wl-emoji">📍</div>
-    <h1 class="wl-big head">Welche<br>Location?</h1>
+    <h1 class="wl-big head">Welcher<br>Standort?</h1>
     <div class="wl-role" id="wl-stores"></div>
   </div>
-  <!-- slide 5 -->
   <div class="wl-slide" data-s="5">
     <div class="wl-kicker">Fertig 🎉</div>
     <div class="wl-emoji">🚀</div>
@@ -375,43 +309,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="topbar" style="display:none;">
   <div class="tb-l">
     <div class="tb-title head">Karma Food</div>
-    <div class="tb-sub" id="tb-sub">Onboarding · —</div>
+    <div class="tb-sub" id="tb-sub">—</div>
   </div>
-  <div class="tb-av" id="tb-av">?</div>
+  <div class="tb-av" id="tb-av" onclick="switchArea()">?</div>
 </div>
 
 <div id="content" style="display:none;">
   <div class="view show" id="v-home"></div>
   <div class="view" id="v-modules"></div>
   <div class="view" id="v-flow"></div>
-  <div class="view" id="v-kitchen"></div>
   <div class="view" id="v-store"></div>
   <div class="view" id="v-check"></div>
   <div class="view" id="v-help"></div>
 </div>
 
-<nav id="bottomnav" style="display:none;">
-  <button class="nav-btn active" data-v="home" onclick="go('home')">
-    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Start
-  </button>
-  <button class="nav-btn" data-v="modules" onclick="go('modules')">
-    <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Lernen
-  </button>
-  <button class="nav-btn" data-v="flow" onclick="go('flow')">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>Karma
-  </button>
-  <button class="nav-btn" data-v="store" onclick="go('store')">
-    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Store
-  </button>
-  <button class="nav-btn" data-v="check" onclick="go('check')">
-    <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>To-Dos
-  </button>
-  <button class="nav-btn" data-v="help" onclick="go('help')">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Hilfe
-  </button>
-</nav>
+<nav id="bottomnav" style="display:none;"></nav>
 
-<!-- module reader -->
 <div class="reader" id="reader">
   <div class="rd-top">
     <button class="rd-close" onclick="closeReader()">✕</button>
@@ -424,7 +337,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- celebration -->
 <div class="celebrate" id="celebrate">
   <div class="cel-badge" id="cel-e">🏅</div>
   <div class="cel-k">Badge freigeschaltet</div>
@@ -436,7 +348,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="toast"></div>
 
 <script>
-/* ============ STATE ============ */
+/* =========================================================
+   KARMA ONBOARDING · Zwei-Bereiche-Architektur
+   Meta-Basis + Store-View + Kitchen-View
+   ========================================================= */
+
 const STORES = [
   {id:'lb', name:'Laurenzerberg', short:'Laurenzerberg', col:'#00A878'},
   {id:'boerse', name:'Börse', short:'Börse', col:'#00B4CC'},
@@ -445,9 +361,49 @@ const STORES = [
   {id:'3400', name:'Stadtplatz Klosterneuburg', short:'Stadtplatz', col:'#E0521F'},
   {id:'kitchen', name:'Produktionsküche', short:'Kitchen', col:'#F0A500'},
 ];
-const ROLE_LABEL = {stores:'Karma Dealer Store', kitchen:'Produktionsküche', transporter:'Transporter', management:'Management'};
+const AREA_LABEL = {store:'Store · Karma Crew', kitchen:'Kitchen · Küchen-Team'};
 
-// Nur unkritische, öffentlich teilbare Fakten. KEINE Passwörter/Codes im öffentlichen Link.
+/* ---------- GERICHTE (Emoji-Zuordnung aus Prozess-App) ---------- */
+function dishEmoji(name){
+  if(!name) return '🍽️';
+  const n=name.toUpperCase();
+  if(/LASAGNE/.test(n)) return '🫕';
+  if(/BIRYANI/.test(n)) return '🍚';
+  if(/\bDAL\b|LINSEN/.test(n)) return '🫘';
+  if(/CURRY/.test(n)) return '🍛';
+  if(/\bBOWL\b/.test(n)) return '🥙';
+  if(/SALAT|SALAD/.test(n)) return '🥗';
+  if(/GULASCH/.test(n)) return '🥘';
+  if(/MEATBALL/.test(n)) return '🧆';
+  if(/CHILI/.test(n)) return '🌶️';
+  if(/TIKKA|MASALA/.test(n)) return '🍛';
+  if(/SPINAT/.test(n)) return '🌿';
+  return '🍽️';
+}
+// In der Prozess-App sind aktuell KEINE echten Gerichts-Fotos hinterlegt (DISH_IMAGE_MAP leer).
+// Sobald Fotos vorliegen: hier als {'GERICHTNAME':'URL'} ergänzen.
+const DISH_PHOTOS = {};
+function dishImg(name){
+  const key=Object.keys(DISH_PHOTOS).find(k=>name.toUpperCase().includes(k));
+  if(key) return `<img src="${DISH_PHOTOS[key]}" alt="">`;
+  return dishEmoji(name);
+}
+
+const DISH_CATEGORIES = [
+  {cat:'Hauptgerichte (3 pro Tag)', dishes:[
+    {n:'Curry', d:'Indisch-inspiriert, cremig, würzig'},
+    {n:'Dal', d:'Linsengericht, herzhaft & proteinreich'},
+    {n:'Biryani', d:'Gewürzter Reis mit Gemüse'},
+    {n:'Lasagne', d:'Wird immer mit Salat serviert'},
+    {n:'Special', d:'z.B. Meatballs, Gulasch, Chili sin Carne'},
+  ]},
+  {cat:'Immer dabei', dishes:[
+    {n:'Bowl', d:'Mit passendem Dressing'},
+    {n:'Salat', d:'Mit passendem Dressing'},
+    {n:'Wochensalat', d:'Wechselt wöchentlich, mit Dressing'},
+  ]},
+];
+
 const DEFAULT_STORE_FACTS = {
   open:{k:'Öffnungszeiten',ic:'🕒',v:'Mo–Fr, siehe Aushang vor Ort',by:'System',when:'—'},
   delivery:{k:'Lieferung aus der Küche',ic:'🚚',v:'Küche liefert täglich frisch in die Läden (Bain Marie hält warm)',by:'System',when:'—'},
@@ -456,185 +412,194 @@ const DEFAULT_STORE_FACTS = {
   marktamt:{k:'Marktamt-Kontrolle',ic:'📋',v:'QR-Code hängt im Betrieb — zeigt: alles digital erfasst. Schädlingsmonitoring: grüne Mappe Stutzig & Hacker',by:'System',when:'—'},
   dishwasher:{k:'Geschirrspüler',ic:'🧼',v:'Bitte lokal eintragen (Ablauf variiert je Gerät)',by:'System',when:'—'},
 };
-// Sensible Zugangsdaten: bewusst NICHT im öffentlichen Prototyp. Später hinter Store-PIN.
 const LOCKED_FACTS = [
-  {k:'WLAN-Passwort',ic:'📶'},
-  {k:'ready2order Login',ic:'💳'},
-  {k:'Kassenschnitt-Code',ic:'🔢'},
-  {k:'Schlüsselsafe-Code',ic:'🗝️'},
-  {k:'TooGoodToGo Zugang',ic:'🥡'},
+  {k:'WLAN-Passwort',ic:'📶'},{k:'ready2order Login',ic:'💳'},{k:'Kassenschnitt-Code',ic:'🔢'},
+  {k:'Schlüsselsafe-Code',ic:'🗝️'},{k:'TooGoodToGo Zugang',ic:'🥡'},
 ];
 
-let S = load();
-function load(){
-  try{ const raw=localStorage.getItem('kf_onb'); if(raw) return JSON.parse(raw); }catch(e){}
-  return { name:'', role:'', store:'', started:null,
-    modProgress:{}, modDone:{}, badges:{}, checks:{}, storeFacts:{}, wlStep:0 };
-}
-function save(){ try{ localStorage.setItem('kf_onb', JSON.stringify(S)); }catch(e){} }
+const STORE_DAYFLOW = [
+  {ic:'🚚', col:'#F0A500', t:'Lieferung', time:'Am Vormittag', items:[
+    'Der Transporter fährt den Store an','Das Essen kommt in Kisten','Kisten entladen','Gerichte in die Bain-Maries einsetzen','Store für den Verkauf vorbereiten']},
+  {ic:'🛒', col:'#00A878', t:'Öffnungszeiten', time:'Verkaufsbetrieb', items:[
+    'Verkauf & Kundenservice','Auffüllen','Sauberkeit halten','Hygiene beachten','Laufende Qualitätskontrolle']},
+  {ic:'🌙', col:'#7B61FF', t:'Schichtende', time:'Nach Geschäftsschluss', items:[
+    'Kasse zählen','Store reinigen','Bain-Maries reinigen','Arbeitsflächen reinigen','Müll entsorgen','Store abschließen','Feierabend 🎉']},
+];
 
-/* ============ CONTENT: MODULES ============ */
-const MODULES = [
-  { id:'welcome', ic:'🧡', title:'Willkommen bei Karma Food', meta:'Marke · 5 Schritte', scope:'global', roles:'all',
-    badge:{e:'🧡',n:'Marken-Kenner',d:'Du weißt jetzt, wofür Karma Food steht. Welcome to the family!'},
+const KITCHEN_DAYFLOW = [
+  {ic:'📋', col:'#F0A500', t:'Produktionsplanung', time:'Start in den Tag', items:[
+    'Was wird heute gekocht? Mengen checken','Bestellungen & Bedarf der Stores ansehen','Aufgaben im Team verteilen']},
+  {ic:'🔪', col:'#E0521F', t:'Vorbereitung (Mise en Place)', time:'Vorbereiten', items:[
+    'Zutaten bereitstellen','Gemüse schneiden, Basis vorbereiten','Alles griffbereit an den Stationen']},
+  {ic:'🍳', col:'#00A878', t:'Kochen', time:'Herzstück', items:[
+    'Currys, Dals, Bowls, Biryanis & Specials frisch kochen','Auf Handschrift & Qualität achten','Sweets backen']},
+  {ic:'⚖️', col:'#00B4CC', t:'Portionieren', time:'Nach dem Kochen', items:[
+    'Gerichte nach Standard portionieren','Beilagen & Dressings zuordnen']},
+  {ic:'📦', col:'#7B61FF', t:'Verpacken & Etikettieren', time:'Fertigmachen', items:[
+    'In Transport-Kisten / Bain-Marie-Behälter füllen','Etikettieren: was ist drin, welcher Store','Haltbarkeit / Datum beachten']},
+  {ic:'✅', col:'#F0A500', t:'Qualitätskontrolle', time:'Vor dem Verladen', items:[
+    'Sichtprüfung: sieht alles gut aus?','Mengen & Vollständigkeit checken','Temperatur & Hygiene dokumentieren']},
+  {ic:'🗂️', col:'#E0521F', t:'Kommissionieren', time:'Sortieren', items:[
+    'Pro Store zusammenstellen','Reihenfolge der Route beachten']},
+  {ic:'🚐', col:'#00A878', t:'Transporter beladen', time:'Übergabe', items:[
+    'Kisten in den Transporter laden','Leere, saubere Boxen vom Vortag zurücknehmen','Übergabe an den Transporter']},
+  {ic:'🧼', col:'#00B4CC', t:'Reinigung der Küche', time:'Nach der Produktion', items:[
+    'Arbeitsflächen & Geräte reinigen','Böden, Abfall, Kühlung','Alles bereit für morgen']},
+  {ic:'🌙', col:'#7B61FF', t:'Tagesabschluss', time:'Feierabend', items:[
+    'Reste beschriften & korrekt lagern (FIFO)','HACCP-Dokumentation abzeichnen','Feierabend 🎉']},
+];
+
+const ROUTE = [
+  {t:'Produktionsküche Klosterneuburg', d:'Inkustraße 1-7 · frisch gekocht & eingepackt bis ~9:00', tag:'START', col:'#F0A500'},
+  {t:'Ausstellungsstraße', d:'1020 Wien · erste Anlaufstelle', tag:'1', col:'#F0806B'},
+  {t:'Laurenzerberg', d:'1010 Wien · 1. Bezirk', tag:'2', col:'#00A878'},
+  {t:'Börse / Schottenring', d:'Schottenring 17 · 1010 Wien', tag:'3', col:'#00B4CC'},
+  {t:'Stadtplatz Klosterneuburg', d:'Stadtplatz 34 · zurück in Kloburg', tag:'4', col:'#E0521F'},
+  {t:'Zurück zur Küche', d:'Leere, saubere Boxen kommen wieder mit', tag:'ENDE', col:'#F0A500'},
+];
+
+const WELCOME_STEPS = [
+  {type:'read', e:'🍛', h:'Der Curry Dealer deines Vertrauens', p:['<b>Hey, we\'re Karma Food.</b> Alles begann 2014 mit einer Vision von Adi & Simone: authentische, pflanzliche indische Küche nach Wien zu bringen.','Wir stehen auf Farbe, Vielfalt und ordentlich Vitamine am Teller. Deshalb kochen wir täglich frisch: <b>Currys, Dal, Salate, Biryani Bowls, Mango Lassi, Masala Chai, Coffee & Cakes.</b>','Schnell, gesund, zum Mitnehmen.']},
+  {type:'read', e:'🌿', h:'Vegan, veggie & regional', p:['Wir kochen <b>ausschließlich vegetarisch und vegan</b>. Veggies sind bei uns keine Beilage, sondern Main Character.','Wir sind <b>nicht bio-zertifiziert</b> — und das mit Absicht. Für uns steht <b>regional</b> an erster Stelle. Lieber Produkte aus der Umgebung als Bio von weit her.','Bei Gast-Fragen zu Zutaten oder Allergenen: kurz nachschauen (Zutatenliste / WhatsApp-Gruppe) statt raten.']},
+  {type:'values', e:'✨', h:'Unsere Good Karma Laws', cards:[
+    {e:'🌿',t:'Vegan & Veggie Fuel',d:'Veggies sind bei uns keine Beilage, sondern Main Character. Authentische, pflanzliche indische Küche.'},
+    {e:'🤝',t:'Food is Community',d:'Wir kreieren Räume und Momente, in denen sich alle willkommen fühlen. Gutes Essen bringt Menschen zusammen.'},
+    {e:'💥',t:'Bold Realness',d:'Real ingredients, real flavor, mit starken Family Roots. Ehrliche Küche mit indischen Wurzeln.'},
+  ]},
+  {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Ein Gast fragt, ob euer Essen bio ist. Was stimmt?',
+    opts:['Ja, alles bio-zertifiziert','Nein — wir setzen bewusst auf regional statt bio','Nur die Currys sind bio'],
+    right:1, fb:'Genau! Wir sind nicht bio-zertifiziert, weil uns regional wichtiger ist als Bio von weit her. 🌿'},
+];
+
+const STORE_MODULES = [
+  {id:'welcome', ic:'🧡', title:'Willkommen bei Karma Food', meta:'Marke · 4 Schritte', badge:{e:'🧡',n:'Marken-Kenner',d:'Du weißt, wofür Karma Food steht. Welcome to the family!'}, steps:WELCOME_STEPS},
+  {id:'products', ic:'🍛', title:'Unsere Produkte', meta:'Marke · 3 Schritte', badge:{e:'🍛',n:'Menü-Profi',d:'Du kennst dich mit unserem Angebot aus!'},
     steps:[
-      {type:'read', e:'🍛', h:'Der Curry Dealer deines Vertrauens', p:['<b>Hey, we\'re Karma Food.</b> Alles begann 2014 mit einer Vision von Adi & Simone: authentische, pflanzliche indische Küche nach Wien zu bringen.','Wir stehen auf Farbe, Vielfalt und ordentlich Vitamine am Teller. Deshalb kochen wir täglich frisch: <b>Currys, Dal, Salate, Biryani Bowls, Mango Lassi, Masala Chai, Coffee & Cakes.</b>','Schnell, gesund, zum Mitnehmen. Für alle, die wenig Zeit, viel Hunger und null Lust auf Kompromisse haben.']},
-      {type:'read', e:'🌿', h:'Vegan, veggie & regional', p:['Wir kochen <b>ausschließlich vegetarisch und vegan</b>. Veggies sind bei uns keine Beilage, sondern Main Character.','Wichtig zu wissen: Wir sind <b>nicht bio-zertifiziert</b> — und das mit Absicht. Für uns steht <b>regional</b> an erster Stelle. Lieber Produkte aus der Umgebung als Bio, das von weit her kommt.','Bei Gast-Fragen zu Zutaten oder Allergenen gilt immer: kurz nachschauen (Zutatenliste / WhatsApp-Gruppe) statt raten.']},
-      {type:'values', e:'✨', h:'Unsere Good Karma Laws', cards:[
-        {e:'🌿',t:'Vegan & Veggie Fuel',d:'Veggies sind bei uns keine Beilage, sondern Main Character. Authentische, pflanzliche indische Küche — das war von Anfang an die Vision.'},
-        {e:'🤝',t:'Food is Community',d:'Wir kreieren Räume, Events und Momente, in denen sich alle willkommen fühlen. Gutes Essen bringt Menschen zusammen, always.'},
-        {e:'💥',t:'Bold Realness',d:'Real ingredients, real flavor, mit starken Family Roots. Geboren aus der Leidenschaft für ehrliche Küche mit indischen Wurzeln.'},
-      ]},
-      {type:'read', e:'🚀', h:'Von 5m² Küche zu ganz Wien', p:['<b>2014</b> ging der Traum los: Healthy Lunch for everyone. <b>2015</b> wurde aus einer alten Autowaschanlage in der Inkustraße unsere Karma Kitchen — bis heute das Herzstück, wo täglich für alle Locations gekocht wird.','<b>2016</b> Vienna Calling: erste Location am Laurenzerberg. Danach ging\'s Schlag auf Schlag — 1020, 1070, Schottenring, das erste Kochbuch (2020), der Kitchen Collective Eventspace (2022).','Heute: Lunch Locations, Catering, Kochkurse, Webshop, Schrankerl — und ständig neue Pop-ups und Collabs. <b>Started from the bottom, now we\'re here.</b> 🧡']},
-      {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Ein Gast fragt, ob euer Essen bio ist. Was stimmt?',
-        opts:['Ja, alles bio-zertifiziert','Nein — wir setzen bewusst auf regional statt bio','Nur die Currys sind bio'],
-        right:1, fb:'Genau! Wir sind nicht bio-zertifiziert, weil uns regional wichtiger ist als Bio von weit her. Ehrlich & mit Haltung. 🌿'},
-    ]},
-  { id:'products', ic:'🍛', title:'Unsere Produkte', meta:'Marke · 3 Schritte', scope:'global', roles:'all',
-    badge:{e:'🍛',n:'Menü-Profi',d:'Du kennst dich mit unserem Angebot aus. Die Gäste werden es dir danken!'},
-    steps:[
-      {type:'read', e:'🥘', h:'Was wir servieren', p:['Herzstück sind unsere <b>Currys, Bowls und Dals</b> — indisch inspiriert, komplett plant-based.','Dazu wechselnde Specials und Sides. Das Menü ist saisonal und datenbasiert geplant.','Wichtig: Fast alles ist vegan. Wenn ein Gast fragt — im Zweifel nachschauen, nicht raten.']},
+      {type:'read', e:'🥘', h:'Was wir servieren', p:['Herzstück sind unsere <b>Currys, Bowls und Dals</b> — indisch inspiriert, komplett plant-based.','Dazu wechselnde Specials, Salate und Sides. Das Menü ist saisonal geplant.','Fast alles ist vegan. Wenn ein Gast fragt — im Zweifel nachschauen, nicht raten.']},
       {type:'read', e:'🛒', h:'Mehr als nur Essen', p:['Im <b>Webshop</b> gibt es Curry-Pasten, Masalas, Saucen, Kashmiri Chili Crisp, Chai-Sirup und Kochbücher.','<b>Catering & Kochkurse</b> bringen Karma zu Events und Menschen nach Hause.','<b>Schrankerl</b> sind unsere smarten RFID-Kühlschränke — Essen to go, rund um die Uhr.']},
-      {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Ein Gast fragt, ob das Curry vegan ist. Du bist dir nicht 100% sicher. Was tust du?',
-        opts:['„Ja klar, alles vegan!" — passt schon','Kurz nachschauen oder Kolleg:in fragen, dann ehrlich antworten','Sagen, dass man es nicht weiß und weggehen'],
+      {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Ein Gast fragt, ob das Curry vegan ist. Du bist unsicher. Was tust du?',
+        opts:['„Ja klar, alles vegan!"','Kurz nachschauen oder Kolleg:in fragen, dann ehrlich antworten','Sagen dass man es nicht weiß und weggehen'],
         right:1, fb:'Richtig. Ehrlichkeit + kurz checken ist immer besser als raten. Bei Allergien geht Sicherheit vor. 🙏'},
     ]},
-  { id:'coffee', ic:'☕', title:'Kaffee-Basics', meta:'Fachwissen · 3 Schritte', scope:'global', roles:['stores'],
-    badge:{e:'☕',n:'Kaffee-Profi',d:'Espresso, Cappuccino & Co — du hast den Dreh raus!'},
+  {id:'coffee', ic:'☕', title:'Kaffee-Basics', meta:'Fachwissen · 3 Schritte', badge:{e:'☕',n:'Kaffee-Profi',d:'Espresso, Cappuccino & Co — du hast den Dreh raus!'},
     steps:[
-      {type:'read', e:'☕', h:'Alles beginnt mit Espresso', p:['<b>Jeder Milchkaffee startet als Espresso.</b> Das ist die Basis von allem.','Ein guter Espresso läuft in ca. 25–30 Sekunden durch und hat eine haselnussbraune Crema obendrauf.','Kein Espresso ohne frisch gemahlene Bohnen — der Mahlgrad macht den Unterschied.']},
-      {type:'read', e:'🥛', h:'Espresso vs. Cappuccino', p:['<b>Espresso</b> = pur und konzentriert, nichts dazu.','<b>Cappuccino</b> = Espresso + heiße Milch + Milchschaum, im Verhältnis etwa 1:1:1.','<b>Latte</b> = mehr Milch, weniger Schaum. <b>Flat White</b> = Espresso mit feiner, samtiger Milch.']},
+      {type:'read', e:'☕', h:'Alles beginnt mit Espresso', p:['<b>Jeder Milchkaffee startet als Espresso.</b> Das ist die Basis von allem.','Karma Coffee ist der erste indische Specialty Blend Wiens — 70% Monsoon Malabar (Indien), 30% Finca Luisa (Costa Rica), geröstet mit Jonas Reindl.','Geschmack: Milchschokolade mit fruchtiger Note, die an Zitronengras erinnert.']},
+      {type:'read', e:'🥛', h:'Espresso vs. Cappuccino', p:['<b>Espresso / kl. Schwarzer</b> = 1 Shot, pur. <b>Doppio / gr. Schwarzer</b> = 2 Shots.','<b>Cappuccino / Melange</b> = 1 Shot + aufgeschäumte Milch. <b>Flat White</b> = 2 Shots + Milch. <b>Verlängerter</b> = heißes Wasser + 2 Shots.','<b>Chai Latte</b> = 4 EL hausgemachter Chai-Sirup + aufgeschäumte Milch. Alle Hot Drinks mit Bio-Vollmilch oder Haferdrink.']},
       {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Was ist der Hauptunterschied zwischen Espresso und Cappuccino?',
-        opts:['Andere Bohnen','Der Cappuccino hat heiße Milch und Milchschaum dazu','Der Espresso ist kälter'],
-        right:1, fb:'Perfekt! Beide starten gleich — die Milch macht den Cappuccino aus. ☕'},
+        opts:['Andere Bohnen','Der Cappuccino hat aufgeschäumte Milch dazu','Der Espresso ist kälter'],
+        right:1, fb:'Perfekt! Beide starten als Espresso — die Milch macht den Cappuccino aus. ☕ Kein Coffee-Expert? Am Probetag gibt\'s eine Kaffeeschulung.'},
     ]},
-  { id:'store-basics', ic:'🔑', title:'Store öffnen & schließen', meta:'Prozesse · 3 Schritte', scope:'global', roles:['stores'],
-    badge:{e:'🔑',n:'Alltags-Held',d:'Öffnen, schließen, Kassa — du bringst den Store sicher durch den Tag.'},
+  {id:'portions', ic:'⚖️', title:'Anrichten & Portionieren', meta:'Fachwissen · 2 Schritte', badge:{e:'⚖️',n:'Portions-Meister',d:'Du portionierst wie ein Profi!'},
     steps:[
-      {type:'read', e:'🌅', h:'Store öffnen', p:['Licht an, Maschinen hochfahren (Kaffeemaschine braucht Vorlaufzeit!), Kassa starten.','Kurzer Blick: ist alles sauber, ist genug Ware da, stimmt die Auslage?','Erst wenn alles steht, aufsperren. Lieber 5 Minuten früher da sein.']},
-      {type:'read', e:'🌙', h:'Store schließen', p:['Kassa abschließen, Maschinen reinigen, Kühlung checken.','Ware wegräumen, Flächen putzen, Müll raus (siehe „Store"-Tab für die lokalen Zeiten).','Licht aus, absperren, und dran denken: Schlüssel-Info steht im Store-Tab.']},
-      {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Warum solltest du die Kaffeemaschine als Erstes hochfahren?',
+      {type:'read', e:'⚖️', h:'Die Standard-Portionen', p:['<b>Curry:</b> 2 Schöpfer gestrichen voll + 2 Schöpfer Reis.','<b>Bowl:</b> Box voll bis 2 cm unter den Rand. <b>Dal/Stew:</b> 3 kleine Schöpfer gestrichen voll.','<b>Gemischte Portion:</b> 2 Schöpfer Reis + 1 Schöpfer Curry / 1,5 Schöpfer Dal. Nebeneinander portionieren, als gemischt bonieren.']},
+      {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Ein Gast wirkt unsicher bei der Menge. Was bietest du an?',
+        opts:['Immer eine kleine Portion','Von einer normalen Portion ausgehen, keine kleine forcieren','Doppelte Portion'],
+        right:1, fb:'Genau! Kleine Portionen sind möglich, werden aber nicht forciert — im Gespräch immer von einer normalen Portion ausgehen. 🙂'},
+    ]},
+  {id:'shift', ic:'🔑', title:'Öffnen & Schließen', meta:'Prozesse · 3 Schritte', badge:{e:'🔑',n:'Alltags-Held',d:'Öffnen, schließen, Kassa — du bringst den Store sicher durch den Tag.'},
+    steps:[
+      {type:'read', e:'🌅', h:'Store öffnen', p:['Aufsperren & einstempeln. Warmhaltegeräte und Kaffeemaschine einschalten (Maschine braucht Vorlaufzeit!).','Alles sauber? Verpackungen herrichten, Essen einräumen, Limetten schneiden, Tafel beschriften, Musik an, Geschirrspüler an.','Prüfen: Alles bekommen, was über die Liste bestellt war? WhatsApp-Infos checken. & los geht\'s. <3']},
+      {type:'read', e:'🌙', h:'Store schließen', p:['Sweets bestellen, abwaschen & Behälter zusammenrichten. Kaffeemaschine reinigen, Bain-Marie reinigen + Wasser auffüllen.','Geräte laden/neustarten, WC checken, Karma Shop auffüllen & nachbestellen, Abrechnung & Personalkonsumation verbuchen.','Boden kehren & nass wischen, abschließen, evtl. Schlüssel hinterlegen & ausstempeln. 1× pro Woche: Putz- & Pflanzentag.']},
+      {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Warum die Kaffeemaschine als Erstes hochfahren?',
         opts:['Damit sie schön aussieht','Weil sie Vorlaufzeit zum Aufheizen braucht','Muss man nicht'],
         right:1, fb:'Genau — die Maschine braucht Zeit zum Aufheizen, damit der erste Espresso schon top ist. 🔥'},
     ]},
-  { id:'roles', ic:'🧭', title:'Wer macht was', meta:'Orientierung · 2 Schritte', scope:'global', roles:'all',
-    badge:{e:'🧭',n:'Crew-Versteher',d:'Du weißt, wie die Karma Crew zusammenspielt. Kein Rätselraten mehr!'},
+  {id:'benefits', ic:'🎁', title:'Deine Karma Benefits', meta:'Gut zu wissen · 2 Schritte', badge:{e:'🎁',n:'Insider',d:'Du kennst deine Benefits & Rabatte!'},
     steps:[
-      {type:'read', e:'🤝', h:'Selbstorganisiert statt Chef-Prinzip', p:['Wir sind die <b>Karma Crew</b> — und in den Stores gibt es keine klassische Restaurantleitung vor Ort. Ihr organisiert euch im Team.','Das heißt: mitdenken, Verantwortung übernehmen, und bei Unsicherheit nachschauen oder fragen.','Diese App ist quasi deine „Leitung to go" — hier steht, was du wissen musst.']},
-      {type:'read', e:'🧩', h:'Die vier Bereiche', p:['<b>Produktionsküche (Klosterneuburg)</b>: kocht täglich frisch für alle Locations.','<b>Karma Dealer Stores</b>: die 5 Lunch-Locations — Gäste, Kassa, Kaffee, Portionieren, Sauberkeit.','<b>Transporter</b>: bringt frisches Essen raus und leere Boxen zurück.','<b>Management</b>: hält alles zusammen — erreichbar über WhatsApp „Karma Info".']},
+      {type:'read', e:'🍽️', h:'Freie Konsumation im Dienst', p:['Während dem Dienst: <b>1× Essen, 1× Drink, 1× Coffee.</b>','Reste vom Vortag (Lunch, Sweets) darfst du gerne mit nach Hause nehmen.','Konsumation immer auf „Personalverbrauch" buchen (gleicher Vorgang wie Bezahlung).']},
+      {type:'read', e:'🏷️', h:'Deine Rabatte', p:['<b>50%</b> auf Konsumation außerhalb vom Dienst.','<b>30%</b> auf Store-Produkte über dein Free Contingent hinaus, <b>25%</b> auf Karma Products (Gewürze, Pasten, Saucen).','<b>10%</b> auf Merch (Weducer Cup, Dabba, Tshirts, Kochbücher). Einlösbar per Code (Codeliste in der Wissensdatenbank).']},
     ]},
 ];
 
-/* ============ KÜCHEN-ONBOARDING (Rollenübergang) ============ */
-// Zwei Sichten: 'pre' = was der neue Küchenchef (IN) vor Tag 1 sieht · 'gf' = interne Führungssicht
-// Terminologie neutral gehalten: IN = neuer Küchenchef, AF = Souschef (bestehend)
-
-const KITCHEN_PHILOSOPHY = [
-  {e:'🌿', t:'Genuss zuerst', d:'Wir sind keine Diät-Küche. Gäste sollen sich nach dem Essen wohl, leicht und energiegeladen fühlen — aber Genuss steht immer im Vordergrund.'},
-  {e:'✍️', t:'Die Handschrift des Hauses', d:'Neue Einflüsse müssen zur Handschrift passen, nicht überschreiben. Wir sind keine Fusion-Bühne.'},
-  {e:'💎', t:'Qualität ohne Kompromiss', d:'Effizienz ja, Kompromisse bei Qualität nein. Wir kochen nicht „schnell und billig".'},
-  {e:'🌍', t:'Plant-based & regional', d:'Ausschließlich vegetarisch & vegan. Regional vor bio — Zutaten aus der Umgebung statt Bio von weit her.'},
+const KITCHEN_MODULES = [
+  {id:'welcome', ic:'🧡', title:'Willkommen bei Karma Food', meta:'Marke · 4 Schritte', badge:{e:'🧡',n:'Marken-Kenner',d:'Du weißt, wofür Karma Food steht. Welcome to the family!'}, steps:WELCOME_STEPS},
+  {id:'k-philo', ic:'⭐', title:'Unsere Küchenphilosophie', meta:'Küche · 2 Schritte', badge:{e:'⭐',n:'Philosophie-Kenner',d:'Du weißt, wie wir bei Karma kochen!'},
+    steps:[
+      {type:'values', e:'⭐', h:'Wie wir kochen', cards:[
+        {e:'🌿',t:'Genuss zuerst',d:'Wir sind keine Diät-Küche. Alles ist gesund & pflanzlich — aber schmecken muss es richtig gut. Immer.'},
+        {e:'✍️',t:'Unsere Handschrift',d:'Wir haben einen eigenen Stil. Neue Ideen bereichern ihn, überschreiben ihn nicht.'},
+        {e:'💎',t:'Qualität ohne Kompromiss',d:'Schnell arbeiten: ja. Bei der Qualität sparen: nie.'},
+        {e:'🌍',t:'Pflanzlich & regional',d:'Alles vegan & vegetarisch. Lieber regionale Zutaten als bio von weit weg.'},
+      ]},
+      {type:'read', e:'🍽️', h:'Was wir produzieren', p:['In der Karma Kitchen (Inkustraße, Klosterneuburg) wird täglich frisch für alle Locations gekocht.','<b>Currys, Dals, Bowls, Biryanis, Lasagnen</b> und wechselnde Specials — plus Sweets.','Danach wird alles vom Transporter in die Läden gebracht und in den Bain-Maries warm gehalten.']},
+    ]},
+  {id:'k-hygiene', ic:'🧼', title:'Hygiene & HACCP', meta:'Standards · 2 Schritte', badge:{e:'🧼',n:'Hygiene-Held',d:'Du kennst die wichtigsten Standards!'},
+    steps:[
+      {type:'read', e:'📥', h:'Wareneingang', p:['Bei jeder Lieferung: Lieferschein mit Bestellung abgleichen.','Temperatur messen (Kühlware max. 4°C, TK max. -18°C) und dokumentieren. Sichtprüfung: Aussehen, Geruch, Farbe.','Verpackung intakt? MHD ausreichend? Einlagerung nach FIFO (first in, first out).']},
+      {type:'read', e:'✅', h:'Vor & nach der Produktion', p:['<b>Vor Service:</b> Mise en Place vollständig, Portionsstandards einhalten, Kühlkette dokumentieren, Arbeitsflächen sauber.','<b>Ausgabe:</b> Temperatur korrekt, Portionsgröße nach Standard, bei Abweichung neu machen statt durchreichen.','<b>Ende:</b> Alle Flächen reinigen & desinfizieren, Reste beschriften & datieren, HACCP-Bogen abzeichnen.']},
+    ]},
 ];
 
-// Pre-Boarding-Schritte für den neuen Küchenchef (bewusst OHNE Detail-Rollenverteilung)
-const CHEF_PREBOARD = [
-  {e:'🙏', h:'Willkommen in der Karma-Küche', p:['<b>Schön, dass du zu uns kommst.</b> Du bringst viel Erfahrung mit — und wir freuen uns darauf, unsere Küche mit dir weiterzuentwickeln.','Nimm dir vor deinem ersten Tag Zeit, dich hier in Ruhe einzulesen: unsere Geschichte, unsere Produkte, wie unsere Küche tickt.']},
-  {e:'🧭', h:'Deine ersten Wochen', p:['Die ersten zwei Wochen stehen ganz im Zeichen von <b>Ankommen und Kennenlernen</b> — das Team, die Abläufe, die Handschrift unserer Gerichte.','Unser Leitsatz für den Start: <b>„Ich lerne zuhören, bevor ich koche."</b> Erst verstehen, dann gestalten. Deine Ideen sind willkommen — wenn du die Küche kennst.']},
-  {e:'📖', h:'Unsere Küchenphilosophie', p:['Das Wichtigste vorab: unsere Küchenphilosophie. Sie ist die Grundlage jeder Rezeptentscheidung und deine verbindliche Referenz.','Lies sie dir in Ruhe durch — sie erklärt, warum wir kochen, wie wir kochen.']},
-  {e:'👋', h:'Am ersten Tag', p:['An deinem ersten Tag lernst du das <b>ganze Team persönlich kennen</b> — in Ruhe, mit einem gemeinsamen Willkommen.','Alles Weitere zu Abläufen, Rollen und Zusammenarbeit besprechen wir gemeinsam vor Ort. Komm mit deinen Fragen — dafür ist Zeit.']},
-];
-
-// 4-Wochen-Plan (interne Führungssicht)
-const CHEF_WEEKS = [
-  {label:'Woche 1', motto:'Zuhören, bevor ich koche', focus:'Beobachten & Verstehen',
-   chef:['Küchenphilosophie als Pflichtlektüre','Alle Rezepte lesen (learning by doing)','Top-10-Gerichte live beobachten','2 Services am Pass mitgehen','1 Wareneingang mit Souschef','Tour durch alle Filialen'],
-   chefRule:'❌ Keine Veränderungen!',
-   sous:['Führt weiter: operative Küchenleitung, Tagesablauf, Team-Koordination, Servicekommunikation','NEU: Küchenrundgang für Küchenchef führen','Rezepte und Abläufe erklären'],
-   talk:'G0 (vor Tag 1) + G1 (Tag 1, Team)',
-   success:['Kann Philosophie erklären','Kennt Top-10-Rezepte','Keine ungebetenen Änderungen','Souschef fühlt sich in neuer Rolle gesehen']},
-  {label:'Woche 2', motto:'Die Handschrift mit den Händen lernen', focus:'Mitkochen & Lernen',
-   chef:['Jedes Gericht der Karte selbst kochen','1 Bestellung mit Souschef aufsetzen','1 Lieferanten-Termin','3 Lieferanten persönlich kennenlernen','Erstes Testrezept still notieren (nicht kochen)'],
-   chefRule:'❌ Weiterhin keine Veränderungen',
-   sous:['Führt weiter: alle operativen Aufgaben','Übergibt schrittweise: Bestellsystem zeigen, Lieferanten vorstellen, Kalkulation erläutern','Bewertet Rezeptqualität Küchenchef'],
-   talk:'G2 (Ende W1) + G3 (Ende W2)',
-   success:['Kocht 80% der Karte auf Standard','Kennt alle Hauptlieferanten','Beide arbeiten sichtbar respektvoll']},
-  {label:'Woche 3', motto:'Was zu mir gehört, übernehme ich', focus:'Verantwortung übernehmen',
-   chef:['Übernimmt: Einkauf & Bestellwesen','Übernimmt: Warenwirtschaft / Lager','Übernimmt: Kalkulation','2 eigene Rezeptideen testen (nach Service)','Feedback vom Souschef einholen'],
-   chefRule:'Erste eigene Ideen — philosophie-konform',
-   sous:['Bleibt dauerhaft: operative Führung, Team & Service, Hygiene/HACCP, Allergene','Gibt ab: Einkauf (Küchenchef führt, Souschef unterstützt), Kalkulation'],
-   talk:'G4 (Ende W3)',
-   success:['Einkauf stabil, Bestand in Ordnung','Erste Rezeptideen philosophie-konform','Souschef bestätigt gute Zusammenarbeit']},
-  {label:'Woche 4', motto:'Wir wissen, wer was macht', focus:'Rollen etablieren & Ausblick',
-   chef:['Konzept „3 Karten-Optimierungen" vorlegen','Präsentation an Geschäftsführung','Erste Rezeptänderungen (nach GF-Freigabe)'],
-   chefRule:'✅ Freigaben ab Woche 4',
-   sous:['Dauerhaft: operativer Kopf der Küche','Einschulung neuer Mitarbeiter','Präsentiert 3 operative Verbesserungen an GF'],
-   talk:'G5 (30-Tage-Review, 90 min)',
-   success:['3 Karten-Optimierungen liegen vor','Küchenchef & Souschef tragen ihre Rolle','Team meldet: läuft']},
-];
-
-// Gesprächsplan
-const CHEF_TALKS = [
-  {id:'G0', when:'Vor Tag 1', who:'GF + Küchenchef + Souschef · 60 min', goal:'Rollen, Philosophie & Erwartungen klären, bevor der erste Arbeitstag beginnt. Hier wird die Rollenverteilung gemeinsam und mündlich besprochen.'},
-  {id:'G1', when:'Tag 1 (Team)', who:'Ganzes Team', goal:'Sichtbares, respektvolles Willkommen. Beide Rollen werden gleichzeitig und gleichwertig vorgestellt. Küchenrundgang durch den Souschef.'},
-  {id:'G2', when:'Ende Woche 1', who:'GF + IN + AF · 45 min', goal:'Erste Eindrücke des Küchenchefs. Wie erlebt der Souschef die neue Rolle?'},
-  {id:'G3', when:'Ende Woche 2', who:'GF + IN + AF · 45 min', goal:'Kann der Küchenchef die Karte kochen? Übergabe Einkauf vorbereiten.'},
-  {id:'G4', when:'Ende Woche 3', who:'GF + IN + AF · 60 min', goal:'Auswertung Einkauf & Bestand. Erste Rezeptideen bewerten. Reibungspunkte ansprechen.'},
-  {id:'G5', when:'30-Tage-Review', who:'GF + IN + AF · 90 min', goal:'Formelle Standortbestimmung. Konzepte beider vorstellen, Meilensteine für 60 Tage, Rollenmodell bestätigen.'},
-];
-
-// Frühwarnindikatoren (nur GF-Sicht)
-const CHEF_WARNINGS = [
-  'Souschef spricht auffallend leiser, weniger, meidet Blickkontakt',
-  'Küchenchef trifft Entscheidungen ohne Souschef zu informieren — oder umgekehrt',
-  'Reklamationsquote steigt zwei Wochen in Folge',
-  'Service beschwert sich über unklare Kommunikation aus der Küche',
-  'Ein Mitarbeitender spricht nur noch mit einem der beiden',
-];
-
-/* ============ CHECKLIST (JOURNEY) ============ */
-const CHECKLIST = [
+const STORE_CHECKLIST = [
   {n:1, t:'Ankommen', when:'Tag 1', items:[
-    {id:'c1', t:'App durchgeklickt & Willkommen-Modul geschafft'},
-    {id:'c2', t:'Team & Standort kennengelernt'},
-    {id:'c3', t:'Wichtigste Ansprechpartner gespeichert'},
-  ]},
+    {id:'sc1', t:'App durchgeklickt & Willkommen-Modul geschafft'},
+    {id:'sc2', t:'Team & Standort kennengelernt'},
+    {id:'sc3', t:'Tagesablauf im Store verstanden'}]},
   {n:2, t:'Orientierung', when:'Tag 2–3', items:[
-    {id:'c4', t:'Produkte-Modul abgeschlossen'},
-    {id:'c5', t:'„Wer macht was" verstanden'},
-    {id:'c6', t:'Store-Infos im Store-Tab angeschaut'},
-  ]},
+    {id:'sc4', t:'Produkte-Modul abgeschlossen'},
+    {id:'sc5', t:'Portionieren geübt'},
+    {id:'sc6', t:'Store-Infos im Infos-Tab gefunden'}]},
   {n:3, t:'Grundhandwerk', when:'Woche 1–2', items:[
-    {id:'c7', t:'Fachwissen-Modul für meine Rolle geschafft'},
-    {id:'c8', t:'Ersten Arbeitstag mit Kolleg:in gemeistert'},
-    {id:'c9', t:'Erste Fragen im Hilfe-Bereich nachgeschlagen'},
-  ]},
-  {n:4, t:'Alltag sicher', when:'Woche 2–4', items:[
-    {id:'c10', t:'Store öffnen & schließen selbst gemacht'},
-    {id:'c11', t:'Kassen-/Tagesabschluss verstanden'},
-    {id:'c12', t:'Hygiene-Standards sitzen'},
-  ]},
-  {n:5, t:'Eingearbeitet', when:'Tag 30', items:[
-    {id:'c13', t:'Alle Pflichtmodule abgeschlossen'},
-    {id:'c14', t:'Praxis-Check mit Schichtverantwortung'},
-  ]},
+    {id:'sc7', t:'Kaffee-Modul geschafft'},
+    {id:'sc8', t:'Ersten Arbeitstag gemeistert'},
+    {id:'sc9', t:'Öffnen & Schließen selbst gemacht'}]},
+  {n:4, t:'Eingearbeitet', when:'Tag 30', items:[
+    {id:'sc10', t:'Alle Store-Module abgeschlossen'},
+    {id:'sc11', t:'Kassen-/Tagesabschluss verstanden'}]},
+];
+const KITCHEN_CHECKLIST = [
+  {n:1, t:'Ankommen', when:'Tag 1', items:[
+    {id:'kc1', t:'App durchgeklickt & Willkommen-Modul geschafft'},
+    {id:'kc2', t:'Team & Küche kennengelernt'},
+    {id:'kc3', t:'Produktionsablauf verstanden'}]},
+  {n:2, t:'Orientierung', when:'Tag 2–3', items:[
+    {id:'kc4', t:'Küchenphilosophie gelesen'},
+    {id:'kc5', t:'Hygiene & HACCP-Basics durch'},
+    {id:'kc6', t:'Bei der Produktion mitgelaufen'}]},
+  {n:3, t:'Mitarbeiten', when:'Woche 1–2', items:[
+    {id:'kc7', t:'Erste eigene Produktionsschritte'},
+    {id:'kc8', t:'Portionieren & Verpacken geübt'},
+    {id:'kc9', t:'Transporter-Beladung verstanden'}]},
 ];
 
-/* ============ FAQ ============ */
-const FAQ = [
-  {q:'Ist unser Essen vegan?', a:'Wir kochen ausschließlich vegetarisch und vegan. Bei konkreten Gast-Fragen (v.a. Allergene) immer kurz nachschauen statt raten — die Zutatenliste findest du im extra Tab, und in der WhatsApp-Gruppe „Zutatenliste" kannst du direkt die Küche fragen.'},
+const FAQ_COMMON = [
+  {q:'Ist unser Essen vegan?', a:'Wir kochen ausschließlich vegetarisch und vegan. Bei Gast-Fragen (v.a. Allergene) immer kurz nachschauen statt raten — Zutatenliste im extra Tab oder WhatsApp-Gruppe „Zutatenliste".'},
   {q:'Sind wir bio?', a:'Nein, bewusst nicht bio-zertifiziert. Für uns steht regional an erster Stelle — lieber Produkte aus der Umgebung als Bio von weit her.'},
-  {q:'Wo sehe ich die Allergene?', a:'Bei der Zutatenliste im extra Tab. Bei Unsicherheit: WhatsApp-Gruppe „Zutatenliste" oder jemanden vom Team fragen. Nie raten.'},
-  {q:'Wie mache ich einen Cappuccino?', a:'Basis ist immer ein Espresso (1 Shot) plus aufgeschäumte Milch. Mehr Kaffee-Rezepte (Brauner, Flat White, Chai Latte …) findest du im Kaffee-Modul. Alle Hot Drinks gehen mit Bio-Vollmilch oder Haferdrink.'},
-  {q:'Wie groß ist eine normale Portion?', a:'Curry: 2 Schöpfer gestrichen voll + 2 Schöpfer Reis. Bowl: Box voll bis 2 cm unter den Rand. Dal/Stew: 3 kleine Schöpfer. Im Gespräch immer von einer NORMALEN Portion ausgehen, keine kleine anbieten.'},
-  {q:'Was bekomme ich als Mitarbeiter:in gratis?', a:'Während dem Dienst: 1x Essen, 1x Drink, 1x Coffee. Reste vom Vortag (Lunch/Sweets) darfst du gerne mit nach Hause nehmen. Konsumation immer auf „Personalverbrauch" buchen.'},
-  {q:'Welche Rabatte habe ich?', a:'50% auf Konsumation außerhalb vom Dienst, 30% auf Store-Produkte über dein Free Contingent hinaus, 25% auf Karma Products (Gewürze, Pasten, Saucen), 10% auf Merch. Einlösbar per Code (Codeliste in der Wissensdatenbank).'},
-  {q:'Wie funktioniert der Stempelpass?', a:'Ein Stempel pro ganzer Portion Tagesgericht oder pro Heißgetränk. Voll = jede 13. Portion gratis. Nur vollgestempelt einlösbar, halbe Portionen werden nicht gestempelt.'},
-  {q:'Was bei der Marktamt-Kontrolle?', a:'Der QR-Code im Betrieb scannen — dort sind Temperaturkontrollen, Reinigungs- & Hygieneplan digital erfasst. Schädlingsmonitoring liegt in der grünen Mappe von Stutzig & Hacker. Merksatz: Alles ist vorhanden — du musst nur wissen wo.'},
-  {q:'An wen wende ich mich bei einem Problem?', a:'Erste Anlaufstelle ist dein Team vor Ort. Für Übergeordnetes: WhatsApp-Gruppe „Karma Info" oder Operations. Bei Küchen-Fragen zuerst bei der Kitchen anrufen.'},
   {q:'Was heißt „Lunch-Location"?', a:'So nennen wir unsere Standorte — bewusst nicht „Restaurant", weil es bei uns um mehr geht als nur einen Tisch. Food is community.'},
-  {q:'Wie lade ich die App auf mein Handy?', a:'Im Browser auf „Teilen" tippen und „Zum Home-Bildschirm hinzufügen" wählen. Dann hast du sie wie eine echte App.'},
-  {q:'Woher bekomme ich WLAN & Kassa-Zugänge?', a:'Die bekommst du an deinem ersten Arbeitstag vor Ort — aus Sicherheitsgründen stehen sie nicht im Onboarding-Link.'},
+  {q:'An wen wende ich mich bei einem Problem?', a:'Erste Anlaufstelle ist dein Team vor Ort. Für Übergeordnetes: WhatsApp-Gruppe „Karma Info". Bei Küchen-Fragen zuerst bei der Kitchen anrufen.'},
+  {q:'Wie lade ich die App aufs Handy?', a:'Im Browser auf „Teilen" tippen und „Zum Home-Bildschirm hinzufügen". Dann hast du sie wie eine echte App.'},
+  {q:'Was ist Schrankerl?', a:'Unsere smarten RFID-Kühlschränke mit Karma-Food to go — rund um die Uhr, ohne Personal davor.'},
 ];
+const FAQ_STORE = [
+  {q:'Wie groß ist eine normale Portion?', a:'Curry: 2 Schöpfer gestrichen voll + 2 Schöpfer Reis. Bowl: Box voll bis 2 cm unter den Rand. Dal/Stew: 3 kleine Schöpfer. Im Gespräch immer von einer normalen Portion ausgehen.'},
+  {q:'Wie mache ich einen Cappuccino?', a:'Basis ist immer ein Espresso (1 Shot) plus aufgeschäumte Milch. Mehr im Kaffee-Modul. Alle Hot Drinks mit Bio-Vollmilch oder Haferdrink.'},
+  {q:'Was bekomme ich als Mitarbeiter:in gratis?', a:'Im Dienst: 1× Essen, 1× Drink, 1× Coffee. Reste vom Vortag darfst du mitnehmen. Immer auf „Personalverbrauch" buchen.'},
+  {q:'Welche Rabatte habe ich?', a:'50% auf Konsumation außerhalb vom Dienst, 30% auf Store-Produkte über dein Contingent, 25% auf Karma Products, 10% auf Merch. Per Code (Codeliste in der Wissensdatenbank).'},
+  {q:'Wie funktioniert der Stempelpass?', a:'Ein Stempel pro ganzer Portion Tagesgericht oder pro Heißgetränk. Voll = jede 13. Portion gratis. Nur vollgestempelt einlösbar, halbe Portionen zählen nicht.'},
+  {q:'Was bei der Marktamt-Kontrolle?', a:'QR-Code im Betrieb scannen — dort sind Temperaturkontrollen, Reinigungs- & Hygieneplan digital erfasst. Schädlingsmonitoring: grüne Mappe Stutzig & Hacker.'},
+  {q:'Woher bekomme ich WLAN & Kassa-Zugänge?', a:'Die bekommst du an deinem ersten Arbeitstag vor Ort — aus Sicherheitsgründen nicht im Onboarding-Link.'},
+];
+const FAQ_KITCHEN = [
+  {q:'Was wird in der Küche produziert?', a:'Currys, Dals, Bowls, Biryanis, Lasagnen und wechselnde Specials — plus Sweets. Täglich frisch für alle Locations.'},
+  {q:'Wie läuft die Wareneingangskontrolle?', a:'Lieferschein mit Bestellung abgleichen, Temperatur messen & dokumentieren (Kühlware max. 4°C, TK max. -18°C), Sichtprüfung, Einlagerung nach FIFO.'},
+  {q:'Was heißt FIFO?', a:'First in, first out — was zuerst da war, wird zuerst verbraucht. Gilt beim Einlagern und Verarbeiten, damit nichts abläuft.'},
+  {q:'Wann muss alles fertig sein?', a:'Die Produktion ist am Vormittag fertig — bis ca. 9:00 wird eingepackt, dann fährt der Transporter die Route.'},
+];
+
+/* ============ STATE ============ */
+let S = load();
+function load(){
+  try{ const raw=localStorage.getItem('kf_onb2'); if(raw) return JSON.parse(raw); }catch(e){}
+  return { name:'', area:'', store:'', started:null, modProgress:{}, modDone:{}, badges:{}, checks:{}, storeFacts:{}, wlStep:0 };
+}
+function save(){ try{ localStorage.setItem('kf_onb2', JSON.stringify(S)); }catch(e){} }
+
+function isKitchen(){ return S.area==='kitchen'; }
+function modules(){ return isKitchen()?KITCHEN_MODULES:STORE_MODULES; }
+function checklist(){ return isKitchen()?KITCHEN_CHECKLIST:STORE_CHECKLIST; }
+function dayflow(){ return isKitchen()?KITCHEN_DAYFLOW:STORE_DAYFLOW; }
+function faqList(){ return isKitchen()?[...FAQ_COMMON,...FAQ_KITCHEN]:[...FAQ_COMMON,...FAQ_STORE]; }
+function storeById(id){ return STORES.find(s=>s.id===id)||STORES[0]; }
 
 /* ============ WELCOME FLOW ============ */
 let wl = S.wlStep || 0;
@@ -648,14 +613,15 @@ function showWl(){
   document.getElementById('wl-back').style.display = wl>0 ? 'block':'none';
   const next=document.getElementById('wl-next');
   next.textContent = wl===wlTotal-1 ? 'App öffnen 🚀' : (wl===0?'Los geht\'s':'Weiter');
-  // build stores on slide 4
   if(wl===4) buildWlStores();
   if(wl===5) buildWlFinal();
   renderWlDots();
 }
 function buildWlStores(){
   const c=document.getElementById('wl-stores'); c.innerHTML='';
-  STORES.forEach(s=>{
+  const list = isKitchen() ? STORES.filter(s=>s.id==='kitchen') : STORES.filter(s=>s.id!=='kitchen');
+  if(isKitchen() && !S.store) S.store='kitchen';
+  list.forEach(s=>{
     const b=document.createElement('button'); b.className='wl-chip'+(S.store===s.id?' sel':'');
     b.innerHTML=`<span class="ce" style="width:14px;height:14px;border-radius:50%;background:${s.col};display:inline-block;"></span> ${s.name}`;
     b.onclick=()=>{ S.store=s.id; save(); buildWlStores(); };
@@ -668,17 +634,17 @@ function buildWlFinal(){
 }
 document.getElementById('wl-next').onclick=()=>{
   if(wl===2){ const v=document.getElementById('wl-name').value.trim(); if(v) S.name=v; }
-  if(wl===3 && !S.role){ toast('Bitte wähl deinen Bereich 🎯'); return; }
+  if(wl===3 && !S.area){ toast('Bitte wähl deinen Bereich 🎯'); return; }
   if(wl===4 && !S.store){ toast('Bitte wähl deinen Standort 📍'); return; }
   if(wl>=wlTotal-1){ finishWelcome(); return; }
   wl++; S.wlStep=wl; save(); showWl();
 };
 document.getElementById('wl-back').onclick=()=>{ if(wl>0){ wl--; S.wlStep=wl; save(); showWl(); } };
-document.querySelectorAll('#wl-roles .wl-chip').forEach(b=>{
-  b.onclick=()=>{ S.role=b.dataset.role; save(); document.querySelectorAll('#wl-roles .wl-chip').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); };
+document.querySelectorAll('#wl-areas .area-big').forEach(b=>{
+  b.onclick=()=>{ S.area=b.dataset.area; if(S.area==='kitchen') S.store='kitchen'; else if(S.store==='kitchen') S.store=''; save();
+    document.querySelectorAll('#wl-areas .area-big').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); };
 });
-// preselect role visual on load
-function preselectRole(){ if(S.role){ document.querySelectorAll('#wl-roles .wl-chip').forEach(x=>x.classList.toggle('sel', x.dataset.role===S.role)); } }
+function preselectArea(){ if(S.area){ document.querySelectorAll('#wl-areas .area-big').forEach(x=>x.classList.toggle('sel', x.dataset.area===S.area)); } }
 
 function finishWelcome(){
   if(!S.started) S.started = Date.now();
@@ -690,27 +656,36 @@ function finishWelcome(){
   bootApp();
 }
 
-/* ============ APP BOOT ============ */
-function storeById(id){ return STORES.find(s=>s.id===id)||STORES[0]; }
-function facts(){
-  const base=JSON.parse(JSON.stringify(DEFAULT_STORE_FACTS));
-  const ov=(S.storeFacts&&S.storeFacts[S.store])||{};
-  Object.keys(ov).forEach(k=>{ if(base[k]) base[k]={...base[k],...ov[k]}; });
-  return base;
+/* ============ BEREICH WECHSELN ============ */
+function switchArea(){
+  const other = isKitchen()?'Store':'Kitchen';
+  if(confirm(`Möchtest du in den Bereich „${other}" wechseln?`)){
+    S.area = isKitchen()?'store':'kitchen';
+    if(S.area==='kitchen') S.store='kitchen'; else if(S.store==='kitchen') S.store='';
+    save(); bootApp(); go('home');
+  }
 }
-function visibleModules(){
-  return MODULES.filter(m=> m.roles==='all' || (Array.isArray(m.roles)&&m.roles.includes(S.role)) );
+
+/* ============ NAVIGATION ============ */
+const NAV = [
+  {v:'home', label:'Start', svg:'<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'},
+  {v:'modules', label:'Lernen', svg:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>'},
+  {v:'flow', label:'Ablauf', svg:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'},
+  {v:'store', label:'Infos', svg:'<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>'},
+  {v:'check', label:'To-Dos', svg:'<polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>'},
+  {v:'help', label:'Hilfe', svg:'<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>'},
+];
+function buildNav(){
+  document.getElementById('bottomnav').innerHTML = NAV.map(n=>`<button class="nav-btn" data-v="${n.v}" onclick="go('${n.v}')"><svg viewBox="0 0 24 24">${n.svg}</svg>${n.label}</button>`).join('');
 }
-function dayNum(){ if(!S.started) return 1; return Math.max(1, Math.floor((Date.now()-S.started)/86400000)+1); }
 
 function bootApp(){
   const st=storeById(S.store);
-  document.getElementById('tb-sub').textContent = `${ROLE_LABEL[S.role]||'Karma Crew'} · ${st.short}`;
+  document.getElementById('tb-sub').textContent = isKitchen() ? `${AREA_LABEL.kitchen}` : `${AREA_LABEL.store} · ${st.short}`;
   document.getElementById('tb-av').textContent = (S.name||'?').slice(0,2).toUpperCase();
-  renderAll();
-  go('home');
+  buildNav(); renderAll(); go('home');
 }
-function renderAll(){ renderHome(); renderModules(); renderFlow(); renderKitchen(); renderStore(); renderCheck(); renderHelp(); }
+function renderAll(){ renderHome(); renderModules(); renderFlow(); renderStore(); renderCheck(); renderHelp(); }
 
 function go(v){
   document.querySelectorAll('.view').forEach(el=>el.classList.remove('show'));
@@ -720,19 +695,18 @@ function go(v){
 }
 
 /* ============ HOME ============ */
+function modKey(m){ return S.area+'_'+m.id; }
 function renderHome(){
-  const mods=visibleModules();
-  const totalSteps=mods.reduce((a,m)=>a+(m.isWeekPlan?1:(m.steps?m.steps.length:1)),0);
-  const doneSteps=mods.reduce((a,m)=>{
-    if(S.modDone[m.id]) return a+(m.isWeekPlan?1:m.steps.length);
-    return a+(S.modProgress[m.id]||0);
-  },0);
+  const mods=modules();
+  const totalSteps=mods.reduce((a,m)=>a+m.steps.length,0);
+  const doneSteps=mods.reduce((a,m)=> S.modDone[modKey(m)]?a+m.steps.length:a+(S.modProgress[modKey(m)]||0),0);
   const pct=Math.round(doneSteps/Math.max(1,totalSteps)*100);
-  const nextMod = mods.find(m=>!S.modDone[m.id]);
+  const nextMod=mods.find(m=>!S.modDone[modKey(m)]);
   const badgeCount=Object.keys(S.badges).length;
+  const kitchen=isKitchen();
 
   let h=`<div class="hero">
-    <div class="hero-hi">Tag ${dayNum()} deiner Reise · Hi ${S.name||''} 👋</div>
+    <div class="hero-hi">${kitchen?'🥘 Küchen-Team':'🫶 Karma Crew'} · Hi ${S.name||''} 👋</div>
     <div class="hero-name head">Schön dass<br>du da bist.</div>
     <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%"></div></div>
     <div class="prog-lbl"><span>${pct}% geschafft</span><span>🏅 ${badgeCount} Badge${badgeCount===1?'':'s'}</span></div>
@@ -741,344 +715,56 @@ function renderHome(){
   if(nextMod){
     h+=`<div class="next-card" onclick="openModule('${nextMod.id}')">
       <div class="nc-ic">${nextMod.ic}</div>
-      <div class="nc-t"><div class="nc-k">Als nächstes</div><div class="nc-h">${nextMod.title}</div></div>
-      <div class="nc-arrow">→</div>
-    </div>`;
+      <div><div class="nc-k">Als nächstes</div><div class="nc-h">${nextMod.title}</div></div>
+      <div class="nc-arrow">→</div></div>`;
   } else {
     h+=`<div class="next-card" style="background:var(--ink);color:#fff;" onclick="go('modules')">
       <div class="nc-ic" style="background:var(--neon);">🎉</div>
-      <div class="nc-t"><div class="nc-k" style="color:var(--neon);">Alles geschafft</div><div class="nc-h">Du bist eingearbeitet!</div></div>
-    </div>`;
+      <div><div class="nc-k" style="color:var(--neon);">Alles geschafft</div><div class="nc-h">Du bist eingearbeitet!</div></div></div>`;
   }
-
   h+=`<div class="tip"><span class="ti">💡</span><span class="tt"><b>Wusstest du?</b> Wir nennen unsere Standorte „Lunch-Location" — nicht Restaurant. Weil's um mehr geht als nur den Teller.</span></div>`;
-
-  const showKitchen = (S.role==='kitchen'||S.role==='management');
   h+=`<div class="sec-lbl">Schnellzugriff</div>
-  <div class="mod-grid">`;
-  if(showKitchen){
-    h+=`<div class="mod" onclick="go('kitchen')" style="grid-column:1 / -1;border-color:var(--orange);"><div class="m-ic">👨‍🍳</div><div class="m-t">Küchenleitung — Rollenübergang</div><div class="m-meta">Onboarding, 4-Wochen-Plan & Integration</div></div>`;
-  }
-  h+=`<div class="mod" onclick="go('flow')"><div class="m-ic">🚐</div><div class="m-t">So läuft Karma</div><div class="m-meta">Route, Karte & Ablauf</div></div>
-    <div class="mod" onclick="go('store')"><div class="m-ic">📍</div><div class="m-t">Mein Store</div><div class="m-meta">Infos & Zugänge</div></div>
+  <div class="mod-grid">
+    <div class="mod" onclick="go('flow')"><div class="m-ic">${kitchen?'🥘':'🚚'}</div><div class="m-t">${kitchen?'Produktionsablauf':'Tagesablauf'}</div><div class="m-meta">${kitchen?'Von Planung bis Abschluss':'Lieferung bis Feierabend'}</div></div>
+    <div class="mod" onclick="go('store')"><div class="m-ic">📍</div><div class="m-t">${kitchen?'Infos & Team':'Mein Store'}</div><div class="m-meta">Infos & Kontakte</div></div>
     <div class="mod" onclick="go('help')"><div class="m-ic">❓</div><div class="m-t">Ich brauch Hilfe</div><div class="m-meta">FAQ & Nachschlagen</div></div>
     <div class="mod" onclick="go('modules')"><div class="m-ic">📚</div><div class="m-t">Weiterlernen</div><div class="m-meta">Deine Module</div></div>
   </div>`;
-
   document.getElementById('v-home').innerHTML=h;
 }
 
 /* ============ MODULES ============ */
 function renderModules(){
-  const mods=visibleModules();
+  const mods=modules();
   let h=`<div class="sec-lbl">Deine Lernpfade</div><div class="mod-grid">`;
   mods.forEach(m=>{
-    const total=m.isWeekPlan?1:m.steps.length;
-    const prog=S.modDone[m.id]?total:(S.modProgress[m.id]||0);
-    const pct=Math.round(prog/total*100);
-    const done=S.modDone[m.id];
+    const key=modKey(m), total=m.steps.length;
+    const prog=S.modDone[key]?total:(S.modProgress[key]||0);
+    const pct=Math.round(prog/total*100), done=S.modDone[key];
     h+=`<div class="mod${done?' done':''}" onclick="openModule('${m.id}')">
-      <div class="m-check">✓</div>
-      <div class="m-ic">${m.ic}</div>
-      <div class="m-t">${m.title}</div>
-      <div class="m-meta">${m.meta}</div>
-      <div class="m-bar"><i style="width:${pct}%"></i></div>
-    </div>`;
+      <div class="m-check">✓</div><div class="m-ic">${m.ic}</div>
+      <div class="m-t">${m.title}</div><div class="m-meta">${m.meta}</div>
+      <div class="m-bar"><i style="width:${pct}%"></i></div></div>`;
   });
-  h+=`</div>`;
-
-  // badges
-  h+=`<div class="sec-lbl">Deine Badges</div><div class="badge-grid">`;
-  MODULES.filter(m=>m.badge).forEach(m=>{
-    const got=S.badges[m.id];
+  h+=`</div><div class="sec-lbl">Deine Badges</div><div class="badge-grid">`;
+  mods.filter(m=>m.badge).forEach(m=>{
+    const got=S.badges[modKey(m)];
     h+=`<div class="badge${got?' got':''}"><div class="b-e">${m.badge.e}</div><div class="b-n">${got?m.badge.n:'???'}</div></div>`;
   });
   h+=`</div>`;
   document.getElementById('v-modules').innerHTML=h;
 }
 
-/* ============ FLOW TAB (So läuft Karma) ============ */
-const AREAS = [
-  {e:'🥘', t:'Produktionsküche', d:'Hier wird täglich frisch gekocht', col:'#F0A500'},
-  {e:'🫶', t:'Karma Dealer Stores', d:'5 Lunch-Locations in Wien & Kloburg', col:'#00A878'},
-  {e:'🚐', t:'Transporter', d:'Bringt frisch raus, holt leer zurück', col:'#E0521F'},
-  {e:'🧭', t:'Management', d:'Hält den Laden zusammen', col:'#00B4CC'},
-];
-// Stops in Reihenfolge der echten Route
-const ROUTE = [
-  {t:'Produktionsküche Klosterneuburg', d:'Inkustraße 1-7 · alles frisch gekocht & eingepackt bis ~9:00', tag:'START', col:'#F0A500'},
-  {t:'Ausstellungsstraße', d:'1020 Wien · erste Anlaufstelle', tag:'1', col:'#F0806B'},
-  {t:'Laurenzerberg', d:'1010 Wien · 1. Bezirk', tag:'2', col:'#00A878'},
-  {t:'Börse / Schottenring', d:'Schottenring 17 · 1010 Wien', tag:'3', col:'#00B4CC'},
-  {t:'Stadtplatz Klosterneuburg', d:'Stadtplatz 34 · zurück in Kloburg', tag:'4', col:'#E0521F'},
-  {t:'Zurück zur Küche', d:'Leere, saubere Boxen kommen wieder mit', tag:'ENDE', col:'#F0A500'},
-];
-const DAYFLOW = [
-  {time:'ab früh', h:'Frisch kochen', d:'In der Produktionsküche Klosterneuburg werden alle Gerichte täglich frisch gekocht.'},
-  {time:'bis 9:00', h:'Einpacken', d:'Küche & Transporter packen alles ein — Currys, Dals, Bowls, Salate & Sweets in die Bain-Marie-Boxen.'},
-  {time:'vormittags', h:'Route fahren', d:'Der Karma-Food-Transporter bringt das frische Essen raus: Ausstellungsstraße → Laurenzerberg → Börse → Stadtplatz.'},
-  {time:'unterwegs', h:'Boxen-Kreislauf', d:'Die leeren, sauberen Boxen vom Vortag nimmt der Transporter wieder mit zurück nach Klosterneuburg.'},
-  {time:'im Store', h:'Warm halten & verkaufen', d:'In den Stores hält die Bain Marie alles warm. Die Karma Crew portioniert & verkauft.'},
-  {time:'bis 14:00', h:'Sweets bestellen', d:'Wichtig: Die Sweets für den nächsten Tag müssen bis 14:00 Uhr bestellt sein.'},
-];
-
-let mapTab='wien';
-function renderFlow(){
-  const el=document.getElementById('v-flow');
-  let h=`<div class="flow-intro">
-    <div class="fi-k">So läuft Karma</div>
-    <div class="fi-h head">Ein Kreislauf,<br>der jeden Tag rollt.</div>
-    <div class="fi-p">Frisch gekocht in Klosterneuburg, ausgeliefert nach Wien, leere Boxen zurück. Hier siehst du, wie alles zusammenspielt — und wo wir überall sind.</div>
-  </div>`;
-
-  // Bereiche
-  h+=`<div class="sec-lbl">Die Karma Crew — vier Bereiche</div><div class="area-grid">`;
-  AREAS.forEach(a=>{
-    h+=`<div class="area-card" style="background:${a.col};"><div><div class="ac-e">${a.e}</div><div class="ac-t">${a.t}</div></div><div class="ac-d">${a.d}</div></div>`;
-  });
-  h+=`</div>`;
-
-  // Map
-  h+=`<div class="sec-lbl">Wo wir überall sind</div>
-  <div class="map-wrap">
-    <div class="map-tabs">
-      <button class="map-tab ${mapTab==='wien'?'on':''}" onclick="switchMap('wien')">🏙️ Wien</button>
-      <button class="map-tab ${mapTab==='klo'?'on':''}" onclick="switchMap('klo')">🌳 Klosterneuburg</button>
-    </div>
-    ${mapTab==='wien'?mapWien():mapKlo()}
-    <div class="map-legend">
-      <span class="ml"><span class="dot" style="background:#F0A500;"></span>Produktionsküche</span>
-      <span class="ml"><span class="dot" style="background:#00A878;"></span>Dealer Store</span>
-    </div>
-  </div>`;
-
-  // Route
-  h+=`<div class="sec-lbl">Die Liefer-Route</div>
-  <div class="route-card">
-    <div class="route-head">
-      <span class="rh-t">🚐 Transporter-Tour</span>
-      <button class="route-play" id="route-play-btn" onclick="playRoute()">▶ Abspielen</button>
-    </div>
-    ${routeMapSvg()}
-    <div class="route-steps" id="route-steps">`;
-  ROUTE.forEach((r,i)=>{
-    h+=`<div class="route-step" id="rstep-${i}"><div class="rs-num" style="">${r.tag}</div><div><div class="rs-t">${r.t}</div><div class="rs-d">${r.d}</div></div></div>`;
-  });
-  h+=`</div></div>`;
-
-  // Tagesablauf
-  h+=`<div class="sec-lbl">Der Tagesablauf</div><div class="timeline">`;
-  DAYFLOW.forEach(d=>{
-    h+=`<div class="tl-item"><div class="tl-dot"></div><div class="tl-time">${d.time}</div><div class="tl-h">${d.h}</div><div class="tl-d">${d.d}</div></div>`;
-  });
-  h+=`</div>`;
-
-  el.innerHTML=h;
-}
-function switchMap(t){ mapTab=t; renderFlow(); }
-
-// gezeichnete CI-Karte Wien (stilisiert, nicht geo-präzise)
-function mapWien(){
-  return `<svg class="map-svg" viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg">
-    <rect width="340" height="240" rx="14" fill="#EDF3EE"/>
-    <!-- Donau -->
-    <path d="M-10 60 C60 90 120 70 175 100 C230 130 280 110 350 140 L350 175 C280 150 235 165 178 135 C120 105 55 125 -10 95 Z" fill="#B8D8E8" opacity="0.7"/>
-    <text x="250" y="128" font-size="9" fill="#5A8199" font-style="italic" transform="rotate(14 250 128)">Donau</text>
-    <!-- stilisierte Blocks -->
-    <g fill="#DDE7DE">
-      <rect x="30" y="150" width="34" height="26" rx="3"/><rect x="72" y="158" width="40" height="30" rx="3"/>
-      <rect x="120" y="150" width="30" height="22" rx="3"/><rect x="40" y="185" width="46" height="26" rx="3"/>
-      <rect x="200" y="40" width="38" height="26" rx="3"/><rect x="246" y="34" width="34" height="30" rx="3"/>
-      <rect x="210" y="74" width="30" height="22" rx="3"/>
-    </g>
-    <!-- Pins -->
-    ${pin(95,168,'#00A878','Laurenzerberg','1010')}
-    ${pin(150,182,'#00B4CC','Börse','1010')}
-    ${pin(232,58,'#F0806B','Ausstellungsstr.','1020')}
-    <text x="12" y="22" font-size="11" font-weight="800" fill="#1A1A18" font-family="sans-serif">WIEN</text>
-  </svg>`;
-}
-function mapKlo(){
-  return `<svg class="map-svg" viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg">
-    <rect width="340" height="240" rx="14" fill="#EDF3EE"/>
-    <!-- Grün / Wald -->
-    <path d="M0 0 H120 C110 40 130 70 90 100 C60 125 40 180 0 200 Z" fill="#CFE6CE" opacity="0.7"/>
-    <circle cx="285" cy="60" r="34" fill="#CFE6CE" opacity="0.6"/>
-    <text x="40" y="60" font-size="9" fill="#5A8560" font-style="italic">Wienerwald</text>
-    <g fill="#DDE7DE">
-      <rect x="150" y="90" width="40" height="28" rx="3"/><rect x="196" y="100" width="34" height="26" rx="3"/>
-      <rect x="160" y="140" width="44" height="26" rx="3"/><rect x="120" y="150" width="32" height="22" rx="3"/>
-    </g>
-    <!-- Pins -->
-    ${pin(178,120,'#E0521F','Stadtplatz 34','Store')}
-    ${pin(240,168,'#F0A500','Produktionsküche','Inkustraße')}
-    <text x="12" y="22" font-size="11" font-weight="800" fill="#1A1A18" font-family="sans-serif">KLOSTERNEUBURG</text>
-  </svg>`;
-}
-function pin(x,y,col,label,sub){
-  return `<g>
-    <path d="M${x} ${y-16} a9 9 0 0 1 9 9 c0 6 -9 15 -9 15 c0 0 -9 -9 -9 -15 a9 9 0 0 1 9 -9 Z" fill="${col}"/>
-    <circle cx="${x}" cy="${y-7}" r="3.5" fill="#fff"/>
-    <rect x="${x-38}" y="${y+10}" width="76" height="26" rx="6" fill="#fff" opacity="0.95"/>
-    <text x="${x}" y="${y+21}" font-size="8.5" font-weight="800" fill="#1A1A18" text-anchor="middle" font-family="sans-serif">${label}</text>
-    <text x="${x}" y="${y+31}" font-size="7" fill="#8A857A" text-anchor="middle" font-family="sans-serif">${sub}</text>
-  </g>`;
-}
-
-// Route-SVG mit animierbarem Transporter
-function routeMapSvg(){
-  // Punkte entlang eines Pfads (schematisch)
-  const pts=[[40,130],[110,50],[175,95],[250,45],[300,120],[40,130]];
-  let path='M'+pts.map(p=>p.join(' ')).join(' L ');
-  let dots='';
-  pts.slice(0,5).forEach((p,i)=>{
-    dots+=`<circle cx="${p[0]}" cy="${p[1]}" r="7" fill="${ROUTE[i].col}"/><text x="${p[0]}" y="${p[1]+3.5}" font-size="8" font-weight="800" fill="#fff" text-anchor="middle" font-family="sans-serif">${ROUTE[i].tag==='START'?'K':ROUTE[i].tag}</text>`;
-  });
-  return `<svg class="map-svg" id="route-svg" viewBox="0 0 340 170" xmlns="http://www.w3.org/2000/svg" style="background:#F7F4EC;">
-    <path id="route-path" d="${path}" fill="none" stroke="#E0521F" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.5"/>
-    ${dots}
-    <g id="route-van" style="opacity:0;"><circle r="12" fill="#1A1A18"/><text y="4.5" font-size="13" text-anchor="middle">🚐</text></g>
-  </svg>`;
-}
-let routeAnim=null;
-function playRoute(){
-  const van=document.getElementById('route-van');
-  const path=document.getElementById('route-path');
-  const btn=document.getElementById('route-play-btn');
-  if(!van||!path) return;
-  if(routeAnim){ cancelAnimationFrame(routeAnim); routeAnim=null; }
-  const len=path.getTotalLength();
-  van.style.opacity='1';
-  btn.textContent='⏸ läuft…';
-  const dur=6000; const start=performance.now();
-  const stepBounds=[0,0.22,0.45,0.68,0.86,1]; // grob wo die stops sitzen
-  function frame(now){
-    let t=(now-start)/dur; if(t>1)t=1;
-    const pt=path.getPointAtLength(t*len);
-    van.setAttribute('transform',`translate(${pt.x} ${pt.y})`);
-    // aktiven step markieren
-    let active=0; for(let i=0;i<stepBounds.length;i++){ if(t>=stepBounds[i]) active=i; }
-    document.querySelectorAll('.route-step').forEach((s,i)=>s.classList.toggle('active', i<=active));
-    if(t<1){ routeAnim=requestAnimationFrame(frame); }
-    else { btn.textContent='▶ Nochmal'; routeAnim=null; setTimeout(()=>{document.querySelectorAll('.route-step').forEach(s=>s.classList.remove('active'));van.style.opacity='0';},1800); }
-  }
-  routeAnim=requestAnimationFrame(frame);
-}
-window.switchMap=switchMap; window.playRoute=playRoute;
-
-/* ============ KITCHEN TAB (Rollenübergang) ============ */
-let kView = 'pre';   // 'pre' = Pre-Boarding (IN sieht) · 'gf' = interne Führungssicht
-let kWeek = 0;
-function renderKitchen(){
-  const el=document.getElementById('v-kitchen');
-  let h=`<div class="flow-intro">
-    <div class="fi-k">Küchenleitung</div>
-    <div class="fi-h head">Rollenübergang<br>& Integration</div>
-    <div class="fi-p">Der Wechsel in der Küchenleitung — strukturiert, respektvoll, in vier Wochen. Zwei erfahrene Köche, die gleichberechtigt zusammenarbeiten.</div>
-  </div>`;
-
-  // Sicht-Umschalter
-  h+=`<div class="view-switch">
-    <button class="${kView==='pre'?'on':''}" onclick="setKView('pre')">👨‍🍳 Pre-Boarding<br><span style="font-weight:500;font-size:11px;">(was der neue Chef sieht)</span></button>
-    <button class="${kView==='gf'?'on':''}" onclick="setKView('gf')">🧭 Führungssicht<br><span style="font-weight:500;font-size:11px;">(intern, GF)</span></button>
-  </div>`;
-
-  if(kView==='pre') h+=kitchenPre();
-  else h+=kitchenGF();
-
-  el.innerHTML=h;
-}
-function setKView(v){ kView=v; renderKitchen(); document.getElementById('content').scrollTop=0; }
-function setKWeek(i){ kWeek=i; renderKitchen(); }
-
-// ---- PRE-BOARDING SICHT (neuer Küchenchef, vor Tag 1) ----
-function kitchenPre(){
-  let h=`<div class="vs-hint"><span class="vh-i">👋</span><span>Das ist die Ansicht für den <b>neuen Küchenchef vor dem ersten Tag</b>: Willkommen, erste Wochen im Überblick, und die Küchenphilosophie zum Einlesen. Bewusst <b>ohne</b> Detail-Rollenverteilung — die wird im persönlichen G0-Gespräch besprochen.</span></div>`;
-
-  CHEF_PREBOARD.forEach(s=>{
-    h+=`<div class="philo-card" style="border-left-color:var(--orange);">
-      <div class="pc-e">${s.e}</div><div class="pc-t">${s.h}</div>`;
-    s.p.forEach(p=>h+=`<div class="pc-d" style="margin-top:6px;">${p}</div>`);
-    h+=`</div>`;
-  });
-
-  h+=`<div class="sec-lbl">Unsere Küchenphilosophie</div>`;
-  KITCHEN_PHILOSOPHY.forEach(p=>{
-    h+=`<div class="philo-card"><div class="pc-e">${p.e}</div><div class="pc-t">${p.t}</div><div class="pc-d">${p.d}</div></div>`;
-  });
-  h+=`<div class="vs-hint" style="margin-top:14px;"><span class="vh-i">📖</span><span>Die vollständige Philosophie (8 Leitplanken, DE + EN) bekommst du vor Arbeitsbeginn als Dokument — sie ist deine verbindliche Referenz für jede Rezeptentscheidung.</span></div>`;
-  return h;
-}
-
-// ---- FÜHRUNGSSICHT (GF, intern) ----
-function kitchenGF(){
-  let h=`<div class="vs-hint"><span class="vh-i">🔒</span><span><b>Interne Führungssicht.</b> Der vollständige 4-Wochen-Plan, Gesprächsleitfäden und Frühwarnsignale — dein Steuerungsinstrument, nicht das Onboarding-Material des neuen Chefs.</span></div>`;
-
-  // Rollen-Split
-  h+=`<div class="sec-lbl">Die zwei Rollen</div>
-  <div class="krole-split">
-    <div class="krole chef"><div class="kr-tag">Neu · IN</div><div class="kr-n">Küchenchef</div><div class="kr-d">Strategisch & inhaltlich. Trägt inhaltliche & wirtschaftliche Verantwortung. Führt partnerschaftlich.</div></div>
-    <div class="krole sous"><div class="kr-tag">Bestehend · AF</div><div class="kr-n">Souschef</div><div class="kr-d">Operativ & täglich. Bleibt dauerhaft der operative Kopf der Küche. Gleichberechtigt im eigenen Bereich.</div></div>
-  </div>
-  <div class="vs-hint"><span class="vh-i">⚖️</span><span>Beide berichten an die GF. Der Küchenchef ist disziplinarisch übergeordnet, führt aber <b>partnerschaftlich</b> — kein „von oben herab".</span></div>`;
-
-  // 4-Wochen-Plan
-  h+=`<div class="sec-lbl">4-Wochen-Plan</div>
-  <div class="kweek-tabs">`;
-  CHEF_WEEKS.forEach((w,i)=>h+=`<button class="kweek-pill ${i===kWeek?'on':''}" onclick="setKWeek(${i})">${w.label}</button>`);
-  h+=`</div>`;
-
-  const w=CHEF_WEEKS[kWeek];
-  h+=`<div class="kweek-card">
-    <div class="kweek-motto">„${w.motto}"</div>
-    <div class="kw-block">
-      <div class="kw-h chef">🟠 Küchenchef (neu)</div>`;
-  w.chef.forEach(t=>h+=`<div class="kw-li"><span class="kb">›</span><span>${t}</span></div>`);
-  h+=`<div class="kw-rule">${w.chefRule}</div></div>`;
-
-  h+=`<div class="kw-block"><div class="kw-h sous">🟢 Souschef (bestehend)</div>`;
-  w.sous.forEach(t=>h+=`<div class="kw-li"><span class="kb">›</span><span>${t}</span></div>`);
-  h+=`</div>`;
-
-  h+=`<div class="kw-block"><div class="kw-h talk">💬 Gespräche</div><div class="kw-li"><span class="kb">›</span><span>${w.talk}</span></div></div>`;
-
-  h+=`<div class="kw-success"><div class="ks-h">✓ Woche erfolgreich, wenn</div>`;
-  w.success.forEach(s=>h+=`<div class="kw-li"><span class="kb" style="color:#00A878;">✓</span><span>${s}</span></div>`);
-  h+=`</div></div>`;
-
-  // Gesprächsplan
-  h+=`<div class="sec-lbl">Kommunikationsplan · 6 Gespräche</div>`;
-  CHEF_TALKS.forEach(t=>{
-    h+=`<div class="talk-card">
-      <div class="tc-top"><span class="tc-id">${t.id}</span><span class="tc-when">${t.when}</span></div>
-      <div class="tc-who">${t.who}</div>
-      <div class="tc-goal">${t.goal}</div>
-    </div>`;
-  });
-
-  // Frühwarnindikatoren
-  h+=`<div class="sec-lbl">Frühwarnsignale · GF reagiert in 48h</div>
-  <div class="warn-card"><div class="wc-h">⚠️ Worauf die GF aktiv achtet</div>`;
-  CHEF_WARNINGS.forEach(w=>h+=`<div class="warn-li"><span>${w}</span></div>`);
-  h+=`</div>`;
-
-  return h;
-}
-window.setKView=setKView; window.setKWeek=setKWeek;
-
-
-let curMod=null, curStep=0;
+/* ============ MODULE READER ============ */
+let curMod=null, curStep=0, quizAnswered=false;
 function openModule(id){
-  const m=MODULES.find(x=>x.id===id); if(!m) return;
-  curMod=m; curStep=0;
-  document.getElementById('reader').classList.add('on');
-  renderStep();
+  const m=modules().find(x=>x.id===id); if(!m) return;
+  curMod=m; curStep=0; quizAnswered=false;
+  document.getElementById('reader').classList.add('on'); renderStep();
 }
 function closeReader(){ document.getElementById('reader').classList.remove('on'); renderAll(); }
 function renderStep(){
-  const m=curMod;
-  const step=m.steps[curStep];
-  const body=document.getElementById('rd-body');
+  const m=curMod, step=m.steps[curStep], body=document.getElementById('rd-body');
   document.getElementById('rd-prog-fill').style.width=Math.round((curStep)/(m.steps.length)*100)+'%';
   let h='';
   if(step.type==='read'){
@@ -1095,40 +781,31 @@ function renderStep(){
   }
   body.innerHTML=h; body.scrollTop=0;
   document.getElementById('rd-back').style.display = curStep>0?'block':'none';
-  const nx=document.getElementById('rd-next');
-  if(step.type==='quiz'){ nx.disabled=!quizAnswered; nx.textContent = isLast()?'Fertig 🎉':'Weiter'; }
-  else { nx.disabled=false; nx.textContent = isLast()?'Fertig 🎉':'Weiter'; }
+  const nx=document.getElementById('rd-next'), last=curStep===m.steps.length-1;
+  nx.disabled = (step.type==='quiz') ? !quizAnswered : false;
+  nx.textContent = last?'Fertig 🎉':'Weiter';
 }
-let quizAnswered=false;
-function isLast(){ return curStep===curMod.steps.length-1; }
 function answerQuiz(i){
   const step=curMod.steps[curStep];
-  const btns=document.querySelectorAll('#quiz-opts .quiz-opt');
-  btns.forEach((b,idx)=>{ b.onclick=null; if(idx===step.right)b.classList.add('right'); else if(idx===i)b.classList.add('wrong'); });
+  document.querySelectorAll('#quiz-opts .quiz-opt').forEach((b,idx)=>{ b.onclick=null; if(idx===step.right)b.classList.add('right'); else if(idx===i)b.classList.add('wrong'); });
   document.getElementById('quiz-fb').innerHTML=`<div class="quiz-fb">${i===step.right?'✅ ':'💡 '}${step.fb}</div>`;
-  quizAnswered=true;
-  const nx=document.getElementById('rd-next'); nx.disabled=false;
+  quizAnswered=true; document.getElementById('rd-next').disabled=false;
 }
 function rdNext(){
-  const m=curMod;
-  // save progress
-  const reached=curStep+1;
-  if((S.modProgress[m.id]||0)<reached){ S.modProgress[m.id]=reached; }
-  if(isLast()){ completeModule(m); return; }
+  const m=curMod, key=modKey(m), reached=curStep+1;
+  if((S.modProgress[key]||0)<reached){ S.modProgress[key]=reached; }
+  if(curStep===m.steps.length-1){ completeModule(m); return; }
   curStep++; quizAnswered=false; save(); renderStep();
 }
 function rdBack(){ if(curStep>0){ curStep--; quizAnswered = curMod.steps[curStep].type!=='quiz'; save(); renderStep(); } }
 function completeModule(m){
-  const firstTime=!S.modDone[m.id];
-  S.modDone[m.id]=true; S.modProgress[m.id]=m.steps?m.steps.length:1;
-  if(m.badge) S.badges[m.id]=true;
+  const key=modKey(m), firstTime=!S.modDone[key];
+  S.modDone[key]=true; S.modProgress[key]=m.steps.length;
+  if(m.badge) S.badges[key]=true;
   save();
   document.getElementById('reader').classList.remove('on');
-  if(firstTime && m.badge){ showCelebrate(m.badge); }
-  else { renderAll(); }
+  if(firstTime && m.badge){ showCelebrate(m.badge); } else { renderAll(); }
 }
-
-/* ============ CELEBRATION ============ */
 function showCelebrate(b){
   document.getElementById('cel-e').textContent=b.e;
   document.getElementById('cel-h').textContent=b.n;
@@ -1137,60 +814,129 @@ function showCelebrate(b){
 }
 function closeCelebrate(){ document.getElementById('celebrate').classList.remove('on'); renderAll(); go('modules'); }
 
-/* ============ STORE (EDITABLE) ============ */
-function renderStore(){
-  const st=storeById(S.store);
-  const f=facts();
-  let h=`<div class="hero" style="background:${st.col};">
-    <div class="hero-hi" style="color:#fff;opacity:.9;">📍 Dein Standort</div>
-    <div class="hero-name head" style="font-size:24px;">${st.name}</div>
-    <div style="font-size:13px;color:#fff;opacity:.9;">Diese Infos kann das Team selbst aktuell halten. Was sich ändert (z.B. Müll-Tage), einfach antippen & korrigieren.</div>
+/* ============ FLOW ============ */
+let openStage=-1;
+function renderFlow(){
+  const kitchen=isKitchen(), stages=dayflow();
+  let h=`<div class="flow-intro">
+    <div class="fi-k">${kitchen?'Produktionsablauf':'Tagesablauf im Store'}</div>
+    <div class="fi-h head">${kitchen?'So entsteht dein<br>Karma-Essen.':'So läuft dein<br>Tag im Store.'}</div>
+    <div class="fi-p">${kitchen?'Von der Planung bis zum Tagesabschluss — tipp jede Station an für die Details.':'Von der Lieferung am Morgen bis zum Feierabend — tipp jede Station an für die Details.'}</div>
   </div>`;
-
-  h+=`<div style="display:flex;gap:8px;margin-bottom:12px;"><span class="pill local">📍 Lokal · editierbar</span></div>`;
-  h+=`<div class="card">`;
-  Object.keys(f).forEach(key=>{
-    const it=f[key];
-    h+=`<div class="field" id="fld-${key}">
-      <span class="f-ic">${it.ic}</span>
-      <div class="f-body">
-        <div class="f-k">${it.k}</div>
-        <div class="f-v" id="fv-${key}">${escapeHtml(it.v)}</div>
-        <div class="f-meta">zuletzt geändert: ${it.by} · ${it.when}</div>
-      </div>
-      <button class="f-edit" onclick="editField('${key}')">✎</button>
-    </div>`;
+  stages.forEach((s,i)=>{
+    h+=`<div class="stage ${i===openStage?'open':''}" id="stage-${i}">
+      <div class="stage-head" onclick="toggleStage(${i})">
+        <div class="stage-num" style="background:${s.col};">${s.ic}</div>
+        <div class="stage-tl"><div class="stage-t">${s.t}</div><div class="stage-time">${s.time}</div></div>
+        <div class="stage-x">+</div></div>
+      <div class="stage-body"><div class="stage-inner">`;
+    s.items.forEach(it=>h+=`<div class="stage-li"><span class="sb">›</span><span>${it}</span></div>`);
+    h+=`</div></div></div>`;
   });
-  h+=`</div>`;
+  if(!kitchen){
+    h+=`<div class="sec-lbl">Unsere Tagesgerichte</div>`;
+    DISH_CATEGORIES.forEach(c=>{
+      h+=`<div class="dish-cat"><div style="font-size:13px;font-weight:700;color:var(--sub);margin:4px 2px 8px;">${c.cat}</div>`;
+      c.dishes.forEach(d=>{
+        const isPhoto = Object.keys(DISH_PHOTOS).some(k=>d.n.toUpperCase().includes(k));
+        h+=`<div class="dish-row"><div class="dish-emoji">${dishImg(d.n)}</div>
+          <div class="dish-tl"><div class="dish-n">${d.n}${isPhoto?'':'<span class="img-todo">Foto folgt</span>'}</div><div class="dish-d">${d.d}</div></div></div>`;
+      });
+      h+=`</div>`;
+    });
+    h+=`<div class="tip"><span class="ti">🥗</span><span class="tt">Zu jedem Salat und jeder Bowl gehört das <b>passende Dressing</b>. Lasagne wird immer mit Salat serviert.</span></div>`;
+    h+=`<div class="sec-lbl">So kommt das Essen zu dir</div>
+    <div class="route-card">
+      <div class="route-head"><span class="rh-t">🚐 Die Liefer-Route</span>
+        <button class="route-play" id="route-play-btn" onclick="playRoute()">▶ Abspielen</button></div>
+      ${routeMapSvg()}
+      <div class="route-steps" id="route-steps">`;
+    ROUTE.forEach((r,i)=>{
+      h+=`<div class="route-step" id="rstep-${i}"><div class="rs-num">${r.tag}</div><div><div class="rs-t">${r.t}</div><div class="rs-d">${r.d}</div></div></div>`;
+    });
+    h+=`</div></div>`;
+  }
+  document.getElementById('v-flow').innerHTML=h;
+}
+function toggleStage(i){ openStage = openStage===i?-1:i; renderFlow(); }
 
-  // locked access data
-  h+=`<div class="sec-lbl">Zugangsdaten</div>
-  <div class="card" style="border-style:dashed;">
-    <div style="padding:14px 16px;background:var(--neon-soft);border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:center;">
-      <span style="font-size:20px;">🔒</span>
-      <span style="font-size:13px;line-height:1.4;color:var(--sub);">WLAN, Kassa & Co. bekommst du an deinem <b>ersten Arbeitstag vor Ort</b> — aus Sicherheitsgründen nicht im Onboarding-Link.</span>
-    </div>`;
-  LOCKED_FACTS.forEach(l=>{
-    h+=`<div class="field"><span class="f-ic" style="opacity:.5;">${l.ic}</span>
-      <div class="f-body"><div class="f-k">${l.k}</div><div class="f-v" style="color:var(--muted);font-weight:500;">🔒 am ersten Tag</div></div></div>`;
+function routeMapSvg(){
+  const pts=[[40,130],[110,50],[175,95],[250,45],[300,120],[40,130]];
+  let path='M'+pts.map(p=>p.join(' ')).join(' L ');
+  let dots='';
+  pts.slice(0,5).forEach((p,i)=>{
+    dots+=`<circle cx="${p[0]}" cy="${p[1]}" r="7" fill="${ROUTE[i].col}"/><text x="${p[0]}" y="${p[1]+3.5}" font-size="8" font-weight="800" fill="#fff" text-anchor="middle" font-family="sans-serif">${ROUTE[i].tag==='START'?'K':ROUTE[i].tag}</text>`;
   });
-  h+=`</div>`;
+  return `<svg class="map-svg" id="route-svg" viewBox="0 0 340 170" xmlns="http://www.w3.org/2000/svg" style="background:#F7F4EC;">
+    <path id="route-path" d="${path}" fill="none" stroke="#E0521F" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.5"/>
+    ${dots}
+    <g id="route-van" style="opacity:0;"><circle r="12" fill="#1A1A18"/><text y="4.5" font-size="13" text-anchor="middle">🚐</text></g>
+  </svg>`;
+}
+let routeAnim=null;
+function playRoute(){
+  const van=document.getElementById('route-van'), path=document.getElementById('route-path'), btn=document.getElementById('route-play-btn');
+  if(!van||!path) return;
+  if(routeAnim){ cancelAnimationFrame(routeAnim); routeAnim=null; }
+  const len=path.getTotalLength();
+  van.style.opacity='1'; btn.textContent='⏸ läuft…';
+  const dur=6000, start=performance.now(), bounds=[0,0.22,0.45,0.68,0.86,1];
+  function frame(now){
+    let t=(now-start)/dur; if(t>1)t=1;
+    const pt=path.getPointAtLength(t*len);
+    van.setAttribute('transform',`translate(${pt.x} ${pt.y})`);
+    let active=0; for(let i=0;i<bounds.length;i++){ if(t>=bounds[i]) active=i; }
+    document.querySelectorAll('.route-step').forEach((s,i)=>s.classList.toggle('active', i<=active));
+    if(t<1){ routeAnim=requestAnimationFrame(frame); }
+    else { btn.textContent='▶ Nochmal'; routeAnim=null; setTimeout(()=>{document.querySelectorAll('.route-step').forEach(s=>s.classList.remove('active'));van.style.opacity='0';},1800); }
+  }
+  routeAnim=requestAnimationFrame(frame);
+}
 
-  // team / contacts
+/* ============ STORE / INFOS ============ */
+function facts(){
+  const base=JSON.parse(JSON.stringify(DEFAULT_STORE_FACTS));
+  const ov=(S.storeFacts&&S.storeFacts[S.store])||{};
+  Object.keys(ov).forEach(k=>{ if(base[k]) base[k]={...base[k],...ov[k]}; });
+  return base;
+}
+function renderStore(){
+  const st=storeById(S.store), kitchen=isKitchen();
+  let h=`<div class="hero" style="background:${st.col};">
+    <div class="hero-hi" style="color:#fff;opacity:.9;">📍 ${kitchen?'Deine Küche':'Dein Standort'}</div>
+    <div class="hero-name head" style="font-size:24px;">${st.name}</div>
+    <div style="font-size:13px;color:#fff;opacity:.9;">${kitchen?'Die Produktionsküche — das Herzstück von Karma Food.':'Diese Infos kann das Team selbst aktuell halten. Was sich ändert, einfach antippen & korrigieren.'}</div>
+  </div>`;
+  if(!kitchen){
+    const f=facts();
+    h+=`<div style="display:flex;gap:8px;margin-bottom:12px;"><span class="pill local">📍 Lokal · editierbar</span></div><div class="card">`;
+    Object.keys(f).forEach(key=>{
+      const it=f[key];
+      h+=`<div class="field" id="fld-${key}"><span class="f-ic">${it.ic}</span>
+        <div class="f-body"><div class="f-k">${it.k}</div><div class="f-v" id="fv-${key}">${escapeHtml(it.v)}</div><div class="f-meta">zuletzt geändert: ${it.by} · ${it.when}</div></div>
+        <button class="f-edit" onclick="editField('${key}')">✎</button></div>`;
+    });
+    h+=`</div>`;
+    h+=`<div class="sec-lbl">Zugangsdaten</div><div class="card" style="border-style:dashed;">
+      <div style="padding:14px 16px;background:var(--neon-soft);border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:center;">
+        <span style="font-size:20px;">🔒</span><span style="font-size:13px;line-height:1.4;color:var(--sub);">WLAN, Kassa & Co. bekommst du an deinem <b>ersten Arbeitstag vor Ort</b> — aus Sicherheitsgründen nicht im Onboarding-Link.</span></div>`;
+    LOCKED_FACTS.forEach(l=>{
+      h+=`<div class="field"><span class="f-ic" style="opacity:.5;">${l.ic}</span><div class="f-body"><div class="f-k">${l.k}</div><div class="f-v" style="color:var(--muted);font-weight:500;">🔒 am ersten Tag</div></div></div>`;
+    });
+    h+=`</div>`;
+  }
   h+=`<div class="sec-lbl">Team & Ansprechpartner</div><div class="card">
-    <div class="person"><div class="p-av">OP</div><div class="p-body"><div class="p-n">Operations (Büro)</div><div class="p-r">Für alles Übergeordnete · via Prozess-App</div></div></div>
-    <div class="person"><div class="p-av">👥</div><div class="p-body"><div class="p-n">Dein Team vor Ort</div><div class="p-r">Erste Anlaufstelle bei Fragen im Alltag</div></div></div>
+    <div class="person"><div class="p-av">SA</div><div><div class="p-n">Simone & Adi</div><div class="p-r">Gründer:innen</div></div></div>
+    <div class="person"><div class="p-av" style="background:var(--green);">KI</div><div><div class="p-n">Küchen-Team</div><div class="p-r">Kocht täglich frisch in Klosterneuburg</div></div></div>
+    <div class="person"><div class="p-av" style="background:#F0806B;">TR</div><div><div class="p-n">Transporter</div><div class="p-r">Bringt frisch raus, holt leere Boxen zurück</div></div></div>
+    <div class="person"><div class="p-av" style="background:var(--purple);">OP</div><div><div class="p-n">Karma Info (WhatsApp)</div><div class="p-r">Allgemeine Fragen & Notfälle</div></div></div>
   </div>
   <div style="font-size:12px;color:var(--muted);padding:4px 4px 10px;">💡 Namen & Kontakte kommen in der vernetzten Version automatisch aus der Prozess-App.</div>`;
-
   document.getElementById('v-store').innerHTML=h;
 }
 function editField(key){
-  const f=facts()[key];
-  const fld=document.getElementById('fld-'+key);
-  const isLong = f.v.length>28;
-  fld.querySelector('.f-body').innerHTML=`
-    <div class="f-k">${f.k}</div>
+  const f=facts()[key], fld=document.getElementById('fld-'+key), isLong=f.v.length>28;
+  fld.querySelector('.f-body').innerHTML=`<div class="f-k">${f.k}</div>
     ${isLong?`<textarea id="edit-${key}" rows="2">${escapeHtml(f.v)}</textarea>`:`<input id="edit-${key}" value="${escapeHtml(f.v)}">`}
     <div><button class="f-save" onclick="saveField('${key}')">Speichern</button><button class="f-cancel" onclick="renderStore()">Abbrechen</button></div>`;
   fld.querySelector('.f-edit').style.display='none';
@@ -1203,31 +949,23 @@ function saveField(key){
   if(!S.storeFacts[S.store]) S.storeFacts[S.store]={};
   const now=new Date().toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit',year:'numeric'});
   S.storeFacts[S.store][key]={v:val, by:(S.name||'Team'), when:now};
-  save();
-  renderStore();
-  toast('Gespeichert ✓ — für alle im Store sichtbar');
+  save(); renderStore(); toast('Gespeichert ✓ — für alle im Store sichtbar');
 }
 
 /* ============ CHECKLIST ============ */
 function renderCheck(){
-  const allItems=CHECKLIST.flatMap(p=>p.items);
-  const done=allItems.filter(i=>S.checks[i.id]).length;
-  const pct=Math.round(done/allItems.length*100);
+  const cl=checklist(), allItems=cl.flatMap(p=>p.items);
+  const done=allItems.filter(i=>S.checks[i.id]).length, pct=Math.round(done/allItems.length*100);
   let h=`<div class="hero">
     <div class="hero-hi">Deine Einarbeitung</div>
     <div class="hero-name head" style="font-size:22px;">${done} von ${allItems.length} erledigt</div>
     <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%"></div></div>
-    <div class="prog-lbl"><span>Von Tag 1 bis „eingearbeitet"</span><span>${pct}%</span></div>
-  </div>`;
-  CHECKLIST.forEach(ph=>{
-    h+=`<div class="phase-h"><span class="ph-n">${ph.n}</span><span class="ph-t">${ph.t}</span><span class="ph-when">${ph.when}</span></div>`;
-    h+=`<div class="card">`;
+    <div class="prog-lbl"><span>Von Tag 1 bis „eingearbeitet"</span><span>${pct}%</span></div></div>`;
+  cl.forEach(ph=>{
+    h+=`<div class="phase-h"><span class="ph-n">${ph.n}</span><span class="ph-t">${ph.t}</span><span class="ph-when">${ph.when}</span></div><div class="card">`;
     ph.items.forEach(it=>{
       const on=S.checks[it.id];
-      h+=`<div class="cl-item" onclick="toggleCheck('${it.id}')">
-        <div class="cl-box${on?' on':''}">${on?'✓':''}</div>
-        <div class="cl-txt${on?' on':''}">${it.t}</div>
-      </div>`;
+      h+=`<div class="cl-item" onclick="toggleCheck('${it.id}')"><div class="cl-box${on?' on':''}">${on?'✓':''}</div><div class="cl-txt${on?' on':''}">${it.t}</div></div>`;
     });
     h+=`</div>`;
   });
@@ -1237,26 +975,19 @@ function toggleCheck(id){ S.checks[id]=!S.checks[id]; save(); renderCheck(); if(
 
 /* ============ HELP / FAQ ============ */
 function renderHelp(){
-  let h=`<div class="sec-lbl">Ich brauch Hilfe</div>
-  <input class="faq-search" id="faq-search" placeholder="🔍 Wonach suchst du?" oninput="filterFaq()">
-  <div id="faq-list"></div>`;
-  document.getElementById('v-help').innerHTML=h;
+  document.getElementById('v-help').innerHTML=`<div class="sec-lbl">Ich brauch Hilfe</div>
+  <input class="faq-search" id="faq-search" placeholder="🔍 Wonach suchst du?" oninput="filterFaq()"><div id="faq-list"></div>`;
   renderFaqList('');
 }
 function renderFaqList(q){
-  const list=document.getElementById('faq-list');
-  const ql=q.toLowerCase();
-  const items=FAQ.filter(f=>!ql || f.q.toLowerCase().includes(ql) || f.a.toLowerCase().includes(ql));
-  if(!items.length){ list.innerHTML=`<div class="empty">Nichts gefunden. Frag am besten dein Team oder Operations. 🙏</div>`; return; }
-  list.innerHTML=items.map((f,i)=>`<div class="faq-item" id="faq-${i}">
-    <div class="faq-q" onclick="toggleFaq(${i})">${f.q}<span class="fq-x">+</span></div>
-    <div class="faq-a"><div class="fa-in">${f.a}</div></div>
-  </div>`).join('');
+  const list=document.getElementById('faq-list'), ql=q.toLowerCase();
+  const items=faqList().filter(f=>!ql || f.q.toLowerCase().includes(ql) || f.a.toLowerCase().includes(ql));
+  if(!items.length){ list.innerHTML=`<div class="empty">Nichts gefunden. Frag am besten dein Team oder Karma Info. 🙏</div>`; return; }
+  list.innerHTML=items.map((f,i)=>`<div class="faq-item" id="faq-${i}"><div class="faq-q" onclick="toggleFaq(${i})">${f.q}<span class="fq-x">+</span></div><div class="faq-a"><div class="fa-in">${f.a}</div></div></div>`).join('');
 }
 function filterFaq(){ renderFaqList(document.getElementById('faq-search').value); }
 function toggleFaq(i){
-  const el=document.getElementById('faq-'+i);
-  const a=el.querySelector('.faq-a');
+  const el=document.getElementById('faq-'+i), a=el.querySelector('.faq-a');
   const open=el.classList.toggle('open');
   a.style.maxHeight=open?a.querySelector('.fa-in').scrollHeight+20+'px':'0';
 }
@@ -1266,15 +997,13 @@ function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg
 function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 /* ============ INIT ============ */
-if(S.started && S.name && S.role && S.store){
-  finishWelcome();
-} else {
-  preselectRole();
-  showWl();
-}
+if(S.started && S.name && S.area && S.store){ finishWelcome(); }
+else { preselectArea(); showWl(); }
+
 window.go=go; window.openModule=openModule; window.closeReader=closeReader;
 window.rdNext=rdNext; window.rdBack=rdBack; window.answerQuiz=answerQuiz;
-window.closeCelebrate=closeCelebrate;
+window.closeCelebrate=closeCelebrate; window.switchArea=switchArea;
+window.toggleStage=toggleStage; window.playRoute=playRoute;
 window.editField=editField; window.saveField=saveField; window.renderStore=renderStore;
 window.toggleCheck=toggleCheck; window.filterFaq=filterFaq; window.toggleFaq=toggleFaq;
 </script>
