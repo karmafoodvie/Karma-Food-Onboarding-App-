@@ -249,6 +249,55 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .area-card .ac-t{font-size:15px;font-weight:800;margin-top:8px;line-height:1.2;}
 .area-card .ac-d{font-size:11px;opacity:.9;margin-top:3px;line-height:1.35;}
 
+/* ---------- KITCHEN TAB ---------- */
+.view-switch{display:flex;gap:6px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:5px;margin-bottom:14px;}
+.view-switch button{flex:1;padding:11px 8px;border-radius:10px;border:none;background:transparent;font-size:13px;font-weight:700;cursor:pointer;color:var(--sub);font-family:inherit;line-height:1.2;}
+.view-switch button.on{background:var(--ink);color:var(--neon);}
+.vs-hint{font-size:12px;color:var(--muted);line-height:1.5;background:var(--cream);border-radius:12px;padding:12px 14px;margin-bottom:14px;display:flex;gap:9px;}
+.vs-hint .vh-i{font-size:16px;flex-shrink:0;}
+
+.krole-split{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.krole{border-radius:16px;padding:15px;color:#fff;}
+.krole.chef{background:var(--orange);}
+.krole.sous{background:#00A878;}
+.krole .kr-tag{font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;opacity:.85;}
+.krole .kr-n{font-size:16px;font-weight:800;margin:3px 0 6px;}
+.krole .kr-d{font-size:12px;line-height:1.45;opacity:.95;}
+
+.kweek-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;}
+.kweek-pill{flex-shrink:0;padding:9px 15px;border-radius:20px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:var(--sub);}
+.kweek-pill.on{background:var(--orange);border-color:var(--orange);color:#fff;}
+.kweek-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px;}
+.kweek-motto{background:var(--neon-soft);border-radius:10px;padding:10px 12px;font-size:14px;font-style:italic;color:#5A7A00;font-weight:600;margin-bottom:14px;}
+.kw-block{margin-bottom:14px;}
+.kw-block:last-child{margin-bottom:0;}
+.kw-h{font-size:12px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:7px;}
+.kw-h.chef{color:var(--orange);}
+.kw-h.sous{color:#00A878;}
+.kw-h.talk{color:#7B61FF;}
+.kw-li{display:flex;gap:9px;align-items:flex-start;font-size:14px;line-height:1.45;padding:3px 0;color:var(--sub);}
+.kw-li .kb{color:var(--ink);font-weight:800;flex-shrink:0;}
+.kw-rule{background:#FEF0EC;border-radius:8px;padding:9px 12px;font-size:13px;font-weight:700;color:var(--orange);margin-top:8px;}
+.kw-success{background:var(--cream);border-radius:10px;padding:11px 13px;margin-top:12px;}
+.kw-success .ks-h{font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+
+.talk-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px;border-left:4px solid #7B61FF;}
+.talk-card .tc-top{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+.talk-card .tc-id{background:#7B61FF;color:#fff;font-size:12px;font-weight:800;padding:3px 9px;border-radius:7px;}
+.talk-card .tc-when{font-size:12px;font-weight:700;color:var(--ink);}
+.talk-card .tc-who{font-size:11px;color:var(--muted);margin-bottom:6px;}
+.talk-card .tc-goal{font-size:13px;line-height:1.5;color:var(--sub);}
+
+.warn-card{background:#FFF7F5;border:1px solid #F5C4B8;border-radius:14px;padding:14px 16px;margin-bottom:12px;}
+.warn-card .wc-h{font-size:13px;font-weight:800;color:#C0392B;display:flex;align-items:center;gap:7px;margin-bottom:9px;}
+.warn-li{display:flex;gap:9px;align-items:flex-start;font-size:13px;line-height:1.45;padding:4px 0;color:#7A4A42;}
+.warn-li::before{content:"⚠";flex-shrink:0;}
+
+.philo-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:15px 16px;margin-bottom:10px;border-left:5px solid var(--neon);}
+.philo-card .pc-e{font-size:24px;}
+.philo-card .pc-t{font-size:16px;font-weight:800;margin:5px 0 4px;}
+.philo-card .pc-d{font-size:13px;color:var(--sub);line-height:1.5;}
+
 /* toast */
 #toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;z-index:90;opacity:0;pointer-events:none;transition:.3s;max-width:90%;text-align:center;}
 #toast.show{opacity:1;}
@@ -335,6 +384,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="view show" id="v-home"></div>
   <div class="view" id="v-modules"></div>
   <div class="view" id="v-flow"></div>
+  <div class="view" id="v-kitchen"></div>
   <div class="view" id="v-store"></div>
   <div class="view" id="v-check"></div>
   <div class="view" id="v-help"></div>
@@ -473,24 +523,72 @@ const MODULES = [
       {type:'read', e:'🤝', h:'Selbstorganisiert statt Chef-Prinzip', p:['Wir sind die <b>Karma Crew</b> — und in den Stores gibt es keine klassische Restaurantleitung vor Ort. Ihr organisiert euch im Team.','Das heißt: mitdenken, Verantwortung übernehmen, und bei Unsicherheit nachschauen oder fragen.','Diese App ist quasi deine „Leitung to go" — hier steht, was du wissen musst.']},
       {type:'read', e:'🧩', h:'Die vier Bereiche', p:['<b>Produktionsküche (Klosterneuburg)</b>: kocht täglich frisch für alle Locations.','<b>Karma Dealer Stores</b>: die 5 Lunch-Locations — Gäste, Kassa, Kaffee, Portionieren, Sauberkeit.','<b>Transporter</b>: bringt frisches Essen raus und leere Boxen zurück.','<b>Management</b>: hält alles zusammen — erreichbar über WhatsApp „Karma Info".']},
     ]},
-  { id:'chef-week', ic:'📅', title:'Dein Wochenplan', meta:'Nur Küche · Einarbeitung', scope:'global', roles:['kitchen'],
-    badge:{e:'📅',n:'Startklar',d:'Du weißt, was in Woche 1 zu tun ist. Willkommen in der Küche!'},
-    isWeekPlan:true },
 ];
 
-/* ============ WEEK PLAN (CHEF) ============ */
-const WEEK_PLAN = [
-  {label:'Vor Start', days:[
-    {h:'Zum Einlesen', tasks:['Diese App durchklicken — Marke, Werte, Produkte','Wochenplan Woche 1 überfliegen, damit du weißt was kommt','Fragen sammeln für den ersten Tag']},
-  ]},
-  {label:'Woche 1', days:[
-    {h:'Tag 1 — Ankommen', tasks:['Team & Küche kennenlernen','Warenwirtschaft & Lager anschauen','HACCP / Hygiene-Basics durchgehen']},
-    {h:'Tag 2–3 — Abläufe', tasks:['Produktionsabläufe mitlaufen','Rezepte & Mengen kennenlernen','Bestellsystem in der Prozess-App zeigen lassen']},
-    {h:'Tag 4–5 — Mit anpacken', tasks:['Erste eigene Produktionsschritte','Schrankerl-Produktion (Sonntag-Lieferung) verstehen','Fragen mit Operations klären']},
-  ]},
-  {label:'Woche 2', days:[
-    {h:'Vertiefung', tasks:['Selbstständigere Produktion','Warenannahme eigenständig','Übergabe-Logik (Abnahme vor Transport) kennenlernen']},
-  ]},
+/* ============ KÜCHEN-ONBOARDING (Rollenübergang) ============ */
+// Zwei Sichten: 'pre' = was der neue Küchenchef (IN) vor Tag 1 sieht · 'gf' = interne Führungssicht
+// Terminologie neutral gehalten: IN = neuer Küchenchef, AF = Souschef (bestehend)
+
+const KITCHEN_PHILOSOPHY = [
+  {e:'🌿', t:'Genuss zuerst', d:'Wir sind keine Diät-Küche. Gäste sollen sich nach dem Essen wohl, leicht und energiegeladen fühlen — aber Genuss steht immer im Vordergrund.'},
+  {e:'✍️', t:'Die Handschrift des Hauses', d:'Neue Einflüsse müssen zur Handschrift passen, nicht überschreiben. Wir sind keine Fusion-Bühne.'},
+  {e:'💎', t:'Qualität ohne Kompromiss', d:'Effizienz ja, Kompromisse bei Qualität nein. Wir kochen nicht „schnell und billig".'},
+  {e:'🌍', t:'Plant-based & regional', d:'Ausschließlich vegetarisch & vegan. Regional vor bio — Zutaten aus der Umgebung statt Bio von weit her.'},
+];
+
+// Pre-Boarding-Schritte für den neuen Küchenchef (bewusst OHNE Detail-Rollenverteilung)
+const CHEF_PREBOARD = [
+  {e:'🙏', h:'Willkommen in der Karma-Küche', p:['<b>Schön, dass du zu uns kommst.</b> Du bringst viel Erfahrung mit — und wir freuen uns darauf, unsere Küche mit dir weiterzuentwickeln.','Nimm dir vor deinem ersten Tag Zeit, dich hier in Ruhe einzulesen: unsere Geschichte, unsere Produkte, wie unsere Küche tickt.']},
+  {e:'🧭', h:'Deine ersten Wochen', p:['Die ersten zwei Wochen stehen ganz im Zeichen von <b>Ankommen und Kennenlernen</b> — das Team, die Abläufe, die Handschrift unserer Gerichte.','Unser Leitsatz für den Start: <b>„Ich lerne zuhören, bevor ich koche."</b> Erst verstehen, dann gestalten. Deine Ideen sind willkommen — wenn du die Küche kennst.']},
+  {e:'📖', h:'Unsere Küchenphilosophie', p:['Das Wichtigste vorab: unsere Küchenphilosophie. Sie ist die Grundlage jeder Rezeptentscheidung und deine verbindliche Referenz.','Lies sie dir in Ruhe durch — sie erklärt, warum wir kochen, wie wir kochen.']},
+  {e:'👋', h:'Am ersten Tag', p:['An deinem ersten Tag lernst du das <b>ganze Team persönlich kennen</b> — in Ruhe, mit einem gemeinsamen Willkommen.','Alles Weitere zu Abläufen, Rollen und Zusammenarbeit besprechen wir gemeinsam vor Ort. Komm mit deinen Fragen — dafür ist Zeit.']},
+];
+
+// 4-Wochen-Plan (interne Führungssicht)
+const CHEF_WEEKS = [
+  {label:'Woche 1', motto:'Zuhören, bevor ich koche', focus:'Beobachten & Verstehen',
+   chef:['Küchenphilosophie als Pflichtlektüre','Alle Rezepte lesen (learning by doing)','Top-10-Gerichte live beobachten','2 Services am Pass mitgehen','1 Wareneingang mit Souschef','Tour durch alle Filialen'],
+   chefRule:'❌ Keine Veränderungen!',
+   sous:['Führt weiter: operative Küchenleitung, Tagesablauf, Team-Koordination, Servicekommunikation','NEU: Küchenrundgang für Küchenchef führen','Rezepte und Abläufe erklären'],
+   talk:'G0 (vor Tag 1) + G1 (Tag 1, Team)',
+   success:['Kann Philosophie erklären','Kennt Top-10-Rezepte','Keine ungebetenen Änderungen','Souschef fühlt sich in neuer Rolle gesehen']},
+  {label:'Woche 2', motto:'Die Handschrift mit den Händen lernen', focus:'Mitkochen & Lernen',
+   chef:['Jedes Gericht der Karte selbst kochen','1 Bestellung mit Souschef aufsetzen','1 Lieferanten-Termin','3 Lieferanten persönlich kennenlernen','Erstes Testrezept still notieren (nicht kochen)'],
+   chefRule:'❌ Weiterhin keine Veränderungen',
+   sous:['Führt weiter: alle operativen Aufgaben','Übergibt schrittweise: Bestellsystem zeigen, Lieferanten vorstellen, Kalkulation erläutern','Bewertet Rezeptqualität Küchenchef'],
+   talk:'G2 (Ende W1) + G3 (Ende W2)',
+   success:['Kocht 80% der Karte auf Standard','Kennt alle Hauptlieferanten','Beide arbeiten sichtbar respektvoll']},
+  {label:'Woche 3', motto:'Was zu mir gehört, übernehme ich', focus:'Verantwortung übernehmen',
+   chef:['Übernimmt: Einkauf & Bestellwesen','Übernimmt: Warenwirtschaft / Lager','Übernimmt: Kalkulation','2 eigene Rezeptideen testen (nach Service)','Feedback vom Souschef einholen'],
+   chefRule:'Erste eigene Ideen — philosophie-konform',
+   sous:['Bleibt dauerhaft: operative Führung, Team & Service, Hygiene/HACCP, Allergene','Gibt ab: Einkauf (Küchenchef führt, Souschef unterstützt), Kalkulation'],
+   talk:'G4 (Ende W3)',
+   success:['Einkauf stabil, Bestand in Ordnung','Erste Rezeptideen philosophie-konform','Souschef bestätigt gute Zusammenarbeit']},
+  {label:'Woche 4', motto:'Wir wissen, wer was macht', focus:'Rollen etablieren & Ausblick',
+   chef:['Konzept „3 Karten-Optimierungen" vorlegen','Präsentation an Geschäftsführung','Erste Rezeptänderungen (nach GF-Freigabe)'],
+   chefRule:'✅ Freigaben ab Woche 4',
+   sous:['Dauerhaft: operativer Kopf der Küche','Einschulung neuer Mitarbeiter','Präsentiert 3 operative Verbesserungen an GF'],
+   talk:'G5 (30-Tage-Review, 90 min)',
+   success:['3 Karten-Optimierungen liegen vor','Küchenchef & Souschef tragen ihre Rolle','Team meldet: läuft']},
+];
+
+// Gesprächsplan
+const CHEF_TALKS = [
+  {id:'G0', when:'Vor Tag 1', who:'GF + Küchenchef + Souschef · 60 min', goal:'Rollen, Philosophie & Erwartungen klären, bevor der erste Arbeitstag beginnt. Hier wird die Rollenverteilung gemeinsam und mündlich besprochen.'},
+  {id:'G1', when:'Tag 1 (Team)', who:'Ganzes Team', goal:'Sichtbares, respektvolles Willkommen. Beide Rollen werden gleichzeitig und gleichwertig vorgestellt. Küchenrundgang durch den Souschef.'},
+  {id:'G2', when:'Ende Woche 1', who:'GF + IN + AF · 45 min', goal:'Erste Eindrücke des Küchenchefs. Wie erlebt der Souschef die neue Rolle?'},
+  {id:'G3', when:'Ende Woche 2', who:'GF + IN + AF · 45 min', goal:'Kann der Küchenchef die Karte kochen? Übergabe Einkauf vorbereiten.'},
+  {id:'G4', when:'Ende Woche 3', who:'GF + IN + AF · 60 min', goal:'Auswertung Einkauf & Bestand. Erste Rezeptideen bewerten. Reibungspunkte ansprechen.'},
+  {id:'G5', when:'30-Tage-Review', who:'GF + IN + AF · 90 min', goal:'Formelle Standortbestimmung. Konzepte beider vorstellen, Meilensteine für 60 Tage, Rollenmodell bestätigen.'},
+];
+
+// Frühwarnindikatoren (nur GF-Sicht)
+const CHEF_WARNINGS = [
+  'Souschef spricht auffallend leiser, weniger, meidet Blickkontakt',
+  'Küchenchef trifft Entscheidungen ohne Souschef zu informieren — oder umgekehrt',
+  'Reklamationsquote steigt zwei Wochen in Folge',
+  'Service beschwert sich über unklare Kommunikation aus der Küche',
+  'Ein Mitarbeitender spricht nur noch mit einem der beiden',
 ];
 
 /* ============ CHECKLIST (JOURNEY) ============ */
@@ -612,7 +710,7 @@ function bootApp(){
   renderAll();
   go('home');
 }
-function renderAll(){ renderHome(); renderModules(); renderFlow(); renderStore(); renderCheck(); renderHelp(); }
+function renderAll(){ renderHome(); renderModules(); renderFlow(); renderKitchen(); renderStore(); renderCheck(); renderHelp(); }
 
 function go(v){
   document.querySelectorAll('.view').forEach(el=>el.classList.remove('show'));
@@ -655,9 +753,13 @@ function renderHome(){
 
   h+=`<div class="tip"><span class="ti">💡</span><span class="tt"><b>Wusstest du?</b> Wir nennen unsere Standorte „Lunch-Location" — nicht Restaurant. Weil's um mehr geht als nur den Teller.</span></div>`;
 
+  const showKitchen = (S.role==='kitchen'||S.role==='management');
   h+=`<div class="sec-lbl">Schnellzugriff</div>
-  <div class="mod-grid">
-    <div class="mod" onclick="go('flow')"><div class="m-ic">🚐</div><div class="m-t">So läuft Karma</div><div class="m-meta">Route, Karte & Ablauf</div></div>
+  <div class="mod-grid">`;
+  if(showKitchen){
+    h+=`<div class="mod" onclick="go('kitchen')" style="grid-column:1 / -1;border-color:var(--orange);"><div class="m-ic">👨‍🍳</div><div class="m-t">Küchenleitung — Rollenübergang</div><div class="m-meta">Onboarding, 4-Wochen-Plan & Integration</div></div>`;
+  }
+  h+=`<div class="mod" onclick="go('flow')"><div class="m-ic">🚐</div><div class="m-t">So läuft Karma</div><div class="m-meta">Route, Karte & Ablauf</div></div>
     <div class="mod" onclick="go('store')"><div class="m-ic">📍</div><div class="m-t">Mein Store</div><div class="m-meta">Infos & Zugänge</div></div>
     <div class="mod" onclick="go('help')"><div class="m-ic">❓</div><div class="m-t">Ich brauch Hilfe</div><div class="m-meta">FAQ & Nachschlagen</div></div>
     <div class="mod" onclick="go('modules')"><div class="m-ic">📚</div><div class="m-t">Weiterlernen</div><div class="m-meta">Deine Module</div></div>
@@ -864,6 +966,106 @@ function playRoute(){
 }
 window.switchMap=switchMap; window.playRoute=playRoute;
 
+/* ============ KITCHEN TAB (Rollenübergang) ============ */
+let kView = 'pre';   // 'pre' = Pre-Boarding (IN sieht) · 'gf' = interne Führungssicht
+let kWeek = 0;
+function renderKitchen(){
+  const el=document.getElementById('v-kitchen');
+  let h=`<div class="flow-intro">
+    <div class="fi-k">Küchenleitung</div>
+    <div class="fi-h head">Rollenübergang<br>& Integration</div>
+    <div class="fi-p">Der Wechsel in der Küchenleitung — strukturiert, respektvoll, in vier Wochen. Zwei erfahrene Köche, die gleichberechtigt zusammenarbeiten.</div>
+  </div>`;
+
+  // Sicht-Umschalter
+  h+=`<div class="view-switch">
+    <button class="${kView==='pre'?'on':''}" onclick="setKView('pre')">👨‍🍳 Pre-Boarding<br><span style="font-weight:500;font-size:11px;">(was der neue Chef sieht)</span></button>
+    <button class="${kView==='gf'?'on':''}" onclick="setKView('gf')">🧭 Führungssicht<br><span style="font-weight:500;font-size:11px;">(intern, GF)</span></button>
+  </div>`;
+
+  if(kView==='pre') h+=kitchenPre();
+  else h+=kitchenGF();
+
+  el.innerHTML=h;
+}
+function setKView(v){ kView=v; renderKitchen(); document.getElementById('content').scrollTop=0; }
+function setKWeek(i){ kWeek=i; renderKitchen(); }
+
+// ---- PRE-BOARDING SICHT (neuer Küchenchef, vor Tag 1) ----
+function kitchenPre(){
+  let h=`<div class="vs-hint"><span class="vh-i">👋</span><span>Das ist die Ansicht für den <b>neuen Küchenchef vor dem ersten Tag</b>: Willkommen, erste Wochen im Überblick, und die Küchenphilosophie zum Einlesen. Bewusst <b>ohne</b> Detail-Rollenverteilung — die wird im persönlichen G0-Gespräch besprochen.</span></div>`;
+
+  CHEF_PREBOARD.forEach(s=>{
+    h+=`<div class="philo-card" style="border-left-color:var(--orange);">
+      <div class="pc-e">${s.e}</div><div class="pc-t">${s.h}</div>`;
+    s.p.forEach(p=>h+=`<div class="pc-d" style="margin-top:6px;">${p}</div>`);
+    h+=`</div>`;
+  });
+
+  h+=`<div class="sec-lbl">Unsere Küchenphilosophie</div>`;
+  KITCHEN_PHILOSOPHY.forEach(p=>{
+    h+=`<div class="philo-card"><div class="pc-e">${p.e}</div><div class="pc-t">${p.t}</div><div class="pc-d">${p.d}</div></div>`;
+  });
+  h+=`<div class="vs-hint" style="margin-top:14px;"><span class="vh-i">📖</span><span>Die vollständige Philosophie (8 Leitplanken, DE + EN) bekommst du vor Arbeitsbeginn als Dokument — sie ist deine verbindliche Referenz für jede Rezeptentscheidung.</span></div>`;
+  return h;
+}
+
+// ---- FÜHRUNGSSICHT (GF, intern) ----
+function kitchenGF(){
+  let h=`<div class="vs-hint"><span class="vh-i">🔒</span><span><b>Interne Führungssicht.</b> Der vollständige 4-Wochen-Plan, Gesprächsleitfäden und Frühwarnsignale — dein Steuerungsinstrument, nicht das Onboarding-Material des neuen Chefs.</span></div>`;
+
+  // Rollen-Split
+  h+=`<div class="sec-lbl">Die zwei Rollen</div>
+  <div class="krole-split">
+    <div class="krole chef"><div class="kr-tag">Neu · IN</div><div class="kr-n">Küchenchef</div><div class="kr-d">Strategisch & inhaltlich. Trägt inhaltliche & wirtschaftliche Verantwortung. Führt partnerschaftlich.</div></div>
+    <div class="krole sous"><div class="kr-tag">Bestehend · AF</div><div class="kr-n">Souschef</div><div class="kr-d">Operativ & täglich. Bleibt dauerhaft der operative Kopf der Küche. Gleichberechtigt im eigenen Bereich.</div></div>
+  </div>
+  <div class="vs-hint"><span class="vh-i">⚖️</span><span>Beide berichten an die GF. Der Küchenchef ist disziplinarisch übergeordnet, führt aber <b>partnerschaftlich</b> — kein „von oben herab".</span></div>`;
+
+  // 4-Wochen-Plan
+  h+=`<div class="sec-lbl">4-Wochen-Plan</div>
+  <div class="kweek-tabs">`;
+  CHEF_WEEKS.forEach((w,i)=>h+=`<button class="kweek-pill ${i===kWeek?'on':''}" onclick="setKWeek(${i})">${w.label}</button>`);
+  h+=`</div>`;
+
+  const w=CHEF_WEEKS[kWeek];
+  h+=`<div class="kweek-card">
+    <div class="kweek-motto">„${w.motto}"</div>
+    <div class="kw-block">
+      <div class="kw-h chef">🟠 Küchenchef (neu)</div>`;
+  w.chef.forEach(t=>h+=`<div class="kw-li"><span class="kb">›</span><span>${t}</span></div>`);
+  h+=`<div class="kw-rule">${w.chefRule}</div></div>`;
+
+  h+=`<div class="kw-block"><div class="kw-h sous">🟢 Souschef (bestehend)</div>`;
+  w.sous.forEach(t=>h+=`<div class="kw-li"><span class="kb">›</span><span>${t}</span></div>`);
+  h+=`</div>`;
+
+  h+=`<div class="kw-block"><div class="kw-h talk">💬 Gespräche</div><div class="kw-li"><span class="kb">›</span><span>${w.talk}</span></div></div>`;
+
+  h+=`<div class="kw-success"><div class="ks-h">✓ Woche erfolgreich, wenn</div>`;
+  w.success.forEach(s=>h+=`<div class="kw-li"><span class="kb" style="color:#00A878;">✓</span><span>${s}</span></div>`);
+  h+=`</div></div>`;
+
+  // Gesprächsplan
+  h+=`<div class="sec-lbl">Kommunikationsplan · 6 Gespräche</div>`;
+  CHEF_TALKS.forEach(t=>{
+    h+=`<div class="talk-card">
+      <div class="tc-top"><span class="tc-id">${t.id}</span><span class="tc-when">${t.when}</span></div>
+      <div class="tc-who">${t.who}</div>
+      <div class="tc-goal">${t.goal}</div>
+    </div>`;
+  });
+
+  // Frühwarnindikatoren
+  h+=`<div class="sec-lbl">Frühwarnsignale · GF reagiert in 48h</div>
+  <div class="warn-card"><div class="wc-h">⚠️ Worauf die GF aktiv achtet</div>`;
+  CHEF_WARNINGS.forEach(w=>h+=`<div class="warn-li"><span>${w}</span></div>`);
+  h+=`</div>`;
+
+  return h;
+}
+window.setKView=setKView; window.setKWeek=setKWeek;
+
 
 let curMod=null, curStep=0;
 function openModule(id){
@@ -875,7 +1077,6 @@ function openModule(id){
 function closeReader(){ document.getElementById('reader').classList.remove('on'); renderAll(); }
 function renderStep(){
   const m=curMod;
-  if(m.isWeekPlan){ renderWeekPlan(); return; }
   const step=m.steps[curStep];
   const body=document.getElementById('rd-body');
   document.getElementById('rd-prog-fill').style.width=Math.round((curStep)/(m.steps.length)*100)+'%';
@@ -926,26 +1127,6 @@ function completeModule(m){
   if(firstTime && m.badge){ showCelebrate(m.badge); }
   else { renderAll(); }
 }
-
-/* week plan reader */
-let wkTab=0;
-function renderWeekPlan(){
-  const body=document.getElementById('rd-body');
-  document.getElementById('rd-prog-fill').style.width='100%';
-  let h=`<div class="rd-emoji">📅</div><h1 class="rd-h head">Dein Wochenplan</h1><p class="rd-p">Damit du weißt, was auf dich zukommt. Schau ihn dir in Ruhe an — du musst nichts auswendig können.</p>`;
-  h+=`<div class="wk-tab">`;
-  WEEK_PLAN.forEach((w,i)=>h+=`<button class="wk-pill${i===wkTab?' on':''}" onclick="setWkTab(${i})">${w.label}</button>`);
-  h+=`</div>`;
-  WEEK_PLAN[wkTab].days.forEach(d=>{
-    h+=`<div class="wk-day"><div class="wd-h">${d.h}</div>`;
-    d.tasks.forEach(t=>h+=`<div class="wk-task"><span class="wt-b">›</span><span>${t}</span></div>`);
-    h+=`</div>`;
-  });
-  body.innerHTML=h; body.scrollTop=0;
-  document.getElementById('rd-back').style.display='none';
-  const nx=document.getElementById('rd-next'); nx.disabled=false; nx.textContent='Verstanden ✓';
-}
-function setWkTab(i){ wkTab=i; renderWeekPlan(); }
 
 /* ============ CELEBRATION ============ */
 function showCelebrate(b){
@@ -1093,7 +1274,7 @@ if(S.started && S.name && S.role && S.store){
 }
 window.go=go; window.openModule=openModule; window.closeReader=closeReader;
 window.rdNext=rdNext; window.rdBack=rdBack; window.answerQuiz=answerQuiz;
-window.setWkTab=setWkTab; window.closeCelebrate=closeCelebrate;
+window.closeCelebrate=closeCelebrate;
 window.editField=editField; window.saveField=saveField; window.renderStore=renderStore;
 window.toggleCheck=toggleCheck; window.filterFaq=filterFaq; window.toggleFaq=toggleFaq;
 </script>
