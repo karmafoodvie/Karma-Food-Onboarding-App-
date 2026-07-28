@@ -53,6 +53,46 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .area-big .ab-d{font-size:13px;color:#FFE9DF;line-height:1.4;}
 .area-big.sel .ab-d{color:#3A3A34;}
 
+/* ---------- WELCOME: TIMELINE ---------- */
+.tl-tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 0 14px;-webkit-overflow-scrolling:touch;}
+.tl-tabs::-webkit-scrollbar{display:none;}
+.tl-tab{flex-shrink:0;padding:9px 14px;border-radius:20px;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
+.tl-tab.on{background:var(--neon);color:var(--ink);border-color:var(--neon);}
+.tl-card{background:rgba(255,255,255,.1);border-radius:16px;padding:16px 18px;}
+.tl-card .tc-y{color:var(--neon);font-size:12px;font-weight:800;letter-spacing:1px;}
+.tl-card .tc-h{color:#fff;font-size:19px;font-weight:800;margin:5px 0 8px;}
+.tl-card .tc-d{color:#FFE9DF;font-size:14px;line-height:1.55;}
+
+/* ---------- WELCOME: MAP ---------- */
+.map-tabs-wl{display:flex;gap:6px;margin-bottom:10px;}
+.map-tabs-wl button{flex:1;padding:9px;border-radius:12px;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
+.map-tabs-wl button.on{background:var(--neon);color:var(--ink);border-color:var(--neon);}
+.wl-map-svg{width:100%;border-radius:16px;display:block;background:rgba(255,255,255,.08);}
+.wl-store-card{background:rgba(255,255,255,.12);border-radius:16px;padding:14px 16px;margin-top:12px;display:flex;gap:12px;align-items:flex-start;}
+.wl-store-card .sc-photo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;color:#fff;}
+.wl-store-card .sc-n{color:#fff;font-size:15px;font-weight:800;}
+.wl-store-card .sc-d{color:#FFE9DF;font-size:13px;line-height:1.4;margin-top:3px;}
+.wl-store-card .sc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.wl-store-card .sc-tag{background:rgba(255,255,255,.15);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px;}
+
+/* ---------- WELCOME: OFFER CHIPS ---------- */
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;}
+.offer-chip{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);color:#fff;font-size:13px;font-weight:700;padding:8px 13px;border-radius:20px;}
+
+/* ---------- WELCOME: PRODUCT GRID ---------- */
+.prod-grid-wl{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
+.prod-card-wl{background:rgba(255,255,255,.1);border-radius:14px;padding:13px 15px;display:flex;gap:12px;align-items:center;}
+.prod-card-wl .pc-e{font-size:26px;}
+.prod-card-wl .pc-t{color:#fff;font-size:14px;font-weight:800;}
+.prod-card-wl .pc-d{color:#FFE9DF;font-size:12px;line-height:1.4;margin-top:2px;}
+
+/* ---------- WELCOME: FEATURE GRID (Catering/Kochkurse) ---------- */
+.feat-grid{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
+.feat-card{background:rgba(255,255,255,.1);border-radius:14px;padding:13px 15px;display:flex;gap:12px;align-items:flex-start;}
+.feat-card .fc-e{font-size:22px;}
+.feat-card .fc-t{color:#fff;font-size:14px;font-weight:800;}
+.feat-card .fc-d{color:#FFE9DF;font-size:12px;line-height:1.4;margin-top:2px;}
+
 /* ---------- TOPBAR ---------- */
 #topbar{background:var(--orange);color:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;position:sticky;top:0;z-index:20;}
 .tb-l{display:flex;flex-direction:column;}
@@ -245,29 +285,99 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="wl-slide on" data-s="0">
     <div class="wl-kicker">Willkommen 🌱</div>
     <div class="wl-emoji">👋</div>
-    <h1 class="wl-big head">Hey, schön<br>dass du da bist!</h1>
-    <p class="wl-txt">Das hier ist deine Karma-Food-App. Kein trockenes Handbuch — sondern alles, was du brauchst, um dich vom ersten Tag an sicher zu fühlen.</p>
-    <p class="wl-txt">Dauert keine 5 Minuten dich reinzulesen. Los geht's? 👇</p>
+    <h1 class="wl-big head">Schön, dass<br>du da bist!</h1>
+    <p class="wl-txt">Willkommen bei der Karma Food Crew. Wir freuen uns, dass du Teil unserer Reise wirst — und mit uns die Welt ein Stück genussvoller und nachhaltiger machst.</p>
+    <p class="wl-txt">Bevor's an die Arbeit geht, nehmen wir dich kurz mit auf eine kleine Reise durch Karma Food. Los geht's? 👇</p>
   </div>
+
   <div class="wl-slide" data-s="1">
-    <div class="wl-kicker">Wer wir sind</div>
-    <div class="wl-emoji">🍛</div>
-    <h1 class="wl-big head">Der Curry<br>Dealer deines<br>Vertrauens.</h1>
-    <p class="wl-txt">Karma Food gibt's seit 2014 — gegründet von Adi & Simone. Plant-based, Indian-inspired, täglich frisch gekocht.</p>
-    <p class="wl-txt">Wir nennen unsere Orte <b style="color:#fff">Lunch-Location</b> — nicht Restaurant. Weil's bei uns um mehr geht als nur einen Teller. Food is community. 🧡</p>
-  </div>
-  <div class="wl-slide" data-s="2">
     <div class="wl-kicker">Wie heißt du?</div>
     <div class="wl-emoji">✍️</div>
     <h1 class="wl-big head">Sag uns<br>deinen Namen</h1>
-    <p class="wl-txt">Damit wir dich richtig begrüßen können.</p>
+    <p class="wl-txt">Damit wir dich auf deiner Reise richtig begrüßen können.</p>
     <input class="wl-input" id="wl-name" placeholder="Dein Vorname" autocomplete="given-name">
   </div>
+
+  <div class="wl-slide" data-s="2">
+    <div class="wl-kicker">Was ist Karma Food?</div>
+    <div class="wl-emoji">🍛</div>
+    <h1 class="wl-big head">Der Curry Dealer<br>deines Vertrauens.</h1>
+    <p class="wl-txt">Alles begann mit einer Vision: authentische, pflanzliche indische Küche nach Wien zu bringen. Wir stehen auf Farbe, Vielfalt und ordentlich Vitamine am Teller.</p>
+    <p class="wl-txt">Karma Food steht für mehr als gutes Essen — wir bringen unglaublich gerne Menschen zusammen. <b style="color:#fff">Food is community.</b> 🧡</p>
+    <div class="swipe-cards" style="margin-top:6px;">
+      <div class="value-card"><div class="vc-e">🌿</div><div class="vc-t">Vegan & Veggie Fuel</div><div class="vc-d">Veggies sind bei uns keine Beilage, sondern Main Character.</div></div>
+      <div class="value-card"><div class="vc-e">🤝</div><div class="vc-t">Food is Community</div><div class="vc-d">Wir schaffen Räume und Momente, in denen sich alle willkommen fühlen.</div></div>
+      <div class="value-card"><div class="vc-e">✨</div><div class="vc-t">Bold Realness</div><div class="vc-d">Echte Zutaten, echter Geschmack, mit starken Familienwurzeln.</div></div>
+    </div>
+  </div>
+
   <div class="wl-slide" data-s="3">
-    <div class="wl-kicker">Dein Bereich</div>
+    <div class="wl-kicker">Unsere Geschichte</div>
+    <div class="wl-emoji">📖</div>
+    <h1 class="wl-big head">Started from<br>the bottom.</h1>
+    <p class="wl-txt">Von einem kleinen Traum 2014 bis heute — tipp dich durch die Jahre.</p>
+    <div class="tl-tabs" id="tl-tabs"></div>
+    <div class="tl-card" id="tl-card"></div>
+  </div>
+
+  <div class="wl-slide" data-s="4">
+    <div class="wl-kicker">Unsere Standorte</div>
+    <div class="wl-emoji">📍</div>
+    <h1 class="wl-big head">Wo du uns<br>überall findest.</h1>
+    <p class="wl-txt">Tipp auf einen Pin für mehr Infos.</p>
+    <div class="map-tabs-wl" id="map-tabs-wl"></div>
+    <div id="wl-map-holder"></div>
+    <div id="wl-store-card"></div>
+  </div>
+
+  <div class="wl-slide" data-s="5">
+    <div class="wl-kicker">Unser Angebot</div>
+    <div class="wl-emoji">🍽️</div>
+    <h1 class="wl-big head">Was wir jeden<br>Tag verkaufen.</h1>
+    <p class="wl-txt">Jeden Tag drei wechselnde Hauptgerichte, dazu die passende Sauce:</p>
+    <div class="chip-row">
+      <span class="offer-chip">🍛 Curry</span><span class="offer-chip">🫘 Dal</span><span class="offer-chip">🍚 Biryani</span>
+      <span class="offer-chip">🫕 Lasagne</span><span class="offer-chip">✨ Special</span>
+    </div>
+    <p class="wl-txt" style="margin-top:14px;">Immer dabei:</p>
+    <div class="chip-row">
+      <span class="offer-chip">🥙 Bowls</span><span class="offer-chip">🥗 Salate</span><span class="offer-chip">🥬 Wochensalat</span>
+    </div>
+    <p class="wl-txt" style="margin-top:14px;">Und außerdem:</p>
+    <div class="chip-row">
+      <span class="offer-chip">🥟 Samosas</span><span class="offer-chip">🍰 Sweets</span><span class="offer-chip">☕ Kaffee</span><span class="offer-chip">🎂 Kuchen</span>
+    </div>
+  </div>
+
+  <div class="wl-slide" data-s="6">
+    <div class="wl-kicker">Unsere eigenen Produkte</div>
+    <div class="wl-emoji">🥫</div>
+    <h1 class="wl-big head">Karma Food<br>zum Mitnehmen.</h1>
+    <p class="wl-txt">Viele wissen es gar nicht — wir stellen auch eigene Produkte her, die es im Webshop gibt.</p>
+    <div class="prod-grid-wl" id="prod-grid-wl"></div>
+  </div>
+
+  <div class="wl-slide" data-s="7">
+    <div class="wl-kicker">Catering</div>
+    <div class="wl-emoji">🎉</div>
+    <h1 class="wl-big head">Karma Food,<br>wo du willst.</h1>
+    <p class="wl-txt" id="cat-lead"></p>
+    <div class="feat-grid" id="cat-grid"></div>
+  </div>
+
+  <div class="wl-slide" data-s="8">
+    <div class="wl-kicker">Kochkurse</div>
+    <div class="wl-emoji">👨‍🍳</div>
+    <h1 class="wl-big head">Unser Wissen,<br>deine Küche.</h1>
+    <p class="wl-txt" id="kk-lead"></p>
+    <div class="feat-grid" id="kk-grid"></div>
+  </div>
+
+  <div class="wl-slide" data-s="9">
+    <div class="wl-kicker">Fast geschafft</div>
     <div class="wl-emoji">🎯</div>
     <h1 class="wl-big head">Wo arbeitest<br>du?</h1>
-    <p class="wl-txt">Danach zeigen wir dir genau das, was für deinen Bereich zählt.</p>
+    <p class="wl-txt">Jetzt zeigen wir dir genau das, was für deinen Bereich zählt.</p>
     <div class="area-pick" id="wl-areas">
       <button class="area-big" data-area="store">
         <div class="ab-e">🫶</div>
@@ -281,13 +391,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </button>
     </div>
   </div>
-  <div class="wl-slide" data-s="4">
+
+  <div class="wl-slide" data-s="10">
     <div class="wl-kicker">Dein Standort</div>
     <div class="wl-emoji">📍</div>
     <h1 class="wl-big head">Welcher<br>Standort?</h1>
     <div class="wl-role" id="wl-stores"></div>
   </div>
-  <div class="wl-slide" data-s="5">
+
+  <div class="wl-slide" data-s="11">
     <div class="wl-kicker">Fertig 🎉</div>
     <div class="wl-emoji">🚀</div>
     <h1 class="wl-big head" id="wl-final-h">Los geht's!</h1>
@@ -357,11 +469,67 @@ const STORES = [
   {id:'lb', name:'Laurenzerberg', short:'Laurenzerberg', col:'#00A878'},
   {id:'boerse', name:'Börse', short:'Börse', col:'#00B4CC'},
   {id:'1020', name:'Ausstellungsstraße', short:'1020', col:'#F0806B'},
-  {id:'1070', name:'Neustiftgasse', short:'1070', col:'#A855F7'},
   {id:'3400', name:'Stadtplatz Klosterneuburg', short:'Stadtplatz', col:'#E0521F'},
   {id:'kitchen', name:'Produktionsküche', short:'Kitchen', col:'#F0A500'},
 ];
 const AREA_LABEL = {store:'Store · Karma Crew', kitchen:'Kitchen · Küchen-Team'};
+
+/* ---------- STANDORT-DETAILS (für interaktive Karte, mit Foto-Platzhaltern) ---------- */
+const STORE_DETAILS = {
+  lb: {photo:null, desc:'Unsere erste Wiener Location — mitten im 1. Bezirk.', tags:['Zentral','Kompakt','Business-Lunch']},
+  boerse: {photo:null, desc:'Der Lunch-Spot direkt am Ring — schnell rein, gut gegessen.', tags:['Am Ring','Business-Lunch','To-go-freundlich']},
+  '1020': {photo:null, desc:'Viel Platz, schöner Gastgarten — zum Verweilen gemacht.', tags:['Gastgarten','Viel Platz','Entspannt']},
+  '3400': {photo:null, desc:'Mitten im Herzen von Klosterneuburg, unser Standort dort.', tags:['Klosterneuburg','Stadtplatz','Familiär']},
+  kitchen: {photo:null, desc:'Die Produktionsküche — hier entsteht alles, was in den Stores landet.', tags:['Herzstück','Community-Tisch','Klosterneuburg']},
+};
+
+/* ---------- GESCHICHTE (echte Timeline von karmafood.at/pages/unsere-story) ---------- */
+const STORY_TIMELINE = [
+  {y:'2014', h:'Der erste Store', d:'Der Traum: gesundes Essen für alle, ohne dass die Mittagspause auf der Strecke bleibt. Täglich frisch gekocht — Currys, Dal, Biryani Bowls, Mango Lassi, Masala Chai.'},
+  {y:'2015', h:'Die Karma Kitchen entsteht', d:'Die erste kleine Küche wurde zu eng. Aus einer alten Autowaschanlage in der Inkustraße wird unser Herzstück — bis heute wird hier für alle Standorte gekocht.'},
+  {y:'2016', h:'Vienna Calling', d:'Die erste Wiener Location eröffnet am Laurenzerberg, mitten im 1. Bezirk.'},
+  {y:'2017', h:'Good Karma on the road', d:'Von Streetfood-Märkten bis zu großen Events — das Karma Catering bringt uns an viele neue Orte.'},
+  {y:'2018', h:'Standort Ausstellungsstraße', d:'Ein neuer Ort bei der Messe Wien entsteht — mit viel Platz für Community-Events.'},
+  {y:'2019', h:'Zwei weitere Standorte', d:'Es geht Schlag auf Schlag: neue Locations im 7. Bezirk und direkt am Schottenring.'},
+  {y:'2020', h:'Das erste Kochbuch', d:'Mit Unterstützung durch Crowdfunding entsteht unser erstes Kochbuch — all unsere liebsten Familienrezepte gesammelt.'},
+  {y:'2021', h:'Karma Care Packages', d:'Während der Lockdowns kommen wir zu euch nach Hause: Live-Kochen, Dinner-Pop-ups, und unsere Curry-Pasten wandern in die Supermärkte.'},
+  {y:'2022', h:'Das Kitchen Collective', d:'Unser eigener Eventspace wird wahr — Platz für Kochkurse, Team-Events, Pop-ups und noch mehr Caterings.'},
+  {y:'2023', h:'Events & Pop-ups', d:'Naturwein im Garten kommt zurück, und wir starten unsere Breakfast-Club-Reihe im Kitchen Collective.'},
+  {y:'2024', h:'Vienna Design Week', d:'Wir werden zum ersten Mal offizieller Gastro-Partner der Vienna Design Week — mit Gastspielen an besonderen Orten.'},
+  {y:'2025', h:'Maison Bufett', d:'Simone startet mit Maison Bufett ihr eigenes Herzensprojekt — eine neue kulinarische Spielwiese.'},
+  {y:'heute', h:'Und es geht weiter', d:'Neue Events, Kollaborationen und Pop-ups — und noch viele Pläne für die Zukunft. Du bist jetzt Teil dieser Reise. 🧡'},
+];
+
+/* ---------- EIGENPRODUKTE ---------- */
+const OWN_PRODUCTS = [
+  {e:'🥫', t:'Curry-Pasten', d:'Madras, Curry & Korma — die Basis für schnelle, authentische Currys zuhause.'},
+  {e:'🌶️', t:'Masalas & Gewürze', d:'Unsere Gewürzmischungen bringen die echten Aromen Indiens in jede Küche.'},
+  {e:'🥄', t:'Kashmiri Chili Crisp', d:'Knuspriges Chili-Öl mit Zwiebeln — das Topping für Reis, Nudeln oder Bowls.'},
+  {e:'🍵', t:'Chai-Sirup', d:'Hausgemacht, mit ayurvedischen Gewürzen — für Chai Latte oder als Dessert-Topping.'},
+  {e:'📖', t:'Kochbücher', d:'Unsere liebsten Familienrezepte, gesammelt und mit Crowdfunding realisiert.'},
+];
+
+/* ---------- CATERING ---------- */
+const CATERING_INFO = {
+  lead:'Karma Food steht für mehr als gutes Essen — wir bringen Menschen zusammen.',
+  points:[
+    {e:'🏢', t:'Firmenveranstaltungen', d:'Veganes Lunch-Catering fürs Office, Meetings & Firmenfeiern.'},
+    {e:'🎉', t:'Private Feiern', d:'Von der Geburtstagsfeier bis zur großen Feier — Karma Food kommt zu dir.'},
+    {e:'✨', t:'Events', d:'Von Streetfood-Markets bis zu großen Konferenzen — wir sind dabei.'},
+    {e:'📋', t:'Individuelle Angebote', d:'Jede Anfrage bekommt ihr eigenes, individuelles Angebot — meist innerhalb von 24 Stunden.'},
+  ]
+};
+
+/* ---------- KOCHKURSE ---------- */
+const KOCHKURSE_INFO = {
+  lead:'Ein Herzstück von Karma Food — im Kitchen Collective in Klosterneuburg.',
+  points:[
+    {e:'👨‍🍳', t:'Mit Adi persönlich', d:'Unser Gründer Adi leitet die Kurse selbst — mit Rat, Tat und viel Entertainment.'},
+    {e:'👥', t:'Kleine Gruppen', d:'In Teamarbeit werden bunte Gerichte der indischen Küche gemeinsam zubereitet.'},
+    {e:'🌶️', t:'Vom Gewürz zum Curry', d:'Ihr lernt, wie aus Gewürzen und Zutaten ein echtes Curry entsteht — inklusive Tipps & Tricks.'},
+    {e:'🍽️', t:'Wie bei guten Freunden', d:'Am Ende sitzt ihr gemeinsam bei einem indischen Festmahl — nicht nur ein Kurs, ein Erlebnis.'},
+  ]
+};
 
 /* ---------- GERICHTE (Emoji-Zuordnung aus Prozess-App) ---------- */
 function dishEmoji(name){
@@ -603,24 +771,108 @@ function storeById(id){ return STORES.find(s=>s.id===id)||STORES[0]; }
 
 /* ============ WELCOME FLOW ============ */
 let wl = S.wlStep || 0;
-const wlTotal = 6;
+const WL_LAST = 11; // Index des letzten Slides (fix, Store-Slide 10 wird für Kitchen übersprungen)
+function wlVisibleCount(){ return isKitchen() ? 11 : 12; } // Kitchen überspringt Store-Slide (10)
+function wlVisiblePos(i){ return (isKitchen() && i>10) ? i-1 : i; } // Position in Dots-Anzeige
 function renderWlDots(){
   const d=document.getElementById('wl-dots'); d.innerHTML='';
-  for(let i=0;i<wlTotal;i++){ const s=document.createElement('span'); s.className='wl-dot'+(i===wl?' on':''); d.appendChild(s); }
+  const total=wlVisibleCount(), pos=wlVisiblePos(wl);
+  for(let i=0;i<total;i++){ const s=document.createElement('span'); s.className='wl-dot'+(i===pos?' on':''); d.appendChild(s); }
 }
 function showWl(){
   document.querySelectorAll('.wl-slide').forEach(el=>el.classList.toggle('on', +el.dataset.s===wl));
   document.getElementById('wl-back').style.display = wl>0 ? 'block':'none';
   const next=document.getElementById('wl-next');
-  next.textContent = wl===wlTotal-1 ? 'App öffnen 🚀' : (wl===0?'Los geht\'s':'Weiter');
-  if(wl===4) buildWlStores();
-  if(wl===5) buildWlFinal();
+  next.textContent = wl===WL_LAST ? 'App öffnen 🚀' : (wl===0?'Los geht\'s':'Weiter');
+  if(wl===3) buildTimeline();
+  if(wl===4) buildWlMap();
+  if(wl===6) buildProdGrid();
+  if(wl===7) buildCatering();
+  if(wl===8) buildKochkurse();
+  if(wl===10) buildWlStores();
+  if(wl===11) buildWlFinal();
   renderWlDots();
 }
+
+/* ---- Slide 3: Geschichte / Timeline ---- */
+let tlYear = STORY_TIMELINE[0].y;
+function buildTimeline(){
+  const tabs=document.getElementById('tl-tabs'); tabs.innerHTML='';
+  STORY_TIMELINE.forEach(t=>{
+    const b=document.createElement('button'); b.className='tl-tab'+(t.y===tlYear?' on':''); b.textContent=t.y;
+    b.onclick=()=>{ tlYear=t.y; buildTimeline(); };
+    tabs.appendChild(b);
+  });
+  const cur=STORY_TIMELINE.find(t=>t.y===tlYear);
+  document.getElementById('tl-card').innerHTML=`<div class="tc-y">${cur.y}</div><div class="tc-h">${cur.h}</div><div class="tc-d">${cur.d}</div>`;
+}
+
+/* ---- Slide 4: Standorte / Karte ---- */
+let wlMapTab='wien';
+function buildWlMap(){
+  const tabs=document.getElementById('map-tabs-wl');
+  tabs.innerHTML=`<button class="${wlMapTab==='wien'?'on':''}" onclick="setWlMapTab('wien')">🏙️ Wien</button><button class="${wlMapTab==='klo'?'on':''}" onclick="setWlMapTab('klo')">🌳 Klosterneuburg</button>`;
+  document.getElementById('wl-map-holder').innerHTML = wlMapTab==='wien' ? wlMapWien() : wlMapKlo();
+  document.getElementById('wl-store-card').innerHTML='';
+}
+function setWlMapTab(t){ wlMapTab=t; buildWlMap(); }
+function wlPin(x,y,col,id){
+  return `<g onclick="showStoreCard('${id}')" style="cursor:pointer;">
+    <path d="M${x} ${y-16} a9 9 0 0 1 9 9 c0 6 -9 15 -9 15 c0 0 -9 -9 -9 -15 a9 9 0 0 1 9 -9 Z" fill="${col}"/>
+    <circle cx="${x}" cy="${y-7}" r="3.5" fill="#fff"/></g>`;
+}
+function wlMapWien(){
+  return `<svg class="wl-map-svg" viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg">
+    <path d="M-10 55 C60 85 120 65 175 95 C230 125 280 105 350 135 L350 165 C280 140 235 155 178 125 C120 95 55 115 -10 85 Z" fill="rgba(255,255,255,.12)"/>
+    ${wlPin(95,158,'#00A878','lb')}
+    ${wlPin(150,172,'#00B4CC','boerse')}
+    ${wlPin(232,58,'#F0806B','1020')}
+    <text x="12" y="22" font-size="11" font-weight="800" fill="#fff" font-family="sans-serif">WIEN</text>
+  </svg>`;
+}
+function wlMapKlo(){
+  return `<svg class="wl-map-svg" viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0 H120 C110 40 130 70 90 100 C60 125 40 180 0 200 Z" fill="rgba(255,255,255,.12)"/>
+    ${wlPin(178,120,'#E0521F','3400')}
+    ${wlPin(240,168,'#F0A500','kitchen')}
+    <text x="12" y="22" font-size="11" font-weight="800" fill="#fff" font-family="sans-serif">KLOSTERNEUBURG</text>
+  </svg>`;
+}
+function showStoreCard(id){
+  const st=storeById(id), det=STORE_DETAILS[id]||{};
+  const photoInner = det.photo ? `<img src="${det.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">` : '📷';
+  document.getElementById('wl-store-card').innerHTML=`<div class="wl-store-card">
+    <div class="sc-photo">${photoInner}</div>
+    <div><div class="sc-n">${st.name}</div><div class="sc-d">${det.desc||''}</div>
+    <div class="sc-tags">${(det.tags||[]).map(t=>`<span class="sc-tag">${t}</span>`).join('')}</div></div>
+  </div>`;
+}
+
+/* ---- Slide 6: Eigenprodukte ---- */
+function buildProdGrid(){
+  document.getElementById('prod-grid-wl').innerHTML = OWN_PRODUCTS.map(p=>
+    `<div class="prod-card-wl"><div class="pc-e">${p.e}</div><div><div class="pc-t">${p.t}</div><div class="pc-d">${p.d}</div></div></div>`
+  ).join('');
+}
+/* ---- Slide 7: Catering ---- */
+function buildCatering(){
+  document.getElementById('cat-lead').textContent = CATERING_INFO.lead;
+  document.getElementById('cat-grid').innerHTML = CATERING_INFO.points.map(p=>
+    `<div class="feat-card"><div class="fc-e">${p.e}</div><div><div class="fc-t">${p.t}</div><div class="fc-d">${p.d}</div></div></div>`
+  ).join('');
+}
+/* ---- Slide 8: Kochkurse ---- */
+function buildKochkurse(){
+  document.getElementById('kk-lead').textContent = KOCHKURSE_INFO.lead;
+  document.getElementById('kk-grid').innerHTML = KOCHKURSE_INFO.points.map(p=>
+    `<div class="feat-card"><div class="fc-e">${p.e}</div><div><div class="fc-t">${p.t}</div><div class="fc-d">${p.d}</div></div></div>`
+  ).join('');
+}
+
+/* ---- Slide 10: Standort ---- */
 function buildWlStores(){
   const c=document.getElementById('wl-stores'); c.innerHTML='';
-  const list = isKitchen() ? STORES.filter(s=>s.id==='kitchen') : STORES.filter(s=>s.id!=='kitchen');
-  if(isKitchen() && !S.store) S.store='kitchen';
+  const list = STORES.filter(s=>s.id!=='kitchen');
   list.forEach(s=>{
     const b=document.createElement('button'); b.className='wl-chip'+(S.store===s.id?' sel':'');
     b.innerHTML=`<span class="ce" style="width:14px;height:14px;border-radius:50%;background:${s.col};display:inline-block;"></span> ${s.name}`;
@@ -632,14 +884,22 @@ function buildWlFinal(){
   const nm=S.name?(', '+S.name):'';
   document.getElementById('wl-final-h').textContent = `Los geht's${nm}!`;
 }
+
 document.getElementById('wl-next').onclick=()=>{
-  if(wl===2){ const v=document.getElementById('wl-name').value.trim(); if(v) S.name=v; }
-  if(wl===3 && !S.area){ toast('Bitte wähl deinen Bereich 🎯'); return; }
-  if(wl===4 && !S.store){ toast('Bitte wähl deinen Standort 📍'); return; }
-  if(wl>=wlTotal-1){ finishWelcome(); return; }
-  wl++; S.wlStep=wl; save(); showWl();
+  if(wl===1){ const v=document.getElementById('wl-name').value.trim(); if(v) S.name=v; }
+  if(wl===9 && !S.area){ toast('Bitte wähl deinen Bereich 🎯'); return; }
+  if(wl===10 && !S.store){ toast('Bitte wähl deinen Standort 📍'); return; }
+  if(wl>=WL_LAST){ finishWelcome(); return; }
+  // Store-Slide (10) für Kitchen überspringen
+  if(wl===9 && isKitchen()){ S.store='kitchen'; save(); wl=11; }
+  else { wl++; }
+  S.wlStep=wl; save(); showWl();
 };
-document.getElementById('wl-back').onclick=()=>{ if(wl>0){ wl--; S.wlStep=wl; save(); showWl(); } };
+document.getElementById('wl-back').onclick=()=>{
+  if(wl<=0) return;
+  if(wl===11 && isKitchen()){ wl=9; } else { wl--; }
+  S.wlStep=wl; save(); showWl();
+};
 document.querySelectorAll('#wl-areas .area-big').forEach(b=>{
   b.onclick=()=>{ S.area=b.dataset.area; if(S.area==='kitchen') S.store='kitchen'; else if(S.store==='kitchen') S.store=''; save();
     document.querySelectorAll('#wl-areas .area-big').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); };
@@ -1006,6 +1266,7 @@ window.closeCelebrate=closeCelebrate; window.switchArea=switchArea;
 window.toggleStage=toggleStage; window.playRoute=playRoute;
 window.editField=editField; window.saveField=saveField; window.renderStore=renderStore;
 window.toggleCheck=toggleCheck; window.filterFaq=filterFaq; window.toggleFaq=toggleFaq;
+window.setWlMapTab=setWlMapTab; window.showStoreCard=showStoreCard;
 </script>
 </body>
 </html>
