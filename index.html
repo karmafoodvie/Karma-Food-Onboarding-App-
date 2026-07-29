@@ -58,10 +58,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .area-big.sel .ab-d{color:#3A3A34;}
 
 /* ---------- WELCOME: TIMELINE ---------- */
-.tl-tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 0 14px;-webkit-overflow-scrolling:touch;}
-.tl-tabs::-webkit-scrollbar{display:none;}
-.tl-tab{flex-shrink:0;padding:9px 14px;border-radius:20px;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
-.tl-tab.on{background:var(--neon);color:var(--ink);border-color:var(--neon);}
+.tl-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin:4px 0 12px;}
+.tl-arrow{width:38px;height:38px;border-radius:50%;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font-size:17px;cursor:pointer;flex-shrink:0;font-family:inherit;}
+.tl-arrow:disabled{opacity:.25;cursor:default;}
+.tl-year-big{color:var(--neon);font-size:22px;font-weight:800;min-width:70px;text-align:center;letter-spacing:.5px;}
+.tl-dots{display:flex;justify-content:center;gap:5px;margin-bottom:14px;}
+.tl-dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);}
+.tl-dots span.on{background:var(--neon);width:18px;border-radius:4px;}
 .tl-card{background:rgba(255,255,255,.1);border-radius:16px;padding:16px 18px;}
 .tl-photo{width:100%;aspect-ratio:16/10;border-radius:12px;overflow:hidden;margin-bottom:12px;}
 .tl-photo img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -385,7 +388,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="wl-emoji">📖</div>
     <h1 class="wl-big head">Started from<br>the bottom.</h1>
     <p class="wl-txt">Von einem kleinen Traum 2014 bis heute — tipp dich durch die Jahre.</p>
-    <div class="tl-tabs" id="tl-tabs"></div>
+    <div class="tl-nav">
+      <button class="tl-arrow" onclick="tlStep(-1)" id="tl-prev">←</button>
+      <div class="tl-year-big" id="tl-year-big">2014</div>
+      <button class="tl-arrow" onclick="tlStep(1)" id="tl-next">→</button>
+    </div>
+    <div class="tl-dots" id="tl-dots"></div>
     <div class="tl-card" id="tl-card"></div>
   </div>
 
@@ -977,17 +985,21 @@ function showWl(){
 }
 
 /* ---- Slide 3: Geschichte / Timeline ---- */
-let tlYear = STORY_TIMELINE[0].y;
+let tlIdx = 0;
 function buildTimeline(){
-  const tabs=document.getElementById('tl-tabs'); tabs.innerHTML='';
-  STORY_TIMELINE.forEach(t=>{
-    const b=document.createElement('button'); b.className='tl-tab'+(t.y===tlYear?' on':''); b.textContent=t.y;
-    b.onclick=()=>{ tlYear=t.y; buildTimeline(); };
-    tabs.appendChild(b);
-  });
-  const cur=STORY_TIMELINE.find(t=>t.y===tlYear);
+  const cur = STORY_TIMELINE[tlIdx];
+  document.getElementById('tl-year-big').textContent = cur.y;
+  document.getElementById('tl-prev').disabled = tlIdx===0;
+  document.getElementById('tl-next').disabled = tlIdx===STORY_TIMELINE.length-1;
+  const dots=document.getElementById('tl-dots');
+  dots.innerHTML = STORY_TIMELINE.map((_,i)=>`<span class="${i===tlIdx?'on':''}"></span>`).join('');
   const photoHtml = cur.photo ? `<div class="tl-photo"><img src="${cur.photo}" alt="${cur.h}"></div>` : '';
   document.getElementById('tl-card').innerHTML=`${photoHtml}<div class="tc-y">${cur.y}</div><div class="tc-h">${cur.h}</div><div class="tc-d">${cur.d}</div>`;
+}
+function tlStep(dir){
+  const next = tlIdx + dir;
+  if(next<0 || next>=STORY_TIMELINE.length) return;
+  tlIdx = next; buildTimeline();
 }
 
 /* ---- Slide 4: Standorte / Karte ---- */
@@ -1640,7 +1652,7 @@ window.toggleCheck=toggleCheck; window.filterFaq=filterFaq; window.toggleFaq=tog
 window.kbFilter=kbFilter; window.kbToggleCat=kbToggleCat; window.kbJumpCat=kbJumpCat;
 window.kbOpenStore=kbOpenStore; window.kbBackToHub=kbBackToHub; window.kbSetTab=kbSetTab;
 window.kbStartEdit=kbStartEdit; window.kbCancelEdit=kbCancelEdit; window.kbSaveEdit=kbSaveEdit;
-window.setWlMapTab=setWlMapTab; window.showStoreCard=showStoreCard; window.pickStore=pickStore;
+window.setWlMapTab=setWlMapTab; window.showStoreCard=showStoreCard; window.pickStore=pickStore; window.tlStep=tlStep;
 </script>
 </body>
 </html>
