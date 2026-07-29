@@ -30,6 +30,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wl-big{color:#fff;font-size:34px;line-height:1.15;margin:0 0 18px;}
 .wl-txt{color:#FFE9DF;font-size:16px;line-height:1.6;margin-bottom:14px;}
 .wl-emoji{font-size:52px;margin-bottom:18px;}
+.wl-logo{height:34px;width:auto;margin-bottom:16px;filter:brightness(0) invert(1);opacity:.95;}
+.wl-hero-photo{width:100%;aspect-ratio:16/10;border-radius:18px;overflow:hidden;margin-bottom:18px;}
+.wl-hero-photo img{width:100%;height:100%;object-fit:cover;display:block;}
 .wl-dots{position:absolute;bottom:92px;left:0;right:0;display:flex;justify-content:center;gap:7px;}
 .wl-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35);transition:.3s;}
 .wl-dot.on{background:var(--neon);width:22px;border-radius:4px;}
@@ -78,6 +81,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 /* ---------- WELCOME: OFFER CHIPS ---------- */
 .chip-row{display:flex;flex-wrap:wrap;gap:8px;}
 .offer-chip{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);color:#fff;font-size:13px;font-weight:700;padding:8px 13px;border-radius:20px;}
+
+/* ---------- WELCOME: WOCHEN-RHYTHMUS ---------- */
+.week-rhythm{display:flex;flex-direction:column;gap:6px;}
+.wr-row{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border-radius:12px;padding:9px 10px;}
+.wr-day{width:32px;flex-shrink:0;font-size:12px;font-weight:800;color:var(--neon);}
+.wr-slot{flex:1;background:rgba(255,255,255,.12);border-radius:8px;padding:6px 8px;font-size:12px;font-weight:700;color:#fff;text-align:center;}
+.wr-slot.curry{background:rgba(212,255,63,.22);color:var(--neon);}
 
 /* ---------- WELCOME: PRODUCT GRID ---------- */
 .prod-grid-wl{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
@@ -293,7 +303,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="welcome">
   <div class="wl-slide on" data-s="0">
     <div class="wl-kicker">Willkommen 🌱</div>
-    <div class="wl-emoji">👋</div>
+    <img src="https://karmafood.at/cdn/shop/files/Karma_Food_Wien.png?v=1760621788&width=200" alt="Karma Food Logo" class="wl-logo">
+    <div class="wl-hero-photo"><img src="https://karmafood.at/cdn/shop/files/Karma-Food-Lunch-vegan-Wien.jpg?v=1777450260&width=1200" alt="Karma Food"></div>
     <h1 class="wl-big head">Schön, dass<br>du da bist!</h1>
     <p class="wl-txt">Willkommen bei der Karma Food Crew. Wir freuen uns, dass du Teil unserer Reise wirst — und mit uns die Welt ein Stück genussvoller und nachhaltiger machst.</p>
     <p class="wl-txt">Bevor's an die Arbeit geht, nehmen wir dich kurz mit auf eine kleine Reise durch Karma Food. Los geht's? 👇</p>
@@ -343,14 +354,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="wl-kicker">Unser Angebot</div>
     <div class="wl-emoji">🍽️</div>
     <h1 class="wl-big head">Was wir jeden<br>Tag verkaufen.</h1>
-    <p class="wl-txt">Jeden Tag drei wechselnde Hauptgerichte, dazu die passende Sauce:</p>
-    <div class="chip-row">
-      <span class="offer-chip">🍛 Curry</span><span class="offer-chip">🫘 Dal</span><span class="offer-chip">🍚 Biryani</span>
-      <span class="offer-chip">🫕 Lasagne</span><span class="offer-chip">✨ Special</span>
-    </div>
+    <p class="wl-txt">Jeden Tag gibt's <b style="color:#fff">3 Gerichte</b> — Curry ist immer mit dabei, dazu wechseln Bowl, Dal, Lasagne, Biryani und Specials nach einem festen Wochen-Rhythmus:</p>
+    <div class="week-rhythm" id="week-rhythm"></div>
+    <p class="wl-txt" style="margin-top:6px;font-size:12px;opacity:.75;">Der genaue Rhythmus kann sich saisonal leicht verschieben — das aktuelle Tagesmenü hängt immer im Store aus.</p>
     <p class="wl-txt" style="margin-top:14px;">Immer dabei:</p>
     <div class="chip-row">
-      <span class="offer-chip">🥙 Bowls</span><span class="offer-chip">🥗 Salate</span><span class="offer-chip">🥬 Wochensalat</span>
+      <span class="offer-chip">🥗 Salate</span><span class="offer-chip">🥬 Wochensalat</span><span class="offer-chip">🧂 Passende Sauce</span>
     </div>
     <p class="wl-txt" style="margin-top:14px;">Und außerdem:</p>
     <div class="chip-row">
@@ -529,14 +538,23 @@ const CATERING_INFO = {
   ]
 };
 
-/* ---------- KOCHKURSE ---------- */
+/* ---------- WOCHEN-RHYTHMUS (echter interner Speiseplan-Takt) ---------- */
+// Immer 3 Gerichte/Tag: Slot 1 wechselt (Bowl/Lasagne/Biryani), Curry ist täglich fix, Slot 3 meist Dal (Mi: Special)
+const WEEKLY_RHYTHM = [
+  {day:'Mo', s1:'Bowl', s2:'Curry', s3:'Dal'},
+  {day:'Di', s1:'Lasagne', s2:'Curry', s3:'Dal'},
+  {day:'Mi', s1:'Bowl', s2:'Curry', s3:'Special'},
+  {day:'Do', s1:'Lasagne', s2:'Curry', s3:'Dal'},
+  {day:'Fr', s1:'Bowl/Biryani', s2:'Curry', s3:'Dal'},
+];
+
+/* ---------- KOCHKURSE (echte Masterclasses) ---------- */
 const KOCHKURSE_INFO = {
-  lead:'Ein Herzstück von Karma Food — im Kitchen Collective in Klosterneuburg.',
+  lead:'Mit Adi persönlich, in kleinen Gruppen — im Kitchen Collective in Klosterneuburg.',
   points:[
-    {e:'👨‍🍳', t:'Mit Adi persönlich', d:'Unser Gründer Adi leitet die Kurse selbst — mit Rat, Tat und viel Entertainment.'},
-    {e:'👥', t:'Kleine Gruppen', d:'In Teamarbeit werden bunte Gerichte der indischen Küche gemeinsam zubereitet.'},
-    {e:'🌶️', t:'Vom Gewürz zum Curry', d:'Ihr lernt, wie aus Gewürzen und Zutaten ein echtes Curry entsteht — inklusive Tipps & Tricks.'},
-    {e:'🍽️', t:'Wie bei guten Freunden', d:'Am Ende sitzt ihr gemeinsam bei einem indischen Festmahl — nicht nur ein Kurs, ein Erlebnis.'},
+    {e:'🥭', t:'Best of Classics', d:'Indische Klassiker, ganz vegan & vegetarisch. ~3,5 Stunden.'},
+    {e:'🍛', t:'Best of Restaurant', d:'Kochen wie im Restaurant — auf Wunsch auch mit Fleisch-Option. ~3,5 Stunden.'},
+    {e:'🌴', t:'Best of Kerala', d:'Aromen aus Süd-Indien, vegan & vegetarisch. ~3,5 Stunden.'},
   ]
 };
 
@@ -795,6 +813,7 @@ function showWl(){
   next.textContent = wl===WL_LAST ? 'App öffnen 🚀' : (wl===0?'Los geht\'s':'Weiter');
   if(wl===3) buildTimeline();
   if(wl===4) buildWlMap();
+  if(wl===5) buildWeekRhythm();
   if(wl===6) buildProdGrid();
   if(wl===7) buildCatering();
   if(wl===8) buildKochkurse();
@@ -855,6 +874,15 @@ function showStoreCard(id){
     <div><div class="sc-n">${st.name}</div><div class="sc-d">${det.desc||''}</div>
     <div class="sc-tags">${(det.tags||[]).map(t=>`<span class="sc-tag">${t}</span>`).join('')}</div></div>
   </div>`;
+}
+
+/* ---- Slide 5: Wochenrhythmus ---- */
+function buildWeekRhythm(){
+  document.getElementById('week-rhythm').innerHTML = WEEKLY_RHYTHM.map(r=>
+    `<div class="wr-row"><span class="wr-day">${r.day}</span>
+      <span class="wr-slot">${r.s1}</span><span class="wr-slot curry">${r.s2}</span><span class="wr-slot">${r.s3}</span>
+    </div>`
+  ).join('');
 }
 
 /* ---- Slide 6: Eigenprodukte ---- */
