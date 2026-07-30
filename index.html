@@ -747,19 +747,16 @@ function dishImg(name){
 }
 
 const DISH_CATEGORIES = [
-  {cat:'Hauptgerichte (3 pro Tag)', dishes:[
+  {cat:'Hauptgerichte (immer 3 pro Tag)', dishes:[
     {n:'Curry', d:'Indisch-inspiriert, cremig, würzig'},
     {n:'Dal', d:'Linsengericht, herzhaft & proteinreich'},
+    {n:'Bowl', d:'Mit passendem Dressing — im Sommer oft durch den Wochensalat ersetzt'},
     {n:'Biryani', d:'Gewürzter Reis mit Gemüse'},
-    {n:'Lasagne', d:'Wird immer mit Salat serviert'},
+    {n:'Lasagne', d:'Kommt immer mit Salat als Beilage'},
     {n:'Special', d:'z.B. Meatballs, Gulasch, Chili sin Carne'},
   ]},
-  {cat:'Immer dabei', dishes:[
-    {n:'Bowl', d:'Mit passendem Dressing'},
-    {n:'Salat', d:'Mit passendem Dressing'},
-    {n:'Wochensalat', d:'Wechselt wöchentlich, mit Dressing'},
-  ]},
 ];
+const DISH_NOTE = 'Es sind immer genau 3 Gerichte pro Tag — Curry ist praktisch immer dabei. Salat gibt es nur als Beilage zur Lasagne, nie einzeln. Der Wochensalat ersetzt im Sommer die Bowl; außerhalb der Saison gibt\'s stattdessen die Bowl.';
 
 const DEFAULT_STORE_FACTS = {
   open:{k:'Öffnungszeiten',ic:'🕒',v:'Mo–Fr, siehe Aushang vor Ort',by:'System',when:'—'},
@@ -865,6 +862,16 @@ const STORE_MODULES = [
     steps:[
       {type:'read', e:'🍽️', h:'Freie Konsumation im Dienst', p:['Während dem Dienst: <b>1× Essen, 1× Drink, 1× Coffee.</b>','Reste vom Vortag (Lunch, Sweets) darfst du gerne mit nach Hause nehmen.','Konsumation immer auf „Personalverbrauch" buchen (gleicher Vorgang wie Bezahlung).']},
       {type:'read', e:'🏷️', h:'Deine Rabatte', p:['<b>50%</b> auf Konsumation außerhalb vom Dienst.','<b>30%</b> auf Store-Produkte über dein Free Contingent hinaus, <b>25%</b> auf Karma Products (Gewürze, Pasten, Saucen).','<b>10%</b> auf Merch (Weducer Cup, Dabba, Tshirts, Kochbücher). Einlösbar per Code (Codeliste in der Wissensdatenbank).']},
+    ]},
+  {id:'sales', ic:'💜', title:'Exzellenter Service & Verkauf', meta:'Verkaufsschulung · 4 Schritte', badge:{e:'💜',n:'Service-Profi',d:'Du weißt, wie herzlicher Service & aktiver Verkauf bei Karma funktionieren!'},
+    steps:[
+      {type:'read', e:'👋', h:'Begrüßung & persönlicher Umgang', p:['Jede:r Gast wird freundlich begrüßt — z.B. <b>„Hallo, herzlich willkommen!"</b> oder <b>„Was darf ich dir heute Gutes zubereiten?"</b> Der erste Eindruck zählt.','Immer freundlich, aufmerksam, Blickkontakt & Lächeln. Zuhören, kompetent antworten, auch bei viel Betrieb geduldig bleiben.','Wir verkaufen nicht einfach Essen — wir schaffen ein positives Erlebnis.']},
+      {type:'read', e:'🌿', h:'Unser fixer Standard: Petersilie & Limette', p:['Bei jedem passenden Gericht fragen wir <b>immer</b>: „Möchtest du Petersilie und Limette dazu?"','Das ist kein netter Zusatz, sondern fixer Servicestandard — bei jeder passenden Bestellung.']},
+      {type:'read', e:'💬', h:'Aktiver Zusatzverkauf & Empfehlungen', p:['Zu jeder Bestellung freundlich eine passende Ergänzung anbieten — nie aufdringlich, sondern als hilfreiche Empfehlung.','Beispiele: „Möchtest du noch ein frisches Mango Lassi dazu?" · „Darf es zum Abschluss noch etwas Süßes sein?"','Empfehlungen wirken authentisch: „Das ist heute unser beliebtestes Gericht" oder „Dazu passt unser Mango Lassi besonders gut."']},
+      {type:'read', e:'🙏', h:'Gastkontakt & Verabschiedung', p:['Nachfragen ob\'s geschmeckt hat, Stammgäste wiedererkennen, dich für den Besuch bedanken.','Jede:r Gast wird freundlich verabschiedet: „Vielen Dank für deinen Besuch, bis bald!"','Unsere Philosophie: So behandeln, wie wir selbst zuhause empfangen werden würden — herzlich, aufmerksam, mit echter Gastfreundschaft.']},
+      {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Ein Gast bestellt ein Curry. Was gehört laut unserem Servicestandard immer dazu gefragt?',
+        opts:['Nichts, einfach servieren','Ob Petersilie & Limette dazu sollen','Ob der Gast bar zahlt'],
+        right:1, fb:'Genau! Bei jedem passenden Gericht fragen wir aktiv nach Petersilie & Limette — das ist unser fixer Servicestandard. 🌿'},
     ]},
 ];
 
@@ -1321,7 +1328,7 @@ function renderFlow(){
       });
       h+=`</div>`;
     });
-    h+=`<div class="tip"><span class="ti">🥗</span><span class="tt">Zu jedem Salat und jeder Bowl gehört das <b>passende Dressing</b>. Lasagne wird immer mit Salat serviert.</span></div>`;
+    h+=`<div class="tip"><span class="ti">🥗</span><span class="tt">${DISH_NOTE}</span></div>`;
     h+=`<div class="sec-lbl">So kommt das Essen zu dir</div>
     <div class="route-card">
       <div class="route-head"><span class="rh-t">🚐 Die Liefer-Route</span>
