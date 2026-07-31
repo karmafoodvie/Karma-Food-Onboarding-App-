@@ -132,6 +132,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pb-continue{width:100%;background:var(--orange);color:#fff;border:none;border-radius:14px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;margin-top:8px;}
 .pb-skip{width:100%;background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer;font-family:inherit;margin-top:12px;padding:6px;}
 
+/* ---------- FREISCHALT-TOR ---------- */
+#gate{position:fixed;inset:0;max-width:480px;margin:0 auto;background:var(--cream);z-index:70;overflow-y:auto;}
+.gate-inner{padding:34px 22px 40px;}
+.gate-emoji{font-size:48px;margin-bottom:12px;}
+.gate-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;margin:8px 0 16px;}
+.gate-card-t{font-size:15px;font-weight:800;margin-bottom:12px;}
+.gate-fb-row{display:flex;gap:8px;margin-bottom:12px;}
+.gate-fb{flex:1;padding:12px 6px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--sub);}
+.gate-fb.on{border-color:var(--green);background:var(--green-soft);color:var(--green);}
+.gate-fb-text{width:100%;border:2px solid var(--border);border-radius:12px;padding:11px 13px;font-size:14px;font-family:inherit;outline:none;resize:vertical;}
+.gate-fb-text:focus{border-color:var(--orange);}
+.gate-lock{background:var(--ink);border-radius:18px;padding:22px;text-align:center;color:#fff;margin-bottom:8px;}
+.gate-lock.done{opacity:.5;}
+.gate-lock-ic{font-size:34px;margin-bottom:10px;}
+.gate-lock-t{font-size:17px;font-weight:800;margin-bottom:6px;}
+.gate-lock-d{font-size:13px;line-height:1.5;color:#CFC9BC;margin-bottom:16px;}
+.gate-code-row{display:flex;gap:8px;}
+.gate-code-input{flex:1;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;border-radius:12px;padding:13px 14px;font-size:16px;font-weight:700;outline:none;text-transform:uppercase;letter-spacing:1px;}
+.gate-code-input::placeholder{color:rgba(255,255,255,.5);letter-spacing:0;font-weight:400;text-transform:none;}
+.gate-code-input:focus{border-color:var(--neon);}
+.gate-code-btn{background:var(--neon);color:var(--ink);border:none;border-radius:12px;padding:13px 18px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;flex-shrink:0;}
+.gate-code-err{font-size:12.5px;color:#F0806B;margin-top:10px;min-height:16px;font-weight:600;}
+
 #topbar{background:var(--orange);color:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;position:sticky;top:0;z-index:20;}
 .tb-l{display:flex;flex-direction:column;}
 .tb-title{font-size:15px;}
@@ -470,6 +493,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="feat-grid" id="kk-grid"></div>
   </div>
 
+  <div class="wl-slide" data-s="12">
+    <div class="wl-kicker">Dein Schnuppertag</div>
+    <div class="wl-emoji">🌱</div>
+    <h1 class="wl-big head">Dein erster<br>Tag bei uns.</h1>
+    <p class="wl-txt">Bevor's richtig losgeht, kommst du zu einem Schnuppertag. Kein Stress — heute geht's ums Reinschnuppern, nicht ums Können.</p>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="fc-e">🤝</div><div><div class="fc-t">Du wirst begleitet</div><div class="fc-d">Eine erfahrene Person aus dem Team nimmt dich an die Hand und zeigt dir alles.</div></div></div>
+      <div class="feat-card"><div class="fc-e">👀</div><div><div class="fc-t">Einfach mitlaufen</div><div class="fc-d">Du schaust zu, lernst das Team kennen und bekommst ein Gefühl für unseren Alltag.</div></div></div>
+      <div class="feat-card"><div class="fc-e">😌</div><div><div class="fc-t">Was du noch NICHT können musst</div><div class="fc-d">Kasse, Kaffee, Abläufe — alles kommt später Schritt für Schritt. Heute nur ankommen.</div></div></div>
+      <div class="feat-card"><div class="fc-e">💬</div><div><div class="fc-t">Danach gibst du uns Feedback</div><div class="fc-d">Wie war dein Tag? Danach entscheiden wir gemeinsam, wie's weitergeht.</div></div></div>
+    </div>
+  </div>
+
   <div class="wl-slide" data-s="9">
     <div class="wl-kicker">Fast geschafft</div>
     <div class="wl-emoji">🎯</div>
@@ -524,6 +560,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div id="pb-steps"></div>
     <button class="pb-continue" onclick="finishPreboard()">Alles erledigt → zur App</button>
     <button class="pb-skip" onclick="finishPreboard()">Später erledigen, jetzt reinschauen</button>
+  </div>
+</div>
+
+<!-- ===================== FREISCHALT-TOR (nach Schnuppertag) ===================== -->
+<div id="gate" style="display:none;">
+  <div class="gate-inner">
+    <div class="gate-emoji">🌱</div>
+    <div class="pb-kicker" style="color:var(--green);">Schnuppertag geschafft</div>
+    <h1 class="pb-h head" id="gate-hello">Danke, dass du<br>da warst!</h1>
+    <p class="pb-lead">Wie war dein Tag? Sag uns kurz Bescheid — dann melden wir uns bei dir und schalten gemeinsam deinen nächsten Schritt frei.</p>
+
+    <div class="gate-card">
+      <div class="gate-card-t">💬 Dein Feedback zum Schnuppertag</div>
+      <div class="gate-fb-row">
+        <button class="gate-fb" data-fb="top" onclick="gateFb('top')">😍 Top</button>
+        <button class="gate-fb" data-fb="ok" onclick="gateFb('ok')">🙂 Ganz gut</button>
+        <button class="gate-fb" data-fb="unsure" onclick="gateFb('unsure')">🤔 Unsicher</button>
+      </div>
+      <textarea id="gate-fb-text" class="gate-fb-text" rows="3" placeholder="Magst du noch was dazu sagen? (optional)"></textarea>
+      <button class="pb-continue" id="gate-fb-send" onclick="gateSendFb()" style="margin-top:12px;">Feedback abschicken</button>
+    </div>
+
+    <div class="gate-lock" id="gate-lock">
+      <div class="gate-lock-ic">🔒</div>
+      <div class="gate-lock-t">Dein Onboarding wartet auf Freigabe</div>
+      <div class="gate-lock-d">Sobald das Karma-Team dich übernimmt, bekommst du einen Freischalt-Code. Gib ihn hier ein — dann geht's richtig los.</div>
+      <div class="gate-code-row">
+        <input id="gate-code" class="gate-code-input" placeholder="Freischalt-Code" autocapitalize="characters">
+        <button class="gate-code-btn" onclick="gateUnlock()">Freischalten</button>
+      </div>
+      <div class="gate-code-err" id="gate-code-err"></div>
+    </div>
+
+    <button class="pb-skip" onclick="gatePeek()">Nur die Willkommens-Reise nochmal ansehen</button>
   </div>
 </div>
 
@@ -1015,20 +1085,24 @@ function faqList(){ return isKitchen()?[...FAQ_COMMON,...FAQ_KITCHEN]:[...FAQ_CO
 function storeById(id){ return STORES.find(s=>s.id===id)||STORES[0]; }
 
 /* ============ WELCOME FLOW ============ */
-let wl = S.wlStep || 0;
-const WL_LAST = 11; // Index des letzten Slides (fix, Store-Slide 10 wird für Kitchen übersprungen)
-function wlVisibleCount(){ return 11; } // Store-Slide (10) wird immer übersprungen — Store wählt man später
-function wlVisiblePos(i){ return i>10 ? i-1 : i; }
+// Explizite Reihenfolge der Slides (data-s Werte). Store-Slide (10) wird immer übersprungen.
+// Schnuppertag (12) sitzt zwischen Kochkurse (8) und Bereich (9).
+const WL_ORDER = [0,1,2,3,4,5,6,7,8,12,9,11];
+let wlPos = 0; // Position in WL_ORDER
+let wl = WL_ORDER[wlPos]; // aktueller data-s Wert
+// Position aus gespeichertem Schritt wiederherstellen
+if(typeof S.wlStep==='number'){ const idx=WL_ORDER.indexOf(S.wlStep); if(idx>=0){ wlPos=idx; wl=S.wlStep; } }
+const WL_LAST = 11;
+function wlVisibleCount(){ return WL_ORDER.length; }
 function renderWlDots(){
   const d=document.getElementById('wl-dots'); d.innerHTML='';
-  const total=wlVisibleCount(), pos=wlVisiblePos(wl);
-  for(let i=0;i<total;i++){ const s=document.createElement('span'); s.className='wl-dot'+(i===pos?' on':''); d.appendChild(s); }
+  for(let i=0;i<WL_ORDER.length;i++){ const s=document.createElement('span'); s.className='wl-dot'+(i===wlPos?' on':''); d.appendChild(s); }
 }
 function showWl(){
   document.querySelectorAll('.wl-slide').forEach(el=>el.classList.toggle('on', +el.dataset.s===wl));
-  document.getElementById('wl-back').style.display = wl>0 ? 'block':'none';
+  document.getElementById('wl-back').style.display = wlPos>0 ? 'block':'none';
   const next=document.getElementById('wl-next');
-  next.textContent = wl===WL_LAST ? 'App öffnen 🚀' : (wl===0?'Los geht\'s':'Weiter');
+  next.textContent = wl===WL_LAST ? 'App öffnen 🚀' : (wlPos===0?'Los geht\'s':'Weiter');
   if(wl===3) buildTimeline();
   if(wl===4) buildWlMap();
   if(wl===5) buildWeekRhythm();
@@ -1150,15 +1224,14 @@ function buildWlFinal(){
 document.getElementById('wl-next').onclick=()=>{
   if(wl===1){ const v=document.getElementById('wl-name').value.trim(); if(v) S.name=v; }
   if(wl===9 && !S.area){ toast('Bitte wähl deinen Bereich 🎯'); return; }
-  if(wl>=WL_LAST){ finishWelcome(); return; }
-  // Store-Slide (10) wird immer übersprungen — Store wählt man später vor Ort / im Infos-Tab
-  if(wl===9){ if(isKitchen()) S.store='kitchen'; save(); wl=11; }
-  else { wl++; }
+  if(wl===9 && isKitchen()) S.store='kitchen';
+  if(wl===WL_LAST){ finishWelcome(); return; }
+  wlPos++; wl=WL_ORDER[wlPos];
   S.wlStep=wl; save(); showWl();
 };
 document.getElementById('wl-back').onclick=()=>{
-  if(wl<=0) return;
-  if(wl===11){ wl=9; } else { wl--; }
+  if(wlPos<=0) return;
+  wlPos--; wl=WL_ORDER[wlPos];
   S.wlStep=wl; save(); showWl();
 };
 document.querySelectorAll('#wl-areas .area-big').forEach(b=>{
@@ -1171,16 +1244,70 @@ function finishWelcome(){
   if(!S.started) S.started = Date.now();
   save();
   document.getElementById('welcome').style.display='none';
-  // Zuerst das ruhige Preboarding zeigen (nur solange nicht erledigt)
+  routeAfterWelcome();
+}
+// Entscheidet, wohin es nach der Willkommens-Reise geht: Preboard → Gate → App
+function routeAfterWelcome(){
   if(!S.preboardDone){ showPreboard(); return; }
+  if(!S.unlocked){ showGate(); return; }
   enterApp();
 }
 function enterApp(){
   document.getElementById('preboard').style.display='none';
+  document.getElementById('gate').style.display='none';
   document.getElementById('topbar').style.display='flex';
   document.getElementById('content').style.display='block';
   document.getElementById('bottomnav').style.display='flex';
   bootApp();
+}
+
+/* ============ FREISCHALT-TOR ============ */
+// Der Code, den das Karma-Team ausgibt. Änderbar. (Leichtgewichtig — kein echter Server-Schutz.)
+const UNLOCK_CODE = 'KARMA2024';
+function showGate(){
+  document.getElementById('preboard').style.display='none';
+  const g=document.getElementById('gate');
+  g.style.display='block';
+  document.getElementById('gate-hello').innerHTML = S.name ? `Danke ${escapeHtml(S.name)},<br>dass du da warst!` : 'Danke, dass du<br>da warst!';
+  // Feedback-Status wiederherstellen
+  if(S.gateFb){ document.querySelectorAll('.gate-fb').forEach(b=>b.classList.toggle('on', b.dataset.fb===S.gateFb)); }
+  const lock=document.getElementById('gate-lock');
+  if(S.gateFbSent){ document.getElementById('gate-fb-send').textContent='Feedback gesendet ✓'; }
+}
+let gateFbChoice = null;
+function gateFb(v){ gateFbChoice=v; S.gateFb=v; save(); document.querySelectorAll('.gate-fb').forEach(b=>b.classList.toggle('on', b.dataset.fb===v)); }
+function gateSendFb(){
+  if(!S.gateFb){ toast('Wähl kurz, wie dein Tag war 🙂'); return; }
+  S.gateFbText = document.getElementById('gate-fb-text').value.trim();
+  S.gateFbSent = true; save();
+  document.getElementById('gate-fb-send').textContent='Feedback gesendet ✓';
+  toast('Danke für dein Feedback! 🧡');
+}
+function gateUnlock(){
+  const inp=document.getElementById('gate-code');
+  const val=(inp.value||'').trim().toUpperCase();
+  const err=document.getElementById('gate-code-err');
+  if(!val){ err.textContent='Bitte gib deinen Code ein.'; return; }
+  if(val!==UNLOCK_CODE){ err.textContent='Hm, der Code stimmt nicht. Frag kurz beim Karma-Team nach.'; return; }
+  S.unlocked=true; save();
+  err.textContent='';
+  document.getElementById('gate').style.display='none';
+  showUnlockCelebrate();
+}
+function gatePeek(){
+  // zurück in die offene Willkommens-Reise
+  document.getElementById('gate').style.display='none';
+  wlPos=0; wl=WL_ORDER[0]; S.wlStep=wl; save();
+  document.getElementById('welcome').style.display='block';
+  showWl();
+}
+function showUnlockCelebrate(){
+  document.getElementById('cel-e').textContent='🎉';
+  document.getElementById('cel-h').textContent='Willkommen im Team!';
+  document.getElementById('cel-d').textContent='Dein Onboarding ist jetzt freigeschaltet. Schön, dass du Teil der Karma Crew bist — jetzt geht\'s Schritt für Schritt los.';
+  const cel=document.getElementById('celebrate'); cel.classList.add('on');
+  // Beim Schließen in die App
+  S._afterCel='enterApp'; 
 }
 
 /* ============ PREBOARDING ============ */
@@ -1213,7 +1340,7 @@ function renderPreboard(){
 function pbToggle(id){ if(!S.pbChecks) S.pbChecks={}; S.pbChecks[id]=!S.pbChecks[id]; save(); renderPreboard(); }
 function pbAutoCheck(id){ if(!S.pbChecks) S.pbChecks={}; S.pbChecks[id]=true; save(); setTimeout(renderPreboard,100); }
 function pbToggleQr(id){ S.pbQrOpen = (S.pbQrOpen===id)?null:id; save(); renderPreboard(); }
-function finishPreboard(){ S.preboardDone=true; save(); enterApp(); }
+function finishPreboard(){ S.preboardDone=true; save(); if(!S.unlocked){ showGate(); } else { enterApp(); } }
 function allPbDone(){ return PREBOARD_STEPS.every(s=> S.pbChecks && S.pbChecks[s.id]); }
 function reopenPreboard(){
   document.getElementById('topbar').style.display='none';
@@ -1399,7 +1526,11 @@ function showCelebrate(b){
   document.getElementById('cel-d').textContent=b.d;
   document.getElementById('celebrate').classList.add('on');
 }
-function closeCelebrate(){ document.getElementById('celebrate').classList.remove('on'); renderAll(); go('modules'); }
+function closeCelebrate(){
+  document.getElementById('celebrate').classList.remove('on');
+  if(S._afterCel==='enterApp'){ S._afterCel=null; save(); enterApp(); return; }
+  renderAll(); go('modules');
+}
 
 /* ============ FLOW ============ */
 let openStage=-1;
@@ -1764,6 +1895,7 @@ window.kbOpenStore=kbOpenStore; window.kbBackToHub=kbBackToHub; window.kbSetTab=
 window.kbStartEdit=kbStartEdit; window.kbCancelEdit=kbCancelEdit; window.kbSaveEdit=kbSaveEdit;
 window.pbToggle=pbToggle; window.pbAutoCheck=pbAutoCheck; window.pbToggleQr=pbToggleQr;
 window.finishPreboard=finishPreboard; window.reopenPreboard=reopenPreboard;
+window.gateFb=gateFb; window.gateSendFb=gateSendFb; window.gateUnlock=gateUnlock; window.gatePeek=gatePeek;
 window.setWlMapTab=setWlMapTab; window.showStoreCard=showStoreCard; window.pickStore=pickStore; window.tlStep=tlStep;
 </script>
 </body>
