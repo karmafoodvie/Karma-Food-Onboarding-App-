@@ -155,6 +155,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .gate-code-btn{background:var(--neon);color:var(--ink);border:none;border-radius:12px;padding:13px 18px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;flex-shrink:0;}
 .gate-code-err{font-size:12.5px;color:#F0806B;margin-top:10px;min-height:16px;font-weight:600;}
 
+.gate-field-lbl{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:9px;}
+.gate-field-lbl.gate-optional span{font-weight:500;color:var(--muted);font-size:12px;}
+.gate-days-row{display:flex;gap:6px;flex-wrap:wrap;}
+.gate-day-chip{flex:1;min-width:38px;padding:11px 4px;border-radius:10px;border:2px solid var(--border);background:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--sub);}
+.gate-day-chip.on{border-color:var(--orange);background:var(--orange-soft);color:var(--orange);}
+.gate-select{width:100%;padding:13px 14px;border:2px solid var(--border);border-radius:12px;font-size:15px;font-family:inherit;background:#fff;color:var(--ink);outline:none;}
+.gate-select:focus{border-color:var(--orange);}
+
 #topbar{background:var(--orange);color:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;position:sticky;top:0;z-index:20;}
 .tb-l{display:flex;flex-direction:column;}
 .tb-title{font-size:15px;}
@@ -185,6 +193,72 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sec-lbl{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px;text-transform:uppercase;padding:16px 2px 8px;}
 .card{background:var(--card);border-radius:16px;border:1px solid var(--border);overflow:hidden;margin-bottom:12px;}
 .next-card{background:var(--neon);border-radius:16px;padding:16px 18px;margin-bottom:14px;cursor:pointer;display:flex;align-items:center;gap:14px;}
+
+/* Phase-Track im Hero */
+.phase-track{display:flex;gap:6px;margin:14px 0 10px;}
+.phase-dot{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.phase-dot span{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;background:rgba(255,255,255,.15);color:rgba(255,255,255,.6);transition:.2s;}
+.phase-dot label{font-size:9.5px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.2px;}
+.phase-dot.done span{background:var(--neon);color:var(--ink);}
+.phase-dot.done label{color:var(--neon);}
+.phase-dot.now span{background:#fff;color:var(--ink);transform:scale(1.12);}
+.phase-dot.now label{color:#fff;}
+
+/* Focus-Card — der eine nächste Schritt */
+.focus-card{background:var(--neon);border-radius:18px;padding:16px 18px;margin-bottom:12px;cursor:pointer;}
+.focus-card.done{background:var(--ink);}
+.focus-k{font-size:11px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:#5C6B00;margin-bottom:10px;}
+.focus-card.done .focus-k{color:var(--neon);}
+.focus-row{display:flex;align-items:center;gap:14px;}
+.focus-ic{width:52px;height:52px;background:var(--ink);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+.focus-card.done .focus-ic{background:var(--neon);}
+.focus-body{flex:1;min-width:0;}
+.focus-h{font-size:18px;font-weight:800;line-height:1.2;color:var(--ink);}
+.focus-card.done .focus-h{color:#fff;}
+.focus-meta{font-size:12px;color:#5C6B00;margin-top:3px;font-weight:600;}
+.focus-card.done .focus-meta{color:#DDD8CC;}
+.focus-go{font-size:15px;font-weight:800;color:var(--ink);flex-shrink:0;}
+
+/* Mini-Card — ruhige Zeile */
+.mini-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:13px 16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:12px;}
+.mini-card.green{background:var(--green-soft);border-color:var(--green);}
+.mini-card .mc-ic{font-size:20px;}
+.mini-card .mc-t{flex:1;font-size:14px;font-weight:700;}
+.mini-card .mc-go{font-size:16px;color:var(--muted);font-weight:800;}
+
+/* Duty-Card auf Home */
+.duty-card{background:var(--ink);border-radius:16px;padding:15px 18px;margin-bottom:12px;cursor:pointer;display:flex;align-items:center;gap:14px;}
+.duty-ic{width:44px;height:44px;background:var(--neon);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.duty-body{flex:1;}
+.duty-h{font-size:16px;font-weight:800;color:#fff;}
+.duty-d{font-size:12.5px;color:#CFC9BC;margin-top:2px;line-height:1.4;}
+.duty-go{font-size:20px;color:var(--neon);font-weight:800;}
+
+/* Duty-Liste (View) */
+.duty-list{display:flex;flex-direction:column;gap:10px;}
+.duty-item{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;}
+.duty-item.open{border-color:var(--ink);}
+.duty-item-head{display:flex;align-items:center;gap:12px;padding:15px 16px;}
+.duty-item-ic{font-size:22px;flex-shrink:0;}
+.duty-item-t{flex:1;font-size:15px;font-weight:800;}
+.duty-item-x{font-size:20px;color:var(--muted);transition:.2s;}
+.duty-item.open .duty-item-x{transform:rotate(45deg);}
+.duty-item-body{max-height:0;overflow:hidden;transition:max-height .28s;}
+.duty-item.open .duty-item-body{max-height:400px;}
+.duty-item-d{padding:0 16px 15px 50px;font-size:14px;line-height:1.6;color:var(--sub);}
+
+/* Modul-Zeilen (Sequenz) */
+.mod-row{background:#fff;border:1px solid var(--border);border-radius:14px;padding:13px 14px;margin-bottom:9px;cursor:pointer;display:flex;align-items:center;gap:13px;}
+.mod-row.next{border-color:var(--orange);border-width:2px;}
+.mod-row.done{background:var(--cream);}
+.mr-ic{width:40px;height:40px;border-radius:11px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;}
+.mod-row.done .mr-ic{background:var(--orange);color:#fff;font-weight:800;}
+.mr-body{flex:1;min-width:0;}
+.mr-t{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.mr-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.3px;}
+.mr-bar{height:5px;background:var(--border);border-radius:5px;margin-top:8px;overflow:hidden;}
+.mr-bar i{display:block;height:100%;border-radius:5px;}
+.mr-go{font-size:16px;color:var(--muted);font-weight:800;flex-shrink:0;}
 .next-card .nc-ic{width:44px;height:44px;background:var(--ink);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
 .nc-k{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;opacity:.6;}
 .nc-h{font-size:16px;font-weight:700;margin-top:2px;}
@@ -582,10 +656,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <button class="pb-continue" id="gate-fb-send" onclick="gateSendFb()" style="margin-top:12px;">Feedback abschicken</button>
     </div>
 
+    <div class="gate-card">
+      <div class="gate-card-t">📋 Ein paar Infos für deine Anmeldung</div>
+      <div class="gate-field-lbl">Wie viele Tage pro Woche kannst du arbeiten?</div>
+      <div class="gate-days-row" id="gate-days-row"></div>
+
+      <div class="gate-field-lbl" style="margin-top:16px;">Ist geringfügige Beschäftigung notwendig?</div>
+      <div class="gate-fb-row">
+        <button class="gate-fb" data-gf="ja" onclick="gateSetGf('ja')">Ja</button>
+        <button class="gate-fb" data-gf="nein" onclick="gateSetGf('nein')">Nein</button>
+      </div>
+
+      <div class="gate-field-lbl gate-optional" style="margin-top:16px;">Wunsch-Standort <span>(optional, keine Garantie)</span></div>
+      <select id="gate-store-select" class="gate-select" onchange="gateSetStore(this.value)">
+        <option value="">Ist mir egal / flexibel</option>
+      </select>
+
+      <button class="pb-continue" id="gate-data-send" onclick="gateSendData()" style="margin-top:16px;">Daten schicken</button>
+    </div>
+
     <div class="gate-lock" id="gate-lock">
       <div class="gate-lock-ic">🔒</div>
       <div class="gate-lock-t">Dein Onboarding wartet auf Freigabe</div>
-      <div class="gate-lock-d">Sobald das Karma-Team dich übernimmt, bekommst du einen Freischalt-Code. Gib ihn hier ein — dann geht's richtig los.</div>
+      <div class="gate-lock-d">Sobald das Karma-Team deine Daten hat und dich übernimmt, meldet es sich wegen der Dienstplanung — und du bekommst deinen Freischalt-Code. Gib ihn hier ein, dann geht's richtig los.</div>
       <div class="gate-code-row">
         <input id="gate-code" class="gate-code-input" placeholder="Freischalt-Code" autocapitalize="characters">
         <button class="gate-code-btn" onclick="gateUnlock()">Freischalten</button>
@@ -613,6 +706,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="view" id="v-check"></div>
   <div class="view" id="v-help"></div>
   <div class="view" id="v-kb"></div>
+  <div class="view" id="v-duty"></div>
 </div>
 
 <nav id="bottomnav" style="display:none;"></nav>
@@ -1069,6 +1163,68 @@ const FAQ_KITCHEN = [
   {q:'Wann muss alles fertig sein?', a:'Die Produktion ist am Vormittag fertig — bis ca. 9:00 wird eingepackt, dann fährt der Transporter die Route.'},
 ];
 
+/* ============ ETAPPEN & MODUL-SEQUENZ ============ */
+// Vier Etappen der Crew-Reise. Jedes Modul gehört zu einer Etappe (nach id).
+const PHASES = [
+  {n:1, key:'ankommen', t:'Ankommen', ic:'🌱', col:'#00A878', d:'Marke, Team & erste Orientierung'},
+  {n:2, key:'lernen',   t:'Lernen',   ic:'📚', col:'#F0A500', d:'Produkte, Portionen, Kaffee & Service'},
+  {n:3, key:'anwenden', t:'Anwenden', ic:'🫶', col:'#F0806B', d:'Im Store, mit Begleitung'},
+  {n:4, key:'drin',     t:'Drin',     ic:'🎉', col:'#7B61FF', d:'Eingearbeitet & sicher'},
+];
+// Reihenfolge + Etappe je Modul. Pädagogisch sortiert: erst Marke, dann Fachliches, Verkauf, zuletzt Alltag.
+const STORE_SEQUENCE = [
+  {id:'welcome',  phase:'ankommen'},
+  {id:'products', phase:'lernen'},
+  {id:'portions', phase:'lernen'},
+  {id:'coffee',   phase:'lernen'},
+  {id:'sales',    phase:'lernen'},
+  {id:'shift',    phase:'anwenden'},
+  {id:'benefits', phase:'drin'},
+];
+const KITCHEN_SEQUENCE = [
+  {id:'welcome',   phase:'ankommen'},
+  {id:'k-philo',   phase:'lernen'},
+  {id:'k-hygiene', phase:'lernen'},
+];
+function sequence(){ return isKitchen()?KITCHEN_SEQUENCE:STORE_SEQUENCE; }
+// Module in Sequenz-Reihenfolge (mit Etappe angereichert)
+function orderedModules(){
+  const mods=modules();
+  return sequence().map(s=>{ const m=mods.find(x=>x.id===s.id); return m?{...m, phase:s.phase}:null; }).filter(Boolean);
+}
+function phaseByKey(k){ return PHASES.find(p=>p.key===k); }
+// Aktuelle Etappe = Etappe des ersten noch nicht fertigen Moduls
+function currentPhase(){
+  const om=orderedModules();
+  const next=om.find(m=>!S.modDone[modKey(m)]);
+  if(!next) return PHASES[PHASES.length-1];
+  return phaseByKey(next.phase);
+}
+// Fortschritt der aktuellen Etappe
+function phaseProgress(pkey){
+  const inPhase=orderedModules().filter(m=>m.phase===pkey);
+  const done=inPhase.filter(m=>S.modDone[modKey(m)]).length;
+  return {done, total:inPhase.length};
+}
+
+/* ============ JETZT IM DIENST — Schnell-Nachschlagen (Zwei-Tap) ============ */
+// Die Rettungsanker für die Solo-Schicht. Kurz, direkt, kein Lernmodus.
+const DUTY_STORE = [
+  {ic:'⚖️', t:'Portionen', d:'Curry: 2 Schöpfer + 2 Reis · Bowl: bis 2 cm unter Rand · Dal: 3 kleine Schöpfer. Normale Portion als Standard, kleine nicht forcieren.'},
+  {ic:'☕', t:'Kaffee-Rezepte', d:'Cappuccino/Melange: 1 Shot + Milchschaum · Flat White: 2 Shots + Milch · Verlängerter: heißes Wasser + 2 Shots · Chai Latte: 4 EL Sirup + Milchschaum.'},
+  {ic:'🌿', t:'Service-Standard', d:'Immer fragen: „Petersilie & Limette dazu?" · Stempelpass anbieten · freundlich begrüßen & verabschieden.'},
+  {ic:'🌙', t:'Schließen (Kurz)', d:'Sweets bestellen · Kaffeemaschine & Bain-Marie reinigen · Kassa abrechnen · Boden · abschließen · ausstempeln.'},
+  {ic:'🌅', t:'Öffnen (Kurz)', d:'Aufsperren & einstempeln · Kaffeemaschine + Warmhaltegeräte an (Vorlauf!) · Essen einräumen · Limetten schneiden · Tafel beschriften.'},
+  {ic:'🆘', t:'Hilfe & Notfall', d:'Erste Anlaufstelle: dein Team. Für alles andere die WhatsApp-Gruppe Karma Info. Bei Küchenfragen zuerst in der Kitchen anrufen.'},
+];
+const DUTY_KITCHEN = [
+  {ic:'🌡️', t:'Wareneingang', d:'Lieferschein prüfen · Temperatur messen (Kühl max. 4°C, TK max. -18°C) & dokumentieren · Sichtprüfung · FIFO einlagern.'},
+  {ic:'⚖️', t:'Portionieren', d:'Nach Standard portionieren, Beilagen & Dressings korrekt zuordnen, Etiketten nicht vergessen.'},
+  {ic:'✅', t:'Qualitätscheck', d:'Vor dem Verladen: Sichtprüfung, Mengen & Vollständigkeit, Temperatur & Hygiene dokumentieren.'},
+  {ic:'🆘', t:'Hilfe & Notfall', d:'Erste Anlaufstelle ist die Küchenleitung. Für Übergeordnetes die WhatsApp-Gruppe Karma Info.'},
+];
+function dutyItems(){ return isKitchen()?DUTY_KITCHEN:DUTY_STORE; }
+
 /* ============ STATE ============ */
 let S = load();
 function load(){
@@ -1270,18 +1426,54 @@ function showGate(){
   g.style.display='block';
   document.getElementById('gate-hello').innerHTML = S.name ? `Danke ${escapeHtml(S.name)},<br>dass du da warst!` : 'Danke, dass du<br>da warst!';
   // Feedback-Status wiederherstellen
-  if(S.gateFb){ document.querySelectorAll('.gate-fb').forEach(b=>b.classList.toggle('on', b.dataset.fb===S.gateFb)); }
-  const lock=document.getElementById('gate-lock');
+  if(S.gateFb){ document.querySelectorAll('.gate-fb[data-fb]').forEach(b=>b.classList.toggle('on', b.dataset.fb===S.gateFb)); }
   if(S.gateFbSent){ document.getElementById('gate-fb-send').textContent='Feedback gesendet ✓'; }
+  // Tage-pro-Woche Chips
+  const dr=document.getElementById('gate-days-row'); dr.innerHTML='';
+  for(let d=1; d<=7; d++){
+    const b=document.createElement('button');
+    b.className='gate-day-chip'+(S.gateDays===d?' on':'');
+    b.textContent=d; b.onclick=()=>gateSetDays(d);
+    dr.appendChild(b);
+  }
+  if(S.gateGf){ document.querySelectorAll('.gate-fb[data-gf]').forEach(b=>b.classList.toggle('on', b.dataset.gf===S.gateGf)); }
+  // Store-Auswahl befüllen
+  const sel=document.getElementById('gate-store-select');
+  if(sel.options.length<=1){ STORES.forEach(s=>{ const o=document.createElement('option'); o.value=s.id; o.textContent=s.name; sel.appendChild(o); }); }
+  sel.value = S.gateWunschStore || '';
+  if(S.gateDataSent){ document.getElementById('gate-data-send').textContent='Daten gesendet ✓'; }
 }
 let gateFbChoice = null;
-function gateFb(v){ gateFbChoice=v; S.gateFb=v; save(); document.querySelectorAll('.gate-fb').forEach(b=>b.classList.toggle('on', b.dataset.fb===v)); }
+function gateFb(v){ gateFbChoice=v; S.gateFb=v; save(); document.querySelectorAll('.gate-fb[data-fb]').forEach(b=>b.classList.toggle('on', b.dataset.fb===v)); }
 function gateSendFb(){
   if(!S.gateFb){ toast('Wähl kurz, wie dein Tag war 🙂'); return; }
   S.gateFbText = document.getElementById('gate-fb-text').value.trim();
   S.gateFbSent = true; save();
   document.getElementById('gate-fb-send').textContent='Feedback gesendet ✓';
   toast('Danke für dein Feedback! 🧡');
+}
+function gateSetDays(d){ S.gateDays=d; save(); document.querySelectorAll('.gate-day-chip').forEach((b,i)=>b.classList.toggle('on', i+1===d)); }
+function gateSetGf(v){ S.gateGf=v; save(); document.querySelectorAll('.gate-fb[data-gf]').forEach(b=>b.classList.toggle('on', b.dataset.gf===v)); }
+function gateSetStore(v){ S.gateWunschStore=v; save(); }
+function gateSendData(){
+  if(!S.gateDays){ toast('Wähl kurz, wie viele Tage du kannst 🙂'); return; }
+  if(!S.gateGf){ toast('Bitte noch geringfügig ja/nein wählen 🙂'); return; }
+  S.gateDataSent = true; save();
+  document.getElementById('gate-data-send').textContent='Daten gesendet ✓';
+  const storeName = S.gateWunschStore ? storeById(S.gateWunschStore).name : 'flexibel / egal';
+  const fbLabel = {top:'Top 😍', ok:'Ganz gut 🙂', unsure:'Unsicher 🤔'}[S.gateFb] || '—';
+  const body = [
+    `Name: ${S.name||'—'}`,
+    `Schnuppertag-Feedback: ${fbLabel}`,
+    S.gateFbText ? `Anmerkung: ${S.gateFbText}` : null,
+    `Tage/Woche verfügbar: ${S.gateDays}`,
+    `Geringfügig notwendig: ${S.gateGf==='ja'?'Ja':'Nein'}`,
+    `Wunsch-Standort: ${storeName}`,
+  ].filter(Boolean).join('\n');
+  const subject = encodeURIComponent(`Anmeldung Schnuppertag – ${S.name||'Neue Crew'}`);
+  const mailBody = encodeURIComponent(body);
+  window.location.href = `mailto:hallo@karmafood.at?subject=${subject}&body=${mailBody}`;
+  toast('Mail wird geöffnet — bitte abschicken 📩');
 }
 function gateUnlock(){
   const inp=document.getElementById('gate-code');
@@ -1387,7 +1579,33 @@ function bootApp(){
   document.getElementById('tb-av').textContent = (S.name||'?').slice(0,2).toUpperCase();
   buildNav(); renderAll(); go('home');
 }
-function renderAll(){ renderHome(); renderModules(); renderFlow(); renderStore(); renderCheck(); renderHelp(); renderKB(); }
+function renderAll(){ renderHome(); renderModules(); renderFlow(); renderStore(); renderCheck(); renderHelp(); renderKB(); renderDuty(); }
+function renderDuty(){
+  const items=dutyItems();
+  let h=`<div class="hero" style="background:var(--ink);">
+    <div class="hero-hi" style="color:var(--neon);">⚡ Jetzt im Dienst</div>
+    <div class="hero-name head" style="font-size:22px;">Schnell<br>nachschlagen.</div>
+    <div style="font-size:13px;color:#DDD8CC;line-height:1.5;">Alles, was du in der Schicht brauchst — kurz und direkt. Tipp eine Karte an.</div>
+  </div>`;
+  h+=`<div class="duty-list">`;
+  items.forEach((it,i)=>{
+    h+=`<div class="duty-item" onclick="toggleDuty(${i})" id="duty-item-${i}">
+      <div class="duty-item-head">
+        <span class="duty-item-ic">${it.ic}</span>
+        <span class="duty-item-t">${it.t}</span>
+        <span class="duty-item-x">+</span>
+      </div>
+      <div class="duty-item-body"><div class="duty-item-d">${it.d}</div></div>
+    </div>`;
+  });
+  h+=`</div>
+  <div class="tip" style="margin-top:14px;"><span class="ti">💡</span><span class="tt">Tipp: Füg die App zum Homescreen hinzu, dann ist dieser Schnellzugriff im Dienst immer sofort griffbereit.</span></div>`;
+  document.getElementById('v-duty').innerHTML=h;
+}
+function toggleDuty(i){
+  const el=document.getElementById('duty-item-'+i);
+  el.classList.toggle('open');
+}
 
 function go(v){
   document.querySelectorAll('.view').forEach(el=>el.classList.remove('show'));
@@ -1396,72 +1614,103 @@ function go(v){
   document.getElementById('content').scrollTop=0;
 }
 
-/* ============ HOME ============ */
+/* ============ HOME (Cockpit) ============ */
 function modKey(m){ return S.area+'_'+m.id; }
 function renderHome(){
-  const mods=modules();
-  const totalSteps=mods.reduce((a,m)=>a+m.steps.length,0);
-  const doneSteps=mods.reduce((a,m)=> S.modDone[modKey(m)]?a+m.steps.length:a+(S.modProgress[modKey(m)]||0),0);
-  const pct=Math.round(doneSteps/Math.max(1,totalSteps)*100);
-  const nextMod=mods.find(m=>!S.modDone[modKey(m)]);
-  const badgeCount=Object.keys(S.badges).length;
   const kitchen=isKitchen();
+  const om=orderedModules();
+  const nextMod=om.find(m=>!S.modDone[modKey(m)]);
+  const ph=currentPhase();
+  const badgeCount=Object.keys(S.badges).length;
+  const allDone=!nextMod;
 
+  // Hero: Etappe statt Prozent
   let h=`<div class="hero">
     <div class="hero-hi">${kitchen?'🥘 Küchen-Team':'🫶 Karma Crew'} · Hi ${S.name||''} 👋</div>
-    <div class="hero-name head">Schön dass<br>du da bist.</div>
-    <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%"></div></div>
-    <div class="prog-lbl"><span>${pct}% geschafft</span><span>🏅 ${badgeCount} Badge${badgeCount===1?'':'s'}</span></div>
+    <div class="hero-name head" style="font-size:23px;">${allDone?'Du bist<br>eingearbeitet. 🎉':'Schön dass<br>du da bist.'}</div>
+    <div class="phase-track">`;
+  PHASES.forEach(p=>{
+    const state = p.n<ph.n||allDone ? 'done' : (p.n===ph.n ? 'now' : 'todo');
+    h+=`<div class="phase-dot ${state}"><span>${p.n}</span><label>${p.t}</label></div>`;
+  });
+  h+=`</div>
+    <div class="prog-lbl"><span>Etappe ${allDone?PHASES.length:ph.n} von ${PHASES.length} · ${ph.t}</span><span>🏅 ${badgeCount}</span></div>
   </div>`;
 
+  // DER eine nächste Schritt (Fokus)
   if(nextMod){
-    h+=`<div class="next-card" onclick="openModule('${nextMod.id}')">
-      <div class="nc-ic">${nextMod.ic}</div>
-      <div><div class="nc-k">Als nächstes</div><div class="nc-h">${nextMod.title}</div></div>
-      <div class="nc-arrow">→</div></div>`;
+    const pp=phaseProgress(ph.key);
+    h+=`<div class="focus-card" onclick="openModule('${nextMod.id}')">
+      <div class="focus-k">Dein nächster Schritt · ${ph.t} (${pp.done}/${pp.total})</div>
+      <div class="focus-row">
+        <div class="focus-ic">${nextMod.ic}</div>
+        <div class="focus-body"><div class="focus-h">${nextMod.title}</div><div class="focus-meta">${nextMod.meta}</div></div>
+        <div class="focus-go">Los →</div>
+      </div>
+    </div>`;
   } else {
-    h+=`<div class="next-card" style="background:var(--ink);color:#fff;" onclick="go('modules')">
-      <div class="nc-ic" style="background:var(--neon);">🎉</div>
-      <div><div class="nc-k" style="color:var(--neon);">Alles geschafft</div><div class="nc-h">Du bist eingearbeitet!</div></div></div>`;
-  }
-  h+=`<div class="tip"><span class="ti">💡</span><span class="tt"><b>Wusstest du?</b> Wir nennen unsere Standorte „Lunch-Location" — nicht Restaurant. Weil's um mehr geht als nur den Teller.</span></div>`;
-  h+=`<div class="sec-lbl">Schnellzugriff</div>`;
-  if(!allPbDone()){
-    h+=`<div class="next-card" style="background:var(--green);color:#fff;" onclick="reopenPreboard()">
-      <div class="nc-ic" style="background:rgba(255,255,255,.2);">🚀</div>
-      <div><div class="nc-k" style="color:#fff;opacity:.85;">Noch offen</div><div class="nc-h">Deine ersten Schritte</div></div>
-      <div class="nc-arrow">→</div>
+    h+=`<div class="focus-card done" onclick="go('modules')">
+      <div class="focus-k">Alles geschafft</div>
+      <div class="focus-row"><div class="focus-ic">🎉</div><div class="focus-body"><div class="focus-h">Du hast alle Module durch!</div><div class="focus-meta">Deine Badges ansehen</div></div></div>
     </div>`;
   }
-  h+=`<div class="next-card" style="background:var(--purple);color:#fff;" onclick="go('kb')">
-    <div class="nc-ic" style="background:rgba(255,255,255,.2);">📖</div>
-    <div><div class="nc-k" style="color:#fff;opacity:.8;">Nachschlagen</div><div class="nc-h">Wissensdatenbank</div></div>
-    <div class="nc-arrow">→</div>
-  </div>
-  <div class="mod-grid">
+
+  // Preboarding-Erinnerung nur wenn offen
+  if(!allPbDone()){
+    h+=`<div class="mini-card green" onclick="reopenPreboard()">
+      <span class="mc-ic">🚀</span><span class="mc-t">Deine ersten Schritte noch offen</span><span class="mc-go">→</span></div>`;
+  }
+
+  // JETZT IM DIENST — der Rettungsanker für die Solo-Schicht (Zwei-Tap)
+  h+=`<div class="sec-lbl">Jetzt im Dienst</div>
+    <div class="duty-card" onclick="go('duty')">
+      <div class="duty-ic">⚡</div>
+      <div class="duty-body">
+        <div class="duty-h">Schnell nachschlagen</div>
+        <div class="duty-d">Portionen, Kaffee, Öffnen & Schließen — in 2 Taps, ohne Suchen.</div>
+      </div>
+      <div class="duty-go">→</div>
+    </div>`;
+
+  // Ruhiger Rest darunter
+  h+=`<div class="sec-lbl">Alles rund um deinen Store</div>
+  <div class="mini-card" onclick="go('kb')"><span class="mc-ic">📖</span><span class="mc-t">Wissensdatenbank</span><span class="mc-go">→</span></div>
+  <div class="mod-grid" style="margin-top:10px;">
     <div class="mod" onclick="go('flow')"><div class="m-ic">${kitchen?'🥘':'🚚'}</div><div class="m-t">${kitchen?'Produktionsablauf':'Tagesablauf'}</div><div class="m-meta">${kitchen?'Von Planung bis Abschluss':'Lieferung bis Feierabend'}</div></div>
     <div class="mod" onclick="go('store')"><div class="m-ic">📍</div><div class="m-t">${kitchen?'Infos & Team':'Mein Store'}</div><div class="m-meta">Infos & Kontakte</div></div>
-    <div class="mod" onclick="go('help')"><div class="m-ic">❓</div><div class="m-t">Ich brauch Hilfe</div><div class="m-meta">FAQ & Nachschlagen</div></div>
-    <div class="mod" onclick="go('modules')"><div class="m-ic">📚</div><div class="m-t">Weiterlernen</div><div class="m-meta">Deine Module</div></div>
+    <div class="mod" onclick="go('modules')"><div class="m-ic">📚</div><div class="m-t">Alle Module</div><div class="m-meta">Dein Lernpfad</div></div>
+    <div class="mod" onclick="go('help')"><div class="m-ic">❓</div><div class="m-t">Hilfe & FAQ</div><div class="m-meta">Schnell nachlesen</div></div>
   </div>`;
   document.getElementById('v-home').innerHTML=h;
 }
 
 /* ============ MODULES ============ */
 function renderModules(){
-  const mods=modules();
-  let h=`<div class="sec-lbl">Deine Lernpfade</div><div class="mod-grid">`;
-  mods.forEach(m=>{
-    const key=modKey(m), total=m.steps.length;
-    const prog=S.modDone[key]?total:(S.modProgress[key]||0);
-    const pct=Math.round(prog/total*100), done=S.modDone[key];
-    h+=`<div class="mod${done?' done':''}" onclick="openModule('${m.id}')">
-      <div class="m-check">✓</div><div class="m-ic">${m.ic}</div>
-      <div class="m-t">${m.title}</div><div class="m-meta">${m.meta}</div>
-      <div class="m-bar"><i style="width:${pct}%"></i></div></div>`;
+  const om=orderedModules();
+  const nextMod=om.find(m=>!S.modDone[modKey(m)]);
+  const nextId=nextMod?nextMod.id:null;
+  let h='';
+  // Nach Etappen gruppiert
+  PHASES.forEach(p=>{
+    const inPhase=om.filter(m=>m.phase===p.key);
+    if(!inPhase.length) return;
+    const done=inPhase.filter(m=>S.modDone[modKey(m)]).length;
+    h+=`<div class="phase-head"><span class="ph-n" style="background:${p.col};color:#fff;">${p.ic}</span><span class="ph-t">${p.t}</span><span class="ph-when">${done}/${inPhase.length}</span></div>`;
+    inPhase.forEach(m=>{
+      const key=modKey(m), total=m.steps.length;
+      const prog=S.modDone[key]?total:(S.modProgress[key]||0);
+      const pct=Math.round(prog/total*100), isDone=S.modDone[key];
+      const isNext=m.id===nextId;
+      h+=`<div class="mod-row${isDone?' done':''}${isNext?' next':''}" onclick="openModule('${m.id}')">
+        <div class="mr-ic">${isDone?'✓':m.ic}</div>
+        <div class="mr-body"><div class="mr-t">${m.title}${isNext?' <span class="mr-badge">dran</span>':''}</div>
+          <div class="mr-bar"><i style="width:${pct}%;background:${p.col};"></i></div></div>
+        <div class="mr-go">→</div>
+      </div>`;
+    });
   });
-  h+=`</div><div class="sec-lbl">Deine Badges</div><div class="badge-grid">`;
-  mods.filter(m=>m.badge).forEach(m=>{
+  h+=`<div class="sec-lbl">Deine Badges</div><div class="badge-grid">`;
+  om.filter(m=>m.badge).forEach(m=>{
     const got=S.badges[modKey(m)];
     h+=`<div class="badge${got?' got':''}"><div class="b-e">${m.badge.e}</div><div class="b-n">${got?m.badge.n:'???'}</div></div>`;
   });
@@ -1890,12 +2139,14 @@ window.closeCelebrate=closeCelebrate; window.switchArea=switchArea;
 window.toggleStage=toggleStage; window.playRoute=playRoute;
 window.editField=editField; window.saveField=saveField; window.renderStore=renderStore;
 window.toggleCheck=toggleCheck; window.filterFaq=filterFaq; window.toggleFaq=toggleFaq;
+window.toggleDuty=toggleDuty;
 window.kbFilter=kbFilter; window.kbToggleCat=kbToggleCat; window.kbJumpCat=kbJumpCat;
 window.kbOpenStore=kbOpenStore; window.kbBackToHub=kbBackToHub; window.kbSetTab=kbSetTab;
 window.kbStartEdit=kbStartEdit; window.kbCancelEdit=kbCancelEdit; window.kbSaveEdit=kbSaveEdit;
 window.pbToggle=pbToggle; window.pbAutoCheck=pbAutoCheck; window.pbToggleQr=pbToggleQr;
 window.finishPreboard=finishPreboard; window.reopenPreboard=reopenPreboard;
 window.gateFb=gateFb; window.gateSendFb=gateSendFb; window.gateUnlock=gateUnlock; window.gatePeek=gatePeek;
+window.gateSetDays=gateSetDays; window.gateSetGf=gateSetGf; window.gateSetStore=gateSetStore; window.gateSendData=gateSendData;
 window.setWlMapTab=setWlMapTab; window.showStoreCard=showStoreCard; window.pickStore=pickStore; window.tlStep=tlStep;
 </script>
 </body>
