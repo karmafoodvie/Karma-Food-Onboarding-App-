@@ -259,6 +259,59 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .mr-bar{height:5px;background:var(--border);border-radius:5px;margin-top:8px;overflow:hidden;}
 .mr-bar i{display:block;height:100%;border-radius:5px;}
 .mr-go{font-size:16px;color:var(--muted);font-weight:800;flex-shrink:0;}
+
+/* ============ STORE-GUIDE ============ */
+.guide-hero{background:var(--ink);border-radius:20px;padding:24px 20px;color:#fff;margin-bottom:16px;position:relative;overflow:hidden;}
+.guide-hero::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;background:var(--orange);border-radius:50%;opacity:.25;}
+.gh-hi{font-size:13px;color:var(--neon);font-weight:700;}
+.gh-title{font-size:30px;line-height:1.12;margin:8px 0 12px;}
+.gh-sub{font-size:14px;color:#DDD8CC;line-height:1.55;}
+.store-pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.store-pick{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .12s;}
+.store-pick:active{transform:scale(.97);}
+.sp-photo{width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--cream);}
+.sp-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.sp-name{padding:11px 13px;font-size:14px;font-weight:800;}
+
+.guide-storehead{border-radius:20px;overflow:hidden;position:relative;margin-bottom:16px;min-height:150px;display:flex;align-items:flex-end;}
+.gsh-photo{position:absolute;inset:0;}
+.gsh-photo img{width:100%;height:100%;object-fit:cover;display:block;opacity:.42;}
+.gsh-overlay{position:relative;padding:20px;z-index:1;}
+.gsh-hi{font-size:12px;color:#fff;font-weight:800;letter-spacing:.4px;opacity:.9;}
+.gsh-name{font-size:26px;color:#fff;line-height:1.1;margin:5px 0 8px;text-shadow:0 1px 6px rgba(0,0,0,.3);}
+.gsh-cta{font-size:14px;color:#fff;font-weight:600;}
+.gsh-switch{position:absolute;top:14px;right:14px;z-index:2;background:rgba(255,255,255,.9);border:none;border-radius:10px;padding:8px 12px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;color:var(--ink);}
+
+.guide-block{margin-bottom:22px;}
+.gb-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;}
+.gb-ic{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;}
+.gb-t{font-size:17px;font-weight:800;}
+.gb-intro{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4;}
+.gb-cards{display:flex;flex-direction:column;gap:10px;}
+
+.guide-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.guide-card.locked{background:var(--cream);border-style:dashed;}
+.gc-photo{width:100%;aspect-ratio:16/10;overflow:hidden;background:var(--cream);}
+.gc-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.gc-main{padding:13px 15px;}
+.gc-t{font-size:15px;font-weight:800;margin-bottom:4px;}
+.gc-d{font-size:13.5px;color:var(--sub);line-height:1.55;white-space:pre-line;}
+.gc-edit{background:var(--orange-soft);color:var(--orange);border:none;border-radius:8px;padding:6px 12px;font-size:11.5px;font-weight:700;cursor:pointer;margin-top:10px;font-family:inherit;}
+.gc-lockrow{display:flex;gap:12px;align-items:flex-start;padding:14px 15px;}
+.gc-lockrow .gc-ic{font-size:20px;flex-shrink:0;}
+.gc-lockrow .gc-body{flex:1;}
+.gc-locked-d{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.45;}
+.guide-card.editing{padding:14px 15px;}
+.gc-ta{width:100%;border:2px solid var(--orange);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit;outline:none;resize:vertical;line-height:1.5;margin-top:6px;}
+.gc-img-edit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;}
+.gc-img-preview{width:70px;height:52px;object-fit:cover;border-radius:8px;}
+.gc-img-empty{font-size:12px;color:var(--muted);background:var(--cream);padding:14px 16px;border-radius:8px;}
+.gc-img-btn{background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:8px 13px;border-radius:9px;cursor:pointer;}
+.gc-img-del{background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;font-family:inherit;text-decoration:underline;}
+.gc-edit-btns{margin-top:12px;display:flex;gap:8px;}
+.gc-save{background:var(--orange);color:#fff;border:none;border-radius:10px;padding:9px 18px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;}
+.gc-cancel{background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer;font-family:inherit;}
+.gc-access-btn{width:100%;background:var(--neon-soft);border:1px dashed var(--green);color:var(--green);border-radius:12px;padding:12px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:16px;}
 .next-card .nc-ic{width:44px;height:44px;background:var(--ink);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
 .nc-k{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;opacity:.6;}
 .nc-h{font-size:16px;font-weight:700;margin-top:2px;}
@@ -1225,6 +1278,37 @@ const DUTY_KITCHEN = [
 ];
 function dutyItems(){ return isKitchen()?DUTY_KITCHEN:DUTY_STORE; }
 
+/* ============ STORE-GUIDE — „Wo finde ich hier alles?" ============ */
+// Vier Blöcke, für jeden Store identisch aufgebaut. Jede Karte: Titel, Text, optional Foto.
+// Inhalte sind pro Store editierbar (guideEdits). Kritische Zugangsdaten sind als "locked" markiert
+// und erscheinen NICHT im öffentlichen Onboarding-Link — nur wenn man vor Ort im Store eingeloggt ist.
+const GUIDE_BLOCKS = [
+  {key:'ankommen', t:'Ankommen & rein', ic:'🔑', col:'#00A878', intro:'Das Wichtigste, um überhaupt reinzukommen und loszulegen.', cards:[
+    {id:'schluessel_eingang', t:'Schlüssel Eingang', locked:true, d:'Wo ist der Schlüssel, wie kommst du rein?'},
+    {id:'schluessel_kassa', t:'Schlüssel Kassa', locked:true, d:'Schlüssel für Kassa / Lade.'},
+    {id:'wlan', t:'WLAN-Passwort', locked:true, d:'Netzwerkname & Passwort.'},
+    {id:'alarm_safe', t:'Alarm & Safe', locked:true, d:'Alarm deaktivieren, Safe-Code.'},
+  ]},
+  {key:'finden', t:'Wo find ich was?', ic:'🔍', col:'#F0A500', intro:'Damit du nicht suchen musst — hier liegt alles.', cards:[
+    {id:'schoepfer', t:'Schöpfer & Portionierer', d:'Wo hängen/liegen die Schöpfer?'},
+    {id:'kaffee', t:'Kaffeemaschine & Bohnen', d:'Maschine, Bohnen, Reinigungszeug.'},
+    {id:'bain_marie', t:'Bain-Marie & Gerichte', d:'Wo das warme Essen steht.'},
+    {id:'putzmittel', t:'Putzmittel', d:'Wo die Reinigungsmittel stehen.'},
+    {id:'lager', t:'Lager & Nachschub', d:'Verpackungen, Sticker, Vorräte.'},
+    {id:'kassa_ausstattung', t:'Kassa & Kartengerät', d:'Wo Kassa & Terminal stehen.'},
+  ]},
+  {key:'ablauf', t:'Ablauf hier', ic:'🔄', col:'#F0806B', intro:'So läuft ein Tag in genau diesem Store.', cards:[
+    {id:'oeffnen', t:'Öffnen — Schritt für Schritt', d:'Was du beim Aufsperren machst.'},
+    {id:'schliessen', t:'Schließen — Schritt für Schritt', d:'Was du am Ende machst.'},
+    {id:'lieferung', t:'Lieferzeiten & Besonderheiten', d:'Wann kommt das Essen, was ist hier speziell?'},
+  ]},
+  {key:'hilfe', t:'Wer hilft dir?', ic:'🤝', col:'#7B61FF', intro:'Falls was ist — hier bekommst du Hilfe.', cards:[
+    {id:'ansprech', t:'Ansprechpartner vor Ort', d:'Wer ist für diesen Store zuständig?'},
+    {id:'whatsapp', t:'WhatsApp-Gruppen', d:'Karma Info & Karma Support.'},
+    {id:'notfall', t:'Notfall-Nummer', d:'Wen rufst du im Notfall an?'},
+  ]},
+];
+
 /* ============ STATE ============ */
 let S = load();
 function load(){
@@ -1430,7 +1514,7 @@ function showGate(){
   if(S.gateFbSent){ document.getElementById('gate-fb-send').textContent='Feedback gesendet ✓'; }
   // Tage-pro-Woche Chips
   const dr=document.getElementById('gate-days-row'); dr.innerHTML='';
-  for(let d=1; d<=7; d++){
+  for(let d=1; d<=5; d++){
     const b=document.createElement('button');
     b.className='gate-day-chip'+(S.gateDays===d?' on':'');
     b.textContent=d; b.onclick=()=>gateSetDays(d);
@@ -1617,71 +1701,173 @@ function go(v){
 /* ============ HOME (Cockpit) ============ */
 function modKey(m){ return S.area+'_'+m.id; }
 function renderHome(){
-  const kitchen=isKitchen();
+  if(isKitchen()){ renderHomeKitchen(); return; }
+  const hasStore = S.store && S.store!=='kitchen';
+  let h='';
+
+  if(!hasStore){
+    // Einstieg: Store wählen
+    h+=`<div class="guide-hero">
+      <div class="gh-hi">🫶 Karma Crew · Hi ${escapeHtml(S.name||'')} 👋</div>
+      <div class="gh-title head">Wo arbeitest<br>du heute?</div>
+      <div class="gh-sub">Tipp deinen Store an — dann zeig ich dir, wo du alles findest.</div>
+    </div>`;
+    h+=`<div class="store-pick-grid">`;
+    STORES.filter(s=>s.id!=='kitchen').forEach(s=>{
+      const det=STORE_DETAILS[s.id]||{};
+      const photo = det.photo ? `<img src="${det.photo}" alt="">` : `<span style="background:${s.col};width:100%;height:100%;display:block;"></span>`;
+      h+=`<div class="store-pick" onclick="pickStoreGuide('${s.id}')">
+        <div class="sp-photo">${photo}</div>
+        <div class="sp-name">${s.name}</div>
+      </div>`;
+    });
+    h+=`</div>`;
+    document.getElementById('v-home').innerHTML=h;
+    return;
+  }
+
+  // Store gewählt → Guide-Übersicht
+  const st=storeById(S.store), det=STORE_DETAILS[S.store]||{};
+  const photo = det.photo ? `<img src="${det.photo}" alt="">` : '';
+  h+=`<div class="guide-storehead" style="background:${st.col};">
+    ${photo?`<div class="gsh-photo">${photo}</div>`:''}
+    <div class="gsh-overlay">
+      <div class="gsh-hi">📍 Heute hier</div>
+      <div class="gsh-name head">${st.name}</div>
+      <div class="gsh-cta">Let's go — hier findest du alles 👇</div>
+    </div>
+    <button class="gsh-switch" onclick="clearStoreGuide()">Store wechseln</button>
+  </div>`;
+
+  // Die vier Blöcke
+  GUIDE_BLOCKS.forEach(block=>{
+    h+=`<div class="guide-block">
+      <div class="gb-head"><span class="gb-ic" style="background:${block.col};">${block.ic}</span>
+        <div><div class="gb-t">${block.t}</div><div class="gb-intro">${block.intro}</div></div></div>`;
+    // Beim Ankommen-Block: Freischalt-Button für Zugangsdaten (nur wenn noch gesperrt)
+    if(block.key==='ankommen' && !S.storeAccessUnlocked){
+      h+=`<button class="gc-access-btn" onclick="unlockStoreAccess()">🔓 Vor Ort? Zugangsdaten freischalten</button>`;
+    }
+    h+=`<div class="gb-cards">`;
+    block.cards.forEach(card=>{
+      h+=guideCardHtml(block, card);
+    });
+    h+=`</div></div>`;
+  });
+
+  // Learning klein & versteckt am Ende
+  h+=`<div class="sec-lbl">Wenn du Zeit hast</div>
+  <div class="mini-card" onclick="go('modules')"><span class="mc-ic">📚</span><span class="mc-t">Karma kennenlernen & dazulernen</span><span class="mc-go">→</span></div>`;
+
+  document.getElementById('v-home').innerHTML=h;
+}
+
+// Eine Guide-Karte (mit Foto + Text, editierbar, locked-Handling)
+function guideCardHtml(block, card){
+  const gkey = `guide:${S.store}:${block.key}:${card.id}`;
+  const txtKey = gkey+':txt';
+  const imgKey = gkey+':img';
+  const savedTxt = kbGet(txtKey, card.d);
+  const savedImg = (S.guideImg && S.guideImg[imgKey]) || null;
+
+  if(card.locked){
+    // Zugangsdaten: nur editierbar/sichtbar wenn vor Ort freigeschaltet
+    const unlocked = S.storeAccessUnlocked;
+    if(!unlocked){
+      return `<div class="guide-card locked">
+        <div class="gc-lockrow"><span class="gc-ic">🔒</span>
+          <div class="gc-body"><div class="gc-t">${card.t}</div>
+          <div class="gc-locked-d">Aus Sicherheit nur vor Ort sichtbar. Tipp auf „Vor Ort? Freischalten" oben.</div></div>
+        </div>
+      </div>`;
+    }
+  }
+
+  if(guideEditing===gkey){
+    return `<div class="guide-card editing">
+      <div class="gc-t">${card.t}</div>
+      <textarea id="gc-ta-${cssId(gkey)}" class="gc-ta" rows="3" placeholder="Text eingeben…">${escapeHtml(savedTxt)}</textarea>
+      <div class="gc-img-edit">
+        ${savedImg?`<img src="${savedImg}" class="gc-img-preview">`:'<div class="gc-img-empty">📷 Noch kein Foto</div>'}
+        <label class="gc-img-btn">Foto wählen<input type="file" accept="image/*" style="display:none" onchange="guidePickImg(event,'${gkey}')"></label>
+        ${savedImg?`<button class="gc-img-del" onclick="guideDelImg('${gkey}')">Foto entfernen</button>`:''}
+      </div>
+      <div class="gc-edit-btns"><button class="gc-save" onclick="guideSave('${gkey}')">Speichern</button><button class="gc-cancel" onclick="guideCancel()">Abbrechen</button></div>
+    </div>`;
+  }
+
+  return `<div class="guide-card">
+    ${savedImg?`<div class="gc-photo"><img src="${savedImg}" alt=""></div>`:''}
+    <div class="gc-main">
+      <div class="gc-t">${card.t}</div>
+      <div class="gc-d">${escapeHtml(savedTxt).replace(/\n/g,'<br>')}</div>
+      <button class="gc-edit" onclick="guideEdit('${gkey}')">✎ ${savedImg?'Bearbeiten':'Foto & Text ergänzen'}</button>
+    </div>
+  </div>`;
+}
+
+/* Kitchen behält das bisherige Cockpit */
+function renderHomeKitchen(){
   const om=orderedModules();
   const nextMod=om.find(m=>!S.modDone[modKey(m)]);
   const ph=currentPhase();
   const badgeCount=Object.keys(S.badges).length;
   const allDone=!nextMod;
-
-  // Hero: Etappe statt Prozent
   let h=`<div class="hero">
-    <div class="hero-hi">${kitchen?'🥘 Küchen-Team':'🫶 Karma Crew'} · Hi ${S.name||''} 👋</div>
+    <div class="hero-hi">🥘 Küchen-Team · Hi ${escapeHtml(S.name||'')} 👋</div>
     <div class="hero-name head" style="font-size:23px;">${allDone?'Du bist<br>eingearbeitet. 🎉':'Schön dass<br>du da bist.'}</div>
     <div class="phase-track">`;
-  PHASES.forEach(p=>{
-    const state = p.n<ph.n||allDone ? 'done' : (p.n===ph.n ? 'now' : 'todo');
-    h+=`<div class="phase-dot ${state}"><span>${p.n}</span><label>${p.t}</label></div>`;
-  });
-  h+=`</div>
-    <div class="prog-lbl"><span>Etappe ${allDone?PHASES.length:ph.n} von ${PHASES.length} · ${ph.t}</span><span>🏅 ${badgeCount}</span></div>
-  </div>`;
-
-  // DER eine nächste Schritt (Fokus)
-  if(nextMod){
-    const pp=phaseProgress(ph.key);
-    h+=`<div class="focus-card" onclick="openModule('${nextMod.id}')">
-      <div class="focus-k">Dein nächster Schritt · ${ph.t} (${pp.done}/${pp.total})</div>
-      <div class="focus-row">
-        <div class="focus-ic">${nextMod.ic}</div>
-        <div class="focus-body"><div class="focus-h">${nextMod.title}</div><div class="focus-meta">${nextMod.meta}</div></div>
-        <div class="focus-go">Los →</div>
-      </div>
-    </div>`;
+  PHASES.forEach(p=>{ const state=p.n<ph.n||allDone?'done':(p.n===ph.n?'now':'todo'); h+=`<div class="phase-dot ${state}"><span>${p.n}</span><label>${p.t}</label></div>`; });
+  h+=`</div><div class="prog-lbl"><span>Etappe ${allDone?PHASES.length:ph.n} von ${PHASES.length} · ${ph.t}</span><span>🏅 ${badgeCount}</span></div></div>`;
+  if(nextMod){ const pp=phaseProgress(ph.key);
+    h+=`<div class="focus-card" onclick="openModule('${nextMod.id}')"><div class="focus-k">Dein nächster Schritt · ${ph.t} (${pp.done}/${pp.total})</div>
+      <div class="focus-row"><div class="focus-ic">${nextMod.ic}</div><div class="focus-body"><div class="focus-h">${nextMod.title}</div><div class="focus-meta">${nextMod.meta}</div></div><div class="focus-go">Los →</div></div></div>`;
   } else {
-    h+=`<div class="focus-card done" onclick="go('modules')">
-      <div class="focus-k">Alles geschafft</div>
-      <div class="focus-row"><div class="focus-ic">🎉</div><div class="focus-body"><div class="focus-h">Du hast alle Module durch!</div><div class="focus-meta">Deine Badges ansehen</div></div></div>
-    </div>`;
+    h+=`<div class="focus-card done" onclick="go('modules')"><div class="focus-k">Alles geschafft</div><div class="focus-row"><div class="focus-ic">🎉</div><div class="focus-body"><div class="focus-h">Alle Module durch!</div><div class="focus-meta">Badges ansehen</div></div></div></div>`;
   }
-
-  // Preboarding-Erinnerung nur wenn offen
-  if(!allPbDone()){
-    h+=`<div class="mini-card green" onclick="reopenPreboard()">
-      <span class="mc-ic">🚀</span><span class="mc-t">Deine ersten Schritte noch offen</span><span class="mc-go">→</span></div>`;
-  }
-
-  // JETZT IM DIENST — der Rettungsanker für die Solo-Schicht (Zwei-Tap)
+  if(!allPbDone()){ h+=`<div class="mini-card green" onclick="reopenPreboard()"><span class="mc-ic">🚀</span><span class="mc-t">Deine ersten Schritte noch offen</span><span class="mc-go">→</span></div>`; }
   h+=`<div class="sec-lbl">Jetzt im Dienst</div>
-    <div class="duty-card" onclick="go('duty')">
-      <div class="duty-ic">⚡</div>
-      <div class="duty-body">
-        <div class="duty-h">Schnell nachschlagen</div>
-        <div class="duty-d">Portionen, Kaffee, Öffnen & Schließen — in 2 Taps, ohne Suchen.</div>
-      </div>
-      <div class="duty-go">→</div>
-    </div>`;
-
-  // Ruhiger Rest darunter
-  h+=`<div class="sec-lbl">Alles rund um deinen Store</div>
+    <div class="duty-card" onclick="go('duty')"><div class="duty-ic">⚡</div><div class="duty-body"><div class="duty-h">Schnell nachschlagen</div><div class="duty-d">Wareneingang, Portionieren, QK — in 2 Taps.</div></div><div class="duty-go">→</div></div>`;
+  h+=`<div class="sec-lbl">Alles rund um deine Küche</div>
   <div class="mini-card" onclick="go('kb')"><span class="mc-ic">📖</span><span class="mc-t">Wissensdatenbank</span><span class="mc-go">→</span></div>
   <div class="mod-grid" style="margin-top:10px;">
-    <div class="mod" onclick="go('flow')"><div class="m-ic">${kitchen?'🥘':'🚚'}</div><div class="m-t">${kitchen?'Produktionsablauf':'Tagesablauf'}</div><div class="m-meta">${kitchen?'Von Planung bis Abschluss':'Lieferung bis Feierabend'}</div></div>
-    <div class="mod" onclick="go('store')"><div class="m-ic">📍</div><div class="m-t">${kitchen?'Infos & Team':'Mein Store'}</div><div class="m-meta">Infos & Kontakte</div></div>
+    <div class="mod" onclick="go('flow')"><div class="m-ic">🥘</div><div class="m-t">Produktionsablauf</div><div class="m-meta">Von Planung bis Abschluss</div></div>
+    <div class="mod" onclick="go('store')"><div class="m-ic">📍</div><div class="m-t">Infos & Team</div><div class="m-meta">Infos & Kontakte</div></div>
     <div class="mod" onclick="go('modules')"><div class="m-ic">📚</div><div class="m-t">Alle Module</div><div class="m-meta">Dein Lernpfad</div></div>
     <div class="mod" onclick="go('help')"><div class="m-ic">❓</div><div class="m-t">Hilfe & FAQ</div><div class="m-meta">Schnell nachlesen</div></div>
   </div>`;
   document.getElementById('v-home').innerHTML=h;
+}
+
+/* ---- Store-Guide Interaktion ---- */
+let guideEditing=null;
+function cssId(k){ return k.replace(/[^a-zA-Z0-9]/g,'_'); }
+function pickStoreGuide(id){ S.store=id; save(); bootApp(); }
+function clearStoreGuide(){ S.store=''; save(); bootApp(); }
+function guideEdit(key){ guideEditing=key; renderHome();
+  setTimeout(()=>{ const ta=document.getElementById('gc-ta-'+cssId(key)); if(ta){ta.focus();} },30); }
+function guideCancel(){ guideEditing=null; renderHome(); }
+function guideSave(key){
+  const ta=document.getElementById('gc-ta-'+cssId(key));
+  if(ta){ if(!S.kbEdits) S.kbEdits={}; S.kbEdits[key+':txt']=ta.value; }
+  guideEditing=null; save(); renderHome(); toast('Gespeichert ✓');
+}
+function guidePickImg(ev, key){
+  const file=ev.target.files&&ev.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    if(!S.guideImg) S.guideImg={};
+    S.guideImg[key+':img']=reader.result; save();
+    renderHome(); setTimeout(()=>guideEdit(key),20);
+  };
+  reader.readAsDataURL(file);
+}
+function guideDelImg(key){ if(S.guideImg){ delete S.guideImg[key+':img']; save(); } renderHome(); setTimeout(()=>guideEdit(key),20); }
+function unlockStoreAccess(){
+  const code=prompt('Zugangs-Code für die sensiblen Store-Daten (bekommst du vor Ort):');
+  if(code===null) return;
+  if(code.trim().toUpperCase()===UNLOCK_CODE){ S.storeAccessUnlocked=true; save(); renderHome(); toast('Zugangsdaten freigeschaltet ✓'); }
+  else { toast('Code stimmt nicht — frag kurz im Store nach.'); }
 }
 
 /* ============ MODULES ============ */
@@ -2140,6 +2326,9 @@ window.toggleStage=toggleStage; window.playRoute=playRoute;
 window.editField=editField; window.saveField=saveField; window.renderStore=renderStore;
 window.toggleCheck=toggleCheck; window.filterFaq=filterFaq; window.toggleFaq=toggleFaq;
 window.toggleDuty=toggleDuty;
+window.pickStoreGuide=pickStoreGuide; window.clearStoreGuide=clearStoreGuide;
+window.guideEdit=guideEdit; window.guideCancel=guideCancel; window.guideSave=guideSave;
+window.guidePickImg=guidePickImg; window.guideDelImg=guideDelImg; window.unlockStoreAccess=unlockStoreAccess;
 window.kbFilter=kbFilter; window.kbToggleCat=kbToggleCat; window.kbJumpCat=kbJumpCat;
 window.kbOpenStore=kbOpenStore; window.kbBackToHub=kbBackToHub; window.kbSetTab=kbSetTab;
 window.kbStartEdit=kbStartEdit; window.kbCancelEdit=kbCancelEdit; window.kbSaveEdit=kbSaveEdit;
