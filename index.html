@@ -111,6 +111,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* ---------- TOPBAR ---------- */
 /* ---------- PREBOARDING ---------- */
+/* ============ EINSTIEG (Doorway) ============ */
+#doorway{position:fixed;inset:0;max-width:480px;margin:0 auto;background:var(--cream);z-index:75;overflow-y:auto;display:flex;align-items:center;}
+.dw-inner{padding:34px 24px 40px;width:100%;}
+.dw-logo{width:70px;height:70px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;padding:9px;box-shadow:0 4px 14px rgba(0,0,0,.1);margin-bottom:22px;}
+.dw-logo img{width:100%;height:100%;object-fit:contain;}
+.dw-kicker{font-size:13px;color:var(--orange);font-weight:800;letter-spacing:1px;text-transform:uppercase;}
+.dw-title{font-size:34px;margin:6px 0 6px;color:var(--ink);}
+.dw-sub{font-size:16px;color:var(--sub);margin-bottom:26px;}
+.dw-door{width:100%;background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:14px;cursor:pointer;display:flex;align-items:center;gap:15px;text-align:left;font-family:inherit;transition:transform .12s;}
+.dw-door:active{transform:scale(.98);}
+.dw-new{border:2px solid var(--orange);}
+.dw-door-ic{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:27px;flex-shrink:0;background:var(--cream);}
+.dw-new .dw-door-ic{background:var(--orange-soft);}
+.dw-known .dw-door-ic{background:var(--green-soft);}
+.dw-door-txt{flex:1;min-width:0;}
+.dw-door-t{font-size:17px;font-weight:800;color:var(--ink);}
+.dw-door-d{font-size:13px;color:var(--sub);margin-top:3px;line-height:1.45;}
+.dw-door-go{font-size:20px;font-weight:800;color:var(--muted);flex-shrink:0;}
+.dw-note{font-size:12.5px;color:var(--muted);text-align:center;margin-top:10px;}
+
 #preboard{position:fixed;inset:0;max-width:480px;margin:0 auto;background:var(--cream);z-index:70;overflow-y:auto;}
 .pb-inner{padding:34px 22px 40px;}
 .pb-kicker{color:var(--orange);font-size:13px;letter-spacing:2px;font-weight:800;text-transform:uppercase;margin-bottom:14px;}
@@ -312,6 +332,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .gc-save{background:var(--orange);color:#fff;border:none;border-radius:10px;padding:9px 18px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;}
 .gc-cancel{background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer;font-family:inherit;}
 .gc-access-btn{width:100%;background:var(--neon-soft);border:1px dashed var(--green);color:var(--green);border-radius:12px;padding:12px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:16px;}
+.guide-fullproc{width:100%;background:none;border:1px solid var(--border);border-radius:12px;padding:13px;font-size:12.5px;color:var(--muted);cursor:pointer;font-family:inherit;margin-top:12px;line-height:1.4;}
 .next-card .nc-ic{width:44px;height:44px;background:var(--ink);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
 .nc-k{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;opacity:.6;}
 .nc-h{font-size:16px;font-weight:700;margin-top:2px;}
@@ -524,7 +545,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <body>
 
 <!-- ===================== WELCOME / PREBOARDING ===================== -->
-<div id="welcome">
+<!-- ===================== EINSTIEG: Neu oder schon dabei? ===================== -->
+<div id="doorway" style="display:none;">
+  <div class="dw-inner">
+    <div class="dw-logo"><img src="https://karmafood.at/cdn/shop/files/Karma_Food_Wien.png?v=1760621788&width=200" alt="Karma Food Logo"></div>
+    <div class="dw-kicker">🫶 Karma Crew</div>
+    <h1 class="dw-title head">Willkommen!</h1>
+    <p class="dw-sub">Schön, dass du da bist. Wie starten wir?</p>
+    <button class="dw-door dw-new" onclick="chooseDoor('new')">
+      <div class="dw-door-ic">🌱</div>
+      <div class="dw-door-txt">
+        <div class="dw-door-t">Ich bin neu hier</div>
+        <div class="dw-door-d">Zeig mir alles — Willkommen, Schnuppertag & die ersten Schritte.</div>
+      </div>
+      <div class="dw-door-go">→</div>
+    </button>
+    <button class="dw-door dw-known" onclick="chooseDoor('known')">
+      <div class="dw-door-ic">📍</div>
+      <div class="dw-door-txt">
+        <div class="dw-door-t">Ich bin schon dabei</div>
+        <div class="dw-door-d">Direkt zum Store-Guide — wo find ich hier alles?</div>
+      </div>
+      <div class="dw-door-go">→</div>
+    </button>
+    <p class="dw-note">Du kannst das später jederzeit wechseln.</p>
+  </div>
+</div>
+
+<div id="welcome" style="display:none;">
   <div class="wl-slide on" data-s="0">
     <div class="wl-kicker">Willkommen 🌱</div>
     <div class="wl-logo-badge"><img src="https://karmafood.at/cdn/shop/files/Karma_Food_Wien.png?v=1760621788&width=200" alt="Karma Food Logo"></div>
@@ -1071,9 +1119,9 @@ const KITCHEN_DAYFLOW = [
 
 const ROUTE = [
   {t:'Produktionsküche Klosterneuburg', d:'Inkustraße 1-7 · frisch gekocht & eingepackt bis ~9:00', tag:'START', col:'#F0A500'},
-  {t:'Ausstellungsstraße', d:'1020 Wien · erste Anlaufstelle', tag:'1', col:'#F0806B'},
+  {t:'Börse / Schottenring', d:'Schottenring 17 · 1010 Wien · erste Anlaufstelle', tag:'1', col:'#00B4CC'},
   {t:'Laurenzerberg', d:'1010 Wien · 1. Bezirk', tag:'2', col:'#00A878'},
-  {t:'Börse / Schottenring', d:'Schottenring 17 · 1010 Wien', tag:'3', col:'#00B4CC'},
+  {t:'Ausstellungsstraße', d:'1020 Wien', tag:'3', col:'#F0806B'},
   {t:'Stadtplatz Klosterneuburg', d:'Stadtplatz 34 · zurück in Kloburg', tag:'4', col:'#E0521F'},
   {t:'Zurück zur Küche', d:'Leere, saubere Boxen kommen wieder mit', tag:'ENDE', col:'#F0A500'},
 ];
@@ -1708,7 +1756,7 @@ function renderHome(){
   if(!hasStore){
     // Einstieg: Store wählen
     h+=`<div class="guide-hero">
-      <div class="gh-hi">🫶 Karma Crew · Hi ${escapeHtml(S.name||'')} 👋</div>
+      <div class="gh-hi">🫶 Karma Crew ${S.name?('· Hi '+escapeHtml(S.name)+' 👋'):'👋'}</div>
       <div class="gh-title head">Wo arbeitest<br>du heute?</div>
       <div class="gh-sub">Tipp deinen Store an — dann zeig ich dir, wo du alles findest.</div>
     </div>`;
@@ -1758,6 +1806,9 @@ function renderHome(){
   // Learning klein & versteckt am Ende
   h+=`<div class="sec-lbl">Wenn du Zeit hast</div>
   <div class="mini-card" onclick="go('modules')"><span class="mc-ic">📚</span><span class="mc-t">Karma kennenlernen & dazulernen</span><span class="mc-go">→</span></div>`;
+  if(S.userType==='known'){
+    h+=`<button class="guide-fullproc" onclick="switchToFull()">🌱 Du bist neu und willst den ganzen Willkommens-Prozess sehen?</button>`;
+  }
 
   document.getElementById('v-home').innerHTML=h;
 }
@@ -1868,6 +1919,16 @@ function unlockStoreAccess(){
   if(code===null) return;
   if(code.trim().toUpperCase()===UNLOCK_CODE){ S.storeAccessUnlocked=true; save(); renderHome(); toast('Zugangsdaten freigeschaltet ✓'); }
   else { toast('Code stimmt nicht — frag kurz im Store nach.'); }
+}
+function switchToFull(){
+  if(!confirm('Willkommens-Prozess starten? Du kannst danach jederzeit wieder direkt zum Store-Guide.')) return;
+  S.userType='new'; S.preboardDone=false; S.unlocked=false;
+  wlPos=0; wl=WL_ORDER[0]; S.wlStep=wl; save();
+  document.getElementById('topbar').style.display='none';
+  document.getElementById('content').style.display='none';
+  document.getElementById('bottomnav').style.display='none';
+  document.getElementById('welcome').style.display='block';
+  preselectArea(); showWl();
 }
 
 /* ============ MODULES ============ */
@@ -2316,8 +2377,39 @@ function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg
 function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 /* ============ INIT ============ */
-if(S.started && S.name && S.area){ finishWelcome(); }
-else { preselectArea(); showWl(); }
+function bootInitial(){
+  // "Schon dabei" → direkt in die App (Name optional)
+  if(S.userType==='known'){ if(!S.area) S.area='store'; enterApp(); return; }
+  // Voller Weg abgeschlossen → App
+  if(S.started && S.name && S.area){ finishWelcome(); return; }
+  // Noch keine Wahl → Türsteher
+  if(!S.userType){ showDoorway(); return; }
+  // userType 'new', mitten im Welcome
+  if(S.userType==='new'){ document.getElementById('welcome').style.display='block'; preselectArea(); showWl(); return; }
+  showDoorway();
+}
+function showDoorway(){
+  document.getElementById('doorway').style.display='flex';
+  document.getElementById('welcome').style.display='none';
+}
+function chooseDoor(type){
+  S.userType=type; save();
+  document.getElementById('doorway').style.display='none';
+  if(type==='new'){
+    // Voller Onboarding-Weg
+    document.getElementById('welcome').style.display='block';
+    wlPos=0; wl=WL_ORDER[0]; preselectArea(); showWl();
+  } else {
+    // Schon dabei → direkt zum Store-Guide. Minimal-Setup: Name kurz erfragen, Bereich = store.
+    if(!S.area) S.area='store';
+    if(!S.name){ S.name=''; }
+    S.started = S.started || Date.now();
+    S.preboardDone=true; S.unlocked=true; // erfahrene Crew braucht kein Gate
+    save();
+    enterApp();
+  }
+}
+bootInitial();
 
 window.go=go; window.openModule=openModule; window.closeReader=closeReader;
 window.rdNext=rdNext; window.rdBack=rdBack; window.answerQuiz=answerQuiz;
@@ -2326,6 +2418,7 @@ window.toggleStage=toggleStage; window.playRoute=playRoute;
 window.editField=editField; window.saveField=saveField; window.renderStore=renderStore;
 window.toggleCheck=toggleCheck; window.filterFaq=filterFaq; window.toggleFaq=toggleFaq;
 window.toggleDuty=toggleDuty;
+window.chooseDoor=chooseDoor; window.switchToFull=switchToFull;
 window.pickStoreGuide=pickStoreGuide; window.clearStoreGuide=clearStoreGuide;
 window.guideEdit=guideEdit; window.guideCancel=guideCancel; window.guideSave=guideSave;
 window.guidePickImg=guidePickImg; window.guideDelImg=guideDelImg; window.unlockStoreAccess=unlockStoreAccess;
