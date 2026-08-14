@@ -310,17 +310,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .gb-cards{display:flex;flex-direction:column;gap:10px;}
 
 .guide-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-.guide-card.locked{background:var(--cream);border-style:dashed;}
-.gc-photo{width:100%;aspect-ratio:16/10;overflow:hidden;background:var(--cream);}
-.gc-photo img{width:100%;height:100%;object-fit:cover;display:block;}
-.gc-main{padding:13px 15px;}
-.gc-t{font-size:15px;font-weight:800;margin-bottom:4px;}
-.gc-d{font-size:13.5px;color:var(--sub);line-height:1.55;white-space:pre-line;}
-.gc-edit{background:var(--orange-soft);color:var(--orange);border:none;border-radius:8px;padding:6px 12px;font-size:11.5px;font-weight:700;cursor:pointer;margin-top:10px;font-family:inherit;}
-.gc-lockrow{display:flex;gap:12px;align-items:flex-start;padding:14px 15px;}
-.gc-lockrow .gc-ic{font-size:20px;flex-shrink:0;}
-.gc-lockrow .gc-body{flex:1;}
-.gc-locked-d{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.45;}
+/* Geteilte Karte: links Emoji/Foto, rechts Text */
+.guide-card.split{display:flex;align-items:stretch;cursor:pointer;transition:transform .1s;}
+.guide-card.split:active{transform:scale(.99);}
+.gc-emoji{width:88px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:38px;}
+.gc-photo-side{width:88px;flex-shrink:0;overflow:hidden;background:var(--cream);}
+.gc-photo-side img{width:100%;height:100%;object-fit:cover;display:block;}
+.gc-right{flex:1;min-width:0;padding:13px 15px;display:flex;flex-direction:column;justify-content:center;}
+.gc-t{font-size:15px;font-weight:800;margin-bottom:3px;}
+.gc-d{font-size:13px;color:var(--sub);line-height:1.5;white-space:pre-line;}
+.gc-hint{font-size:11px;color:var(--orange);font-weight:700;margin-top:7px;}
+.guide-card.locked .gc-t{color:var(--muted);}
+.gc-locked-d{color:var(--muted);}
 .guide-card.editing{padding:14px 15px;}
 .gc-ta{width:100%;border:2px solid var(--orange);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit;outline:none;resize:vertical;line-height:1.5;margin-top:6px;}
 .gc-img-edit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;}
@@ -1332,28 +1333,29 @@ function dutyItems(){ return isKitchen()?DUTY_KITCHEN:DUTY_STORE; }
 // und erscheinen NICHT im öffentlichen Onboarding-Link — nur wenn man vor Ort im Store eingeloggt ist.
 const GUIDE_BLOCKS = [
   {key:'ankommen', t:'Ankommen & rein', ic:'🔑', col:'#00A878', intro:'Das Wichtigste, um überhaupt reinzukommen und loszulegen.', cards:[
-    {id:'schluessel_eingang', t:'Schlüssel Eingang', locked:true, d:'Wo ist der Schlüssel, wie kommst du rein?'},
-    {id:'schluessel_kassa', t:'Schlüssel Kassa', locked:true, d:'Schlüssel für Kassa / Lade.'},
-    {id:'wlan', t:'WLAN-Passwort', locked:true, d:'Netzwerkname & Passwort.'},
-    {id:'alarm_safe', t:'Alarm & Safe', locked:true, d:'Alarm deaktivieren, Safe-Code.'},
+    {id:'schluessel_eingang', t:'Schlüssel Eingang', e:'🔑', locked:true, d:'Wo ist der Schlüssel, wie kommst du rein?'},
+    {id:'schluessel_kassa', t:'Schlüssel Kassa', e:'🗝️', locked:true, d:'Schlüssel für Kassa / Lade.'},
+    {id:'wlan', t:'WLAN-Passwort', e:'📶', locked:true, d:'Netzwerkname & Passwort.'},
+    {id:'alarm_safe', t:'Alarm & Safe', e:'🔐', locked:true, d:'Alarm deaktivieren, Safe-Code.'},
   ]},
   {key:'finden', t:'Wo find ich was?', ic:'🔍', col:'#F0A500', intro:'Damit du nicht suchen musst — hier liegt alles.', cards:[
-    {id:'schoepfer', t:'Schöpfer & Portionierer', d:'Wo hängen/liegen die Schöpfer?'},
-    {id:'kaffee', t:'Kaffeemaschine & Bohnen', d:'Maschine, Bohnen, Reinigungszeug.'},
-    {id:'bain_marie', t:'Bain-Marie & Gerichte', d:'Wo das warme Essen steht.'},
-    {id:'putzmittel', t:'Putzmittel', d:'Wo die Reinigungsmittel stehen.'},
-    {id:'lager', t:'Lager & Nachschub', d:'Verpackungen, Sticker, Vorräte.'},
-    {id:'kassa_ausstattung', t:'Kassa & Kartengerät', d:'Wo Kassa & Terminal stehen.'},
+    {id:'schoepfer', t:'Schöpfer & Portionierer', e:'🥄', d:'Wo hängen/liegen die Schöpfer?'},
+    {id:'kaffee', t:'Kaffeemaschine & Bohnen', e:'☕', d:'Maschine, Bohnen, Reinigungszeug.'},
+    {id:'bain_marie', t:'Bain-Marie & Gerichte', e:'🍛', d:'Wo das warme Essen steht.'},
+    {id:'putzmittel', t:'Putzmittel', e:'🧼', d:'Wo die Reinigungsmittel stehen.'},
+    {id:'lager', t:'Lager & Nachschub', e:'📦', d:'Verpackungen, Sticker, Vorräte.'},
+    {id:'kassa_ausstattung', t:'Kassa & Kartengerät', e:'💳', d:'Wo Kassa & Terminal stehen.'},
+    {id:'muell', t:'Müll & Entsorgung', e:'🗑️', d:'Wohin mit Abfall & Trennung.'},
   ]},
   {key:'ablauf', t:'Ablauf hier', ic:'🔄', col:'#F0806B', intro:'So läuft ein Tag in genau diesem Store.', cards:[
-    {id:'oeffnen', t:'Öffnen — Schritt für Schritt', d:'Was du beim Aufsperren machst.'},
-    {id:'schliessen', t:'Schließen — Schritt für Schritt', d:'Was du am Ende machst.'},
-    {id:'lieferung', t:'Lieferzeiten & Besonderheiten', d:'Wann kommt das Essen, was ist hier speziell?'},
+    {id:'oeffnen', t:'Öffnen — Schritt für Schritt', e:'🌅', d:'Was du beim Aufsperren machst.'},
+    {id:'schliessen', t:'Schließen — Schritt für Schritt', e:'🌙', d:'Was du am Ende machst.'},
+    {id:'lieferung', t:'Lieferzeiten & Besonderheiten', e:'🚚', d:'Wann kommt das Essen, was ist hier speziell?'},
   ]},
   {key:'hilfe', t:'Wer hilft dir?', ic:'🤝', col:'#7B61FF', intro:'Falls was ist — hier bekommst du Hilfe.', cards:[
-    {id:'ansprech', t:'Ansprechpartner vor Ort', d:'Wer ist für diesen Store zuständig?'},
-    {id:'whatsapp', t:'WhatsApp-Gruppen', d:'Karma Info & Karma Support.'},
-    {id:'notfall', t:'Notfall-Nummer', d:'Wen rufst du im Notfall an?'},
+    {id:'ansprech', t:'Ansprechpartner vor Ort', e:'👋', d:'Wer ist für diesen Store zuständig?'},
+    {id:'whatsapp', t:'WhatsApp-Gruppen', e:'💬', d:'Karma Info & Karma Support.'},
+    {id:'notfall', t:'Notfall-Nummer', e:'🆘', d:'Wen rufst du im Notfall an?'},
   ]},
 ];
 
@@ -1820,24 +1822,13 @@ function guideCardHtml(block, card){
   const imgKey = gkey+':img';
   const savedTxt = kbGet(txtKey, card.d);
   const savedImg = (S.guideImg && S.guideImg[imgKey]) || null;
+  const emoji = card.e || block.ic;
 
-  if(card.locked){
-    // Zugangsdaten: nur editierbar/sichtbar wenn vor Ort freigeschaltet
-    const unlocked = S.storeAccessUnlocked;
-    if(!unlocked){
-      return `<div class="guide-card locked">
-        <div class="gc-lockrow"><span class="gc-ic">🔒</span>
-          <div class="gc-body"><div class="gc-t">${card.t}</div>
-          <div class="gc-locked-d">Aus Sicherheit nur vor Ort sichtbar. Tipp auf „Vor Ort? Freischalten" oben.</div></div>
-        </div>
-      </div>`;
-    }
-  }
-
+  // Editier-Modus
   if(guideEditing===gkey){
     return `<div class="guide-card editing">
-      <div class="gc-t">${card.t}</div>
-      <textarea id="gc-ta-${cssId(gkey)}" class="gc-ta" rows="3" placeholder="Text eingeben…">${escapeHtml(savedTxt)}</textarea>
+      <div class="gc-t">${emoji} ${card.t}</div>
+      <textarea id="gc-ta-${cssId(gkey)}" class="gc-ta" rows="3" placeholder="Text eingeben — z.B. „Schöpfer hängen links neben der Kaffeemaschine"…">${escapeHtml(savedTxt)}</textarea>
       <div class="gc-img-edit">
         ${savedImg?`<img src="${savedImg}" class="gc-img-preview">`:'<div class="gc-img-empty">📷 Noch kein Foto</div>'}
         <label class="gc-img-btn">Foto wählen<input type="file" accept="image/*" style="display:none" onchange="guidePickImg(event,'${gkey}')"></label>
@@ -1847,12 +1838,27 @@ function guideCardHtml(block, card){
     </div>`;
   }
 
-  return `<div class="guide-card">
-    ${savedImg?`<div class="gc-photo"><img src="${savedImg}" alt=""></div>`:''}
-    <div class="gc-main">
+  // Gesperrte Zugangsdaten (noch nicht freigeschaltet)
+  if(card.locked && !S.storeAccessUnlocked){
+    return `<div class="guide-card split locked">
+      <div class="gc-emoji" style="background:${block.col};opacity:.55;">${emoji}</div>
+      <div class="gc-right">
+        <div class="gc-t">${card.t} 🔒</div>
+        <div class="gc-d gc-locked-d">Nur vor Ort sichtbar — oben freischalten.</div>
+      </div>
+    </div>`;
+  }
+
+  // Standard: geteilte Karte — links Emoji-Farbfläche (oder Foto), rechts Text
+  const leftSide = savedImg
+    ? `<div class="gc-photo-side"><img src="${savedImg}" alt=""></div>`
+    : `<div class="gc-emoji" style="background:${block.col};">${emoji}</div>`;
+  return `<div class="guide-card split" onclick="guideEdit('${gkey}')">
+    ${leftSide}
+    <div class="gc-right">
       <div class="gc-t">${card.t}</div>
       <div class="gc-d">${escapeHtml(savedTxt).replace(/\n/g,'<br>')}</div>
-      <button class="gc-edit" onclick="guideEdit('${gkey}')">✎ ${savedImg?'Bearbeiten':'Foto & Text ergänzen'}</button>
+      <div class="gc-hint">${savedImg?'✎ Bearbeiten':'✎ Foto & Text'}</div>
     </div>
   </div>`;
 }
