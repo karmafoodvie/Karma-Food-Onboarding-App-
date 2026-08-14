@@ -322,6 +322,35 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .gc-hint{font-size:11px;color:var(--orange);font-weight:700;margin-top:7px;}
 .guide-card.locked .gc-t{color:var(--muted);}
 .gc-locked-d{color:var(--muted);}
+
+/* Was wird mit was serviert */
+.serving-list{display:flex;flex-direction:column;gap:9px;}
+.serving-card{background:#fff;border:1px solid var(--border);border-radius:14px;display:flex;align-items:stretch;overflow:hidden;}
+.sv-emoji{width:64px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:30px;background:var(--cream);}
+.sv-photo{width:64px;flex-shrink:0;overflow:hidden;background:var(--cream);}
+.sv-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.sv-right{flex:1;min-width:0;padding:11px 14px;display:flex;flex-direction:column;justify-content:center;}
+.sv-t{font-size:14px;font-weight:800;}
+.sv-d{font-size:13px;color:var(--sub);line-height:1.45;margin-top:2px;}
+.sv-hint{font-size:10.5px;color:var(--muted);margin-top:5px;}
+.addon-row{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px;}
+.addon-card{background:var(--amber-soft);border:1px solid var(--amber);border-radius:12px;padding:11px 13px;display:flex;align-items:center;gap:9px;}
+.addon-card .ad-e{font-size:22px;flex-shrink:0;}
+.ad-t{font-size:13px;font-weight:800;}
+.ad-d{font-size:11.5px;color:var(--sub);margin-top:1px;}
+
+/* Produkt-Detail im Lernmodul */
+.prod-detail-list{display:flex;flex-direction:column;gap:11px;margin-top:8px;}
+.prod-detail{background:#fff;border:1px solid var(--border);border-radius:14px;padding:13px 15px;display:flex;gap:13px;align-items:flex-start;}
+.pd-emoji{width:46px;height:46px;border-radius:12px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.pd-body{flex:1;min-width:0;}
+.pd-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:3px;}
+.pd-t{font-size:15px;font-weight:800;}
+.pd-preis{font-size:12.5px;font-weight:700;color:var(--orange);}
+.pd-d{font-size:13px;color:var(--sub);line-height:1.5;}
+.pd-use{font-size:12px;color:var(--green);margin-top:6px;line-height:1.45;}
+.pd-scharf{font-size:12px;margin-top:6px;color:var(--sub);}
+.pd-scharf-empty{opacity:.3;letter-spacing:2px;margin-left:2px;}
 .guide-card.editing{padding:14px 15px;}
 .gc-ta{width:100%;border:2px solid var(--orange);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit;outline:none;resize:vertical;line-height:1.5;margin-top:6px;}
 .gc-img-edit{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;}
@@ -997,11 +1026,14 @@ const STORY_TIMELINE = [
 
 /* ---------- EIGENPRODUKTE ---------- */
 const OWN_PRODUCTS = [
-  {e:'🥫', t:'Curry-Pasten', d:'Madras, Curry & Korma — die Basis für schnelle, authentische Currys zuhause.'},
-  {e:'🌶️', t:'Masalas & Gewürze', d:'Unsere Gewürzmischungen bringen die echten Aromen Indiens in jede Küche.'},
-  {e:'🥄', t:'Kashmiri Chili Crisp', d:'Knuspriges Chili-Öl mit Zwiebeln — das Topping für Reis, Nudeln oder Bowls.'},
-  {e:'🍵', t:'Chai-Sirup', d:'Hausgemacht, mit ayurvedischen Gewürzen — für Chai Latte oder als Dessert-Topping.'},
-  {e:'📖', t:'Kochbücher', d:'Unsere liebsten Familienrezepte, gesammelt und mit Crowdfunding realisiert.'},
+  {e:'🥫', t:'Curry Paste', preis:'im Trio €9,90', scharf:2, d:'Mild-würzig, Adis Allrounder. Basis für schnelle Currys, Dals, Wok, Saucen & Marinaden.', use:'Mit Kokosmilch erwärmen, Gemüse & Tofu dazu, ~20 Min garen.'},
+  {e:'🥥', t:'Korma Paste', preis:'im Trio €9,90', scharf:1, d:'Die mildeste — cremig-süßlich mit Cashews, Rosinen & Kokos. Ideal für „Butter Chicken"-Style vegan.', use:'Perfekt für alle, die es gar nicht scharf mögen.'},
+  {e:'🌶️', t:'Madras Paste', preis:'im Trio €9,90', scharf:3, d:'Die schärfste der drei — würzig mit Tamarinde, aber mehr würzig als „hot".', use:'Für alle, die es kräftiger & aromatischer wollen.'},
+  {e:'✨', t:'Masala Trio (Starter Kit)', preis:'€18,90', scharf:0, d:'Mama Masala, Papa Masala & Co. — Gewürzmischungen, die jedem Gericht den letzten Schliff geben.', use:'Papa Masala = die scharfe Prise on top fürs Curry.'},
+  {e:'🥄', t:'Kashmiri Chili Crisp', preis:'€10,90', scharf:3, d:'Knuspriges Chili-Öl mit Zwiebeln — unser Kult-Topping.', use:'Auf Reis, Nudeln, Bowls, Eier — überall drauf.'},
+  {e:'🥭', t:'Mango Chili Hot Sauce', preis:'—', scharf:4, d:'Fruchtig-scharfe Sauce, bringt extra Schärfe auf den Teller.', use:'On top für alle, die es richtig hot mögen.'},
+  {e:'🍵', t:'Chai Sirup', preis:'€8,40', scharf:0, d:'Hausgemacht mit ayurvedischen Gewürzen.', use:'Für Chai Latte oder als Dessert-Topping.'},
+  {e:'📖', t:'Kochbücher', preis:'ab €32', scharf:0, d:'„Karma Food Currys" & Co. — Adis liebste Familienrezepte.', use:'Zum Nachkochen & Verschenken.'},
 ];
 
 /* ---------- CATERING ---------- */
@@ -1073,6 +1105,21 @@ const DISH_CATEGORIES = [
 ];
 const DISH_NOTE = 'Es sind immer genau 3 Gerichte pro Tag — Curry ist praktisch immer dabei. Salat gibt es nur als Beilage zur Lasagne, nie einzeln. Der Wochensalat ersetzt im Sommer die Bowl; außerhalb der Saison gibt\'s stattdessen die Bowl.';
 
+// Was wird mit welcher Beilage/Sauce serviert. Fotos folgen (photo:null).
+const SERVING_RULES = [
+  {dish:'Grüner Salat', e:'🥗', rule:'Immer mit <b>rotem Dressing</b>.', photo:null},
+  {dish:'Bowl', e:'🥙', rule:'Immer mit der <b>dazugehörigen Sauce</b>.', photo:null},
+  {dish:'Wochensalat', e:'🥬', rule:'Immer mit der <b>dazugehörigen Sauce</b>.', photo:null},
+  {dish:'Lasagne', e:'🍽️', rule:'Wird <b>immer mit Salat</b> serviert.', photo:null},
+  {dish:'Biryani', e:'🍚', rule:'Kommt <b>immer mit Raita</b> (Joghurt-Dip) obendrauf.', photo:null},
+  {dish:'Samosa', e:'🥟', rule:'Ohne — oder mit <b>Mango Chutney</b>.', photo:null},
+];
+// Optionale Add-ons gegen Aufpreis
+const SERVING_ADDONS = [
+  {n:'Chili Crisp', e:'🌶️', d:'On top dazu — <b>+0,50 €</b>'},
+  {n:'Mango Chili Sauce', e:'🥭', d:'On top dazu — <b>+0,50 €</b>'},
+];
+
 const DEFAULT_STORE_FACTS = {
   open:{k:'Öffnungszeiten',ic:'🕒',v:'Mo–Fr, siehe Aushang vor Ort',by:'System',when:'—'},
   delivery:{k:'Lieferung aus der Küche',ic:'🚚',v:'Küche liefert täglich frisch in die Läden (Bain Marie hält warm)',by:'System',when:'—'},
@@ -1142,13 +1189,14 @@ const WELCOME_STEPS = [
 
 const STORE_MODULES = [
   {id:'welcome', ic:'🧡', title:'Willkommen bei Karma Food', meta:'Marke · 4 Schritte', badge:{e:'🧡',n:'Marken-Kenner',d:'Du weißt, wofür Karma Food steht. Welcome to the family!'}, steps:WELCOME_STEPS},
-  {id:'products', ic:'🍛', title:'Unsere Produkte', meta:'Marke · 3 Schritte', badge:{e:'🍛',n:'Menü-Profi',d:'Du kennst dich mit unserem Angebot aus!'},
+  {id:'products', ic:'🍛', title:'Unsere Produkte', meta:'Marke · 4 Schritte', badge:{e:'🍛',n:'Menü-Profi',d:'Du kennst dich mit unserem Angebot aus!'},
     steps:[
       {type:'read', e:'🥘', h:'Was wir servieren', p:['Herzstück sind unsere <b>Currys, Bowls und Dals</b> — indisch inspiriert, komplett plant-based.','Dazu wechselnde Specials, Salate und Sides. Das Menü ist saisonal geplant.','Fast alles ist vegan. Wenn ein Gast fragt — im Zweifel nachschauen, nicht raten.']},
       {type:'read', e:'🛒', h:'Mehr als nur Essen', p:['Im <b>Webshop</b> gibt es Curry-Pasten, Masalas, Saucen, Kashmiri Chili Crisp, Chai-Sirup und Kochbücher.','<b>Catering & Kochkurse</b> bringen Karma zu Events und Menschen nach Hause.','<b>Schrankerl</b> sind unsere smarten RFID-Kühlschränke — Essen to go, rund um die Uhr.']},
-      {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Ein Gast fragt, ob das Curry vegan ist. Du bist unsicher. Was tust du?',
-        opts:['„Ja klar, alles vegan!"','Kurz nachschauen oder Kolleg:in fragen, dann ehrlich antworten','Sagen dass man es nicht weiß und weggehen'],
-        right:1, fb:'Richtig. Ehrlichkeit + kurz checken ist immer besser als raten. Bei Allergien geht Sicherheit vor. 🙏'},
+      {type:'products', e:'🥫', h:'Unsere Eigenprodukte im Detail', lead:'Die kennst du am besten, wenn ein Gast fragt „Was ist der Unterschied?" — hier das Wichtigste zu jedem Produkt:'},
+      {type:'quiz', e:'🧠', h:'Kurzer Check', q:'Ein Gast mag es gar nicht scharf und will eine Curry-Paste. Welche empfiehlst du?',
+        opts:['Madras Paste','Korma Paste','Kashmiri Chili Crisp'],
+        right:1, fb:'Genau! Die Korma Paste ist mit 1/5 die mildeste — cremig-süßlich. Madras ist am schärfsten. 🌶️'},
     ]},
   {id:'coffee', ic:'☕', title:'Kaffee-Basics', meta:'Fachwissen · 3 Schritte', badge:{e:'☕',n:'Kaffee-Profi',d:'Espresso, Cappuccino & Co — du hast den Dreh raus!'},
     steps:[
@@ -1553,7 +1601,7 @@ function enterApp(){
 
 /* ============ FREISCHALT-TOR ============ */
 // Der Code, den das Karma-Team ausgibt. Änderbar. (Leichtgewichtig — kein echter Server-Schutz.)
-const UNLOCK_CODE = 'KARMA2024';
+const UNLOCK_CODE = 'WELCOME@KARMAFOOD';
 function showGate(){
   document.getElementById('preboard').style.display='none';
   const g=document.getElementById('gate');
@@ -1994,6 +2042,24 @@ function renderStep(){
     h=`<div class="rd-emoji">${step.e}</div><h1 class="rd-h head">${step.h}</h1><p class="rd-p"><b>${step.q}</b></p><div id="quiz-opts">`;
     step.opts.forEach((o,i)=>h+=`<button class="quiz-opt" onclick="answerQuiz(${i})">${o}</button>`);
     h+=`</div><div id="quiz-fb"></div>`;
+  } else if(step.type==='products'){
+    h=`<div class="rd-emoji">${step.e}</div><h1 class="rd-h head">${step.h}</h1>`;
+    if(step.lead) h+=`<p class="rd-p">${step.lead}</p>`;
+    h+=`<div class="prod-detail-list">`;
+    OWN_PRODUCTS.forEach(p=>{
+      const scharf = p.scharf>0 ? `<div class="pd-scharf">Schärfe: ${'🌶️'.repeat(p.scharf)}<span class="pd-scharf-empty">${'·'.repeat(5-p.scharf)}</span></div>` : '';
+      const preis = p.preis && p.preis!=='—' ? `<span class="pd-preis">${p.preis}</span>` : '';
+      h+=`<div class="prod-detail">
+        <div class="pd-emoji">${p.e}</div>
+        <div class="pd-body">
+          <div class="pd-head"><span class="pd-t">${p.t}</span>${preis}</div>
+          <div class="pd-d">${p.d}</div>
+          ${p.use?`<div class="pd-use">💡 ${p.use}</div>`:''}
+          ${scharf}
+        </div>
+      </div>`;
+    });
+    h+=`</div>`;
   }
   body.innerHTML=h; body.scrollTop=0;
   document.getElementById('rd-back').style.display = curStep>0?'block':'none';
@@ -2065,16 +2131,33 @@ function renderFlow(){
       h+=`</div>`;
     });
     h+=`<div class="tip"><span class="ti">🥗</span><span class="tt">${DISH_NOTE}</span></div>`;
+
+    h+=`<div class="sec-lbl">Was wird mit was serviert?</div>
+    <div class="serving-list">`;
+    SERVING_RULES.forEach(s=>{
+      const left = s.photo ? `<div class="sv-photo"><img src="${s.photo}" alt=""></div>` : `<div class="sv-emoji">${s.e}</div>`;
+      h+=`<div class="serving-card">${left}<div class="sv-right"><div class="sv-t">${s.dish}</div><div class="sv-d">${s.rule}</div>${s.photo?'':'<div class="sv-hint">📷 Foto folgt</div>'}</div></div>`;
+    });
+    h+=`</div>`;
+    h+=`<div class="addon-row">`;
+    SERVING_ADDONS.forEach(a=>{
+      h+=`<div class="addon-card"><span class="ad-e">${a.e}</span><div><div class="ad-t">${a.n}</div><div class="ad-d">${a.d}</div></div></div>`;
+    });
+    h+=`</div>`;
+
     h+=`<div class="sec-lbl">So kommt das Essen zu dir</div>
     <div class="route-card">
-      <div class="route-head"><span class="rh-t">🚐 Die Liefer-Route</span>
+      <div class="route-head"><span class="rh-t">🚚 Die Liefer-Route</span>
         <button class="route-play" id="route-play-btn" onclick="playRoute()">▶ Abspielen</button></div>
       ${routeMapSvg()}
       <div class="route-steps" id="route-steps">`;
     ROUTE.forEach((r,i)=>{
       h+=`<div class="route-step" id="rstep-${i}"><div class="rs-num">${r.tag}</div><div><div class="rs-t">${r.t}</div><div class="rs-d">${r.d}</div></div></div>`;
     });
-    h+=`</div></div>`;
+    h+=`</div>
+      <div class="tip" style="margin:12px 14px 14px;"><span class="ti">🥟</span><span class="tt">Die <b>Samosas</b> werden immer zuerst direkt zur <b>Börse</b> gebracht — von dort startet die weitere Verteilung.</span></div>
+      <div class="tip" style="margin:0 14px 14px;"><span class="ti">📷</span><span class="tt">Foto vom Karma-Transporter folgt.</span></div>
+    </div>`;
   }
   document.getElementById('v-flow').innerHTML=h;
 }
@@ -2090,7 +2173,16 @@ function routeMapSvg(){
   return `<svg class="map-svg" id="route-svg" viewBox="0 0 340 170" xmlns="http://www.w3.org/2000/svg" style="background:#F7F4EC;">
     <path id="route-path" d="${path}" fill="none" stroke="#E0521F" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.5"/>
     ${dots}
-    <g id="route-van" style="opacity:0;"><circle r="12" fill="#1A1A18"/><text y="4.5" font-size="13" text-anchor="middle">🚐</text></g>
+    <g id="route-van" style="opacity:0;">
+      <g transform="translate(-13,-9)">
+        <rect x="0" y="2" width="20" height="11" rx="2" fill="#E94E1B"/>
+        <path d="M20 5h4l3 3v5h-7z" fill="#1A1A18"/>
+        <rect x="21" y="6" width="4" height="3.5" rx="0.5" fill="#D4FF3F"/>
+        <circle cx="6" cy="14" r="2.6" fill="#1A1A18"/><circle cx="6" cy="14" r="1" fill="#fff"/>
+        <circle cx="22" cy="14" r="2.6" fill="#1A1A18"/><circle cx="22" cy="14" r="1" fill="#fff"/>
+        <text x="10" y="10" font-size="5.5" font-weight="800" fill="#fff" text-anchor="middle" font-family="sans-serif">KARMA</text>
+      </g>
+    </g>
   </svg>`;
 }
 let routeAnim=null;
