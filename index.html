@@ -533,6 +533,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* ---------- WISSENSDATENBANK ---------- */
 .kb-search{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:14px;font-size:16px;outline:none;margin-bottom:12px;font-family:inherit;background:#fff;}
+.kb-live-cat{margin-bottom:18px;}
+.kb-live-cat-head{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800;margin-bottom:8px;}
+.kb-live-count{background:var(--cream);color:var(--muted);font-size:11px;font-weight:800;padding:2px 8px;border-radius:8px;}
+.kb-art-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 15px;margin-bottom:8px;cursor:pointer;}
+.kb-art-card.editing{cursor:default;}
+.kb-art-content{max-height:120px;overflow:hidden;position:relative;}
+.kb-add-btn{width:100%;background:none;border:1.5px dashed var(--border);color:var(--muted);border-radius:12px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:2px;}
+.kb-art-title-input{width:100%;border:2px solid var(--border);border-radius:10px;padding:10px 12px;font-size:15px;font-weight:700;font-family:inherit;outline:none;margin-bottom:8px;}
+.kb-art-title-input:focus{border-color:var(--orange);}
+.cred-panel{background:var(--ink);border-radius:16px;padding:16px;margin-bottom:16px;color:#fff;}
+.cred-panel-t{font-size:14px;font-weight:800;color:var(--neon);margin-bottom:10px;}
+.cred-cat{font-size:11.5px;font-weight:800;color:#CFC9BC;text-transform:uppercase;letter-spacing:.3px;margin:12px 0 6px;}
+.cred-cat:first-of-type{margin-top:0;}
+.cred-row{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:13.5px;}
+.cred-lbl{color:#CFC9BC;}
+.cred-val{color:#fff;font-weight:700;font-family:monospace;text-align:right;}
+.cred-note{font-size:11px;color:#9B9587;margin-top:12px;line-height:1.4;}
 .kb-search:focus{border-color:var(--orange);}
 .kb-filters{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px;-webkit-overflow-scrolling:touch;}
 .kb-filters::-webkit-scrollbar{display:none;}
@@ -880,6 +897,7 @@ const STORES = [
   {id:'lb', name:'Laurenzerberg', short:'Laurenzerberg', col:'#00A878'},
   {id:'boerse', name:'Börse', short:'Börse', col:'#00B4CC'},
   {id:'1020', name:'Ausstellungsstraße', short:'1020', col:'#F0806B'},
+  {id:'1070', name:'Neustiftgasse', short:'1070', col:'#7B61FF'},
   {id:'3400', name:'Stadtplatz Klosterneuburg', short:'Stadtplatz', col:'#E0521F'},
   {id:'kitchen', name:'Produktionsküche', short:'Kitchen', col:'#F0A500'},
 ];
@@ -1879,9 +1897,12 @@ function renderHome(){
     h+=`<div class="guide-block">
       <div class="gb-head"><span class="gb-ic" style="background:${block.col};">${block.ic}</span>
         <div><div class="gb-t">${block.t}</div><div class="gb-intro">${block.intro}</div></div></div>`;
-    // Beim Ankommen-Block: Freischalt-Button für Zugangsdaten (nur wenn noch gesperrt)
-    if(block.key==='ankommen' && !S.storeAccessUnlocked){
+    // Beim Ankommen-Block: Freischalt-Button für Zugangsdaten (nur wenn noch gesperrt bzw. nach Reload nicht mehr im Speicher)
+    if(block.key==='ankommen' && !(S.storeAccessUnlocked && secureCreds[S.store])){
       h+=`<button class="gc-access-btn" onclick="unlockStoreAccess()">🔓 Vor Ort? Zugangsdaten freischalten</button>`;
+    }
+    if(block.key==='ankommen' && S.storeAccessUnlocked && secureCreds[S.store]){
+      h+=secureCredsHtml();
     }
     h+=`<div class="gb-cards">`;
     block.cards.forEach(card=>{
@@ -2087,11 +2108,40 @@ async function guideDelImg(key){
   try{ await sgSaveField(store, blockKey, cardId, 'img', null); }catch(e){}
   renderHome(); setTimeout(()=>guideEdit(key),20);
 }
-function unlockStoreAccess(){
+let secureCreds = {}; // Nicht in S/localStorage — bewusst nur im Arbeitsspeicher, verschwindet beim Schließen
+async function unlockStoreAccess(){
   const code=prompt('Zugangs-Code für die sensiblen Store-Daten (bekommst du vor Ort):');
   if(code===null) return;
-  if(code.trim().toUpperCase()===UNLOCK_CODE){ S.storeAccessUnlocked=true; save(); renderHome(); toast('Zugangsdaten freigeschaltet ✓'); }
-  else { toast('Code stimmt nicht — frag kurz im Store nach.'); }
+  if(!ensureName()) return;
+  toast('Wird geprüft…');
+  try{
+    const res = await fetch(`${SUPA_URL}/functions/v1/get-credentials`, {
+      method:'POST', headers: sgHeaders(),
+      body: JSON.stringify({code, store_id:S.store, name:S.name})
+    });
+    if(res.status===401){ toast('Code stimmt nicht — frag kurz im Store nach.'); return; }
+    if(!res.ok) throw new Error('server error');
+    const {data} = await res.json();
+    secureCreds[S.store] = data || [];
+    S.storeAccessUnlocked=true; save(); renderHome();
+    toast('Zugangsdaten freigeschaltet ✓');
+  }catch(e){ toast('Verbindung fehlgeschlagen — Internet prüfen 📡'); }
+}
+function secureCredsHtml(){
+  const rows = secureCreds[S.store];
+  if(!rows || !rows.length) return '';
+  const CAT_LABELS = {zugang:'🔑 Zugang & Geräte', ready2order:'💳 Kassensystem', tgtg_login:'🥡 Too Good To Go Login', todo_app:'✅ To-Do App', spotify:'🎵 Spotify', sonstiges:'📌 Sonstiges'};
+  const byCat = {};
+  rows.forEach(r=>{ if(!byCat[r.category]) byCat[r.category]=[]; byCat[r.category].push(r); });
+  let h = `<div class="cred-panel"><div class="cred-panel-t">🔓 Echte Zugangsdaten für ${storeById(S.store).name}</div>`;
+  Object.keys(byCat).forEach(cat=>{
+    h += `<div class="cred-cat">${CAT_LABELS[cat]||cat}</div>`;
+    byCat[cat].forEach(r=>{
+      h += `<div class="cred-row"><span class="cred-lbl">${escapeHtml(r.label)}</span><span class="cred-val">${escapeHtml(r.value)}</span></div>`;
+    });
+  });
+  h += `<div class="cred-note">Diese Ansicht wird nicht gespeichert — nach dem Schließen der App musst du bei Bedarf neu freischalten.</div></div>`;
+  return h;
 }
 function switchToFull(){
   if(!confirm('Willkommens-Prozess starten? Du kannst danach jederzeit wieder direkt zum Store-Guide.')) return;
@@ -2481,19 +2531,151 @@ function kbSaveEdit(key){
   kbState.editing=null; save(); renderKB(); toast('Gespeichert ✓ — für alle sichtbar');
 }
 
+// Kategorien der "live" Wissensdatenbank (Supabase, laufend erweiterbar)
+const KB_LIVE_CATEGORIES = [
+  {key:'abrechnung', t:'Abrechnung', ic:'💳'},
+  {key:'gutscheine', t:'Gutscheine & Rabatte', ic:'🎟️'},
+  {key:'stempelpass', t:'Stempelpass', ic:'📇'},
+  {key:'tgtg', t:'Too Good To Go', ic:'🥡'},
+  {key:'sortiment', t:'Sortiment / Cakes', ic:'🍰'},
+  {key:'sonstiges', t:'Sonstiges', ic:'📌'},
+];
+let kbLiveCache = null; // {category: [articles]}
+let kbLiveLoading = false;
+let kbEditingArticle = null; // id oder 'new:<category>'
+function kbOpenEdit(id){ kbEditingArticle=id; renderKB(); }
+function kbOpenNew(catKey){ kbEditingArticle='new:'+catKey; renderKB(); }
+function kbCancelEdit(){ kbEditingArticle=null; renderKB(); }
+async function kbLoadArticles(){
+  kbLiveLoading = true;
+  try{
+    const res = await fetch(`${SUPA_URL}/rest/v1/kb_articles?select=id,category,title,content,sort_order,updated_by,updated_at&order=sort_order.asc`, {headers: sgHeaders()});
+    if(!res.ok) return;
+    const rows = await res.json();
+    const grouped = {};
+    KB_LIVE_CATEGORIES.forEach(c=>grouped[c.key]=[]);
+    rows.forEach(r=>{ if(!grouped[r.category]) grouped[r.category]=[]; grouped[r.category].push(r); });
+    kbLiveCache = grouped;
+  }catch(e){ console.error('KB laden fehlgeschlagen', e); }
+  kbLiveLoading = false;
+}
+async function kbSaveArticleField(id, newContent){
+  const changedBy = (S.name && S.name.trim()) ? S.name.trim() : 'Unbekannt';
+  let oldContent = null;
+  for(const cat in (kbLiveCache||{})){ const found=(kbLiveCache[cat]||[]).find(a=>a.id===id); if(found){ oldContent=found.content; break; } }
+  const res = await fetch(`${SUPA_URL}/rest/v1/kb_articles?id=eq.${id}`, {
+    method:'PATCH', headers:{...sgHeaders(),'Prefer':'return=minimal'},
+    body: JSON.stringify({content:newContent, updated_by:changedBy, updated_at:new Date().toISOString()})
+  });
+  if(!res.ok) throw new Error('save failed');
+  fetch(`${SUPA_URL}/rest/v1/kb_articles_history`, {
+    method:'POST', headers:{...sgHeaders(),'Prefer':'return=minimal'},
+    body: JSON.stringify({article_id:id, old_content:oldContent, new_content:newContent, changed_by:changedBy})
+  }).catch(()=>{});
+}
+async function kbCreateArticle(category, title, content){
+  const changedBy = (S.name && S.name.trim()) ? S.name.trim() : 'Unbekannt';
+  const sortOrder = ((kbLiveCache && kbLiveCache[category]) || []).length;
+  const res = await fetch(`${SUPA_URL}/rest/v1/kb_articles`, {
+    method:'POST', headers:{...sgHeaders(),'Prefer':'return=minimal'},
+    body: JSON.stringify({category, title, content, sort_order:sortOrder, updated_by:changedBy})
+  });
+  if(!res.ok) throw new Error('create failed');
+}
+
 function renderKB(){
   const el = document.getElementById('v-kb');
   if(kbState.view==='store'){ el.innerHTML = kbStoreHtml(kbState.store); return; }
   el.innerHTML = kbHubHtml();
+  if(kbLiveCache===null && !kbLiveLoading){
+    kbLoadArticles().then(()=>{ if(kbState.view!=='store') renderKB(); });
+  }
 }
+function kbLiveSectionHtml(){
+  let h = `<div class="sec-lbl">🔴 Live-Wissensdatenbank <span style="font-weight:500;color:var(--muted);">— für alle Stores, sofort gespeichert</span></div>`;
+  if(kbLiveCache===null){
+    h += `<div class="tip"><span class="ti">⏳</span><span class="tt">Lädt…</span></div>`;
+    return h;
+  }
+  KB_LIVE_CATEGORIES.forEach(cat=>{
+    const articles = (kbLiveCache[cat.key]||[]);
+    h += `<div class="kb-live-cat">
+      <div class="kb-live-cat-head"><span>${cat.ic}</span><span>${cat.t}</span><span class="kb-live-count">${articles.length}</span></div>`;
+    articles.forEach(a=>{
+      h += kbArticleCardHtml(a);
+    });
+    if(kbEditingArticle==='new:'+cat.key){
+      h += `<div class="kb-art-card editing">
+        <input id="kb-new-title-${cat.key}" class="kb-art-title-input" placeholder="Titel, z.B. „Kassenschnitt Ablauf"">
+        <textarea id="kb-new-content-${cat.key}" class="gc-ta" rows="4" placeholder="Text eingeben…"></textarea>
+        <div class="gc-edit-btns"><button class="gc-save" onclick="kbNewArticleSave('${cat.key}')">Speichern</button><button class="gc-cancel" onclick="kbCancelEdit()">Abbrechen</button></div>
+      </div>`;
+    } else {
+      h += `<button class="kb-add-btn" onclick="kbOpenNew('${cat.key}')">+ Neuer Eintrag in „${cat.t}"</button>`;
+    }
+    h += `</div>`;
+  });
+  return h;
+}
+function kbArticleCardHtml(a){
+  const whoWhen = a.updated_by ? `<div class="gc-meta">Zuletzt: ${escapeHtml(a.updated_by)} · ${fmtWhen(a.updated_at)}</div>` : '';
+  if(kbEditingArticle===a.id){
+    return `<div class="kb-art-card editing">
+      <div class="gc-t">${escapeHtml(a.title)}</div>
+      <textarea id="kb-art-ta-${a.id}" class="gc-ta" rows="6">${escapeHtml(a.content)}</textarea>
+      <div class="gc-edit-btns"><button class="gc-save" id="kb-art-save-${a.id}" onclick="kbArticleSave(${a.id})">Speichern</button><button class="gc-cancel" onclick="kbCancelEdit()">Abbrechen</button></div>
+      ${whoWhen}
+    </div>`;
+  }
+  // einfache Markdown-artige Darstellung: **fett**, Zeilenumbrüche, - Listen
+  const rendered = escapeHtml(a.content)
+    .replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')
+    .replace(/\n/g,'<br>');
+  return `<div class="kb-art-card" onclick="kbOpenEdit(${a.id})">
+    <div class="gc-t">${escapeHtml(a.title)}</div>
+    <div class="gc-d kb-art-content">${rendered}</div>
+    <div class="gc-hint">✎ Bearbeiten</div>
+    ${whoWhen}
+  </div>`;
+}
+async function kbArticleSave(id){
+  const ta = document.getElementById('kb-art-ta-'+id);
+  const btn = document.getElementById('kb-art-save-'+id);
+  if(!ta) return;
+  if(btn){ btn.disabled=true; btn.textContent='Speichert…'; }
+  try{
+    await kbSaveArticleField(id, ta.value);
+    await kbLoadArticles();
+    kbEditingArticle=null; renderKB(); toast('Gespeichert ✓');
+  }catch(e){
+    if(btn){ btn.disabled=false; btn.textContent='Speichern'; }
+    toast('Speichern fehlgeschlagen — Internet prüfen 📡');
+  }
+}
+async function kbNewArticleSave(catKey){
+  const titleEl = document.getElementById('kb-new-title-'+catKey);
+  const contentEl = document.getElementById('kb-new-content-'+catKey);
+  const title = titleEl.value.trim(), content = contentEl.value.trim();
+  if(!title || !content){ toast('Bitte Titel und Text ausfüllen.'); return; }
+  try{
+    await kbCreateArticle(catKey, title, content);
+    await kbLoadArticles();
+    kbEditingArticle=null; renderKB(); toast('Eintrag gespeichert ✓');
+  }catch(e){ toast('Speichern fehlgeschlagen — Internet prüfen 📡'); }
+}
+
+
 function kbHubHtml(){
   let h = `<div class="hero" style="background:var(--purple);">
     <div class="hero-hi" style="color:#fff;opacity:.9;">📖 Wissensdatenbank</div>
     <div class="hero-name head" style="font-size:22px;">Alles, was du wissen musst.</div>
     <div style="font-size:13px;color:#fff;opacity:.9;">Allgemeine Dokumente für alle Standorte — plus deine Store-Seite weiter unten.</div>
   </div>`;
-  h += `<div class="tip"><span class="ti">✎</span><span class="tt">Alles hier ist bearbeitbar — Stift antippen, korrigieren, speichern. Läuft grad noch lokal in deinem Browser, ideal zum gemeinsamen Verfeinern der Inhalte.</span></div>`;
+  h += `<div class="tip"><span class="ti">✎</span><span class="tt">Die Live-Wissensdatenbank unten ist für alle geteilt und sofort gespeichert. Die älteren Kategorien weiter unten sind noch lokal in deinem Browser — wandern nach und nach in den Live-Bereich.</span></div>`;
   h += `<input class="kb-search" id="kb-search" placeholder="🔍 Suchen — z.B. Kassaabschluss, Stempelpass…" oninput="kbFilter(this.value)" value="${escapeHtml(kbState.filter)}">`;
+
+  h += kbLiveSectionHtml();
+
   h += `<div class="kb-filters">`;
   KB_CATEGORIES.forEach((c,i)=> h += `<button class="kb-filter" onclick="kbJumpCat(${i})">${c.ic} ${c.t}</button>`);
   h += `</div>`;
@@ -2644,6 +2826,9 @@ window.kbOpenStore=kbOpenStore; window.kbBackToHub=kbBackToHub; window.kbSetTab=
 window.kbStartEdit=kbStartEdit; window.kbCancelEdit=kbCancelEdit; window.kbSaveEdit=kbSaveEdit;
 window.pbToggle=pbToggle; window.pbAutoCheck=pbAutoCheck; window.pbToggleQr=pbToggleQr;
 window.finishPreboard=finishPreboard; window.reopenPreboard=reopenPreboard; window.pbPhotoUpload=pbPhotoUpload;
+window.kbArticleSave=kbArticleSave; window.kbNewArticleSave=kbNewArticleSave;
+window.kbOpenEdit=kbOpenEdit; window.kbOpenNew=kbOpenNew; window.kbCancelEdit=kbCancelEdit;
+window.unlockStoreAccess=unlockStoreAccess;
 window.gateFb=gateFb; window.gateSendFb=gateSendFb; window.gateUnlock=gateUnlock; window.gatePeek=gatePeek;
 window.gateSetDays=gateSetDays; window.gateSetGf=gateSetGf; window.gateSetStore=gateSetStore; window.gateSendData=gateSendData;
 window.setWlMapTab=setWlMapTab; window.showStoreCard=showStoreCard; window.pickStore=pickStore; window.tlStep=tlStep;
