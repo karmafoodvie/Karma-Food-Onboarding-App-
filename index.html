@@ -144,6 +144,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pb-step-t{font-size:16px;font-weight:800;line-height:1.25;}
 .pb-step-d{font-size:13.5px;color:var(--sub);line-height:1.5;margin-top:5px;}
 .pb-action{display:inline-flex;align-items:center;gap:7px;background:var(--ink);color:#fff;text-decoration:none;font-size:14px;font-weight:700;padding:11px 18px;border-radius:12px;margin-top:12px;}
+.pb-photo-block{margin-top:14px;padding-top:14px;border-top:1px dashed var(--border);}
+.pb-photo-lbl{font-size:13px;font-weight:800;margin-bottom:3px;}
+.pb-photo-note{font-size:11.5px;color:var(--muted);line-height:1.5;margin-bottom:10px;}
+.pb-photo-btn{display:inline-block;background:var(--orange);color:#fff;font-size:13px;font-weight:700;padding:10px 16px;border-radius:10px;cursor:pointer;}
+.pb-photo-done{display:inline-block;background:var(--green-soft);color:var(--green);font-size:13px;font-weight:700;padding:9px 16px;border-radius:10px;}
 .pb-action:active{transform:scale(.97);}
 .pb-qr{margin-top:14px;text-align:center;}
 .pb-qr img{width:190px;height:auto;border-radius:12px;border:1px solid var(--border);}
@@ -320,6 +325,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .gc-t{font-size:15px;font-weight:800;margin-bottom:3px;}
 .gc-d{font-size:13px;color:var(--sub);line-height:1.5;white-space:pre-line;}
 .gc-hint{font-size:11px;color:var(--orange);font-weight:700;margin-top:7px;}
+.gc-meta{font-size:10px;color:var(--muted);margin-top:5px;}
 .guide-card.locked .gc-t{color:var(--muted);}
 .gc-locked-d{color:var(--muted);}
 
@@ -881,7 +887,7 @@ const STORES = [
 const PREBOARD_STEPS = [
   {id:'pb_app', ic:'📱', t:'„Mein Dienstplan" App laden',
    d:'Lad dir die App „Mein Dienstplan" aus dem App Store (iPhone) oder Google Play (Android) — darüber siehst du deine Schichten und meldest Urlaub/Krankheit.',
-   action:{label:'Im App Store suchen', url:'https://apps.apple.com/at/app/mein-dienstplan/id1054542445'}},
+   action:{label:'Im App Store suchen', url:'https://apps.apple.com/at/app/mein-dienstplan/id1054542445'}, photoUpload:true},
   {id:'pb_info', ic:'💬', t:'WhatsApp „Karma Info" beitreten',
    d:'Allgemeine Infos zu Veränderungen & Co. — hier bist du immer up to date.',
    action:{label:'Gruppe beitreten', url:'https://chat.whatsapp.com/JUMKsB2fbrD5LkLnp0pEUm'},
@@ -1697,6 +1703,16 @@ function renderPreboard(){
     const on = S.pbChecks[s.id];
     const qrBlock = s.qr ? `<button class="pb-qr-toggle" onclick="pbToggleQr('${s.id}')">${S.pbQrOpen===s.id?'▲ QR-Code ausblenden':'▼ QR-Code zum Scannen zeigen'}</button>
       ${S.pbQrOpen===s.id?`<div class="pb-qr"><img src="${s.qr}" alt="QR"><div class="pb-qr-cap">Mit der WhatsApp-Kamera scannen</div></div>`:''}` : '';
+    const photoBlock = s.photoUpload ? `<div class="pb-photo-block">
+        <div class="pb-photo-lbl">📸 Foto für die Dienstplan-Registrierung</div>
+        <div class="pb-photo-note">
+          <b>Verwendungszweck:</b> Dein Foto wird ausschließlich verwendet, um dein Profil in der App „Mein Dienstplan" anzulegen (für Schichtplan & Zeiterfassung).<br>
+          Es wird nicht für andere Zwecke genutzt, nicht an Dritte weitergegeben und ist für andere Crew-Mitglieder nicht sichtbar. Wir löschen es, sobald dein Profil angelegt ist.
+        </div>
+        ${S.pbPhotoSent
+          ? `<div class="pb-photo-done">✓ Foto gesendet, danke!</div>`
+          : `<label class="pb-photo-btn">Foto hochladen<input type="file" accept="image/*" style="display:none" onchange="pbPhotoUpload(event)"></label>`}
+      </div>` : '';
     return `<div class="pb-step">
       <div class="pb-step-top">
         <div class="pb-check ${on?'on':''}" onclick="pbToggle('${s.id}')">${on?'✓':''}</div>
@@ -1706,10 +1722,28 @@ function renderPreboard(){
           <div class="pb-step-d">${s.d}</div>
           <a class="pb-action" href="${s.action.url}" target="_blank" rel="noopener" onclick="pbAutoCheck('${s.id}')">${s.action.label} ↗</a>
           ${qrBlock}
+          ${photoBlock}
         </div>
       </div>
     </div>`;
   }).join('');
+}
+async function pbPhotoUpload(ev){
+  const file=ev.target.files&&ev.target.files[0]; if(!file) return;
+  if(!S.name || !S.name.trim()){ const n=prompt('Wie heißt du? (fürs Foto brauchen wir deinen Namen)'); if(!n||!n.trim()){ toast('Ohne Namen kann ich das Foto nicht zuordnen.'); return; } S.name=n.trim(); save(); }
+  toast('Foto wird gesendet…');
+  const reader=new FileReader();
+  reader.onload=async ()=>{
+    try{
+      const res=await fetch(`${SUPA_URL}/rest/v1/preboard_photos`, {
+        method:'POST', headers:{...sgHeaders(),'Prefer':'return=minimal'},
+        body: JSON.stringify({name:S.name, photo_data_url:reader.result})
+      });
+      if(!res.ok) throw new Error('upload failed');
+      S.pbPhotoSent=true; save(); renderPreboard(); toast('Foto gesendet ✓');
+    }catch(e){ toast('Upload fehlgeschlagen — Internet prüfen 📡'); }
+  };
+  reader.readAsDataURL(file);
 }
 function pbToggle(id){ if(!S.pbChecks) S.pbChecks={}; S.pbChecks[id]=!S.pbChecks[id]; save(); renderPreboard(); }
 function pbAutoCheck(id){ if(!S.pbChecks) S.pbChecks={}; S.pbChecks[id]=true; save(); setTimeout(renderPreboard,100); }
@@ -1760,6 +1794,9 @@ function bootApp(){
   document.getElementById('tb-sub').textContent = isKitchen() ? `${AREA_LABEL.kitchen}` : (hasStore ? `${AREA_LABEL.store} · ${st.short}` : `${AREA_LABEL.store}`);
   document.getElementById('tb-av').textContent = (S.name||'?').slice(0,2).toUpperCase();
   buildNav(); renderAll(); go('home');
+  if(!isKitchen() && hasStore){
+    sgLoadStore(S.store).then(()=>{ renderHome(); });
+  }
 }
 function renderAll(){ renderHome(); renderModules(); renderFlow(); renderStore(); renderCheck(); renderHelp(); renderKB(); renderDuty(); }
 function renderDuty(){
@@ -1864,13 +1901,73 @@ function renderHome(){
 }
 
 // Eine Guide-Karte (mit Foto + Text, editierbar, locked-Handling)
+/* ============ STORE-GUIDE — geteilte Datenbank (Supabase) ============ */
+// Eigenes, unabhängiges Backend nur für dieses Tool (Onboarding Chefcook-Projekt,
+// aber eigene Tabellen store_guide_content / store_guide_history — komplett getrennt
+// von der Odoo-App und der Chef-App).
+const SUPA_URL = 'https://bvkvvycoletlvqkrqybj.supabase.co';
+const SUPA_KEY = 'sb_publishable_zVf9_g07xOfI9jduuAmhww_n0k3albR';
+function sgHeaders(){ return {'apikey':SUPA_KEY, 'Authorization':'Bearer '+SUPA_KEY, 'Content-Type':'application/json'}; }
+
+// Lädt alle Karten-Inhalte eines Stores aus der Datenbank in den lokalen Cache (S.guideRemote)
+async function sgLoadStore(storeId){
+  try{
+    const res = await fetch(`${SUPA_URL}/rest/v1/store_guide_content?store_id=eq.${encodeURIComponent(storeId)}&select=block_key,card_id,txt,img_data_url,updated_by,updated_at`, {headers: sgHeaders()});
+    if(!res.ok) return;
+    const rows = await res.json();
+    if(!S.guideRemote) S.guideRemote = {};
+    const map = {};
+    rows.forEach(r=>{ map[r.block_key+':'+r.card_id] = {txt:r.txt, img:r.img_data_url, updated_by:r.updated_by, updated_at:r.updated_at}; });
+    S.guideRemote[storeId] = map;
+  }catch(e){ console.error('Store-Guide laden fehlgeschlagen', e); }
+}
+// Speichert ein Feld (txt oder img) einer Karte + schreibt ins Änderungsprotokoll
+async function sgSaveField(storeId, blockKey, cardId, field, newValue){
+  const changedBy = (S.name && S.name.trim()) ? S.name.trim() : 'Unbekannt';
+  const key = blockKey+':'+cardId;
+  const cacheEntry = (S.guideRemote && S.guideRemote[storeId] && S.guideRemote[storeId][key]) || {};
+  const oldValue = field==='txt' ? (cacheEntry.txt!=null?cacheEntry.txt:null) : (cacheEntry.img||null);
+  const nowIso = new Date().toISOString();
+  const body = {store_id:storeId, block_key:blockKey, card_id:cardId, updated_by:changedBy, updated_at:nowIso};
+  body[field==='txt' ? 'txt' : 'img_data_url'] = newValue;
+  const res = await fetch(`${SUPA_URL}/rest/v1/store_guide_content?on_conflict=store_id,block_key,card_id`, {
+    method:'POST', headers:{...sgHeaders(),'Prefer':'resolution=merge-duplicates,return=minimal'}, body: JSON.stringify(body)
+  });
+  if(!res.ok) throw new Error('Speichern fehlgeschlagen');
+  fetch(`${SUPA_URL}/rest/v1/store_guide_history`, {
+    method:'POST', headers:{...sgHeaders(),'Prefer':'return=minimal'},
+    body: JSON.stringify({store_id:storeId, block_key:blockKey, card_id:cardId, field, old_value:oldValue, new_value:newValue, changed_by:changedBy})
+  }).catch(()=>{});
+  if(!S.guideRemote) S.guideRemote={};
+  if(!S.guideRemote[storeId]) S.guideRemote[storeId]={};
+  const prev = S.guideRemote[storeId][key] || {};
+  S.guideRemote[storeId][key] = {...prev, [field==='txt'?'txt':'img']:newValue, updated_by:changedBy, updated_at:nowIso};
+}
+function guideVal(blockKey, cardId){
+  const store = S.guideRemote && S.guideRemote[S.store];
+  return store ? (store[blockKey+':'+cardId] || null) : null;
+}
+// Fragt einmalig nach dem Namen, damit Änderungen zuordenbar sind
+function ensureName(){
+  if(S.name && S.name.trim()) return true;
+  const n = prompt('Wie heißt du? (damit wir sehen, wer was aktualisiert hat)');
+  if(!n || !n.trim()){ toast('Ohne Namen kann ich das nicht speichern.'); return false; }
+  S.name = n.trim(); save();
+  return true;
+}
+function fmtWhen(iso){
+  if(!iso) return '';
+  try{ const d=new Date(iso); return d.toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString('de-AT',{hour:'2-digit',minute:'2-digit'}); }catch(e){ return ''; }
+}
+
+
 function guideCardHtml(block, card){
   const gkey = `guide:${S.store}:${block.key}:${card.id}`;
-  const txtKey = gkey+':txt';
-  const imgKey = gkey+':img';
-  const savedTxt = kbGet(txtKey, card.d);
-  const savedImg = (S.guideImg && S.guideImg[imgKey]) || null;
+  const remote = guideVal(block.key, card.id);
+  const savedTxt = (remote && remote.txt!=null && remote.txt!=='') ? remote.txt : card.d;
+  const savedImg = (remote && remote.img) ? remote.img : null;
   const emoji = card.e || block.ic;
+  const whoWhen = remote && remote.updated_by ? `<div class="gc-meta">Zuletzt: ${escapeHtml(remote.updated_by)} · ${fmtWhen(remote.updated_at)}</div>` : '';
 
   // Editier-Modus
   if(guideEditing===gkey){
@@ -1882,7 +1979,8 @@ function guideCardHtml(block, card){
         <label class="gc-img-btn">Foto wählen<input type="file" accept="image/*" style="display:none" onchange="guidePickImg(event,'${gkey}')"></label>
         ${savedImg?`<button class="gc-img-del" onclick="guideDelImg('${gkey}')">Foto entfernen</button>`:''}
       </div>
-      <div class="gc-edit-btns"><button class="gc-save" onclick="guideSave('${gkey}')">Speichern</button><button class="gc-cancel" onclick="guideCancel()">Abbrechen</button></div>
+      <div class="gc-edit-btns"><button class="gc-save" id="gc-save-${cssId(gkey)}" onclick="guideSave('${gkey}')">Speichern</button><button class="gc-cancel" onclick="guideCancel()">Abbrechen</button></div>
+      ${whoWhen}
     </div>`;
   }
 
@@ -1907,6 +2005,7 @@ function guideCardHtml(block, card){
       <div class="gc-t">${card.t}</div>
       <div class="gc-d">${escapeHtml(savedTxt).replace(/\n/g,'<br>')}</div>
       <div class="gc-hint">${savedImg?'✎ Bearbeiten':'✎ Foto & Text'}</div>
+      ${whoWhen}
     </div>
   </div>`;
 }
@@ -1947,27 +2046,47 @@ function renderHomeKitchen(){
 /* ---- Store-Guide Interaktion ---- */
 let guideEditing=null;
 function cssId(k){ return k.replace(/[^a-zA-Z0-9]/g,'_'); }
+function parseGKey(key){ const p=key.split(':'); return {store:p[1], blockKey:p[2], cardId:p[3]}; }
 function pickStoreGuide(id){ S.store=id; save(); bootApp(); }
 function clearStoreGuide(){ S.store=''; save(); bootApp(); }
-function guideEdit(key){ guideEditing=key; renderHome();
-  setTimeout(()=>{ const ta=document.getElementById('gc-ta-'+cssId(key)); if(ta){ta.focus();} },30); }
+function guideEdit(key){
+  if(!ensureName()) return;
+  guideEditing=key; renderHome();
+  setTimeout(()=>{ const ta=document.getElementById('gc-ta-'+cssId(key)); if(ta){ta.focus();} },30);
+}
 function guideCancel(){ guideEditing=null; renderHome(); }
-function guideSave(key){
+async function guideSave(key){
   const ta=document.getElementById('gc-ta-'+cssId(key));
-  if(ta){ if(!S.kbEdits) S.kbEdits={}; S.kbEdits[key+':txt']=ta.value; }
-  guideEditing=null; save(); renderHome(); toast('Gespeichert ✓');
+  const btn=document.getElementById('gc-save-'+cssId(key));
+  if(!ta) return;
+  const {store, blockKey, cardId} = parseGKey(key);
+  if(btn){ btn.disabled=true; btn.textContent='Speichert…'; }
+  try{
+    await sgSaveField(store, blockKey, cardId, 'txt', ta.value);
+    guideEditing=null; renderHome(); toast('Gespeichert ✓');
+  }catch(e){
+    if(btn){ btn.disabled=false; btn.textContent='Speichern'; }
+    toast('Speichern fehlgeschlagen — Internet prüfen 📡');
+  }
 }
 function guidePickImg(ev, key){
   const file=ev.target.files&&ev.target.files[0]; if(!file) return;
+  const {store, blockKey, cardId} = parseGKey(key);
   const reader=new FileReader();
-  reader.onload=()=>{
-    if(!S.guideImg) S.guideImg={};
-    S.guideImg[key+':img']=reader.result; save();
-    renderHome(); setTimeout(()=>guideEdit(key),20);
+  reader.onload=async ()=>{
+    toast('Foto wird hochgeladen…');
+    try{
+      await sgSaveField(store, blockKey, cardId, 'img', reader.result);
+      renderHome(); setTimeout(()=>guideEdit(key),20); toast('Foto gespeichert ✓');
+    }catch(e){ toast('Foto-Upload fehlgeschlagen — Internet prüfen 📡'); }
   };
   reader.readAsDataURL(file);
 }
-function guideDelImg(key){ if(S.guideImg){ delete S.guideImg[key+':img']; save(); } renderHome(); setTimeout(()=>guideEdit(key),20); }
+async function guideDelImg(key){
+  const {store, blockKey, cardId} = parseGKey(key);
+  try{ await sgSaveField(store, blockKey, cardId, 'img', null); }catch(e){}
+  renderHome(); setTimeout(()=>guideEdit(key),20);
+}
 function unlockStoreAccess(){
   const code=prompt('Zugangs-Code für die sensiblen Store-Daten (bekommst du vor Ort):');
   if(code===null) return;
@@ -2524,7 +2643,7 @@ window.kbFilter=kbFilter; window.kbToggleCat=kbToggleCat; window.kbJumpCat=kbJum
 window.kbOpenStore=kbOpenStore; window.kbBackToHub=kbBackToHub; window.kbSetTab=kbSetTab;
 window.kbStartEdit=kbStartEdit; window.kbCancelEdit=kbCancelEdit; window.kbSaveEdit=kbSaveEdit;
 window.pbToggle=pbToggle; window.pbAutoCheck=pbAutoCheck; window.pbToggleQr=pbToggleQr;
-window.finishPreboard=finishPreboard; window.reopenPreboard=reopenPreboard;
+window.finishPreboard=finishPreboard; window.reopenPreboard=reopenPreboard; window.pbPhotoUpload=pbPhotoUpload;
 window.gateFb=gateFb; window.gateSendFb=gateSendFb; window.gateUnlock=gateUnlock; window.gatePeek=gatePeek;
 window.gateSetDays=gateSetDays; window.gateSetGf=gateSetGf; window.gateSetStore=gateSetStore; window.gateSendData=gateSendData;
 window.setWlMapTab=setWlMapTab; window.showStoreCard=showStoreCard; window.pickStore=pickStore; window.tlStep=tlStep;
