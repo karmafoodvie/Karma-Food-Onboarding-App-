@@ -29,6 +29,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wl-kicker{color:var(--neon);font-size:13px;letter-spacing:2px;font-weight:700;text-transform:uppercase;margin-bottom:auto;padding-top:20px;}
 .wl-big{color:#fff;font-size:34px;line-height:1.15;margin:0 0 18px;}
 .wl-txt{color:#FFE9DF;font-size:16px;line-height:1.6;margin-bottom:14px;}
+.wl-signature{font-style:italic;color:var(--neon);font-size:14.5px;font-weight:600;margin-top:4px;margin-bottom:8px;opacity:.95;}
 .wl-emoji{font-size:52px;margin-bottom:18px;}
 .wl-logo-badge{width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:16px;padding:8px;box-shadow:0 4px 14px rgba(0,0,0,.15);}
 .wl-logo-badge img{width:100%;height:100%;object-fit:contain;display:block;}
@@ -99,8 +100,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .prod-grid-wl{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
 .prod-card-wl{background:rgba(255,255,255,.1);border-radius:14px;padding:13px 15px;display:flex;gap:12px;align-items:center;}
 .prod-card-wl .pc-e{font-size:26px;}
+.prod-card-wl .pc-photo{width:46px;height:46px;border-radius:10px;object-fit:cover;flex-shrink:0;}
 .prod-card-wl .pc-t{color:#fff;font-size:14px;font-weight:800;}
 .prod-card-wl .pc-d{color:#FFE9DF;font-size:12px;line-height:1.4;margin-top:2px;}
+.wl-mini-photo{width:100%;aspect-ratio:16/10;border-radius:16px;overflow:hidden;margin:10px 0 6px;}
+.wl-mini-photo img{width:100%;height:100%;object-fit:cover;display:block;}
 
 /* ---------- WELCOME: FEATURE GRID (Catering/Kochkurse) ---------- */
 .feat-grid{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
@@ -633,8 +637,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="wl-logo-badge"><img src="https://karmafood.at/cdn/shop/files/Karma_Food_Wien.png?v=1760621788&width=200" alt="Karma Food Logo"></div>
     <div class="wl-hero-photo"><img src="https://karmafood.at/cdn/shop/files/Karma-Food-Lunch-vegan-Wien.jpg?v=1777450260&width=1200" alt="Karma Food"></div>
     <h1 class="wl-big head">Schön, dass<br>du da bist!</h1>
-    <p class="wl-txt">Willkommen bei der Karma Food Crew. Wir freuen uns, dass du Teil unserer Reise wirst — und mit uns die Welt ein Stück genussvoller und nachhaltiger machst.</p>
-    <p class="wl-txt">Bevor's an die Arbeit geht, nehmen wir dich kurz mit auf eine kleine Reise durch Karma Food. Los geht's? 👇</p>
+    <p class="wl-txt">Hi, wir sind Adi & Simone. 2014 haben wir Karma Food aus einer 5m² Küche in Klosterneuburg gestartet — weil wir gute, ehrliche indische Küche nach Wien bringen wollten. Heute sind wir ein ganzes Karma-Universum. Und du bist jetzt Teil davon. 🧡</p>
+    <p class="wl-txt">Bevor's an die Arbeit geht, nehmen wir dich kurz mit auf eine kleine Reise durch Karma Food — unsere Geschichte, unsere Werte, und was uns wirklich wichtig ist. Los geht's? 👇</p>
+    <div class="wl-signature">— Adi &amp; Simone, Gründer:innen</div>
   </div>
 
   <div class="wl-slide" data-s="1">
@@ -709,7 +714,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <div class="wl-slide" data-s="7">
     <div class="wl-kicker">Catering</div>
-    <div class="wl-emoji">🎉</div>
+    <div class="wl-mini-photo"><img src="https://karmafood.at/cdn/shop/files/Karma-Food-Catering-Wien-vegan.jpg?v=1776177470&width=1200" alt="Karma Catering"></div>
     <h1 class="wl-big head">Karma Food,<br>wo du willst.</h1>
     <p class="wl-txt" id="cat-lead"></p>
     <div class="feat-grid" id="cat-grid"></div>
@@ -717,7 +722,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <div class="wl-slide" data-s="8">
     <div class="wl-kicker">Kochkurse</div>
-    <div class="wl-emoji">👨‍🍳</div>
+    <div class="wl-mini-photo"><img src="https://karmafood.at/cdn/shop/files/Karma-Food-Indische-Kochkurse-Wien_90fe9c2d-cfe2-4834-8e1a-6b392a65ee30.jpg?v=1779807782&width=1200" alt="Karma Kochkurse"></div>
     <h1 class="wl-big head">Unser Wissen,<br>deine Küche.</h1>
     <p class="wl-txt" id="kk-lead"></p>
     <div class="feat-grid" id="kk-grid"></div>
@@ -1551,7 +1556,7 @@ function buildWeekRhythm(){
 /* ---- Slide 6: Eigenprodukte ---- */
 function buildProdGrid(){
   document.getElementById('prod-grid-wl').innerHTML = OWN_PRODUCTS.map(p=>
-    `<div class="prod-card-wl"><div class="pc-e">${p.e}</div><div><div class="pc-t">${p.t}</div><div class="pc-d">${p.d}</div></div></div>`
+    `<div class="prod-card-wl">${p.img?`<img class="pc-photo" src="${p.img}" alt="${p.t}">`:`<div class="pc-e">${p.e}</div>`}<div><div class="pc-t">${p.t}</div><div class="pc-d">${p.d}</div></div></div>`
   ).join('');
 }
 /* ---- Slide 7: Catering ---- */
