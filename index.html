@@ -349,6 +349,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .prod-detail-list{display:flex;flex-direction:column;gap:11px;margin-top:8px;}
 .prod-detail{background:#fff;border:1px solid var(--border);border-radius:14px;padding:13px 15px;display:flex;gap:13px;align-items:flex-start;}
 .pd-emoji{width:46px;height:46px;border-radius:12px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.pd-photo{width:64px;height:64px;border-radius:12px;overflow:hidden;flex-shrink:0;background:var(--cream);}
+.pd-photo img{width:100%;height:100%;object-fit:cover;display:block;}
 .pd-body{flex:1;min-width:0;}
 .pd-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:3px;}
 .pd-t{font-size:15px;font-weight:800;}
@@ -1050,14 +1052,14 @@ const STORY_TIMELINE = [
 
 /* ---------- EIGENPRODUKTE ---------- */
 const OWN_PRODUCTS = [
-  {e:'🥫', t:'Curry Paste', preis:'im Trio €9,90', scharf:2, d:'Mild-würzig, Adis Allrounder. Basis für schnelle Currys, Dals, Wok, Saucen & Marinaden.', use:'Mit Kokosmilch erwärmen, Gemüse & Tofu dazu, ~20 Min garen.'},
-  {e:'🥥', t:'Korma Paste', preis:'im Trio €9,90', scharf:1, d:'Die mildeste — cremig-süßlich mit Cashews, Rosinen & Kokos. Ideal für „Butter Chicken"-Style vegan.', use:'Perfekt für alle, die es gar nicht scharf mögen.'},
-  {e:'🌶️', t:'Madras Paste', preis:'im Trio €9,90', scharf:3, d:'Die schärfste der drei — würzig mit Tamarinde, aber mehr würzig als „hot".', use:'Für alle, die es kräftiger & aromatischer wollen.'},
-  {e:'✨', t:'Masala Trio (Starter Kit)', preis:'€18,90', scharf:0, d:'Mama Masala, Papa Masala & Co. — Gewürzmischungen, die jedem Gericht den letzten Schliff geben.', use:'Papa Masala = die scharfe Prise on top fürs Curry.'},
-  {e:'🥄', t:'Kashmiri Chili Crisp', preis:'€10,90', scharf:3, d:'Knuspriges Chili-Öl mit Zwiebeln — unser Kult-Topping.', use:'Auf Reis, Nudeln, Bowls, Eier — überall drauf.'},
-  {e:'🥭', t:'Mango Chili Hot Sauce', preis:'—', scharf:4, d:'Fruchtig-scharfe Sauce, bringt extra Schärfe auf den Teller.', use:'On top für alle, die es richtig hot mögen.'},
-  {e:'🍵', t:'Chai Sirup', preis:'€8,40', scharf:0, d:'Hausgemacht mit ayurvedischen Gewürzen.', use:'Für Chai Latte oder als Dessert-Topping.'},
-  {e:'📖', t:'Kochbücher', preis:'ab €32', scharf:0, d:'„Karma Food Currys" & Co. — Adis liebste Familienrezepte.', use:'Zum Nachkochen & Verschenken.'},
+  {e:'🥫', img:'https://karmafood.at/cdn/shop/files/curry-paste-kaufen-vegan-ayurvedisch-glutenfrei-karma-food.jpg?v=1754330655&width=600', t:'Curry Paste', preis:'im Trio €9,90', scharf:2, d:'Mild-würzig, Adis Allrounder. Basis für schnelle Currys, Dals, Wok, Saucen & Marinaden.', use:'Mit Kokosmilch erwärmen, Gemüse & Tofu dazu, ~20 Min garen.'},
+  {e:'🥥', img:'https://karmafood.at/cdn/shop/files/korma-paste-3er-pack-kaufen-mildes-curry-vegan-glutenfrei-karma-food.jpg?v=1754330591&width=600', t:'Korma Paste', preis:'im Trio €9,90', scharf:1, d:'Die mildeste — cremig-süßlich mit Cashews, Rosinen & Kokos. Ideal für „Butter Chicken"-Style vegan.', use:'Perfekt für alle, die es gar nicht scharf mögen.'},
+  {e:'🌶️', img:'https://karmafood.at/cdn/shop/files/madras-curry-paste-kaufen-scharfe-vegan-ayurvedische-currybasis-von-karma-food.jpg?v=1754330614&width=600', t:'Madras Paste', preis:'im Trio €9,90', scharf:3, d:'Die schärfste der drei — würzig mit Tamarinde, aber mehr würzig als „hot".', use:'Für alle, die es kräftiger & aromatischer wollen.'},
+  {e:'✨', img:'https://karmafood.at/cdn/shop/files/papa-masala-kaufen-scharfes-curry-gewuerz-von-karma-food-fuer-bowls-und-currys.jpg?v=1754331049&width=600', t:'Masala Trio (Starter Kit)', preis:'€18,90', scharf:0, d:'Mama Masala, Papa Masala & Co. — Gewürzmischungen, die jedem Gericht den letzten Schliff geben.', use:'Papa Masala = die scharfe Prise on top fürs Curry.'},
+  {e:'🥄', img:'https://karmafood.at/cdn/shop/files/kashmiri-chili-crisp-online-bestellen-knuspriges-chili-topping-von-karma-food.jpg?v=1755597499&width=600', t:'Kashmiri Chili Crisp', preis:'€10,90', scharf:3, d:'Knuspriges Chili-Öl mit Zwiebeln — unser Kult-Topping.', use:'Auf Reis, Nudeln, Bowls, Eier — überall drauf.'},
+  {e:'🥭', img:'https://karmafood.at/cdn/shop/files/chili-mango-sauce-kaufen-fruchtig-scharfe-wuerzsauce-von-karma-food.jpg?v=1754330948&width=600', t:'Mango Chili Hot Sauce', preis:'—', scharf:4, d:'Fruchtig-scharfe Sauce, bringt extra Schärfe auf den Teller.', use:'On top für alle, die es richtig hot mögen.'},
+  {e:'🍵', img:'https://karmafood.at/cdn/shop/files/chai-sirup-kaufen-ayurvedischer-tee-sirup-fuer-chai-latte-von-karma-food.jpg?v=1755597499&width=600', t:'Chai Sirup', preis:'€8,40', scharf:0, d:'Hausgemacht mit ayurvedischen Gewürzen.', use:'Für Chai Latte oder als Dessert-Topping.'},
+  {e:'📖', img:'https://karmafood.at/cdn/shop/files/Karma-Food-Currys-Kochbuch-online-kaufen.jpg?v=1761042694&width=600', t:'Kochbücher', preis:'ab €32', scharf:0, d:'„Karma Food Currys" & Co. — Adis liebste Familienrezepte.', use:'Zum Nachkochen & Verschenken.'},
 ];
 
 /* ---------- CATERING ---------- */
@@ -2218,8 +2220,9 @@ function renderStep(){
     OWN_PRODUCTS.forEach(p=>{
       const scharf = p.scharf>0 ? `<div class="pd-scharf">Schärfe: ${'🌶️'.repeat(p.scharf)}<span class="pd-scharf-empty">${'·'.repeat(5-p.scharf)}</span></div>` : '';
       const preis = p.preis && p.preis!=='—' ? `<span class="pd-preis">${p.preis}</span>` : '';
+      const visual = p.img ? `<div class="pd-photo"><img src="${p.img}" alt="${p.t}" loading="lazy"></div>` : `<div class="pd-emoji">${p.e}</div>`;
       h+=`<div class="prod-detail">
-        <div class="pd-emoji">${p.e}</div>
+        ${visual}
         <div class="pd-body">
           <div class="pd-head"><span class="pd-t">${p.t}</span>${preis}</div>
           <div class="pd-d">${p.d}</div>
