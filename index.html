@@ -106,6 +106,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wl-mini-photo{width:100%;aspect-ratio:16/10;border-radius:16px;overflow:hidden;margin:10px 0 6px;}
 .wl-mini-photo img{width:100%;height:100%;object-fit:cover;display:block;}
 
+/* Auf-einen-Blick Karten (Homepage-Style) */
+.glance-stack{display:flex;flex-direction:column;gap:12px;margin-top:8px;}
+.glance-card{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3;}
+.glance-card img{width:100%;height:100%;object-fit:cover;display:block;}
+.glance-overlay{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;background:linear-gradient(0deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.15) 70%,transparent 100%);}
+.glance-kicker{font-size:10.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--neon);}
+.glance-t{font-size:19px;font-weight:800;color:#fff;line-height:1.15;margin:3px 0 4px;}
+.glance-d{font-size:12.5px;color:#EDEAE0;line-height:1.4;}
+
+/* Kochkurs-Karten mit Foto */
+.kk-card{background:rgba(255,255,255,.1);border-radius:14px;overflow:hidden;margin-bottom:10px;}
+.kk-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
+.kk-body{padding:11px 13px;}
+.kk-t{color:#fff;font-size:14px;font-weight:800;}
+.kk-d{color:#FFE9DF;font-size:12px;line-height:1.4;margin-top:3px;}
+.foodies-card{background:rgba(212,255,63,.15);border:1.5px dashed var(--neon);border-radius:14px;padding:13px 15px;margin-top:4px;}
+.foodies-card .fo-t{color:var(--neon);font-size:13.5px;font-weight:800;}
+.foodies-card .fo-d{color:#FFE9DF;font-size:12.5px;line-height:1.5;margin-top:4px;}
+
+.wl-signature-row{display:flex;align-items:center;gap:10px;margin-top:4px;margin-bottom:8px;}
+.wl-founder-photo{width:38px;height:38px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--neon);}
+
 /* ---------- WELCOME: FEATURE GRID (Catering/Kochkurse) ---------- */
 .feat-grid{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
 .feat-card{background:rgba(255,255,255,.1);border-radius:14px;padding:13px 15px;display:flex;gap:12px;align-items:flex-start;}
@@ -639,7 +661,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <h1 class="wl-big head">Schön, dass<br>du da bist!</h1>
     <p class="wl-txt">Hi, wir sind Adi & Simone. 2014 haben wir Karma Food aus einer 5m² Küche in Klosterneuburg gestartet — weil wir gute, ehrliche indische Küche nach Wien bringen wollten. Heute sind wir ein ganzes Karma-Universum. Und du bist jetzt Teil davon. 🧡</p>
     <p class="wl-txt">Bevor's an die Arbeit geht, nehmen wir dich kurz mit auf eine kleine Reise durch Karma Food — unsere Geschichte, unsere Werte, und was uns wirklich wichtig ist. Los geht's? 👇</p>
-    <div class="wl-signature">— Adi &amp; Simone, Gründer:innen</div>
+    <div class="wl-signature-row">
+      <img class="wl-founder-photo" src="https://karmafood.at/cdn/shop/files/Simone-Adi-Raihmann-Karma-Food-Wien.jpg?v=1778573840&width=200" alt="Adi & Simone">
+      <div class="wl-signature">— Adi &amp; Simone, Gründer:innen</div>
+    </div>
   </div>
 
   <div class="wl-slide" data-s="1">
@@ -661,6 +686,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="value-card"><div class="vc-e">🤝</div><div class="vc-t">Food is Community</div><div class="vc-d">Wir schaffen Räume und Momente, in denen sich alle willkommen fühlen.</div></div>
       <div class="value-card"><div class="vc-e">✨</div><div class="vc-t">Bold Realness</div><div class="vc-d">Echte Zutaten, echter Geschmack, mit starken Familienwurzeln.</div></div>
     </div>
+  </div>
+
+  <div class="wl-slide" data-s="13">
+    <div class="wl-kicker">Auf einen Blick</div>
+    <div class="wl-emoji">✨</div>
+    <h1 class="wl-big head">Das ist<br>Karma Food.</h1>
+    <p class="wl-txt">Bevor's ins Detail geht — so hängt bei uns alles zusammen:</p>
+    <div class="glance-stack" id="glance-stack"></div>
   </div>
 
   <div class="wl-slide" data-s="3">
@@ -714,7 +747,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <div class="wl-slide" data-s="7">
     <div class="wl-kicker">Catering</div>
-    <div class="wl-mini-photo"><img src="https://karmafood.at/cdn/shop/files/Karma-Food-Catering-Wien-vegan.jpg?v=1776177470&width=1200" alt="Karma Catering"></div>
+    <div class="wl-mini-photo"><img src="https://karmafood.at/cdn/shop/files/Veganes-Catering-Wien-Karma-Food.jpg?v=1779205842&width=1200" alt="Karma Catering"></div>
     <h1 class="wl-big head">Karma Food,<br>wo du willst.</h1>
     <p class="wl-txt" id="cat-lead"></p>
     <div class="feat-grid" id="cat-grid"></div>
@@ -1088,14 +1121,23 @@ const WEEKLY_RHYTHM = [
   {day:'Fr', s1:'Bowl/Biryani', s2:'Curry', s3:'Dal'},
 ];
 
+/* ---------- AUF EINEN BLICK (4 Karten, 1:1 wie auf der Homepage) ---------- */
+const AT_A_GLANCE = [
+  {img:'https://karmafood.at/cdn/shop/files/Karma-Food-Indische-Curry-Pasten-online-kaufen.jpg?v=1779205796&width=900', kicker:'Online Shop', t:'Indien in deiner Küche', d:'Curry Pasten, Masalas & Toppings: indisch kochen leicht gemacht'},
+  {img:'https://karmafood.at/cdn/shop/files/Karma-Food-Gesundes_Mittagessen-1070-Wien.jpg?v=1779205818&width=900', kicker:'Unsere Lokale', t:'Gesunde Mittagspause', d:'Jede Menge Veggies & noch mehr Spice: so geht Mittag bei Karma Food'},
+  {img:'https://karmafood.at/cdn/shop/files/Veganes-Catering-Wien-Karma-Food.jpg?v=1779205842&width=900', kicker:'Catering', t:'Karma Catering', d:'Office Lunches, Firmenfeiern & Curry Partys: unkompliziertes, leckeres Essen für dein Event'},
+  {img:'https://karmafood.at/cdn/shop/files/Indische-Kochkurse-Wien.jpg?v=1779205865&width=900', kicker:'Kochkurse', t:'Indisch kochen lernen', d:'Lerne die Geheimnisse der indischen Küche: Adi zeigt dir all seine Familienrezepte'},
+];
+
 /* ---------- KOCHKURSE (echte Masterclasses) ---------- */
 const KOCHKURSE_INFO = {
-  lead:'Mit Adi persönlich, in kleinen Gruppen — im Kitchen Collective in Klosterneuburg.',
+  lead:'Mit Adi persönlich, in kleinen Gruppen — im Kitchen Collective in Klosterneuburg. Die best kept secrets von Adi und seiner Mum!',
   points:[
-    {e:'🥭', t:'Best of Classics', d:'Indische Klassiker, ganz vegan & vegetarisch. ~3,5 Stunden.'},
-    {e:'🍛', t:'Best of Restaurant', d:'Kochen wie im Restaurant — auf Wunsch auch mit Fleisch-Option. ~3,5 Stunden.'},
-    {e:'🌴', t:'Best of Kerala', d:'Aromen aus Süd-Indien, vegan & vegetarisch. ~3,5 Stunden.'},
-  ]
+    {img:'https://karmafood.at/cdn/shop/files/Best-of-Indian-Restaurant.jpg?v=1782897766&width=600', t:'Best of Indian Restaurant Kitchen', d:'Die Geheimnisse hinter den Restaurant-Lieblingsgerichten — vom perfekten Butter Chicken bis zum fluffigen Naan.'},
+    {img:'https://karmafood.at/cdn/shop/files/Karma-Food-Best-of-Indian-Classics.png?v=1782898149&width=600', t:'Best of Indian Classics', d:'Punjabi-Klassiker zum Nachkochen — cremiges Dal, würziges Curry, echtes Comfort Food.'},
+    {img:'https://karmafood.at/cdn/shop/files/kochkurs-indien-sued-west-kerala-goa-vegan-curry-streetfood.jpg?v=1752096053&width=600', t:'Best of Kerala Kitchen', d:'Eine kulinarische Reise durch Südindien — von Papaya-Salat bis Kerala Fish Curry.'},
+  ],
+  foodies:{h:'Du willst dabei sein? Werd Karma Foodie! 🧡', d:'Hilf Adi beim Kochkurs mit aufzuräumen — und nimm dafür die ganze Experience gratis mit (Warenwert €130). Interesse? Meld dich bei Tini oder Ines!'}
 };
 
 /* ---------- GERICHTE (Emoji-Zuordnung aus Prozess-App) ---------- */
@@ -1456,7 +1498,7 @@ function storeById(id){ return STORES.find(s=>s.id===id)||STORES[0]; }
 /* ============ WELCOME FLOW ============ */
 // Explizite Reihenfolge der Slides (data-s Werte). Store-Slide (10) wird immer übersprungen.
 // Schnuppertag (12) sitzt zwischen Kochkurse (8) und Bereich (9).
-const WL_ORDER = [0,1,2,3,4,5,6,7,8,12,9,11];
+const WL_ORDER = [0,1,2,13,3,4,5,6,7,8,12,9,11];
 let wlPos = 0; // Position in WL_ORDER
 let wl = WL_ORDER[wlPos]; // aktueller data-s Wert
 // Position aus gespeichertem Schritt wiederherstellen
@@ -1472,6 +1514,7 @@ function showWl(){
   document.getElementById('wl-back').style.display = wlPos>0 ? 'block':'none';
   const next=document.getElementById('wl-next');
   next.textContent = wl===WL_LAST ? 'App öffnen 🚀' : (wlPos===0?'Los geht\'s':'Weiter');
+  if(wl===13) buildGlance();
   if(wl===3) buildTimeline();
   if(wl===4) buildWlMap();
   if(wl===5) buildWeekRhythm();
@@ -1559,6 +1602,19 @@ function buildProdGrid(){
     `<div class="prod-card-wl">${p.img?`<img class="pc-photo" src="${p.img}" alt="${p.t}">`:`<div class="pc-e">${p.e}</div>`}<div><div class="pc-t">${p.t}</div><div class="pc-d">${p.d}</div></div></div>`
   ).join('');
 }
+/* ---- Slide 13: Auf einen Blick (Homepage-Style Karten) ---- */
+function buildGlance(){
+  document.getElementById('glance-stack').innerHTML = AT_A_GLANCE.map(c=>
+    `<div class="glance-card">
+      <img src="${c.img}" alt="${c.t}">
+      <div class="glance-overlay">
+        <div class="glance-kicker">${c.kicker}</div>
+        <div class="glance-t">${c.t}</div>
+        <div class="glance-d">${c.d}</div>
+      </div>
+    </div>`
+  ).join('');
+}
 /* ---- Slide 7: Catering ---- */
 function buildCatering(){
   document.getElementById('cat-lead').textContent = CATERING_INFO.lead;
@@ -1569,9 +1625,11 @@ function buildCatering(){
 /* ---- Slide 8: Kochkurse ---- */
 function buildKochkurse(){
   document.getElementById('kk-lead').textContent = KOCHKURSE_INFO.lead;
-  document.getElementById('kk-grid').innerHTML = KOCHKURSE_INFO.points.map(p=>
-    `<div class="feat-card"><div class="fc-e">${p.e}</div><div><div class="fc-t">${p.t}</div><div class="fc-d">${p.d}</div></div></div>`
+  let h = KOCHKURSE_INFO.points.map(p=>
+    `<div class="kk-card"><img src="${p.img}" alt="${p.t}"><div class="kk-body"><div class="kk-t">${p.t}</div><div class="kk-d">${p.d}</div></div></div>`
   ).join('');
+  h += `<div class="foodies-card"><div class="fo-t">${KOCHKURSE_INFO.foodies.h}</div><div class="fo-d">${KOCHKURSE_INFO.foodies.d}</div></div>`;
+  document.getElementById('kk-grid').innerHTML = h;
 }
 
 /* ---- Slide 10: Standort ---- */
