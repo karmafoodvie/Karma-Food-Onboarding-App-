@@ -77,13 +77,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .map-tabs-wl{display:flex;gap:6px;margin-bottom:10px;}
 .map-tabs-wl button{flex:1;padding:9px;border-radius:12px;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
 .map-tabs-wl button.on{background:var(--neon);color:var(--ink);border-color:var(--neon);}
-.wl-map-svg{width:100%;border-radius:16px;display:block;background:rgba(255,255,255,.08);}
-.wl-store-card{background:rgba(255,255,255,.12);border-radius:16px;padding:14px 16px;margin-top:12px;display:flex;gap:12px;align-items:flex-start;}
-.wl-store-card .sc-photo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;color:#fff;}
-.wl-store-card .sc-n{color:#fff;font-size:15px;font-weight:800;}
-.wl-store-card .sc-d{color:#FFE9DF;font-size:13px;line-height:1.4;margin-top:3px;}
-.wl-store-card .sc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
-.wl-store-card .sc-tag{background:rgba(255,255,255,.15);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px;}
+.wl-map-svg{width:100%;max-height:120px;border-radius:14px;display:block;background:rgba(255,255,255,.08);}
+.wl-store-card{background:rgba(255,255,255,.12);border-radius:18px;overflow:hidden;margin-top:12px;}
+.wl-store-card .sc-photo{width:100%;aspect-ratio:16/9;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:40px;color:#fff;}
+.wl-store-card .sc-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.wl-store-card .sc-body{padding:13px 15px;}
+.wl-store-card .sc-n{color:#fff;font-size:18px;font-weight:800;}
+.wl-store-card .sc-d{color:#FFE9DF;font-size:13px;line-height:1.4;margin-top:4px;}
+.wl-store-card .sc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;}
+.wl-store-card .sc-tag{background:rgba(255,255,255,.15);color:#fff;font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:10px;}
 
 /* ---------- WELCOME: OFFER CHIPS ---------- */
 .chip-row{display:flex;flex-wrap:wrap;gap:8px;}
@@ -107,21 +109,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wl-mini-photo img{width:100%;height:100%;object-fit:cover;display:block;}
 
 /* Auf-einen-Blick Karten (Homepage-Style) */
-.glance-stack{display:flex;flex-direction:column;gap:12px;margin-top:8px;}
-.glance-card{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3;}
+.glance-stack{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:8px;}
+.glance-card{position:relative;border-radius:13px;overflow:hidden;aspect-ratio:1/1;}
 .glance-card img{width:100%;height:100%;object-fit:cover;display:block;}
-.glance-overlay{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;background:linear-gradient(0deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.15) 70%,transparent 100%);}
-.glance-kicker{font-size:10.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--neon);}
-.glance-t{font-size:19px;font-weight:800;color:#fff;line-height:1.15;margin:3px 0 4px;}
-.glance-d{font-size:12.5px;color:#EDEAE0;line-height:1.4;}
+.glance-overlay{position:absolute;left:0;right:0;bottom:0;padding:9px 10px;background:linear-gradient(0deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.25) 65%,transparent 100%);}
+.glance-kicker{font-size:8.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--neon);}
+.glance-t{font-size:13.5px;font-weight:800;color:#fff;line-height:1.15;margin:2px 0 2px;}
+.glance-d{font-size:10px;color:#EDEAE0;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 
 /* Kochkurs-Karten mit Foto */
-.kk-card{background:rgba(255,255,255,.1);border-radius:14px;overflow:hidden;margin-bottom:10px;}
-.kk-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
-.kk-body{padding:11px 13px;}
-.kk-t{color:#fff;font-size:14px;font-weight:800;}
-.kk-d{color:#FFE9DF;font-size:12px;line-height:1.4;margin-top:3px;}
-.foodies-card{background:rgba(212,255,63,.15);border:1.5px dashed var(--neon);border-radius:14px;padding:13px 15px;margin-top:4px;}
+.kk-card{background:rgba(255,255,255,.1);border-radius:12px;overflow:hidden;margin-bottom:8px;display:flex;align-items:stretch;}
+.kk-card img{width:78px;height:78px;object-fit:cover;display:block;flex-shrink:0;}
+.kk-body{padding:8px 11px;display:flex;flex-direction:column;justify-content:center;min-width:0;}
+.kk-t{color:#fff;font-size:12.5px;font-weight:800;line-height:1.2;}
+.kk-d{color:#FFE9DF;font-size:10.5px;line-height:1.3;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.foodies-card{background:rgba(212,255,63,.15);border:1.5px dashed var(--neon);border-radius:14px;padding:11px 13px;margin-top:2px;}
 .foodies-card .fo-t{color:var(--neon);font-size:13.5px;font-weight:800;}
 .foodies-card .fo-d{color:#FFE9DF;font-size:12.5px;line-height:1.5;margin-top:4px;}
 
@@ -690,9 +692,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <div class="wl-slide" data-s="13">
     <div class="wl-kicker">Auf einen Blick</div>
-    <div class="wl-emoji">✨</div>
-    <h1 class="wl-big head">Das ist<br>Karma Food.</h1>
-    <p class="wl-txt">Bevor's ins Detail geht — so hängt bei uns alles zusammen:</p>
+    <h1 class="wl-big head" style="font-size:30px;margin-top:4px;">Das ist Karma Food.</h1>
+    <p class="wl-txt" style="margin-bottom:8px;">So hängt bei uns alles zusammen:</p>
     <div class="glance-stack" id="glance-stack"></div>
   </div>
 
@@ -755,9 +756,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <div class="wl-slide" data-s="8">
     <div class="wl-kicker">Kochkurse</div>
-    <div class="wl-mini-photo"><img src="https://karmafood.at/cdn/shop/files/Karma-Food-Indische-Kochkurse-Wien_90fe9c2d-cfe2-4834-8e1a-6b392a65ee30.jpg?v=1779807782&width=1200" alt="Karma Kochkurse"></div>
-    <h1 class="wl-big head">Unser Wissen,<br>deine Küche.</h1>
-    <p class="wl-txt" id="kk-lead"></p>
+    <div class="wl-mini-photo" style="aspect-ratio:16/6;margin:6px 0 4px;"><img src="https://karmafood.at/cdn/shop/files/Karma-Food-Indische-Kochkurse-Wien_90fe9c2d-cfe2-4834-8e1a-6b392a65ee30.jpg?v=1779807782&width=1200" alt="Karma Kochkurse"></div>
+    <h1 class="wl-big head" style="font-size:26px;">Unser Wissen, deine Küche.</h1>
+    <p class="wl-txt" id="kk-lead" style="font-size:13px;margin-bottom:8px;"></p>
     <div class="feat-grid" id="kk-grid"></div>
   </div>
 
@@ -937,7 +938,6 @@ const STORES = [
   {id:'lb', name:'Laurenzerberg', short:'Laurenzerberg', col:'#00A878'},
   {id:'boerse', name:'Börse', short:'Börse', col:'#00B4CC'},
   {id:'1020', name:'Ausstellungsstraße', short:'1020', col:'#F0806B'},
-  {id:'1070', name:'Neustiftgasse', short:'1070', col:'#7B61FF'},
   {id:'3400', name:'Stadtplatz Klosterneuburg', short:'Stadtplatz', col:'#E0521F'},
   {id:'kitchen', name:'Produktionsküche', short:'Kitchen', col:'#F0A500'},
 ];
@@ -1123,15 +1123,15 @@ const WEEKLY_RHYTHM = [
 
 /* ---------- AUF EINEN BLICK (4 Karten, 1:1 wie auf der Homepage) ---------- */
 const AT_A_GLANCE = [
-  {img:'https://karmafood.at/cdn/shop/files/Karma-Food-Indische-Curry-Pasten-online-kaufen.jpg?v=1779205796&width=900', kicker:'Online Shop', t:'Indien in deiner Küche', d:'Curry Pasten, Masalas & Toppings: indisch kochen leicht gemacht'},
   {img:'https://karmafood.at/cdn/shop/files/Karma-Food-Gesundes_Mittagessen-1070-Wien.jpg?v=1779205818&width=900', kicker:'Unsere Lokale', t:'Gesunde Mittagspause', d:'Jede Menge Veggies & noch mehr Spice: so geht Mittag bei Karma Food'},
+  {img:'https://karmafood.at/cdn/shop/files/Karma-Food-indische-Produkte-fur-Zuhause.jpg?v=1779206788&width=900', kicker:'Online Shop', t:'Indien in deiner Küche', d:'Curry Pasten, Masalas & Toppings: indisch kochen leicht gemacht'},
   {img:'https://karmafood.at/cdn/shop/files/Veganes-Catering-Wien-Karma-Food.jpg?v=1779205842&width=900', kicker:'Catering', t:'Karma Catering', d:'Office Lunches, Firmenfeiern & Curry Partys: unkompliziertes, leckeres Essen für dein Event'},
   {img:'https://karmafood.at/cdn/shop/files/Indische-Kochkurse-Wien.jpg?v=1779205865&width=900', kicker:'Kochkurse', t:'Indisch kochen lernen', d:'Lerne die Geheimnisse der indischen Küche: Adi zeigt dir all seine Familienrezepte'},
 ];
 
 /* ---------- KOCHKURSE (echte Masterclasses) ---------- */
 const KOCHKURSE_INFO = {
-  lead:'Mit Adi persönlich, in kleinen Gruppen — im Kitchen Collective in Klosterneuburg. Die best kept secrets von Adi und seiner Mum!',
+  lead:'Mit Adi persönlich, in kleinen Gruppen — die best kept secrets von Adi und seiner Mum!',
   points:[
     {img:'https://karmafood.at/cdn/shop/files/Best-of-Indian-Restaurant.jpg?v=1782897766&width=600', t:'Best of Indian Restaurant Kitchen', d:'Die Geheimnisse hinter den Restaurant-Lieblingsgerichten — vom perfekten Butter Chicken bis zum fluffigen Naan.'},
     {img:'https://karmafood.at/cdn/shop/files/Karma-Food-Best-of-Indian-Classics.png?v=1782898149&width=600', t:'Best of Indian Classics', d:'Punjabi-Klassiker zum Nachkochen — cremiges Dal, würziges Curry, echtes Comfort Food.'},
@@ -1454,10 +1454,10 @@ function dutyItems(){ return isKitchen()?DUTY_KITCHEN:DUTY_STORE; }
 // und erscheinen NICHT im öffentlichen Onboarding-Link — nur wenn man vor Ort im Store eingeloggt ist.
 const GUIDE_BLOCKS = [
   {key:'ankommen', t:'Ankommen & rein', ic:'🔑', col:'#00A878', intro:'Das Wichtigste, um überhaupt reinzukommen und loszulegen.', cards:[
-    {id:'schluessel_eingang', t:'Schlüssel Eingang', e:'🔑', locked:true, d:'Wo ist der Schlüssel, wie kommst du rein?'},
-    {id:'schluessel_kassa', t:'Schlüssel Kassa', e:'🗝️', locked:true, d:'Schlüssel für Kassa / Lade.'},
-    {id:'wlan', t:'WLAN-Passwort', e:'📶', locked:true, d:'Netzwerkname & Passwort.'},
-    {id:'alarm_safe', t:'Alarm & Safe', e:'🔐', locked:true, d:'Alarm deaktivieren, Safe-Code.'},
+    {id:'schluessel_eingang', t:'Schlüssel Eingang', e:'🔑', locked:false, d:'Wo ist der Schlüssel, wie kommst du rein?'},
+    {id:'schluessel_kassa', t:'Schlüssel Kassa', e:'🗝️', locked:false, d:'Schlüssel für Kassa / Lade.'},
+    {id:'wlan', t:'WLAN-Passwort', e:'📶', locked:false, d:'Netzwerkname & Passwort.'},
+    {id:'alarm_safe', t:'Alarm & Safe', e:'🔐', locked:false, d:'Alarm deaktivieren, Safe-Code.'},
   ]},
   {key:'finden', t:'Wo find ich was?', ic:'🔍', col:'#F0A500', intro:'Damit du nicht suchen musst — hier liegt alles.', cards:[
     {id:'schoepfer', t:'Schöpfer & Portionierer', e:'🥄', d:'Wo hängen/liegen die Schöpfer?'},
@@ -1557,33 +1557,35 @@ function buildWlMap(){
 function setWlMapTab(t){ wlMapTab=t; buildWlMap(); }
 function wlPin(x,y,col,id){
   return `<g onclick="showStoreCard('${id}')" style="cursor:pointer;">
-    <path d="M${x} ${y-16} a9 9 0 0 1 9 9 c0 6 -9 15 -9 15 c0 0 -9 -9 -9 -15 a9 9 0 0 1 9 -9 Z" fill="${col}"/>
-    <circle cx="${x}" cy="${y-7}" r="3.5" fill="#fff"/></g>`;
+    <path d="M${x} ${y-22} a12 12 0 0 1 12 12 c0 8 -12 20 -12 20 c0 0 -12 -12 -12 -20 a12 12 0 0 1 12 -12 Z" fill="${col}"/>
+    <circle cx="${x}" cy="${y-10}" r="5" fill="#fff"/></g>`;
 }
 function wlMapWien(){
-  return `<svg class="wl-map-svg" viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg">
-    <path d="M-10 55 C60 85 120 65 175 95 C230 125 280 105 350 135 L350 165 C280 140 235 155 178 125 C120 95 55 115 -10 85 Z" fill="rgba(255,255,255,.12)"/>
-    ${wlPin(95,158,'#00A878','lb')}
-    ${wlPin(150,172,'#00B4CC','boerse')}
-    ${wlPin(232,58,'#F0806B','1020')}
-    <text x="12" y="22" font-size="11" font-weight="800" fill="#fff" font-family="sans-serif">WIEN</text>
+  return `<svg class="wl-map-svg" viewBox="0 0 340 150" xmlns="http://www.w3.org/2000/svg">
+    <path d="M-10 40 C60 65 120 48 175 70 C230 92 280 78 350 100 L350 125 C280 105 235 118 178 96 C120 74 55 90 -10 65 Z" fill="rgba(255,255,255,.12)"/>
+    ${wlPin(95,110,'#00A878','lb')}
+    ${wlPin(150,120,'#00B4CC','boerse')}
+    ${wlPin(232,45,'#F0806B','1020')}
+    <text x="12" y="20" font-size="11" font-weight="800" fill="#fff" font-family="sans-serif">WIEN</text>
   </svg>`;
 }
 function wlMapKlo(){
-  return `<svg class="wl-map-svg" viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0 0 H120 C110 40 130 70 90 100 C60 125 40 180 0 200 Z" fill="rgba(255,255,255,.12)"/>
-    ${wlPin(178,120,'#E0521F','3400')}
-    ${wlPin(240,168,'#F0A500','kitchen')}
-    <text x="12" y="22" font-size="11" font-weight="800" fill="#fff" font-family="sans-serif">KLOSTERNEUBURG</text>
+  return `<svg class="wl-map-svg" viewBox="0 0 340 150" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0 H120 C110 28 130 48 90 68 C60 85 40 122 0 136 Z" fill="rgba(255,255,255,.12)"/>
+    ${wlPin(178,85,'#E0521F','3400')}
+    ${wlPin(240,115,'#F0A500','kitchen')}
+    <text x="12" y="20" font-size="11" font-weight="800" fill="#fff" font-family="sans-serif">KLOSTERNEUBURG</text>
   </svg>`;
 }
 function showStoreCard(id){
   const st=storeById(id), det=STORE_DETAILS[id]||{};
-  const photoInner = det.photo ? `<img src="${det.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">` : '📷';
+  const photoInner = det.photo ? `<img src="${det.photo}" alt="${st.name}">` : '📷';
   document.getElementById('wl-store-card').innerHTML=`<div class="wl-store-card">
     <div class="sc-photo">${photoInner}</div>
-    <div><div class="sc-n">${st.name}</div><div class="sc-d">${det.desc||''}</div>
-    <div class="sc-tags">${(det.tags||[]).map(t=>`<span class="sc-tag">${t}</span>`).join('')}</div></div>
+    <div class="sc-body">
+      <div class="sc-n">${st.name}</div><div class="sc-d">${det.desc||''}</div>
+      <div class="sc-tags">${(det.tags||[]).map(t=>`<span class="sc-tag">${t}</span>`).join('')}</div>
+    </div>
   </div>`;
 }
 
@@ -1962,8 +1964,10 @@ function renderHome(){
     h+=`<div class="guide-block">
       <div class="gb-head"><span class="gb-ic" style="background:${block.col};">${block.ic}</span>
         <div><div class="gb-t">${block.t}</div><div class="gb-intro">${block.intro}</div></div></div>`;
-    // Beim Ankommen-Block: Freischalt-Button für Zugangsdaten (nur wenn noch gesperrt bzw. nach Reload nicht mehr im Speicher)
-    if(block.key==='ankommen' && !(S.storeAccessUnlocked && secureCreds[S.store])){
+    // Freischalt-Button für die Server-seitigen Zugangsdaten (66 echte Codes) — einstweilen deaktiviert,
+    // da noch nicht final geprüft. Die Ankommen-Karten selbst sind ab jetzt normal offen (locked:false oben).
+    // Reaktivieren: Bedingung "false &&" entfernen.
+    if(false && block.key==='ankommen' && !(S.storeAccessUnlocked && secureCreds[S.store])){
       h+=`<button class="gc-access-btn" onclick="unlockStoreAccess()">🔓 Vor Ort? Zugangsdaten freischalten</button>`;
     }
     if(block.key==='ankommen' && S.storeAccessUnlocked && secureCreds[S.store]){
