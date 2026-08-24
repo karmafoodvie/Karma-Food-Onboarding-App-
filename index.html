@@ -327,12 +327,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sp-name{padding:11px 13px;font-size:14px;font-weight:800;}
 
 .guide-storehead{border-radius:20px;overflow:hidden;position:relative;margin-bottom:16px;min-height:150px;display:flex;align-items:flex-end;}
-.gsh-photo{position:absolute;inset:0;}
-.gsh-photo img{width:100%;height:100%;object-fit:cover;display:block;opacity:.42;}
-.gsh-overlay{position:relative;padding:20px;z-index:1;}
-.gsh-hi{font-size:12px;color:#fff;font-weight:800;letter-spacing:.4px;opacity:.9;}
+.guide-storehead::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,26,24,0) 0%,rgba(26,26,24,.75) 100%);z-index:1;}
+.gsh-photo{position:absolute;inset:0;z-index:0;}
+.gsh-photo img{width:100%;height:100%;object-fit:cover;display:block;opacity:.55;}
+.gsh-overlay{position:relative;padding:20px;z-index:2;}
+.gsh-hi{font-size:13px;color:var(--neon);font-weight:700;letter-spacing:.4px;}
 .gsh-name{font-size:26px;color:#fff;line-height:1.1;margin:5px 0 8px;text-shadow:0 1px 6px rgba(0,0,0,.3);}
-.gsh-cta{font-size:14px;color:#fff;font-weight:600;}
+.gsh-cta{font-size:14px;color:#DDD8CC;font-weight:600;}
 .gsh-switch{position:absolute;top:14px;right:14px;z-index:2;background:rgba(255,255,255,.9);border:none;border-radius:10px;padding:8px 12px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;color:var(--ink);}
 
 .guide-block{margin-bottom:22px;}
@@ -622,6 +623,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .logout-btn:active{transform:scale(.98);}
 .logout-note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:8px;}
 
+.kk-link{display:inline-block;margin-top:10px;font-size:13px;font-weight:800;color:#fff;text-decoration:underline;text-underline-offset:3px;}
+.kk-link:active{opacity:.7;}
+
 .kb-store-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .kb-store-btn{background:#fff;border:1px solid var(--border);border-radius:16px;padding:14px;cursor:pointer;display:flex;align-items:center;gap:10px;}
 .kb-store-btn .ksb-dot{width:34px;height:34px;border-radius:10px;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px;}
@@ -779,6 +783,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <h1 class="wl-big head" style="font-size:26px;">Unser Wissen, deine Küche.</h1>
     <p class="wl-txt" id="kk-lead" style="font-size:13px;margin-bottom:8px;"></p>
     <div class="feat-grid" id="kk-grid"></div>
+    <a href="https://karmafood.at/pages/indische-kochkurse-wien" target="_blank" rel="noopener" class="kk-link">Alle Kochkurse ansehen →</a>
   </div>
 
   <div class="wl-slide" data-s="12">
@@ -1921,7 +1926,7 @@ function pickStore(id){
 /* ============ NAVIGATION ============ */
 const NAV = [
   {v:'home', label:'Start', svg:'<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'},
-  {v:'modules', label:'Lernen', svg:'<path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>'},
+  /* Lernen-Tab vorerst ausgeblendet — zu minimalistisch, wird später überarbeitet */
   {v:'flow', label:'Ablauf', svg:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'},
   {v:'store', label:'Infos', svg:'<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>'},
   {v:'check', label:'To-Dos', svg:'<polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>'},
@@ -2038,9 +2043,7 @@ function renderHome(){
     h+=`</div></div>`;
   });
 
-  // Learning klein & versteckt am Ende
-  h+=`<div class="sec-lbl">Wenn du Zeit hast</div>
-  <div class="mini-card" onclick="go('modules')"><span class="mc-ic">📚</span><span class="mc-t">Karma kennenlernen & dazulernen</span><span class="mc-go">→</span></div>`;
+  // Lernen-Bereich vorerst ausgeblendet (siehe NAV)
   if(S.userType==='known'){
     h+=`<button class="guide-fullproc" onclick="switchToFull()">🌱 Du bist neu und willst den ganzen Willkommens-Prozess sehen?</button>`;
   }
@@ -2185,7 +2188,6 @@ function renderHomeKitchen(){
   <div class="mod-grid" style="margin-top:10px;">
     <div class="mod" onclick="go('flow')"><div class="m-ic">🥘</div><div class="m-t">Produktionsablauf</div><div class="m-meta">Von Planung bis Abschluss</div></div>
     <div class="mod" onclick="go('store')"><div class="m-ic">📍</div><div class="m-t">Infos & Team</div><div class="m-meta">Infos & Kontakte</div></div>
-    <div class="mod" onclick="go('modules')"><div class="m-ic">📚</div><div class="m-t">Alle Module</div><div class="m-meta">Dein Lernpfad</div></div>
     <div class="mod" onclick="go('help')"><div class="m-ic">❓</div><div class="m-t">Hilfe & FAQ</div><div class="m-meta">Schnell nachlesen</div></div>
   </div>`;
   document.getElementById('v-home').innerHTML=h;
