@@ -618,6 +618,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .dg-chip-ph{width:36px;height:36px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:15px;border:2px dashed var(--border);}
 .dg-chip span{font-size:9.5px;font-weight:600;color:var(--sub);text-align:center;line-height:1.1;}
 
+.logout-btn{width:100%;background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer;font-family:inherit;}
+.logout-btn:active{transform:scale(.98);}
+.logout-note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:8px;}
+
 .kb-store-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .kb-store-btn{background:#fff;border:1px solid var(--border);border-radius:16px;padding:14px;cursor:pointer;display:flex;align-items:center;gap:10px;}
 .kb-store-btn .ksb-dot{width:34px;height:34px;border-radius:10px;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px;}
@@ -2596,8 +2600,16 @@ function toggleCheck(id){ S.checks[id]=!S.checks[id]; save(); renderCheck(); if(
 /* ============ HELP / FAQ ============ */
 function renderHelp(){
   document.getElementById('v-help').innerHTML=`<div class="sec-lbl">Ich brauch Hilfe</div>
-  <input class="faq-search" id="faq-search" placeholder="🔍 Wonach suchst du?" oninput="filterFaq()"><div id="faq-list"></div>`;
+  <input class="faq-search" id="faq-search" placeholder="🔍 Wonach suchst du?" oninput="filterFaq()"><div id="faq-list"></div>
+  <div class="sec-lbl" style="margin-top:26px;">Einstieg wechseln</div>
+  <button class="logout-btn" onclick="switchDoorway()">🔄 Zurück zur Auswahl (neu / schon dabei)</button>
+  <div class="logout-note">Falls du dich beim Start verklickt hast — hier kommst du zurück zur Auswahl „Ich bin neu hier" / „Ich bin schon dabei".</div>`;
   renderFaqList('');
+}
+function switchDoorway(){
+  if(!confirm('Zurück zur Start-Auswahl? Dein Fortschritt bleibt gespeichert.')) return;
+  showDoorway();
+  window.scrollTo(0,0);
 }
 function renderFaqList(q){
   const list=document.getElementById('faq-list'), ql=q.toLowerCase();
