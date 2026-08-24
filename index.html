@@ -521,18 +521,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .flow-intro .fi-p{font-size:14px;line-height:1.55;color:#DDD8CC;}
 
 .stage{background:#fff;border:1px solid var(--border);border-radius:16px;margin-bottom:12px;overflow:hidden;}
+.stage.now{border-color:var(--orange);box-shadow:0 0 0 1px var(--orange);}
 .stage-head{display:flex;align-items:center;gap:13px;padding:15px 16px;cursor:pointer;}
 .stage-num{width:34px;height:34px;border-radius:11px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex-shrink:0;}
 .stage-tl{flex:1;}
-.stage-t{font-size:16px;font-weight:800;}
+.stage-t{font-size:16px;font-weight:800;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+.now-badge{font-size:9.5px;font-weight:800;color:#fff;background:var(--orange);padding:2px 8px;border-radius:10px;letter-spacing:.3px;text-transform:uppercase;}
 .stage-time{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-top:1px;}
 .stage-x{font-size:20px;color:var(--muted);transition:.25s;}
 .stage.open .stage-x{transform:rotate(45deg);}
 .stage-body{max-height:0;overflow:hidden;transition:max-height .3s;}
-.stage.open .stage-body{max-height:600px;}
+.stage.open .stage-body{max-height:2600px;}
 .stage-inner{padding:0 16px 15px 63px;}
-.stage-li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;padding:4px 0;color:var(--sub);}
-.stage-li .sb{flex-shrink:0;font-weight:800;color:var(--orange);}
+.stage-li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;padding:6px 0;color:var(--sub);cursor:pointer;}
+.chk{width:20px;height:20px;border-radius:6px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;margin-top:1px;transition:.15s;}
+.stage-li.done .chk{background:var(--sage,#2E7D5B);border-color:var(--sage,#2E7D5B);}
+.stage-li.done>span:last-child{color:var(--muted);text-decoration:line-through;}
+.whatif-block{margin:14px -16px -15px -63px;padding:14px 16px 15px 63px;background:var(--cream);border-top:1px dashed var(--border);}
+.wf-lbl{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;}
+.wf-item{margin-bottom:10px;}
+.wf-item:last-child{margin-bottom:0;}
+.wf-q{font-size:13px;font-weight:800;color:var(--ink);}
+.wf-a{font-size:13px;color:var(--sub);line-height:1.5;margin-top:2px;}
 
 .dish-cat{margin-bottom:6px;}
 .dish-row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:#fff;border:1px solid var(--border);border-radius:14px;margin-bottom:8px;}
@@ -1255,35 +1265,51 @@ const LOCKED_FACTS = [
 ];
 
 const STORE_DAYFLOW = [
-  {ic:'🚚', col:'#F0A500', t:'Lieferung', time:'Am Vormittag', items:[
-    'Der Transporter fährt den Store an','Das Essen kommt in Kisten','Kisten entladen','Gerichte in die Bain-Maries einsetzen','Store für den Verkauf vorbereiten']},
-  {ic:'🛒', col:'#00A878', t:'Öffnungszeiten', time:'Verkaufsbetrieb', items:[
-    'Verkauf & Kundenservice','Auffüllen','Sauberkeit halten','Hygiene beachten','Laufende Qualitätskontrolle']},
-  {ic:'🌙', col:'#7B61FF', t:'Schichtende', time:'Nach Geschäftsschluss', items:[
-    'Kasse zählen','Store reinigen','Bain-Maries reinigen','Arbeitsflächen reinigen','Müll entsorgen','Store abschließen','Feierabend 🎉']},
+  {id:'lieferung', ic:'🚚', col:'#F0A500', t:'Lieferung', time:'Am Vormittag', hours:[7,11], items:[
+    'Der Transporter fährt den Store an','Das Essen kommt in Kisten','Kisten entladen','Gerichte in die Bain-Maries einsetzen','Store für den Verkauf vorbereiten'],
+    whatif:[
+      {q:'Der Transporter kommt später oder gar nicht?', a:'Kurz in der Karma Support Gruppe (WhatsApp) melden — nicht selbst improvisieren.'},
+      {q:'Eine Kiste fehlt oder ist beschädigt?', a:'Sofort mit Foto in der Support Gruppe melden, damit es dokumentiert ist.'},
+    ]},
+  {id:'verkauf', ic:'🛒', col:'#00A878', t:'Öffnungszeiten', time:'Verkaufsbetrieb', hours:[11,20], items:[
+    'Verkauf & Kundenservice','Auffüllen','Sauberkeit halten','Hygiene beachten','Laufende Qualitätskontrolle'],
+    whatif:[
+      {q:'Ein Gericht ist aus?', a:'Auf Foodora & Wolt sofort als "sold-out" markieren, Gast ehrlich informieren und Alternative anbieten.'},
+      {q:'Eine Foodora/Wolt-Bestellung kann nicht erfüllt werden?', a:'Ablehnen kostet 5 € Stornogebühr — deshalb wirklich nur im äußersten Notfall. Sonst schnell Ersatz vorschlagen.'},
+    ]},
+  {id:'schichtende', ic:'🌙', col:'#7B61FF', t:'Schichtende', time:'Nach Geschäftsschluss', hours:[20,24], items:[
+    'Kasse zählen','Store reinigen','Bain-Maries reinigen','Arbeitsflächen reinigen','Müll entsorgen','Store abschließen','Feierabend 🎉'],
+    whatif:[
+      {q:'Kassa stimmt am Abend nicht?', a:'Nochmal nachzählen, Differenz + Unterschrift notieren, in der Support Gruppe melden — nicht einfach so stehen lassen.'},
+      {q:'Viel Essen übrig geblieben?', a:'Too Good To Go & "für dich" nutzen — Details dazu findest du in der Wissensdatenbank.'},
+      {q:'Unsicher beim Abschließen (Alarm, Safe)?', a:'Im Zweifel in der Support Gruppe nachfragen, statt zu raten.'},
+    ]},
 ];
 
 const KITCHEN_DAYFLOW = [
-  {ic:'📋', col:'#F0A500', t:'Produktionsplanung', time:'Start in den Tag', items:[
+  {id:'planung', ic:'📋', col:'#F0A500', t:'Produktionsplanung', time:'Start in den Tag', hours:[5,6], items:[
     'Was wird heute gekocht? Mengen checken','Bestellungen & Bedarf der Stores ansehen','Aufgaben im Team verteilen']},
-  {ic:'🔪', col:'#E0521F', t:'Vorbereitung (Mise en Place)', time:'Vorbereiten', items:[
+  {id:'mise', ic:'🔪', col:'#E0521F', t:'Vorbereitung (Mise en Place)', time:'Vorbereiten', hours:[6,7], items:[
     'Zutaten bereitstellen','Gemüse schneiden, Basis vorbereiten','Alles griffbereit an den Stationen']},
-  {ic:'🍳', col:'#00A878', t:'Kochen', time:'Herzstück', items:[
-    'Currys, Dals, Bowls, Biryanis & Specials frisch kochen','Auf Handschrift & Qualität achten','Sweets backen']},
-  {ic:'⚖️', col:'#00B4CC', t:'Portionieren', time:'Nach dem Kochen', items:[
+  {id:'kochen', ic:'🍳', col:'#00A878', t:'Kochen', time:'Herzstück', hours:[7,9], items:[
+    'Currys, Dals, Bowls, Biryanis & Specials frisch kochen','Auf Handschrift & Qualität achten','Sweets backen'],
+    whatif:[{q:'Eine Zutat ist knapp oder fehlt?', a:'Sofort in der Support Gruppe melden — lieber früh Bescheid geben als später improvisieren.'}]},
+  {id:'portionieren', ic:'⚖️', col:'#00B4CC', t:'Portionieren', time:'Nach dem Kochen', hours:[9,10], items:[
     'Gerichte nach Standard portionieren','Beilagen & Dressings zuordnen']},
-  {ic:'📦', col:'#7B61FF', t:'Verpacken & Etikettieren', time:'Fertigmachen', items:[
+  {id:'verpacken', ic:'📦', col:'#7B61FF', t:'Verpacken & Etikettieren', time:'Fertigmachen', hours:[10,11], items:[
     'In Transport-Kisten / Bain-Marie-Behälter füllen','Etikettieren: was ist drin, welcher Store','Haltbarkeit / Datum beachten']},
-  {ic:'✅', col:'#F0A500', t:'Qualitätskontrolle', time:'Vor dem Verladen', items:[
-    'Sichtprüfung: sieht alles gut aus?','Mengen & Vollständigkeit checken','Temperatur & Hygiene dokumentieren']},
-  {ic:'🗂️', col:'#E0521F', t:'Kommissionieren', time:'Sortieren', items:[
+  {id:'qk', ic:'✅', col:'#F0A500', t:'Qualitätskontrolle', time:'Vor dem Verladen', hours:[11,12], items:[
+    'Sichtprüfung: sieht alles gut aus?','Mengen & Vollständigkeit checken','Temperatur & Hygiene dokumentieren'],
+    whatif:[{q:'Etwas sieht nicht richtig aus?', a:'Im Zweifel lieber nicht ausliefern — Rücksprache mit Adi oder in der Support Gruppe.'}]},
+  {id:'kommission', ic:'🗂️', col:'#E0521F', t:'Kommissionieren', time:'Sortieren', hours:[12,13], items:[
     'Pro Store zusammenstellen','Reihenfolge der Route beachten']},
-  {ic:'🚐', col:'#00A878', t:'Transporter beladen', time:'Übergabe', items:[
+  {id:'beladen', ic:'🚐', col:'#00A878', t:'Transporter beladen', time:'Übergabe', hours:[13,14], items:[
     'Kisten in den Transporter laden','Leere, saubere Boxen vom Vortag zurücknehmen','Übergabe an den Transporter']},
-  {ic:'🧼', col:'#00B4CC', t:'Reinigung der Küche', time:'Nach der Produktion', items:[
+  {id:'reinigen', ic:'🧼', col:'#00B4CC', t:'Reinigung der Küche', time:'Nach der Produktion', hours:[14,15], items:[
     'Arbeitsflächen & Geräte reinigen','Böden, Abfall, Kühlung','Alles bereit für morgen']},
-  {ic:'🌙', col:'#7B61FF', t:'Tagesabschluss', time:'Feierabend', items:[
-    'Reste beschriften & korrekt lagern (FIFO)','HACCP-Dokumentation abzeichnen','Feierabend 🎉']},
+  {id:'abschluss', ic:'🌙', col:'#7B61FF', t:'Tagesabschluss', time:'Feierabend', hours:[15,24], items:[
+    'Reste beschriften & korrekt lagern (FIFO)','HACCP-Dokumentation abzeichnen','Feierabend 🎉'],
+    whatif:[{q:'Unsicher bei der HACCP-Doku?', a:'Lieber einmal zu viel nachfragen als falsch dokumentieren — Adi oder Support Gruppe fragen.'}]},
 ];
 
 const ROUTE = [
@@ -2385,42 +2411,75 @@ function closeCelebrate(){
 }
 
 /* ============ FLOW ============ */
-let openStage=-1;
+let openStage=null;
+let flowKind=null;
+function todayKey(){ const d=new Date(); return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
+function ensureChecklistFresh(){
+  if(S.checkDate!==todayKey()){ S.checkDate=todayKey(); S.checkDone={}; save(); }
+}
+function currentPhaseIndex(stages){
+  const h = new Date().getHours();
+  for(let i=0;i<stages.length;i++){
+    const r = stages[i].hours;
+    if(r && h>=r[0] && h<r[1]) return i;
+  }
+  return 0;
+}
+function toggleFlowCheck(id, idx){
+  ensureChecklistFresh();
+  const key = id+'-'+idx;
+  S.checkDone[key] = !S.checkDone[key];
+  save();
+  renderFlow();
+}
 function renderFlow(){
+  ensureChecklistFresh();
   const kitchen=isKitchen(), stages=dayflow();
+  const kind = kitchen?'kitchen':'store';
+  if(flowKind!==kind){ openStage=null; flowKind=kind; }
+  const nowIdx = currentPhaseIndex(stages);
+  if(openStage===null) openStage = nowIdx;
   let h=`<div class="flow-intro">
     <div class="fi-k">${kitchen?'Produktionsablauf':'Tagesablauf im Store'}</div>
     <div class="fi-h head">${kitchen?'So entsteht dein<br>Karma-Essen.':'So läuft dein<br>Tag im Store.'}</div>
     <div class="fi-p">${kitchen?'Von der Planung bis zum Tagesabschluss — tipp jede Station an für die Details.':'Von der Lieferung am Morgen bis zum Feierabend — tipp jede Station an für die Details.'}</div>
   </div>`;
   stages.forEach((s,i)=>{
-    h+=`<div class="stage ${i===openStage?'open':''}" id="stage-${i}">
+    const isNow = i===nowIdx;
+    h+=`<div class="stage ${i===openStage?'open':''} ${isNow?'now':''}" id="stage-${i}">
       <div class="stage-head" onclick="toggleStage(${i})">
         <div class="stage-num" style="background:${s.col};">${s.ic}</div>
-        <div class="stage-tl"><div class="stage-t">${s.t}</div><div class="stage-time">${s.time}</div></div>
+        <div class="stage-tl"><div class="stage-t">${s.t}${isNow?'<span class="now-badge">Jetzt dran</span>':''}</div><div class="stage-time">${s.time}</div></div>
         <div class="stage-x">+</div></div>
       <div class="stage-body"><div class="stage-inner">`;
-    s.items.forEach(it=>h+=`<div class="stage-li"><span class="sb">›</span><span>${it}</span></div>`);
+    s.items.forEach((it,idx)=>{
+      const key = (s.id||i)+'-'+idx;
+      const done = !!S.checkDone[key];
+      h+=`<div class="stage-li ${done?'done':''}" onclick="toggleFlowCheck('${s.id||i}',${idx})"><span class="chk">${done?'✓':''}</span><span>${it}</span></div>`;
+    });
+    if(s.id==='lieferung'){
+      h+=`<div class="route-card" style="margin:12px -16px 0 -63px;">
+        <div class="route-head"><span class="rh-t">🚚 Die Liefer-Route</span>
+          <button class="route-play" id="route-play-btn" onclick="playRoute(); event.stopPropagation();">▶ Abspielen</button></div>
+        ${routeMapSvg()}
+        <div class="route-steps" id="route-steps">`;
+      ROUTE.forEach((r,ri)=>{
+        h+=`<div class="route-step" id="rstep-${ri}"><div class="rs-num">${r.tag}</div><div><div class="rs-t">${r.t}</div><div class="rs-d">${r.d}</div></div></div>`;
+      });
+      h+=`</div>
+        <div class="tip" style="margin:12px 0 0;"><span class="ti">🥟</span><span class="tt">Die <b>Samosas</b> werden immer zuerst direkt zur <b>Börse</b> gebracht — von dort startet die weitere Verteilung.</span></div>
+      </div>`;
+    }
+    if(s.whatif && s.whatif.length){
+      h+=`<div class="whatif-block">
+        <div class="wf-lbl">❓ Was, wenn…</div>`;
+      s.whatif.forEach(w=>{
+        h+=`<div class="wf-item"><div class="wf-q">${w.q}</div><div class="wf-a">${w.a}</div></div>`;
+      });
+      h+=`</div>`;
+    }
     h+=`</div></div></div>`;
   });
-  if(!kitchen){
-    h+=`<div class="sec-lbl">Unsere Gerichte</div>
-    <div class="mini-card" onclick="go('kb'); const idx=KB_CATEGORIES.findIndex(c=>c.t.includes('Gerichte')); if(idx>=0) kbJumpCat(idx);"><span class="mc-ic">🍛</span><span class="mc-t">Alle Gerichte & Beilagen mit Foto ansehen</span><span class="mc-go">→</span></div>`;
-
-    h+=`<div class="sec-lbl">So kommt das Essen zu dir</div>
-    <div class="route-card">
-      <div class="route-head"><span class="rh-t">🚚 Die Liefer-Route</span>
-        <button class="route-play" id="route-play-btn" onclick="playRoute()">▶ Abspielen</button></div>
-      ${routeMapSvg()}
-      <div class="route-steps" id="route-steps">`;
-    ROUTE.forEach((r,i)=>{
-      h+=`<div class="route-step" id="rstep-${i}"><div class="rs-num">${r.tag}</div><div><div class="rs-t">${r.t}</div><div class="rs-d">${r.d}</div></div></div>`;
-    });
-    h+=`</div>
-      <div class="tip" style="margin:12px 14px 14px;"><span class="ti">🥟</span><span class="tt">Die <b>Samosas</b> werden immer zuerst direkt zur <b>Börse</b> gebracht — von dort startet die weitere Verteilung.</span></div>
-      <div class="tip" style="margin:0 14px 14px;"><span class="ti">📷</span><span class="tt">Foto vom Karma-Transporter folgt.</span></div>
-    </div>`;
-  }
   document.getElementById('v-flow').innerHTML=h;
 }
 function toggleStage(i){ openStage = openStage===i?-1:i; renderFlow(); }
